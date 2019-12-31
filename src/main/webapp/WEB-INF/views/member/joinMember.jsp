@@ -78,7 +78,7 @@
             </div> <!-- form-group// -->
             <div class="form-group input-group">
                 <div class="input-group-prepend">
-                    <span class="input-group-text"> <i class="fa fa-building"></i> </span>
+                    <span class="input-group-text"> <i class="fas fa-headset"></i> </span>
                 </div>
                 <select class="form-control">
                     <option selected=""> Select job type</option>
