@@ -17,6 +17,7 @@
 		<!-- sql에서 사용할 때 직접 내용을 적지 않고 별칭으로도 접근이 가능하다. -->
 <!--		<typeAlias type="com.kh.fifteenGG.member.model.vo.Member"-->
 <!--			         alias="Member"/>-->
+		<typeAlias type="net.rithms.riot.api.endpoints.summoner.dto.Summoner" alias="Summoner"/>
 	</typeAliases>
 
 </configuration>

@@ -20,39 +20,7 @@
     <%-- 내용 부분 --%>
     <div style="min-height: 100%; margin: 0 auto -132px;" class="bg-white">
         <%-- nav 영역 --%>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="#">Navbar</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Features</a>
-                    </li>
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Dropdown link
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </li>
-
-                </ul>
-            </div>
-            <ul class="navbar-nav ml-md-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/member/joinMemberView.do">Login</a>
-                </li>
-            </ul>
-        </nav>
+        <c:import url="views/common/navbar.jsp"/>
 
 
         <%-- nav 와 div 사이의 영역 --%>
@@ -68,14 +36,13 @@
             <!-- 검색창 -->
             <div class="row mt-4 form-group">
                 <div class="col-10 col-lg-8 px-2 mx-auto pb-1 bg-white">
-                    <form action="" class="form-group" style="
+                    <form action="${pageContext.request.contextPath}/search/SummonerSearch.do" class="form-group" style="
                     position: relative;
                     width: 590px;
                     margin: 0 auto;
                     border-radius: 2px;
                     background-color: #f4f4f4;">
-
-                        <input type="text" name="summonerName" placeholder="소환사 명" style="
+                        <input type="text" id="summonerName" name="summonerName" placeholder="소환사 명" style="
                         display: block;
                         width: 100%;
                         padding: 15px 150px 18px 17px;
