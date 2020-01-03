@@ -59,14 +59,17 @@
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.9.10.1" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.9.10" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.9.10" level="project" />
-    <orderEntry type="module-library" exported="">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/src/main/webapp/WEB-INF/lib/riot-api-java.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
+    <orderEntry type="library" name="Maven: com.merakianalytics.orianna:orianna:4.0.0-rc5" level="project" />
+    <orderEntry type="library" name="Maven: com.merakianalytics.datapipelines:datapipelines:1.0.4" level="project" />
+    <orderEntry type="library" name="Maven: es.usc.citius.hipster:hipster-core:1.0.1" level="project" />
+    <orderEntry type="library" name="Maven: com.google.guava:guava:20.0" level="project" />
+    <orderEntry type="library" name="Maven: com.squareup.okhttp3:okhttp:3.13.1" level="project" />
+    <orderEntry type="library" name="Maven: com.squareup.okio:okio:1.17.2" level="project" />
+    <orderEntry type="library" name="Maven: org.msgpack:jackson-dataformat-msgpack:0.8.16" level="project" />
+    <orderEntry type="library" name="Maven: org.msgpack:msgpack-core:0.8.16" level="project" />
+    <orderEntry type="library" name="Maven: joda-time:joda-time:2.10.1" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.datatype:jackson-datatype-joda:2.10.0.pr1" level="project" />
+    <orderEntry type="library" name="Maven: org.cache2k:cache2k-core:1.2.3.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.cache2k:cache2k-api:1.2.3.Final" level="project" />
   </component>
 </module>

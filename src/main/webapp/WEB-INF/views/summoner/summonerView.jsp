@@ -13,6 +13,11 @@
         }
     </style>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css">
+    <script>
+        function check() {
+            console.log(${champions.get(0)})
+        }
+    </script>
 </head>
 <body style="background: #f4f4f4; !important;
       max-width: 1011px;
@@ -25,8 +30,8 @@
 <%-- nav 와 div 사이의 영역 --%>
 <div class="row">
     <!-- 나중에 광고 혹은 분석 관련 탭이 들어갈 위치 -->
-    <br>
-    <br>
+    <button value="확인용" type="button" onclick="check()">
+    </button>
 </div>
 
 <!-- 전적 관련 영역 -->
@@ -134,7 +139,7 @@
         </div>
     </div>
 
-    <!-- line -->
+    <!-- 색 있는 라인 -->
     <div class="row py-2 py-lg-0 px-3 bg-white">
 
         <div class="flex-grow gg-bg-negative" style="height: 1px"></div>
@@ -274,9 +279,9 @@
             </div>
         </div>
 
+
         <div class="col-lg-4 d-flex align-items-center justify-content-center">
             <div class="gg-division flex-grow">
-
 
                 <table class="table">
 
@@ -390,7 +395,7 @@
         </div>
     </div>
 
-    <!-- 선 2-->
+    <!-- 선 -->
     <div class="row no-gutters my-5">
         <div class="col-12">
             <div class="row no-gutters ad">
@@ -457,6 +462,8 @@
             <div class="col-12 tab-pane active" id="matchAll">
 
                 <div class="row">
+
+                    <!-- 좌측 영역 -->
                     <div class="col-lg-4 px-0">
                         <div class="row no-gutters">
                             <div class="col-12 px-0">
@@ -497,12 +504,15 @@
                                             CS 역량
                                             - 분당 CS
                                         </span>
-                                        <span class="d-flex justify-content-center pt-1">
-                                            <span><img src="${pageContext.request.contextPath}/resources/Images/ranked-emblems/Emblem_Gold.png" class="gg-img-30x30"></span>
+                                            <span class="d-flex justify-content-center pt-1">
+                                            <span><img
+                                                    src="${pageContext.request.contextPath}/resources/Images/ranked-emblems/Emblem_Gold.png"
+                                                    class="gg-img-30x30"></span>
                                             <span class="gg-important-number ml-2">5.5</span>
                                         </span>
-                                        <span class="gg-sub-description pt-2">
-                                            <a href="/kr/profile/View/feedback" class="gg-text-soso" data-event="Link-CsTierFeedback">
+                                            <span class="gg-sub-description pt-2">
+                                            <a href="/kr/profile/View/feedback" class="gg-text-soso"
+                                               data-event="Link-CsTierFeedback">
                                                 골드 평균 근접 ... 더보기
                                             </a>
                                         </span>
@@ -633,11 +643,256 @@
                             </div>
                         </div>
                     </div>
+                    <!-- 좌측 영역 끝 -->
+
+                    <!-- 우측 영역 -->
                     <div class="col-lg-8 px-0">
 
-                    </div>
-                </div>
+                        <!-- 듀오 게시판 추천 글 -->
+                        <div class="col-12 px-0">
+                            <div class="col-12 px-0 gg-action-area" data-show-interaction="DuoRequestRecommendation">
+                                <div class="gg-box gg-division text-left bg-primary text-white">
+                                    <div class="d-flex align-items-center">
+                                        <i class="fas fa-info"></i>
+                                        <span class="gg-box-title ml-2">View님 같은 분을 찾고 있습니다!</span>
+                                    </div>
+                                </div>
+                                <div class="gg-box gg-action-area" data-event="DuoRequestRecommendationProfile"
+                                     data-href="/kr/profile/%EC%A0%84%EC%82%B0%EC%9D%98%EC%86%90%EB%86%80%EB%A6%BC">
+                                    <div class="d-flex justify-content-between py-2">
+                                        <div class="d-flex align-items-center gg-profile-duo-request-list-title">
+                                            <div class="aa">자유랭크 실버4</div>
+                                            <div class="px-1"></div>
+                                            <div>모든 포지션 구함</div>
+                                            <div class="px-1"></div>
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-end">
+                                            <div class="gg-text-normal">
+                                                <i class="fas fa-user-edit"></i>
+                                                <span>전산의손놀림</span>
+                                            </div>
+                                            <div class="px-1"></div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex text-secondary text-left my-font">
+                                        골플 자유랭 모집 욕안하는 착한유저들 구합니다 즐빡겜!!!
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between py-1 bg-white">
+                                <div class="col-12 d-flex justify-content-end gg-sub-description">
+                                    <a href="/kr/duo/request" data-event="More-DuoRequestRecommendationDuoRequest">
+                                        듀오 구하기 더보기 ···
+                                    </a>
+                                </div>
+                            </div>
 
+                        </div>
+
+                        <!-- 최근 매치 리스트 -->
+                        <div class="gg-matchlist-box gg-division">
+
+                            <!-- 매치 리스트 -->
+                            <div class="tab-pane active" id="matchListAllArea">
+
+                                <!-- 선 -->
+                                <div class="Normal gg-thin-line"></div>
+
+                                <!-- 1번 매치 -->
+                                <div id="matchListAllArea" class="row no-gutters gg-action gg-matchlist FreeRank"
+                                     data-id="4059186115" data-href="/kr/profile/View/match/4059186115"
+                                     data-event="MatchListMatch">
+
+                                    <!-- 게임에 대한 내 정보 영역 -->
+                                    <div class="col-md-8 d-flex flex-column justify-content-between gg-matchlist-lose">
+                                        <div class="row no-gutters">
+                                            <div class="col-2 d-flex flex-column gg-bg-negative text-white">
+                                                <div class="d-flex flex-column my-auto justify-content-center py-2">
+                                                    <span class="gg-matchlist-meta-text">21시간 전</span>
+                                                    <div class="d-block"><img class="py-1 gg-img-25x25"
+                                                                              src="${pageContext.request.contextPath}/resources/Images/ranked-positions/Position_Iron-Bot.png"></div>
+                                                </div>
+                                                <div class="d-flex justify-content-center py-lg-2 py-1">
+                                                    패배
+                                                </div>
+                                            </div>
+                                            <div class="col-10">
+                                                <div class="row no-gutters px-2 pt-2">
+                                                    <div class="col-2 col-lg-2 my-auto px-1 position-relative">
+                                                        <div class="position-relative">
+                                                            <img class="img-md img-circled full-width"
+                                                                 src="https://ddragon.leagueoflegends.com/cdn/9.24.2/img/champion/Kaisa.png">
+                                                            <span class="gg-matchlist-meta-text gg-matchlist-matchcategory rounded-circle">자</span>
+                                                        </div>
+                                                        <span class="d-block text-sm">29:27</span>
+                                                    </div>
+                                                    <div class="col-2 col-lg-1 d-flex justify-content-center justify-content-lg-start px-0 my-auto">
+                                                        <div class="col-xs-12 gg-padding-1px">
+
+                                                            <img class="d-block img-xs rounded" alt="img"
+                                                                 src="https://ddragon.leagueoflegends.com/cdn/9.24.2/img/spell/SummonerHeal.png">
+
+                                                            <img class="d-block img-xs rounded" alt="img"
+                                                                 src="https://ddragon.leagueoflegends.com/cdn/9.24.2/img/spell/SummonerFlash.png">
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-2 col-lg-2 d-flex flex-column my-auto">
+                                                        <span class="gg-important-number gg-text-negative">
+                                                            0.7
+                                                        </span>
+                                                        <span class="gg-matchlist-sub-description text-truncate">인분</span>
+                                                    </div>
+                                                    <div class="col-lg-2 d-lg-flex flex-column my-auto d-none">
+
+                                                        <span><img src="${pageContext.request.contextPath}/resources/Images/ranked-emblems/Emblem_Grandmaster.png"
+                                                                   class="gg-img-25x25 pr-1"></span>
+
+                                                        <span>6.8</span>
+                                                        <span class="gg-sub-description">분당 CS</span>
+                                                    </div>
+                                                    <div class="col-4 col-lg-3 d-flex py-0 my-auto justify-content-lg-start justify-content-center">
+
+                                                        <div>
+                                                            <img class="d-block img-xs rounded"
+                                                                 src="https://ddragon.leagueoflegends.com/cdn/9.24.2/img/item/1055.png">
+
+
+                                                            <img class="d-block img-xs rounded"
+                                                                 src="https://ddragon.leagueoflegends.com/cdn/9.24.2/img/item/2015.png">
+                                                        </div>
+
+                                                        <div>
+                                                            <img class="d-block img-xs rounded"
+                                                                 src="https://ddragon.leagueoflegends.com/cdn/9.24.2/img/item/3095.png">
+
+
+                                                            <img class="d-block img-xs rounded"
+                                                                 src="https://ddragon.leagueoflegends.com/cdn/9.24.2/img/item/3006.png">
+                                                        </div>
+
+                                                        <div>
+                                                            <img class="d-block img-xs rounded"
+                                                                 src="https://ddragon.leagueoflegends.com/cdn/9.24.2/img/item/3124.png">
+
+
+                                                            <img class="d-block img-xs rounded"
+                                                                 src="https://ddragon.leagueoflegends.com/cdn/9.24.2/img/item/3086.png">
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="col-2 d-flex px-0 flex-column justify-content-center style=">
+                                                        <span class="gg-important-text gg-text-soso">보통</span>
+                                                        <span class="gg-matchlist-sub-description gg-text-break">팀운</span>
+                                                    </div>
+                                                </div>
+                                                <div class="row no-gutters pt-1">
+                                                    <div class="col-12 text-left d-flex align-items-center pl-2">
+
+                                                        <span class="badge badge-default">데이터 없음</span>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- 팀원 정보 영역 -->
+                                    <div class="col-md-4 d-none d-lg-flex align-items-center gg-matchlist-lose">
+                                        <div class="row no-gutters w-100">
+                                            <div class="col-11">
+                                                <div class="row no-gutters">
+                                                    <div class="col-6">
+
+                                                        <div class="of-ellipsis text-left pl-1 gg-matchlist-item gg-border-negative">
+                                                            <img class="img-xs img-circled gg-img-18x18" src="https://ddragon.leagueoflegends.com/cdn/9.24.2/img/champion/Vladimir.png">
+                                                            <a class="text-secondary" href="/kr/profile/KooNH">
+                                                                <span class="gg-text-soso">KooNH</span>
+                                                            </a>
+                                                        </div>
+
+                                                        <div class="of-ellipsis text-left pl-1 gg-matchlist-item gg-border-negative">
+                                                            <img class="img-xs img-circled gg-img-18x18" src="https://ddragon.leagueoflegends.com/cdn/9.24.2/img/champion/Kindred.png">
+                                                            <a class="text-secondary" href="/kr/profile/AFTR">
+                                                                <span class="gg-text-soso">AFTR</span>
+                                                            </a>
+                                                        </div>
+
+                                                        <div class="of-ellipsis text-left pl-1 gg-matchlist-item gg-border-negative">
+                                                            <img class="img-xs img-circled gg-img-18x18" src="https://ddragon.leagueoflegends.com/cdn/9.24.2/img/champion/Renekton.png">
+                                                            <a class="text-secondary" href="/kr/profile/%ED%8C%80%ED%98%B8%ED%8B%B0%EB%AA%A8">
+                                                                <span class="gg-text-positive">팀호티모</span>
+                                                            </a>
+                                                        </div>
+
+                                                        <div class="of-ellipsis text-left pl-1 gg-matchlist-item gg-border-negative">
+                                                            <img class="img-xs img-circled gg-img-18x18" src="https://ddragon.leagueoflegends.com/cdn/9.24.2/img/champion/Kaisa.png">
+                                                            <a class="text-secondary" href="/kr/profile/View">
+                                                                <span class="gg-text-soso">View</span>
+                                                            </a>
+                                                        </div>
+
+                                                        <div class="of-ellipsis text-left pl-1 gg-matchlist-item gg-border-negative">
+                                                            <img class="img-xs img-circled gg-img-18x18" src="https://ddragon.leagueoflegends.com/cdn/9.24.2/img/champion/Teemo.png">
+                                                            <a class="text-secondary" href="/kr/profile/%EC%9D%B4%EB%B3%B5%EB%8D%A9">
+                                                                <span class="gg-text-soso">이복덩</span>
+                                                            </a>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="col-6">
+
+                                                        <div class="of-ellipsis text-left pl-1 gg-matchlist-item gg-border-positive">
+                                                            <img class="img-xs img-circled gg-img-18x18" src="https://ddragon.leagueoflegends.com/cdn/9.24.2/img/champion/Yasuo.png">
+                                                            <a class="text-secondary" href="/kr/profile/%EC%9E%90%EA%B4%B4%EA%B0%90%EB%93%A0%EB%8B%A4">
+                                                                <span class="gg-text-positive">자괴감든다</span>
+                                                            </a>
+                                                        </div>
+
+                                                        <div class="of-ellipsis text-left pl-1 gg-matchlist-item gg-border-positive">
+                                                            <img class="img-xs img-circled gg-img-18x18" src="https://ddragon.leagueoflegends.com/cdn/9.24.2/img/champion/Evelynn.png">
+                                                            <a class="text-secondary" href="/kr/profile/%EC%A7%80%EC%9A%B4%EC%A0%84">
+                                                                <span class="gg-text-positive">지운전</span>
+                                                            </a>
+                                                        </div>
+
+                                                        <div class="of-ellipsis text-left pl-1 gg-matchlist-item gg-border-positive">
+                                                            <img class="img-xs img-circled gg-img-18x18" src="https://ddragon.leagueoflegends.com/cdn/9.24.2/img/champion/Darius.png">
+                                                            <a class="text-secondary" href="/kr/profile/%EB%85%B8egg">
+                                                                <span class="gg-text-soso">노egg</span>
+                                                            </a>
+                                                        </div>
+
+                                                        <div class="of-ellipsis text-left pl-1 gg-matchlist-item gg-border-positive">
+                                                            <img class="img-xs img-circled gg-img-18x18" src="https://ddragon.leagueoflegends.com/cdn/9.24.2/img/champion/MissFortune.png">
+                                                            <a class="text-secondary" href="/kr/profile/%EB%B9%A0%EC%82%90%EB%B9%A0%EC%82%90%EC%BD%94">
+                                                                <span class="gg-text-soso">빠삐빠삐코</span>
+                                                            </a>
+                                                        </div>
+
+                                                        <div class="of-ellipsis text-left pl-1 gg-matchlist-item gg-border-positive">
+                                                            <img class="img-xs img-circled gg-img-18x18" src="https://ddragon.leagueoflegends.com/cdn/9.24.2/img/champion/Morgana.png">
+                                                            <a class="text-secondary" href="/kr/profile/%EC%84%B1%EC%9A%B4%EC%A0%84">
+                                                                <span class="gg-text-positive">성운전</span>
+                                                            </a>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-1 d-flex align-items-center justify-content-center gg-text-bold">
+                                                &gt;
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        <!-- 우측 영역 끝 -->
+
+                </div>
             </div>
 
         </div>
