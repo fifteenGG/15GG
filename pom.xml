@@ -165,21 +165,34 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<version>2.9.10.1</version>
+			<version>2.10.0.pr1</version>
 		</dependency>
 
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-core</artifactId>
-			<version>2.9.10</version>
+			<version>2.10.0.pr1</version>
 		</dependency>
 
 		<!-- orianna api -->
+		<dependency>
+			<groupId>org.cache2k</groupId>
+			<artifactId>cache2k-api</artifactId>
+			<version>1.2.4.Final</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.cache2k</groupId>
+			<artifactId>cache2k-core</artifactId>
+			<version>1.2.4.Final</version>
+		</dependency>
+
 		<dependency>
 			<groupId>com.merakianalytics.orianna</groupId>
 			<artifactId>orianna</artifactId>
 			<version>4.0.0-rc5</version>
 		</dependency>
+		<!-- orianna api end -->
 
 	</dependencies>
 	
