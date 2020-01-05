@@ -5,17 +5,12 @@
 <html>
 <head>
     <c:import url="views/common/commonUtil.jsp"/>
-    <title>Title</title>
-
+    <title>15.GG</title>
     <%--  로고 font --%>
     <link href="https://fonts.googleapis.com/css?family=Baloo+Bhai&display=swap" rel="stylesheet">
 
 </head>
-<body style="background: #f4f4f4; !important;
-      max-width: 1011px;
-      text-align: center;
-      font-weight: normal;
-      margin: 0 auto;">
+<body>
 
     <%-- 내용 부분 --%>
     <div style="min-height: 100%; margin: 0 auto -132px;" class="bg-white">

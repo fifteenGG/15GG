@@ -6,35 +6,33 @@
 <mapper namespace="member-mapper">
 <!-- namespace : 현재 매퍼파일의 별칭 -->
 
-<!--    <insert id="insertMember" parameterType="Member">-->
-<!--        insert into member-->
-<!--        values (#{userId}, #{password},#{userName}, #{gender}, #{age}, #{email}, #{phone}, #{address}, #{hobby}, sysdate)-->
-<!--    </insert>-->
+ <insert id="insertMember" parameterType="Member">
+        insert into member
+       values (SEQ_MEM.NEXTVAL, #{email}, #{nickName}, #{password})
+ </insert>
 
-<!--    <select id="selectOneMember" parameterType="Member" resultType="Member">-->
-<!--        select * from MEMBER-->
-<!--        where USERID = #{userId}-->
-<!--    </select>-->
+    <select id="selectOneMember" parameterType="Member" resultType="Member">
+        select * from MEMBER
+        where nickName = #{nickName}
+    </select>
 
-<!--    <delete id="deleteMember" parameterType="Member">-->
-<!--        delete from MEMBER-->
-<!--        where USERID = #{userId}-->
-<!--    </delete>-->
-
-<!--    <update id="memberUpdate" parameterType="Member">-->
-<!--        UPDATE MEMBER-->
-<!--        <set>-->
-<!--            <if test="password != null">-->
-<!--                PASSWORD = #{password},-->
-<!--            </if>-->
-<!--        EMAIL = #{email},-->
-<!--        PHONE = #{phone},-->
-<!--        ADDRESS = #{address},-->
-<!--        GENDER = #{gender},-->
-<!--        HOBBY = #{hobby}-->
-<!--        </set>-->
-<!--        WHERE USERID = #{userId}-->
-<!--    </update>-->
+	<delete id="deleteMember" parameterType="Member">
+        delete from MEMBER
+        where EMAIL = #{email}
+    </delete>
+ 
+	<update id="updateMember" parameterType="Member">
+		UPDATE MEMBER 
+		<set>
+			<if test="nickName != null">
+				NICKNAME = #{nickName},
+			</if>
+			<if test="password != null">
+				PASSWORD = #{password}
+			</if>
+		</set>
+		WHERE EMAIL = #{email}
+		</update>
 
 <!--    <select id="memberView" parameterType="String" resultType="Member">-->
 <!--        select *-->
@@ -49,6 +47,9 @@
 <!--        { CALL ID_DUP_CHECK(#{userId, mode=IN, jdbcType=VARCHAR}, #{result, mode=OUT, jdbcType=NUMERIC, javaType=integer})}-->
 
 <!--    </select>-->
-
+		<!-- <select id="checkIdDuplicate" parameterType="hashmap" statementType="CALLABLE">
+	 		{ CALL ID_DUP_CHK(#{email, mode=IN, jdbcType=VARCHAR},
+	 						  #{result, mode=OUT, jdbcType=NUMERIC, javaType=integer})}
+		</select> -->
 
 </mapper>

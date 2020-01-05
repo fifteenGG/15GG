@@ -14,9 +14,9 @@
 	<!-- 마이바티스에서 사용하기 위한 
 	    VO 클래스의 별칭을 정의하는 태그 -->
 	<typeAliases>
-		<!-- sql에서 사용할 때 직접 내용을 적지 않고 별칭으로도 접근이 가능하다. -->
-<!--		<typeAlias type="com.kh.fifteenGG.member.model.vo.Member"-->
-<!--			         alias="Member"/>-->
+<!--		 sql에서 사용할 때 직접 내용을 적지 않고 별칭으로도 접근이 가능하다.-->
+		<typeAlias type="com.kh.fifteenGG.member.model.vo.Member"
+			         alias="Member"/>
 	</typeAliases>
 
 </configuration>

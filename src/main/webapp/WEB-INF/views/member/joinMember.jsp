@@ -37,89 +37,169 @@
             background-color: #42AEEC;
             color: #fff;
         }
+        #alert-success{
+            background-color: #f8f9fa !important;
+    		border-color: #f8f9fa !important;
+    		font-size: unset
+    }
+    #alert-danger {
+  		background-color: #f8f9fa !important;
+    	border-color: #f8f9fa !important;
+    	color : red;
+    }
     </style>
 </head>
 <body>
 <div class="card bg-light">
     <article class="card-body mx-auto" style="max-width: 400px;">
-        <h4 class="card-title mt-3 text-center">Create Account</h4>
-        <p class="text-center">Get started with your free account</p>
-        <p>
-            <a href="" class="btn btn-block btn-twitter"> <i class="fab fa-twitter"></i>   Login via Twitter</a>
-            <a href="" class="btn btn-block btn-facebook"> <i class="fab fa-facebook-f"></i>   Login via facebook</a>
-        </p>
+      
+        
         <p class="divider-text">
-            <span class="bg-light">OR</span>
+            <span class="bg-light">회원 가입</span>
         </p>
-        <form>
+        <form action="memberJoin.do" method="post">
+        	<!-- 이름 -->
             <div class="form-group input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                 </div>
-                <input name="" class="form-control" placeholder="Full name" type="text">
+                <input name="nickName" class="form-control" placeholder="Nick name" type="text">
             </div> <!-- form-group// -->
+            
+            
+            
+            <!-- 이메일 -->
             <div class="form-group input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
                 </div>
-                <input name="" class="form-control" placeholder="Email address" type="email">
+                <input id="email" name="email" class="form-control" placeholder="Email address" type="email">
+            	<!-- <span class="guide ok">사용 가능</span>
+		        <span class="guide error">사용 불가</span>
+		        <span class="guide invalid">4글자 미만</span>
+		        <input type="hidden" name="idDuplicateCheck" id="idDuplicateCheck" value="0"/> -->
             </div> <!-- form-group// -->
-            <div class="form-group input-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
-                </div>
-                <select class="custom-select" style="max-width: 120px;">
-                    <option selected="">+971</option>
-                    <option value="1">+972</option>
-                    <option value="2">+198</option>
-                    <option value="3">+701</option>
-                </select>
-                <input name="" class="form-control" placeholder="Phone number" type="text">
-            </div> <!-- form-group// -->
-            <div class="form-group input-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text"> <i class="fas fa-headset"></i> </span>
-                </div>
-                <select class="form-control">
-                    <option selected=""> Select job type</option>
-                    <option>Designer</option>
-                    <option>Manager</option>
-                    <option>Accaunting</option>
-                </select>
-            </div> <!-- form-group end.// -->
+            
+            
+            <!-- 패스워드1 -->
             <div class="form-group input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                 </div>
-                <input class="form-control" placeholder="Create password" type="password">
+                <input id="password" name="password" class="form-control" placeholder="Create password" type="password" onchange="isSame()">
             </div> <!-- form-group// -->
+            
+            <!-- 패스워드2 -->
             <div class="form-group input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                 </div>
-                <input class="form-control" placeholder="Repeat password" type="password">
+                <input id="password2" name="password2" class="form-control" placeholder="Repeat password" type="password" onchange="isSame()">
+            	<span id="pass"></span>
             </div> <!-- form-group// -->
+            <div class="alert alert-success" id="alert-success">비밀번호가 일치합니다.</div> 
+            <div class="alert alert-danger" id="alert-danger">비밀번호가 일치하지 않습니다.</div>
+
+
+            
+            
             <div class="form-group">
                 <button type="submit" class="btn btn-primary btn-block"> Create Account  </button>
             </div> <!-- form-group// -->
+            
+            
             <p class="text-center">Have an account? <a href="">Log In</a> </p>
         </form>
     </article>
 </div> <!-- card.// -->
+<script>
+$(function(){
+		$("#alert-success").hide();
+		$("#alert-danger").hide();
+		$("input").keyup(function(){ 
+			var pwd1=$("#password").val();
+			var pwd2=$("#password2").val(); 
+			if(pwd1 != "" || pwd2 != ""){ 
+			if(pwd1 == pwd2){ 
+				$("#alert-success").show();
+				$("#alert-danger").hide(); 
+				$("#submit").removeAttr("disabled"); 
+		}else{ 
+			$("#alert-success").hide();
+			$("#alert-danger").show(); 
+			$("#submit").attr("disabled", "disabled"); 
+			} 
+		} 
+	});
+});
+//----------------------------------------//
 
-</div>
+$("#email").on("keyup", function(){
+    var email = $(this).val().trim();
+    
+    if(email.length<8) {
+    	$(".guide.error").hide();
+    	$(".guide.ok").hide();
+    	$(".guide.invalid").show();
+    	return;
+    	
+    } else {
+    	
+        $.ajax({
+            url  : "${pageContext.request.contextPath}/member/checkIdDuplicate.do",
+            data : {email:email},
+            dataType: "json",
+            success : function(data){
+                console.log(data);
+                // if(data=="true") //stream 방식
+                if(data.isUsable==true){ //viewName 방식
+                    $(".guide.error").hide();
+                    $(".guide.invalid").hide();
+                    $(".guide.ok").show();
+                    $("#idDuplicateCheck").val(1);
+                } else {
+                    $(".guide.error").show();
+                    $(".guide.invalid").hide();
+                    $(".guide.ok").hide();
+                    $("#idDuplicateCheck").val(0);
+                }
+            }, error : function(jqxhr, textStatus, errorThrown){
+                console.log("ajax 처리 실패");
+                //에러로그
+                console.log(jqxhr);
+                console.log(textStatus);
+                console.log(errorThrown);
+            }
+    	});
+ 	} 
+ //console.log(userId);
+});
+
+
+function validate(){
+var email = $("#email");
+if(email.val().trim().length<8){
+	alert("아이디는 최소 4자리이상이어야 합니다.");
+	email.focus();
+	return false;
+}
+
+//아이디중복체크여부
+if($("#idDuplicateCheck").val()==0){
+    alert("사용가능한 아이디를 입력해주세요.");
+    return false();
+}
+
+return true;
+}
+</script>
+
+
 <!--container end.//-->
 
 <br><br>
-<article class="bg-secondary mb-3">
-    <div class="card-body text-center">
-        <h3 class="text-white mt-3">Bootstrap 4 UI KIT</h3>
-        <p class="h5 text-white">Components and templates  <br> for Ecommerce, marketplace, booking websites
-            and product landing pages</p>   <br>
-        <p><a class="btn btn-warning" target="_blank" href="http://bootstrap-ecommerce.com/"> Bootstrap-ecommerce.com
-            <i class="fa fa-window-restore "></i></a></p>
-    </div>
-    <br><br>
-</article>
+
+
+
 </body>
 </html>

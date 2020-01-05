@@ -10,3 +10,6 @@
 
 <!-- icon -->
 <script src="https://kit.fontawesome.com/b6d39ce2e6.js" crossorigin="anonymous"></script>
+
+<!-- 공용 css -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/all..css">
