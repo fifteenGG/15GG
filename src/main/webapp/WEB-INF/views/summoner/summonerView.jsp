@@ -15,14 +15,14 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css">
     <script>
         function check() {
-            console.log(${champions})
+            console.log(${champions});
+
+            <%--https://ddragon.leagueoflegends.com/cdn/9.24.2/img/champion/ + ${champions.get(0).image.full}--%>
+            // <img class="img-circled" src="https://ddragon.leagueoflegends.com/cdn/9.24.2/img/champion/Xerath.png" width="70px" height="70px">
         }
     </script>
 </head>
-<body style="background: #f4f4f4; !important;
-      max-width: 1011px;
-      text-align: center;
-      margin: 0 auto;">
+<body>
 
 <%-- nav 영역 --%>
 <c:import url="../common/navbar.jsp"/>

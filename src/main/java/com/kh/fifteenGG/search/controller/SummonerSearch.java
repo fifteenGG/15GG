@@ -19,9 +19,7 @@ public class SummonerSearch {
 
         Champions champions = Orianna.getChampions();
 
-        Champion champion = Champion.named("애니").get();
-
-        System.out.println(champion);
+        Champion champion = Orianna.championNamed("애니").get();
 
         model.addAttribute("champions", champion);
 

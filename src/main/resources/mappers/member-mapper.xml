@@ -47,9 +47,9 @@
 <!--        { CALL ID_DUP_CHECK(#{userId, mode=IN, jdbcType=VARCHAR}, #{result, mode=OUT, jdbcType=NUMERIC, javaType=integer})}-->
 
 <!--    </select>-->
-		<!-- <select id="checkIdDuplicate" parameterType="hashmap" statementType="CALLABLE">
-	 		{ CALL ID_DUP_CHK(#{email, mode=IN, jdbcType=VARCHAR},
+		 <select id="checkIdDuplicate" parameterType="hashmap" statementType="CALLABLE">
+	 		{ CALL NK_DUP_CHECK(#{nickName, mode=IN, jdbcType=VARCHAR},
 	 						  #{result, mode=OUT, jdbcType=NUMERIC, javaType=integer})}
-		</select> -->
+		</select>
 
 </mapper>

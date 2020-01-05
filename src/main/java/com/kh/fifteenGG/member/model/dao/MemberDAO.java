@@ -32,12 +32,12 @@ public class MemberDAO {
 	
 	}
 
-	/*
-	 * public int checkIdDuplicate(HashMap<String, Object> hmap) {
-	 * sqlSession.selectOne("member-mapper.checkIdDuplicate", hmap);
-	 * 
-	 * return (Integer)hmap.get("result"); }
-	 */
+	
+	 public int checkIdDuplicate(HashMap<String, Object> hmap) {
+	 sqlSession.selectOne("member-mapper.checkIdDuplicate", hmap);
+	 
+	 return (Integer)hmap.get("result"); }
+	 
 
 
 }

@@ -9,6 +9,9 @@
     <%--  로고 font --%>
     <link href="https://fonts.googleapis.com/css?family=Baloo+Bhai&display=swap" rel="stylesheet">
 
+    <!-- chat css -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/chat.css">
+
 </head>
 <body>
 
@@ -26,7 +29,7 @@
         <%-- 메인 영역 --%>
         <div class="container-fluid">
             <!-- 로고 부분 -->
-            <div><p style="font-family: 'Baloo Bhai', cursive; font-size: 60px">15.GG</p></div>
+            <div><p style="font-family: 'Baloo Bhai', cursive; font-size: 60px"><a href="${pageContext.request.contextPath}">15.GG</a></p></div>
 
             <!-- 검색창 -->
             <div class="row mt-4 form-group">
@@ -69,6 +72,16 @@
 
         </div>
     </div>
+    <button onclick="chattingBtn();" class="fcy-54fyyd ewgv1620"></button>
+    <script>
+        function chattingBtn(){
+            var title = 'chatting';
+            var url = '${pageContext.request.contextPath}/chatting.do';
+            var status = 'width = 500px, heigh= 700px';
+
+            var popup = window.open(url, title, status);
+        }
+    </script>
 
 </body>
 </html>

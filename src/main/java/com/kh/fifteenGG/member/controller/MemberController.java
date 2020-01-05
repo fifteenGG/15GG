@@ -166,17 +166,16 @@ public class MemberController {
 	  return "common/msg"; 
 	  
 	  }
-	/*
-	 * @RequestMapping("/member/checkIdDuplicate.do")
-	 * 
-	 * @ResponseBody public Map<String, Object> checkIdDuplicate(@RequestParam
-	 * String email){
-	 * 
-	 * boolean isUsable = memberService.checkIdDuplicate(email) == 0 ? true : false;
-	 * 
-	 * Map<String, Object> map = new HashMap<String, Object>(); map.put("isUsable",
-	 * isUsable);
-	 * 
-	 * return map; }
-	 */
+	
+	  @RequestMapping("/member/checkIdDuplicate.do")
+	  @ResponseBody 
+	  public Map<String, Object> checkIdDuplicate(@RequestParam String nickName){
+	  
+	  boolean isUsable = memberService.checkIdDuplicate(nickName) == 0 ? true : false;
+	  
+	  Map<String, Object> map = new HashMap<String, Object>(); map.put("isUsable",
+	  isUsable);
+	  
+	  return map; }
+	 
 }
