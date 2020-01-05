@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css">
     <script>
         function check() {
-            console.log(${champions.get(0)})
+            console.log(${champions})
         }
     </script>
 </head>

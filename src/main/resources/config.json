@@ -1,4 +1,9 @@
 {
+
+  "defaultPlatform": "KOREA",
+
+  "defaultLocale": "ko_KR",
+
   "currentVersionExpiration": {
     "period": 6,
     "unit": "HOURS"
