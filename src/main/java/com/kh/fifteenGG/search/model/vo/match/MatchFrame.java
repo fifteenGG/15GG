@@ -14,28 +14,35 @@
  * limitations under the License.
  */
 
-package com.kh.fifteenGG.search.controller.model.vo.match;
+package com.kh.fifteenGG.search.model.vo.match;
+
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
-public class MatchTimeline implements Serializable {
+public class MatchFrame implements Serializable {
 
-	private static final long serialVersionUID = 3888184958883394435L;
+	private static final long serialVersionUID = 4359409042534560829L;
 
-	private long frameInterval;
-	private List<MatchFrame> frames;
+	private List<MatchEvent> events;
+	private Map<Integer, MatchParticipantFrame> participantFrames;
+	private long timestamp;
 
-	public long getFrameInterval() {
-		return frameInterval;
+	public List<MatchEvent> getEvents() {
+		return events;
 	}
 
-	public List<MatchFrame> getFrames() {
-		return frames;
+	public Map<Integer, MatchParticipantFrame> getParticipantFrames() {
+		return participantFrames;
+	}
+
+	public long getTimestamp() {
+		return timestamp;
 	}
 
 	@Override
 	public String toString() {
-		return String.valueOf(getFrameInterval());
+		return String.valueOf(getTimestamp());
 	}
 }

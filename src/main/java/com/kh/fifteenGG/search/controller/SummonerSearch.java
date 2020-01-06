@@ -2,20 +2,13 @@ package com.kh.fifteenGG.search.controller;
 
 
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
-import com.kh.fifteenGG.search.controller.model.service.SearchService;
-import com.kh.fifteenGG.search.controller.model.vo.league.LeagueEntry;
-import com.kh.fifteenGG.search.controller.model.vo.match.Match;
-import com.kh.fifteenGG.search.controller.model.vo.match.MatchList;
-import com.kh.fifteenGG.search.controller.model.vo.match.MatchReference;
-import com.kh.fifteenGG.search.controller.model.vo.summoner.Summoner;
+import com.kh.fifteenGG.search.model.service.SearchService;
+import com.kh.fifteenGG.search.model.vo.league.LeagueEntry;
+import com.kh.fifteenGG.search.model.vo.match.Match;
+import com.kh.fifteenGG.search.model.vo.match.MatchList;
+import com.kh.fifteenGG.search.model.vo.summoner.Summoner;
 
-import com.merakianalytics.orianna.Orianna;
-import com.merakianalytics.orianna.types.core.staticdata.Champion;
-import com.merakianalytics.orianna.types.core.staticdata.Champions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

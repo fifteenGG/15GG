@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.kh.fifteenGG.search.controller.model.vo.league;
+package com.kh.fifteenGG.search.model.vo.league;
 
 import java.io.Serializable;
 import java.util.List;

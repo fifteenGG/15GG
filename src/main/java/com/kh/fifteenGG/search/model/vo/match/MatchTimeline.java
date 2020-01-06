@@ -14,29 +14,28 @@
  * limitations under the License.
  */
 
-package com.kh.fifteenGG.search.controller.model.vo.match;
+package com.kh.fifteenGG.search.model.vo.match;
 
 import java.io.Serializable;
+import java.util.List;
 
-public class Mastery implements Serializable {
+public class MatchTimeline implements Serializable {
 
-	private static final long serialVersionUID = 1049623074386811783L;
-	
-	private int masteryId;
-	private int rank;
+	private static final long serialVersionUID = 3888184958883394435L;
 
+	private long frameInterval;
+	private List<MatchFrame> frames;
 
-	public int getMasteryId() {
-		return masteryId;
+	public long getFrameInterval() {
+		return frameInterval;
 	}
 
-	public int getRank() {
-		return rank;
+	public List<MatchFrame> getFrames() {
+		return frames;
 	}
 
 	@Override
 	public String toString() {
-		return getMasteryId() + ": " + getRank();
+		return String.valueOf(getFrameInterval());
 	}
-
 }

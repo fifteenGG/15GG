@@ -1,4 +1,4 @@
-package com.kh.fifteenGG.search.controller.model.vo.summoner;
+package com.kh.fifteenGG.search.model.vo.summoner;
 
 import java.io.Serializable;
 

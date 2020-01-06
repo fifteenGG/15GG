@@ -1,6 +1,6 @@
-package com.kh.fifteenGG.search.controller.model.service;
+package com.kh.fifteenGG.search.model.service;
 
-import com.kh.fifteenGG.search.controller.model.vo.match.Match;
+import com.kh.fifteenGG.search.model.vo.match.Match;
 import org.springframework.stereotype.Service;
 
 @Service

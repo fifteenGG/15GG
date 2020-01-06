@@ -14,21 +14,24 @@
  * limitations under the License.
  */
 
-package com.kh.fifteenGG.search.controller.model.vo.league;
+package com.kh.fifteenGG.search.model.vo.league;
 
 import java.io.Serializable;
 
-public class LeagueEntry implements Serializable {
+@Deprecated
+public class LeaguePosition implements Serializable {
 
-	private static final long serialVersionUID = 7672279635939129200L;
+	private static final long serialVersionUID = 1753178439019663600L;
 
 	private boolean freshBlood;
 	private boolean hotStreak;
 	private boolean inactive;
 	private String leagueId;
+	private String leagueName;
 	private int leaguePoints;
 	private int losses;
 	private MiniSeries miniSeries;
+	private String position;
 	private String queueType;
 	private String rank;
 	private String summonerId;
@@ -41,68 +44,12 @@ public class LeagueEntry implements Serializable {
 		return leagueId;
 	}
 
-	public static long getSerialVersionUID() {
-		return serialVersionUID;
-	}
-
-	public void setFreshBlood(boolean freshBlood) {
-		this.freshBlood = freshBlood;
-	}
-
-	public void setHotStreak(boolean hotStreak) {
-		this.hotStreak = hotStreak;
-	}
-
-	public void setInactive(boolean inactive) {
-		this.inactive = inactive;
-	}
-
-	public void setLeagueId(String leagueId) {
-		this.leagueId = leagueId;
-	}
-
-	public void setLeaguePoints(int leaguePoints) {
-		this.leaguePoints = leaguePoints;
-	}
-
-	public void setLosses(int losses) {
-		this.losses = losses;
-	}
-
-	public void setMiniSeries(MiniSeries miniSeries) {
-		this.miniSeries = miniSeries;
-	}
-
-	public void setQueueType(String queueType) {
-		this.queueType = queueType;
-	}
-
-	public void setRank(String rank) {
-		this.rank = rank;
-	}
-
-	public void setSummonerId(String summonerId) {
-		this.summonerId = summonerId;
-	}
-
-	public void setSummonerName(String summonerName) {
-		this.summonerName = summonerName;
-	}
-
-	public void setTier(String tier) {
-		this.tier = tier;
-	}
-
-	public void setVeteran(boolean veteran) {
-		this.veteran = veteran;
-	}
-
-	public void setWins(int wins) {
-		this.wins = wins;
-	}
-
 	public int getLeaguePoints() {
 		return leaguePoints;
+	}
+
+	public String getLeagueName() {
+		return leagueName;
 	}
 
 	public int getLosses() {
@@ -111,6 +58,10 @@ public class LeagueEntry implements Serializable {
 
 	public MiniSeries getMiniSeries() {
 		return miniSeries;
+	}
+
+	public String getPosition() {
+		return position;
 	}
 
 	public String getQueueType() {

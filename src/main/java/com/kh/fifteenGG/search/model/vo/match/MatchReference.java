@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.kh.fifteenGG.search.controller.model.vo.match;
+package com.kh.fifteenGG.search.model.vo.match;
 
 import java.io.Serializable;
 

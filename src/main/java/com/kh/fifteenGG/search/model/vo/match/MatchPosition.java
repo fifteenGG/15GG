@@ -14,37 +14,27 @@
  * limitations under the License.
  */
 
-package com.kh.fifteenGG.search.controller.model.vo.league;
+package com.kh.fifteenGG.search.model.vo.match;
 
 import java.io.Serializable;
 
-public class MiniSeries implements Serializable {
+public class MatchPosition implements Serializable {
 
-	private static final long serialVersionUID = -1698803031525933530L;
+	private static final long serialVersionUID = -6998248732159256525L;
 
-	private int losses;
-	private String progress;
-	private int target;
-	private int wins;
+	private int x;
+	private int y;
 
-	public int getLosses() {
-		return losses;
+	public int getX() {
+		return x;
 	}
 
-	public String getProgress() {
-		return progress;
-	}
-
-	public int getTarget() {
-		return target;
-	}
-
-	public int getWins() {
-		return wins;
+	public int getY() {
+		return y;
 	}
 
 	@Override
 	public String toString() {
-		return getProgress();
+		return "[" + getX() + "," + getY() + "]";
 	}
 }
