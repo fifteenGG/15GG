@@ -1,79 +1,129 @@
 package com.kh.fifteenGG.search.controller;
 
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.kh.fifteenGG.search.controller.model.vo.Match;
-import com.merakianalytics.orianna.Orianna;
-import com.merakianalytics.orianna.types.core.match.MatchHistory;
-import com.merakianalytics.orianna.types.core.match.Participant;
-import com.merakianalytics.orianna.types.core.searchable.SearchableList;
-import com.merakianalytics.orianna.types.core.summoner.Summoner;
+import com.google.gson.reflect.TypeToken;
+import com.kh.fifteenGG.search.controller.model.service.SearchService;
+import com.kh.fifteenGG.search.controller.model.vo.league.LeagueEntry;
+import com.kh.fifteenGG.search.controller.model.vo.match.Match;
+import com.kh.fifteenGG.search.controller.model.vo.match.MatchList;
+import com.kh.fifteenGG.search.controller.model.vo.match.MatchReference;
+import com.kh.fifteenGG.search.controller.model.vo.summoner.Summoner;
 
-import jdk.nashorn.internal.parser.JSONParser;
+import com.merakianalytics.orianna.Orianna;
+import com.merakianalytics.orianna.types.core.staticdata.Champion;
+import com.merakianalytics.orianna.types.core.staticdata.Champions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.List;
 
 @Controller
 public class SummonerSearch {
+
+    @Autowired
+    SearchService searchService;
 
     private String ApiKey = "RGAPI-196531b1-f9b5-44d1-be18-d60696c9b79e";
 
     @RequestMapping("/search/SummonerSearch.do")
     public String SummonerSearch(@RequestParam String summonerName, Model model) {
+        /*
+        Gson gson = new Gson();
+        String jsonString = request.getParameter("arrList");
 
-//        Orianna.loadConfiguration("config.json");
-//        Orianna.setRiotAPIKey("RGAPI-f60cb18e-0c5c-463f-af23-f57d0b8b96e4");
-//
-//        Summoner summoner = Summoner.named(summonerName).get();
-//
-////        System.out.println("summoner : " + summoner);
-//
-//        MatchHistory matchHistory = Orianna.matchHistoryForSummoner(summoner).get();
-//
-////        System.out.println("matchHistory : " + matchHistory);
-//
-//        Match match = matchHistory.get(0);
-//
-//        System.out.println("첫번 째 매치  : " + match.getParticipants());
-//
-//        model.addAttribute("match",match);
+        CityPlan[] array = gson.fromJson(jsonString, CityPlan[].class);
 
+        // 1
+        List<CityPlan> list = Arrays.asList(array);
 
-        // ========================================================================================== //
-
-        String urlStr = "https://kr.api.riotgames.com/lol/match/v4/matches/4059186115?api_key=" + ApiKey;
+        // 방법 2
+//        List<CityPlan> list = gson.fromJson(jsonString, new TypeToken<List<CityPlan>>(){}.getType());
+         */
 
         try {
-            URL url = new URL( urlStr );
-            BufferedReader br = new BufferedReader(new InputStreamReader( url.openConnection().getInputStream() ) );
 
-            String string = br.readLine();
+            // 소환사 정보 뽑아오기
 
-            JsonObject jsonObject = (JsonObject) new JsonParser().parse(string);
+            String urlStr = "https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/" + summonerName + "?api_key=" + ApiKey;
 
-            System.out.println("제이슨 확인용 : " + jsonObject);
+            URL url1 = new URL(urlStr);
+            BufferedReader br1 = new BufferedReader(new InputStreamReader(url1.openConnection().getInputStream()));
 
-            model.addAttribute("match", jsonObject);
+            String string1 = br1.readLine();
 
-            Match match = new Match();
+            Gson gson = new Gson();
 
-            match.setGameId(jsonObject.get("gameId").getAsLong());
+            Summoner summoner = gson.fromJson(string1, Summoner.class);
 
-            System.out.println("match get 확인용 : " + match.getGameId());
+            //=====================================================================================================================//
 
-            System.out.println("객체나 배열 뽑아보기 : " + jsonObject.get("teams").getAsJsonArray());
+            // 리그 정보 뽑아오기
+            String urlstr2 = "https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/" + summoner.getId() + "?api_key=" + ApiKey;
+            URL url2 = new URL(urlstr2);
 
-        } catch ( Exception e ) {
+            BufferedReader br2 = new BufferedReader(new InputStreamReader(url2.openConnection().getInputStream()));
+
+            String string2 = br2.readLine();
+
+            List<LeagueEntry> leagueEntry = gson.fromJson(string2, new TypeToken<List<LeagueEntry>>() {}.getType());
+
+            //=====================================================================================================================//
+
+            // 매치 리스트 정보 뽑아오기
+            String urlStr3 = "https://kr.api.riotgames.com/lol/match/v4/matchlists/by-account/"+summoner.getAccountId()+"?api_key="+ApiKey;
+
+            URL url = new URL(urlStr3);
+
+            BufferedReader br3 = new BufferedReader(new InputStreamReader(url.openConnection().getInputStream()));
+
+            String string3 = br3.readLine();
+
+            MatchList matchList = gson.fromJson(string3, MatchList.class);
+
+            List mlist = matchList.getMatches();
+
+
+//             매치 상세 정보 반복적으로
+//             너무 오래된 정보는 가져오기 불가능. 20~30개 까지만 갱신
+
+            // 테스트용으로 1개만
+            System.out.println("반복문 시작");
+            for(int i = 0; i < 1 ; i++){
+                urlStr = "https://kr.api.riotgames.com/lol/match/v4/matches/"+mlist.get(i)+"?api_key="+ApiKey;
+
+                url = new URL(urlStr);
+                BufferedReader br = new BufferedReader(new InputStreamReader(url.openConnection().getInputStream()));
+
+                String string = br.readLine();
+
+                Match match = gson.fromJson(string, Match.class);
+
+                System.out.println(match);
+
+                int result = searchService.insertMatch(match);
+
+            }
+
+            System.out.println("반복문 끝");
+            //=====================================================================================================================//
+
+            model.addAttribute("summoner", summoner);
+            model.addAttribute("leagueEntry", leagueEntry);
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
+
         return "summoner/summonerView";
 
     }

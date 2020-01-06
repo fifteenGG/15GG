@@ -14,35 +14,27 @@
  * limitations under the License.
  */
 
-package com.kh.fifteenGG.search.controller.model.vo;
-
+package com.kh.fifteenGG.search.controller.model.vo.match;
 
 import java.io.Serializable;
-import java.util.List;
-import java.util.Map;
 
-public class MatchFrame implements Serializable {
+public class TeamBans implements Serializable {
 
-	private static final long serialVersionUID = 4359409042534560829L;
+	private static final long serialVersionUID = 2323180505557888125L;
 
-	private List<MatchEvent> events;
-	private Map<Integer, MatchParticipantFrame> participantFrames;
-	private long timestamp;
+	private int championId;
+	private int pickTurn;
 
-	public List<MatchEvent> getEvents() {
-		return events;
+	public int getChampionId() {
+		return championId;
 	}
 
-	public Map<Integer, MatchParticipantFrame> getParticipantFrames() {
-		return participantFrames;
-	}
-
-	public long getTimestamp() {
-		return timestamp;
+	public int getPickTurn() {
+		return pickTurn;
 	}
 
 	@Override
 	public String toString() {
-		return String.valueOf(getTimestamp());
+		return String.valueOf(getChampionId());
 	}
 }

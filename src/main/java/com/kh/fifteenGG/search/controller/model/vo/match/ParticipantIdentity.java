@@ -14,27 +14,27 @@
  * limitations under the License.
  */
 
-package com.kh.fifteenGG.search.controller.model.vo;
+package com.kh.fifteenGG.search.controller.model.vo.match;
 
 import java.io.Serializable;
 
-public class MatchPosition implements Serializable {
+public class ParticipantIdentity implements Serializable {
 
-	private static final long serialVersionUID = -6998248732159256525L;
+	private static final long serialVersionUID = 7750317217073991764L;
 
-	private int x;
-	private int y;
+	private int participantId;
+	private Player player;
 
-	public int getX() {
-		return x;
+	public int getParticipantId() {
+		return participantId;
 	}
 
-	public int getY() {
-		return y;
+	public Player getPlayer() {
+		return player;
 	}
 
 	@Override
 	public String toString() {
-		return "[" + getX() + "," + getY() + "]";
+		return getPlayer().toString();
 	}
 }

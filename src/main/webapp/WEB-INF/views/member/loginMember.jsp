@@ -7,13 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <style>
-	@charset "utf-8";
-
-
-@import url//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css);
-
-
-
+    @charset "UTF-8";
+    @import url(//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css);
 div.main{
    /* background-image: url("${pageContext.request.contextPath}/resources/imges/piora.jpeg"); */
    background-size: cover;

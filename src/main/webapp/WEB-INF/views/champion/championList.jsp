@@ -57,7 +57,7 @@
 	</li>
 	</ul>
 	</div> <!-- 선택 메뉴div -->
-	<c:forEach var="champions" items="${champions}">
+	<c:forEach var="champions" items="${champions.get(0).passive.}">
 	<div class="champion-index__champion-list">
 		<div class="champion-index__champion-item   
 					champion-index__champion-item--TOP 

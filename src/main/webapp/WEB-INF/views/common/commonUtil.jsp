@@ -6,7 +6,7 @@
 <!-- 부트스트랩관련 라이브러리 -->
 <script src="${pageContext.request.contextPath }/resources/js/bootstrap.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bootstrap.css">
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="${pageContext.request.contextPath}/resources/js/popper.min.js"></script>
 
 <!-- icon -->
 <script src="https://kit.fontawesome.com/b6d39ce2e6.js" crossorigin="anonymous"></script>

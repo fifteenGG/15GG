@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.kh.fifteenGG.search.controller.model.vo;
+package com.kh.fifteenGG.search.controller.model.vo.match;
 
 import java.io.Serializable;
 import java.util.List;
@@ -266,7 +266,20 @@ public class Match implements Serializable {
 
 	@Override
 	public String toString() {
-		return String.valueOf(getGameId());
+		return "Match{" +
+				"gameCreation=" + gameCreation +
+				", gameDuration=" + gameDuration +
+				", gameId=" + gameId +
+				", gameMode='" + gameMode + '\'' +
+				", gameType='" + gameType + '\'' +
+				", gameVersion='" + gameVersion + '\'' +
+				", mapId=" + mapId +
+				", participantIdentities=" + participantIdentities +
+				", participants=" + participants +
+				", platformId='" + platformId + '\'' +
+				", queueId=" + queueId +
+				", seasonId=" + seasonId +
+				", teams=" + teams +
+				'}';
 	}
-
 }
