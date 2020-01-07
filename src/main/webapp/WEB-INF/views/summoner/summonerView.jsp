@@ -49,9 +49,8 @@
                     <a class="btn btn-primary btn-block mt-0 mb-0 ml-0 mr-0"
                        id="profileUpdateBtn"
                        style="font-size: 0.875rem"
-                       href="#"
-                       data-href="/kr/profile/View/update"
-                       data-refresh-href="/kr/profile/View" role="button">
+                       href="${pageContext.request.contextPath}/search/UpdateMatch.do?accountId=${summoner.accountId}&summonerName=${summoner.name}"
+                       role="button">
                         <i class="fas fa-sync"></i>
                         <span id="profileUpdateProgressImg" class="fa fa-spinner fa-spin fa-3x"
                               style="display: none !important;"></span>
