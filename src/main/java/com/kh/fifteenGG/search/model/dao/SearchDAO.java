@@ -6,6 +6,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
+
 @Repository
 public class SearchDAO {
 
@@ -37,6 +39,11 @@ public class SearchDAO {
     }
 
     public int insertParticipantStats(ParticipantStats stats) {
-        return 0;
+        return sqlSession.insert("match-mapper.insertParticipantStats", stats);
+    }
+
+    public int checkMatch(HashMap<String, Object> hmap) {
+        sqlSession.selectOne("match-mapper.checkMatch", hmap);
+        return (int) hmap.get("result");
     }
 }

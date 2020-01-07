@@ -41,7 +41,7 @@ public class ParticipantStats implements Serializable {
     private boolean firstTowerKill;
     private int goldEarned;
     private int goldSpent;
-    private int inhibitorKills;
+    private int inhibitorKills; //
     private int item0;
     private int item1;
     private int item2;
@@ -56,7 +56,7 @@ public class ParticipantStats implements Serializable {
     private int largestMultiKill;
     private int longestTimeSpentLiving;
     private long magicDamageDealt;
-    private long magicDamageDealtToChampions;
+    private long magicDamageDealtToChampions; //
     private long magicalDamageTaken;
     private int neutralMinionsKilled;
     private int neutralMinionsKilledEnemyJungle;
@@ -71,7 +71,7 @@ public class ParticipantStats implements Serializable {
     private long physicalDamageDealt;
     private long physicalDamageDealtToChampions;
     private long physicalDamageTaken;
-    private int quadraKills;
+    private int quadraKills; //
     private int sightWardsBoughtInGame;
     private int teamObjective;
     private int timeCCingOthers;
@@ -81,7 +81,7 @@ public class ParticipantStats implements Serializable {
     private long totalHeal;
     private int totalMinionsKilled;
     private int totalPlayerScore;
-    private int totalScoreRank;
+    private int totalScoreRank; //
     private int totalTimeCrowdControlDealt;
     private int totalUnitsHealed;
     private int tripleKills;
@@ -96,7 +96,7 @@ public class ParticipantStats implements Serializable {
     private int wardsPlaced;
     private boolean win;
     private int perk0;
-    private int perk1;
+    private int perk1; //
     private int perk2;
     private int perk3;
     private int perk4;
@@ -116,7 +116,7 @@ public class ParticipantStats implements Serializable {
     private long perk4Var1;
     private long perk4Var2;
     private long perk4Var3;
-    private long perk5Var1;
+    private long perk5Var1; //
     private long perk5Var2;
     private long perk5Var3;
     private long playerScore0;

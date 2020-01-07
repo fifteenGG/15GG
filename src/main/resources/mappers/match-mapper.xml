@@ -6,6 +6,7 @@
 <mapper namespace="match-mapper">
     <!-- namespace : 현재 매퍼파일의 별칭 -->
 
+<!--	매치 정보 저장용	-->
     <insert id="insertMatch" parameterType="Match">
 		insert into MATCH values (
 			#{gameCreation}, #{gameDuration}, #{gameId}, #{gameMode}
@@ -44,5 +45,40 @@
 			, #{teamId}
 		)
 	</insert>
+
+	<insert id="insertParticipantStats" parameterType="ParticipantStats">
+		insert into PARTICIPANTSTATS values (
+			#{gameId}, #{altarsCaptured}, #{altarsNeutralized}, #{assists}, #{champLevel}
+			, #{combatPlayerScore}, #{damageDealtToObjectives}, #{damageDealtToTurrets}, #{damageSelfMitigated}, #{deaths}
+			, #{doubleKills}, #{firstBloodAssist}, #{firstBloodKill}, #{firstInhibitorAssist}, #{firstInhibitorKill}
+			, #{firstTowerAssist}, #{firstTowerKill}, #{goldEarned}, #{goldSpent}, #{inhibitorKills}
+			, #{item0}, #{item1}, #{item2}, #{item3}, #{item4}
+			, #{item5}, #{item6}, #{killingSprees}, #{kills}, #{largestCriticalStrike}
+			, #{largestKillingSpree}, #{largestMultiKill}, #{longestTimeSpentLiving}, #{magicDamageDealt}, #{magicDamageDealtToChampions}
+			, #{magicalDamageTaken}, #{neutralMinionsKilled}, #{neutralMinionsKilledEnemyJungle}, #{neutralMinionsKilledTeamJungle}, #{nodeCapture}
+			, #{nodeCaptureAssist}, #{nodeNeutralize}, #{nodeNeutralizeAssist}, #{objectivePlayerScore}, #{participantId}
+			, #{pentaKills}, #{physicalDamageDealt}, #{physicalDamageDealtToChampions}, #{physicalDamageTaken}, #{quadraKills}
+			, #{sightWardsBoughtInGame}, #{teamObjective}, #{timeCCingOthers}, #{totalDamageDealt}, #{totalDamageDealtToChampions}
+			, #{totalDamageTaken}, #{totalHeal}, #{totalMinionsKilled}, #{totalPlayerScore}, #{totalScoreRank}
+			, #{totalTimeCrowdControlDealt}, #{totalUnitsHealed}, #{tripleKills}, #{trueDamageDealt}, #{trueDamageDealtToChampions}
+			, #{trueDamageTaken}, #{turretKills}, #{unrealKills}, #{visionScore}, #{visionWardsBoughtInGame}
+			, #{wardsKilled}, #{wardsPlaced}, #{win}, #{perk0}, #{perk1}
+			, #{perk2}, #{perk3}, #{perk4}, #{perk5}, #{perk0Var1}
+			, #{perk0Var2}, #{perk0Var3}, #{perk1Var1}, #{perk1Var2}, #{perk1Var3}
+			, #{perk2Var1}, #{perk2Var2}, #{perk2Var3}, #{perk3Var1}, #{perk3Var2}
+			, #{perk3Var3}, #{perk4Var1}, #{perk4Var2}, #{perk4Var3}, #{perk5Var1}
+			, #{perk5Var2}, #{perk5Var3}, #{playerScore0}, #{playerScore1}, #{playerScore2}
+			, #{playerScore3}, #{playerScore4}, #{playerScore5}, #{playerScore6}, #{playerScore7}
+			, #{playerScore8}, #{playerScore9}, #{perkPrimaryStyle}, #{perkSubStyle}, #{statPerk0}
+			, #{statPerk1}, #{statPerk2}
+		)
+	</insert>
+
+	<select id="checkMatch" parameterType="hashmap" statementType="CALLABLE">
+		{ CALL MATCH_DUP_CHECK(#{gameId, mode=IN, jdbcType=VARCHAR}, #{result, mode=OUT, jdbcType=NUMERIC, javaType=integer})}
+	</select>
+<!--	매치 정보 저장용 끝		-->
+
+
 
 </mapper>

@@ -69,12 +69,13 @@ public class SummonerSearch {
 
             String string2 = br2.readLine();
 
-            List<LeagueEntry> leagueEntry = gson.fromJson(string2, new TypeToken<List<LeagueEntry>>() {}.getType());
+            List<LeagueEntry> leagueEntry = gson.fromJson(string2, new TypeToken<List<LeagueEntry>>() {
+            }.getType());
 
             //=====================================================================================================================//
 
             // 매치 리스트 정보 뽑아오기
-            String urlStr3 = "https://kr.api.riotgames.com/lol/match/v4/matchlists/by-account/"+summoner.getAccountId()+"?api_key="+ApiKey;
+            String urlStr3 = "https://kr.api.riotgames.com/lol/match/v4/matchlists/by-account/" + summoner.getAccountId() + "?api_key=" + ApiKey;
 
             URL url = new URL(urlStr3);
 
@@ -86,14 +87,12 @@ public class SummonerSearch {
 
             List mlist = matchList.getMatches();
 
-//             매치 상세 정보 저장 반복문
-//             너무 오래된 정보는 가져오기 불가능. 20~30개 까지만 갱신
-            // 테스트용으로 1개만
-
+            // 매치 상세 정보 저장 반복문
+            // 너무 오래된 정보는 가져오기 불가능. 20~30개 까지만 갱신
             System.out.println("반복문 시작");
 
-            for(int i = 0; i < 1 ; i++){
-                urlStr = "https://kr.api.riotgames.com/lol/match/v4/matches/"+mlist.get(i)+"?api_key="+ApiKey;
+            for (int i = 0; i < 20; i++) {
+                urlStr = "https://kr.api.riotgames.com/lol/match/v4/matches/" + mlist.get(i) + "?api_key=" + ApiKey;
 
                 url = new URL(urlStr);
                 BufferedReader br = new BufferedReader(new InputStreamReader(url.openConnection().getInputStream()));
