@@ -23,6 +23,7 @@ public class TeamStats implements Serializable {
 
     private static final long serialVersionUID = -3414402914522684688L;
 
+    private long gameId;
     private List<TeamBans> bans;
     private int baronKills;
     private int dominionVictoryScore;
@@ -39,6 +40,82 @@ public class TeamStats implements Serializable {
     private int towerKills;
     private int vilemawKills;
     private String win;
+
+    public long getGameId() {
+        return gameId;
+    }
+
+    public void setGameId(long gameId) {
+        this.gameId = gameId;
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public void setBans(List<TeamBans> bans) {
+        this.bans = bans;
+    }
+
+    public void setBaronKills(int baronKills) {
+        this.baronKills = baronKills;
+    }
+
+    public void setDominionVictoryScore(int dominionVictoryScore) {
+        this.dominionVictoryScore = dominionVictoryScore;
+    }
+
+    public void setDragonKills(int dragonKills) {
+        this.dragonKills = dragonKills;
+    }
+
+    public void setFirstBaron(boolean firstBaron) {
+        this.firstBaron = firstBaron;
+    }
+
+    public void setFirstBlood(boolean firstBlood) {
+        this.firstBlood = firstBlood;
+    }
+
+    public void setFirstDragon(boolean firstDragon) {
+        this.firstDragon = firstDragon;
+    }
+
+    public void setFirstInhibitor(boolean firstInhibitor) {
+        this.firstInhibitor = firstInhibitor;
+    }
+
+    public void setFirstRiftHerald(boolean firstRiftHerald) {
+        this.firstRiftHerald = firstRiftHerald;
+    }
+
+    public void setFirstTower(boolean firstTower) {
+        this.firstTower = firstTower;
+    }
+
+    public void setInhibitorKills(int inhibitorKills) {
+        this.inhibitorKills = inhibitorKills;
+    }
+
+    public void setRiftHeraldKills(int riftHeraldKills) {
+        this.riftHeraldKills = riftHeraldKills;
+    }
+
+    public void setTeamId(int teamId) {
+        this.teamId = teamId;
+    }
+
+    public void setTowerKills(int towerKills) {
+        this.towerKills = towerKills;
+    }
+
+    public void setVilemawKills(int vilemawKills) {
+        this.vilemawKills = vilemawKills;
+    }
+
+    public void setWin(String win) {
+        this.win = win;
+    }
 
     public List<TeamBans> getBans() {
         return bans;
@@ -106,6 +183,23 @@ public class TeamStats implements Serializable {
 
     @Override
     public String toString() {
-        return String.valueOf(getTeamId());
+        return "TeamStats{" +
+                "bans=" + bans +
+                ", baronKills=" + baronKills +
+                ", dominionVictoryScore=" + dominionVictoryScore +
+                ", dragonKills=" + dragonKills +
+                ", firstBaron=" + firstBaron +
+                ", firstBlood=" + firstBlood +
+                ", firstDragon=" + firstDragon +
+                ", firstInhibitor=" + firstInhibitor +
+                ", firstRiftHerald=" + firstRiftHerald +
+                ", firstTower=" + firstTower +
+                ", inhibitorKills=" + inhibitorKills +
+                ", riftHeraldKills=" + riftHeraldKills +
+                ", teamId=" + teamId +
+                ", towerKills=" + towerKills +
+                ", vilemawKills=" + vilemawKills +
+                ", win='" + win + '\'' +
+                '}';
     }
 }

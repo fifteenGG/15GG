@@ -21,61 +21,125 @@ import java.util.List;
 
 public class Participant implements Serializable {
 
-	private static final long serialVersionUID = -507075680096851928L;
+    private static final long serialVersionUID = -507075680096851928L;
 
-	private int championId;
-	private String highestAchievedSeasonTier;
-	private List<Mastery> masteries;
-	private int participantId;
-	private List<Rune> runes;
-	private int spell1Id;
-	private int spell2Id;
-	private ParticipantStats stats;
-	private int teamId;
-	private ParticipantTimeline timeline;
+    private long gameId;
+    private int championId;
+    private String highestAchievedSeasonTier;
+    private List<Mastery> masteries;
+    private int participantId;
+    private List<Rune> runes;
+    private int spell1Id;
+    private int spell2Id;
+    private ParticipantStats stats;
+    private int teamId;
+    private ParticipantTimeline timeline;
+
+	public long getGameId() {
+		return gameId;
+	}
+
+	public void setGameId(long gameId) {
+		this.gameId = gameId;
+	}
 
 	public int getChampionId() {
-		return championId;
-	}
+        return championId;
+    }
 
-	public String getHighestAchievedSeasonTier() {
-		return highestAchievedSeasonTier;
-	}
+    public String getHighestAchievedSeasonTier() {
+        return highestAchievedSeasonTier;
+    }
 
-	public List<Mastery> getMasteries() {
-		return masteries;
-	}
+    public List<Mastery> getMasteries() {
+        return masteries;
+    }
 
-	public int getParticipantId() {
-		return participantId;
-	}
+    public int getParticipantId() {
+        return participantId;
+    }
 
-	public List<Rune> getRunes() {
-		return runes;
-	}
+    public List<Rune> getRunes() {
+        return runes;
+    }
 
-	public int getSpell1Id() {
-		return spell1Id;
-	}
+    public int getSpell1Id() {
+        return spell1Id;
+    }
 
-	public int getSpell2Id() {
-		return spell2Id;
-	}
+    public int getSpell2Id() {
+        return spell2Id;
+    }
 
-	public ParticipantStats getStats() {
-		return stats;
-	}
+    public ParticipantStats getStats() {
+        return stats;
+    }
 
-	public int getTeamId() {
-		return teamId;
-	}
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
 
-	public ParticipantTimeline getTimeline() {
-		return timeline;
-	}
+    public void setChampionId(int championId) {
+        this.championId = championId;
+    }
 
-	@Override
-	public String toString() {
-		return String.valueOf(getParticipantId());
-	}
+    public void setHighestAchievedSeasonTier(String highestAchievedSeasonTier) {
+        this.highestAchievedSeasonTier = highestAchievedSeasonTier;
+    }
+
+    public void setMasteries(List<Mastery> masteries) {
+        this.masteries = masteries;
+    }
+
+    public void setParticipantId(int participantId) {
+        this.participantId = participantId;
+    }
+
+    public void setRunes(List<Rune> runes) {
+        this.runes = runes;
+    }
+
+    public void setSpell1Id(int spell1Id) {
+        this.spell1Id = spell1Id;
+    }
+
+    public void setSpell2Id(int spell2Id) {
+        this.spell2Id = spell2Id;
+    }
+
+    public void setStats(ParticipantStats stats) {
+        this.stats = stats;
+    }
+
+    public void setTeamId(int teamId) {
+        this.teamId = teamId;
+    }
+
+    public void setTimeline(ParticipantTimeline timeline) {
+        this.timeline = timeline;
+    }
+
+    public int getTeamId() {
+        return teamId;
+    }
+
+    public ParticipantTimeline getTimeline() {
+        return timeline;
+    }
+
+    @Override
+    public String toString() {
+        return "Participant{" +
+                "championId=" + championId +
+                ", highestAchievedSeasonTier='" + highestAchievedSeasonTier + '\'' +
+                ", masteries=" + masteries +
+                ", participantId=" + participantId +
+                ", runes=" + runes +
+                ", spell1Id=" + spell1Id +
+                ", spell2Id=" + spell2Id +
+                ", stats=" + stats +
+                ", teamId=" + teamId +
+                ", timeline=" + timeline +
+                '}';
+    }
 }

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--suppress ALL -->
+<mapper namespace="match-mapper">
+    <!-- namespace : 현재 매퍼파일의 별칭 -->
+
+    <insert id="insertMatch" parameterType="Match">
+		insert into MATCH values (
+			#{gameCreation}, #{gameDuration}, #{gameId}, #{gameMode}
+			, #{gameType}, #{gameVersion}, #{mapId}, #{platformId}, #{queueId}, #{seasonId})
+	</insert>
+
+    <insert id="insertTeamStats" parameterType="TeamStats">
+		insert into TEAMSTATS values (
+		#{gameId}, #{baronKills}, #{dominionVictoryScore}, #{dragonKills}, #{firstBaron}
+		, #{firstBlood}, #{firstDragon}, #{firstInhibitor}, #{firstRiftHerald}, #{firstTower}
+		, #{inhibitorKills}, #{riftHeraldKills}, #{teamId}, #{towerKills}, #{vilemawKills}
+		, #{win})
+	</insert>
+
+    <insert id="insertTeamBans" parameterType="TeamBans">
+		insert into TEAMBANS values (
+		#{gameId}, #{teamId}, #{championId}, #{pickTurn})
+	</insert>
+
+    <insert id="insertParticipantIdentity" parameterType="ParticipantIdentity">
+		insert into PARTICIPANTIDENTITY values (
+		#{gameId}, #{participantId}
+		)
+	</insert>
+
+    <insert id="insertPlayer" parameterType="Player">
+		insert into PLAYER values (
+		#{gameId}, #{participantId}, #{accountId}, #{currentPlatformId}, #{currentPlatformId}
+		, #{matchHistoryUri}, #{platformId}, #{profileIcon}, #{summonerId}, #{summonerName}
+		)
+	</insert>
+
+	<insert id="insertParticipant" parameterType="Participant">
+		insert into PATICIPANT values (
+			#{gameId}, #{championId}, #{participantId}, #{spell1Id}, #{spell2Id}
+			, #{teamId}
+		)
+	</insert>
+
+</mapper>

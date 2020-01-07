@@ -22,11 +22,32 @@ public class ParticipantIdentity implements Serializable {
 
 	private static final long serialVersionUID = 7750317217073991764L;
 
+	private long gameId;
 	private int participantId;
 	private Player player;
 
 	public int getParticipantId() {
 		return participantId;
+	}
+
+	public static long getSerialVersionUID() {
+		return serialVersionUID;
+	}
+
+	public long getGameId() {
+		return gameId;
+	}
+
+	public void setGameId(long gameId) {
+		this.gameId = gameId;
+	}
+
+	public void setParticipantId(int participantId) {
+		this.participantId = participantId;
+	}
+
+	public void setPlayer(Player player) {
+		this.player = player;
 	}
 
 	public Player getPlayer() {

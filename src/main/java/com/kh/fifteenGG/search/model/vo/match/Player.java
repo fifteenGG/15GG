@@ -21,6 +21,8 @@ public class Player implements Serializable {
 
 	private static final long serialVersionUID = -4459702825178547603L;
 
+	private long gameId;
+	private int participantId;
 	private String accountId;
 	private String currentAccountId;
 	private String currentPlatformId;
@@ -29,6 +31,58 @@ public class Player implements Serializable {
 	private int profileIcon;
 	private String summonerId;
 	private String summonerName;
+
+	public static long getSerialVersionUID() {
+		return serialVersionUID;
+	}
+
+	public long getGameId() {
+		return gameId;
+	}
+
+	public void setGameId(long gameId) {
+		this.gameId = gameId;
+	}
+
+	public int getParticipantId() {
+		return participantId;
+	}
+
+	public void setParticipantId(int participantId) {
+		this.participantId = participantId;
+	}
+
+	public void setAccountId(String accountId) {
+		this.accountId = accountId;
+	}
+
+	public void setCurrentAccountId(String currentAccountId) {
+		this.currentAccountId = currentAccountId;
+	}
+
+	public void setCurrentPlatformId(String currentPlatformId) {
+		this.currentPlatformId = currentPlatformId;
+	}
+
+	public void setMatchHistoryUri(String matchHistoryUri) {
+		this.matchHistoryUri = matchHistoryUri;
+	}
+
+	public void setPlatformId(String platformId) {
+		this.platformId = platformId;
+	}
+
+	public void setProfileIcon(int profileIcon) {
+		this.profileIcon = profileIcon;
+	}
+
+	public void setSummonerId(String summonerId) {
+		this.summonerId = summonerId;
+	}
+
+	public void setSummonerName(String summonerName) {
+		this.summonerName = summonerName;
+	}
 
 	public String getAccountId() {
 		return accountId;

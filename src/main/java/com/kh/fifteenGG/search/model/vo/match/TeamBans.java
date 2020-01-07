@@ -20,21 +20,51 @@ import java.io.Serializable;
 
 public class TeamBans implements Serializable {
 
-	private static final long serialVersionUID = 2323180505557888125L;
+    private static final long serialVersionUID = 2323180505557888125L;
 
-	private int championId;
-	private int pickTurn;
+    private long gameId;
+    private int teamId;
+    private int championId;
+    private int pickTurn;
+
+	public static long getSerialVersionUID() {
+		return serialVersionUID;
+	}
+
+	public long getGameId() {
+		return gameId;
+	}
+
+	public void setGameId(long gameId) {
+		this.gameId = gameId;
+	}
+
+	public int getTeamId() {
+		return teamId;
+	}
+
+	public void setTeamId(int teamId) {
+		this.teamId = teamId;
+	}
+
+	public void setChampionId(int championId) {
+		this.championId = championId;
+	}
+
+	public void setPickTurn(int pickTurn) {
+		this.pickTurn = pickTurn;
+	}
 
 	public int getChampionId() {
-		return championId;
-	}
+        return championId;
+    }
 
-	public int getPickTurn() {
-		return pickTurn;
-	}
+    public int getPickTurn() {
+        return pickTurn;
+    }
 
-	@Override
-	public String toString() {
-		return String.valueOf(getChampionId());
-	}
+    @Override
+    public String toString() {
+        return String.valueOf(getChampionId());
+    }
 }

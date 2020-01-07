@@ -26,7 +26,7 @@ public class SummonerSearch {
     @Autowired
     SearchService searchService;
 
-    private String ApiKey = "RGAPI-196531b1-f9b5-44d1-be18-d60696c9b79e";
+    private String ApiKey = "RGAPI-043368df-ead3-45b6-8602-e45d982bc591";
 
     @RequestMapping("/search/SummonerSearch.do")
     public String SummonerSearch(@RequestParam String summonerName, Model model) {
@@ -44,6 +44,7 @@ public class SummonerSearch {
          */
 
         try {
+            int result = 0;
 
             // 소환사 정보 뽑아오기
 
@@ -85,12 +86,12 @@ public class SummonerSearch {
 
             List mlist = matchList.getMatches();
 
-
-//             매치 상세 정보 반복적으로
+//             매치 상세 정보 저장 반복문
 //             너무 오래된 정보는 가져오기 불가능. 20~30개 까지만 갱신
-
             // 테스트용으로 1개만
+
             System.out.println("반복문 시작");
+
             for(int i = 0; i < 1 ; i++){
                 urlStr = "https://kr.api.riotgames.com/lol/match/v4/matches/"+mlist.get(i)+"?api_key="+ApiKey;
 
@@ -101,13 +102,14 @@ public class SummonerSearch {
 
                 Match match = gson.fromJson(string, Match.class);
 
-                System.out.println(match);
+                // match 저장 서비스 연결
+                result = searchService.insertMatch(match);
 
-                int result = searchService.insertMatch(match);
-
+                System.out.println("저장 확인 : " + result);
             }
 
             System.out.println("반복문 끝");
+
             //=====================================================================================================================//
 
             model.addAttribute("summoner", summoner);
