@@ -16,6 +16,11 @@
     </style>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css">
 </head>
+<script>
+    function text(){
+        location.href = "${pageContext.request.contextPath}/search/testmethod.do?accountId=${summoner.accountId}&summonerName=${summoner.name}";
+    }
+</script>
 <body>
 
 <%-- nav 영역 --%>
@@ -24,6 +29,9 @@
 <%-- nav 와 div 사이의 영역 --%>
 <div class="row">
     <!-- 나중에 광고 혹은 분석 관련 탭이 들어갈 위치 -->
+    <button type="button" onclick="text();" value="체크용">
+    </button>
+
 </div>
 
 <!-- 전적 관련 영역 -->

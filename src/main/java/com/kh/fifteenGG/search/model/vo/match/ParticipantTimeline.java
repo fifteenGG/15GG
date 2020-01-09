@@ -23,6 +23,7 @@ public class ParticipantTimeline implements Serializable {
 
 	private static final long serialVersionUID = -6355300896423737331L;
 
+	private long gameId;
 	private Map<String, Double> creepsPerMinDeltas;
 	private Map<String, Double> csDiffPerMinDeltas;
 	private Map<String, Double> damageTakenDiffPerMinDeltas;
@@ -60,6 +61,58 @@ public class ParticipantTimeline implements Serializable {
 
 	public int getParticipantId() {
 		return participantId;
+	}
+
+	public static long getSerialVersionUID() {
+		return serialVersionUID;
+	}
+
+	public long getGameId() {
+		return gameId;
+	}
+
+	public void setGameId(long gameId) {
+		this.gameId = gameId;
+	}
+
+	public void setCreepsPerMinDeltas(Map<String, Double> creepsPerMinDeltas) {
+		this.creepsPerMinDeltas = creepsPerMinDeltas;
+	}
+
+	public void setCsDiffPerMinDeltas(Map<String, Double> csDiffPerMinDeltas) {
+		this.csDiffPerMinDeltas = csDiffPerMinDeltas;
+	}
+
+	public void setDamageTakenDiffPerMinDeltas(Map<String, Double> damageTakenDiffPerMinDeltas) {
+		this.damageTakenDiffPerMinDeltas = damageTakenDiffPerMinDeltas;
+	}
+
+	public void setDamageTakenPerMinDeltas(Map<String, Double> damageTakenPerMinDeltas) {
+		this.damageTakenPerMinDeltas = damageTakenPerMinDeltas;
+	}
+
+	public void setGoldPerMinDeltas(Map<String, Double> goldPerMinDeltas) {
+		this.goldPerMinDeltas = goldPerMinDeltas;
+	}
+
+	public void setLane(String lane) {
+		this.lane = lane;
+	}
+
+	public void setParticipantId(int participantId) {
+		this.participantId = participantId;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public void setXpDiffPerMinDeltas(Map<String, Double> xpDiffPerMinDeltas) {
+		this.xpDiffPerMinDeltas = xpDiffPerMinDeltas;
+	}
+
+	public void setXpPerMinDeltas(Map<String, Double> xpPerMinDeltas) {
+		this.xpPerMinDeltas = xpPerMinDeltas;
 	}
 
 	public String getRole() {

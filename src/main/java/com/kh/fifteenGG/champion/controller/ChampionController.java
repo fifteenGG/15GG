@@ -1,11 +1,23 @@
 package com.kh.fifteenGG.champion.controller;
 
+import com.merakianalytics.orianna.types.common.Region;
+import com.merakianalytics.orianna.types.core.champion.ChampionRotation;
+import com.merakianalytics.orianna.types.core.staticdata.Champion;
+import com.merakianalytics.orianna.types.core.staticdata.Item;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.merakianalytics.orianna.Orianna;
 import com.merakianalytics.orianna.types.core.staticdata.Champions;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 public class ChampionController {
@@ -14,15 +26,38 @@ public class ChampionController {
 	public String championList(Model model) {
 
 		Orianna.loadConfiguration("config.json");
-        Orianna.setRiotAPIKey("RGAPI-c2d9129b-8619-47ae-901d-4f7b35db9ad5");
+        Orianna.setRiotAPIKey("RGAPI-8ccab60c-d0ce-439f-98af-c0693894aa2e");
 
         Champions champions = Orianna.getChampions();
-        
+
         model.addAttribute("champions", champions);
-                 
-        // 정보 확인용
-		/* System.out.println(champions); */
+
+
 
         return "champion/championList";
 	}
+
+    @RequestMapping("/champion/freeChampion.do")
+    @ResponseBody
+    public List<String> freeChampion(){
+
+        Orianna.loadConfiguration("config.json");
+        Orianna.setRiotAPIKey("RGAPI-8ccab60c-d0ce-439f-98af-c0693894aa2e");
+
+        Map<String, Object> map = new HashMap<>();
+
+        ChampionRotation rotation = ChampionRotation.withRegion(Region.KOREA).get();
+
+        List<String> list = new ArrayList<>();
+
+        for(int i = 0 ; i < rotation.getFreeChampions().size() ; i ++ ){
+            String image = rotation.getFreeChampions().get(i).getImage().getFull();
+
+            list.add(image);
+        }
+
+        System.out.println(list);
+
+        return list;
+    }
 }

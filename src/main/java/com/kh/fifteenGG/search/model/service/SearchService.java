@@ -5,8 +5,10 @@ import com.kh.fifteenGG.search.model.vo.match.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class SearchService {
@@ -14,7 +16,8 @@ public class SearchService {
     @Autowired
     SearchDAO searchDAO;
 
-    public int insertMatch(Match match) {
+    // 매치 업데이트
+    public int insertMatch(Match match, List<MatchFrame> mfList) {
         int result = 0;
 
         // 기존 매치 정보와 비교
@@ -73,23 +76,67 @@ public class SearchService {
                 // participants 저장 시작
                 List<Participant> participants = match.getParticipants();
 
+                // 포지션 중복 제거용 변수
+                int t1,j1,m1,a1,s1 = 0;
+                int t2,j2,m2,a2,s2 = 0;
+
                 for(Participant participant : participants){
                     // participant 저장
                     participant.setGameId(match.getGameId());
                     result = searchDAO.insertParticipant(participant);
 
+                    // participantTimeline 저장
+                    // 타임라인은 사용하기 어려울 것 같아 일부만 저장
+                    ParticipantTimeline participantTimeline = participant.getTimeline();
+                    participantTimeline.setGameId(match.getGameId());
+                    result = searchDAO.insertParticipantTimeline(participantTimeline);
+
                     // participantStats 저장
+
+                    // 저장전에 포지션을 확인하여 넣어준다.
+
                     ParticipantStats participantStats = participant.getStats();
                     participantStats.setGameId(match.getGameId());
-                    result = searchDAO.insertParticipantStats(participantStats);
 
-                    // participantTimeline 저장
-                    // 타임라인은 사용하기 어려울 것 같아 후에 구현
-                    // result = searchDAO.insertParticipantTimeline(participant.getTimeline());
+                    if(participantTimeline.getLane().equals("TOP")){
+                        System.out.println(participantTimeline.getLane());
+                        participantStats.setPosition(1);
+                    }else if(participantTimeline.getLane().equals("MIDDLE")){
+                        participantStats.setPosition(2);
+                    }else if(participantTimeline.getLane().equals("JUNGLE")){
+                        participantStats.setPosition(3);
+                    }else if(participantTimeline.getLane().equals("BOTTOM") && participantTimeline.getRole().equals("DUO_CARRY")){
+                        participantStats.setPosition(4);
+                    }else if(participantTimeline.getLane().equals("BOTTOM") && participantTimeline.getRole().equals("DUO_SUPPORT")){
+                        participantStats.setPosition(5);
+                    }else {
+                        participantStats.setPosition(6);
+                    }
+
+                    result = searchDAO.insertParticipantStats(participantStats);
 
                 }
 
-            }
+                // 좌표 저장
+                for(MatchFrame matchFrame : mfList){
+                    matchFrame.setGameId(match.getGameId());
+
+                    Map<Integer, MatchParticipantFrame> matchParticipantFrame = matchFrame.getParticipantFrames();
+                    for(int j = 1; j <= matchParticipantFrame.size() ; j++){
+                        MatchPosition position = matchParticipantFrame.get(j).getPosition();
+
+                        if(position != null){
+                            position.setGameId(match.getGameId());
+                            position.setTimestamp(matchFrame.getTimestamp());
+                            position.setParticipantId(matchParticipantFrame.get(j).getParticipantId());
+
+                            result = searchDAO.insertTimeLine(position);
+
+                        }
+                    }
+                }
+
+            } // 저장 끝
 
         }else {
             System.out.println("이미 존재하는 매치 입니다.");
@@ -97,4 +144,34 @@ public class SearchService {
 
         return result;
     }
+
+    // 매치 정보 불러와서 화면에 출력용 서비스
+    public HashMap<String, Object> selectSummonerMatch(String summonerName) {
+
+        HashMap<String, Object> hmap = new HashMap<>();
+
+        // 게임번호를 조회
+        List<String> matchList = searchDAO.selectMatchList(summonerName);
+
+        // 소환사 정보
+        List<MatchReference> matchReferenceList = new ArrayList<>();
+
+        // 꺼내온 매치 리스트로 조회
+        for(int i = 0 ; i < matchList.size(); i++){
+
+            Map<String, Object> Map = new HashMap<>();
+
+            String gameid = matchList.get(i);
+
+            // 팀 100, 200
+            for(int tNo=100 ;tNo < 201 ; tNo+=100){
+
+
+            }
+
+        }
+
+        return null;
+    }
+
 }

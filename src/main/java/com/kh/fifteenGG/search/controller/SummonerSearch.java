@@ -5,10 +5,13 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.kh.fifteenGG.search.model.service.SearchService;
 import com.kh.fifteenGG.search.model.vo.league.LeagueEntry;
-import com.kh.fifteenGG.search.model.vo.match.Match;
-import com.kh.fifteenGG.search.model.vo.match.MatchList;
+import com.kh.fifteenGG.search.model.vo.match.*;
 import com.kh.fifteenGG.search.model.vo.summoner.Summoner;
 
+import com.merakianalytics.orianna.Orianna;
+import com.merakianalytics.orianna.types.common.Region;
+import com.merakianalytics.orianna.types.core.champion.ChampionRotation;
+import com.merakianalytics.orianna.types.core.staticdata.Champions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -26,7 +30,7 @@ public class SummonerSearch {
     @Autowired
     SearchService searchService;
 
-    private String ApiKey = "RGAPI-043368df-ead3-45b6-8602-e45d982bc591";
+    private String ApiKey = "RGAPI-8ccab60c-d0ce-439f-98af-c0693894aa2e";
 
     // 검색 화면
     @RequestMapping("/search/SummonerSearch.do")
@@ -58,10 +62,14 @@ public class SummonerSearch {
             List<LeagueEntry> leagueEntry = gson.fromJson(string2, new TypeToken<List<LeagueEntry>>() {
             }.getType());
 
+            //=====================================================================================================================//
+
+            // 매치 정보 가져오기
+            HashMap<String, Object> map = searchService.selectSummonerMatch(summonerName);
+
+            // 화면에 전달
             model.addAttribute("summoner", summoner);
             model.addAttribute("leagueEntry", leagueEntry);
-
-
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -80,48 +88,52 @@ public class SummonerSearch {
         int result = 0;
         Gson gson = new Gson();
 
-        String urlStr;
-
         try {
-//            // AccountId를 받아오기 위하여 api 호출
-//            urlStr = "https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/" + summonerName + "?api_key=" + ApiKey;
-//            URL url1 = new URL(urlStr);
-//            BufferedReader br1 = new BufferedReader(new InputStreamReader(url1.openConnection().getInputStream()));
-//            String string1 = br1.readLine();
-//            Summoner summoner = gson.fromJson(string1, Summoner.class);
-
             // 매치 리스트 정보 뽑아오기
-            String urlStr3 = "https://kr.api.riotgames.com/lol/match/v4/matchlists/by-account/" + accountId + "?api_key=" + ApiKey;
+            String urlStr1 = "https://kr.api.riotgames.com/lol/match/v4/matchlists/by-account/" + accountId + "?api_key=" + ApiKey;
 
-            URL url = new URL(urlStr3);
+            URL url1 = new URL(urlStr1);
 
-            BufferedReader br3 = new BufferedReader(new InputStreamReader(url.openConnection().getInputStream()));
+            BufferedReader br1 = new BufferedReader(new InputStreamReader(url1.openConnection().getInputStream()));
 
-            String string3 = br3.readLine();
+            String string1 = br1.readLine();
 
-            MatchList matchList = gson.fromJson(string3, MatchList.class);
+            MatchList matchList = gson.fromJson(string1, MatchList.class);
 
-            List mlist = matchList.getMatches();
+            List<MatchReference> mlist = matchList.getMatches();
 
             // 매치 상세 정보 저장 반복문
-            // 너무 오래된 정보는 가져오기 불가능. 20~30개 까지만 갱신
+            // 너무 오래된 정보는 가져오기 불가능. 최근10개 까지만 갱신
             System.out.println("반복문 시작");
+            for (int i = 0; i < 20 ; i++) {
 
-            for (int i = 0; i < 10; i++) {
+                String urlStr2 = "https://kr.api.riotgames.com/lol/match/v4/matches/" + mlist.get(i).getGameId() + "?api_key=" + ApiKey;
 
-                urlStr = "https://kr.api.riotgames.com/lol/match/v4/matches/" + mlist.get(i) + "?api_key=" + ApiKey;
+                URL url2 = new URL(urlStr2);
+                BufferedReader br2 = new BufferedReader(new InputStreamReader(url2.openConnection().getInputStream()));
 
-                url = new URL(urlStr);
-                BufferedReader br = new BufferedReader(new InputStreamReader(url.openConnection().getInputStream()));
+                String string2 = br2.readLine();
 
-                String string = br.readLine();
+                Match match = gson.fromJson(string2, Match.class);
 
-                Match match = gson.fromJson(string, Match.class);
+                // 타임라인 api 호출 및 저장
+                String urlStr3 = "https://kr.api.riotgames.com/lol/match/v4/timelines/by-match/" + mlist.get(i).getGameId() + "?api_key=" + ApiKey;
+
+                URL url3 = new URL(urlStr3);
+                BufferedReader br3 = new BufferedReader(new InputStreamReader(url3.openConnection().getInputStream()));
+
+                String string3 = br3.readLine();
+
+                MatchTimeline matchTimeline = gson.fromJson(string3, MatchTimeline.class);
+
+                // 매치타임라인 중 MatchFrame 배열로 담기
+                List<MatchFrame> mfList = matchTimeline.getFrames();
 
                 // match 저장 서비스 연결
-                result = searchService.insertMatch(match);
+                result = searchService.insertMatch(match, mfList);
 
                 System.out.println("저장 확인 : " + result);
+
             }
 
             System.out.println("반복문 끝");
@@ -135,5 +147,22 @@ public class SummonerSearch {
         // 업데이트 후 다시 리다이렉트로 SummonerSearch 컨트롤러로 전송
         return "redirect:/search/SummonerSearch.do";
     }
+
+
+//    // 테스트용 메소드 완료시 삭제
+//    @RequestMapping("/search/testmethod.do")
+//    public String testmethod(Model model,@RequestParam String accountId, @RequestParam String summonerName){
+//
+//        Orianna.loadConfiguration("config.json");
+//        Orianna.setRiotAPIKey("RGAPI-8ccab60c-d0ce-439f-98af-c0693894aa2e");
+//
+//        ChampionRotation rotation = ChampionRotation.withRegion(Region.KOREA).get();
+//
+//        System.out.println(rotation);
+//
+//        model.addAttribute("rotation", rotation);
+//
+//        return "redirect:/";
+//    }
 
 }

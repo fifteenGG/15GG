@@ -70,6 +70,10 @@
                 </div>
             </div>
 
+            <div id="freechamp">
+
+            </div>
+
         </div>
     </div>
     <button onclick="chattingBtn();" class="fcy-54fyyd ewgv1620"></button>
@@ -82,6 +86,32 @@
             var popup = window.open(url, title, status);
         }
     </script>
+
+<%--    <script>--%>
+
+<%--        var freechmap =  $('#freechamp');--%>
+
+<%--        $(()=>{--%>
+<%--            $.ajax({--%>
+<%--                url : "${pageContext.request.contextPath}/champion/freeChampion.do",--%>
+<%--                type : 'json',--%>
+<%--                success : function (data) {--%>
+
+<%--                    console.log("ajax 성공");--%>
+
+<%--                    console.log(data);--%>
+
+<%--                    for(var i=0; i<data.length; i++){--%>
+<%--                        freechmap.append(data[i]);--%>
+<%--                    }--%>
+
+<%--                }, error : function (e) {--%>
+
+<%--                }--%>
+
+<%--            })--%>
+<%--        })--%>
+<%--    </script>--%>
 
 </body>
 </html>

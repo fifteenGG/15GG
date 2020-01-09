@@ -25,9 +25,34 @@ public class MatchFrame implements Serializable {
 
 	private static final long serialVersionUID = 4359409042534560829L;
 
+	private long gameId;
 	private List<MatchEvent> events;
 	private Map<Integer, MatchParticipantFrame> participantFrames;
 	private long timestamp;
+
+	public static long getSerialVersionUID() {
+		return serialVersionUID;
+	}
+
+	public long getGameId() {
+		return gameId;
+	}
+
+	public void setGameId(long gameId) {
+		this.gameId = gameId;
+	}
+
+	public void setEvents(List<MatchEvent> events) {
+		this.events = events;
+	}
+
+	public void setParticipantFrames(Map<Integer, MatchParticipantFrame> participantFrames) {
+		this.participantFrames = participantFrames;
+	}
+
+	public void setTimestamp(long timestamp) {
+		this.timestamp = timestamp;
+	}
 
 	public List<MatchEvent> getEvents() {
 		return events;
@@ -43,6 +68,11 @@ public class MatchFrame implements Serializable {
 
 	@Override
 	public String toString() {
-		return String.valueOf(getTimestamp());
+		return "MatchFrame{" +
+				"gameId=" + gameId +
+				", events=" + events +
+				", participantFrames=" + participantFrames +
+				", timestamp=" + timestamp +
+				'}';
 	}
 }

@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Repository
 public class SearchDAO {
@@ -42,8 +44,24 @@ public class SearchDAO {
         return sqlSession.insert("match-mapper.insertParticipantStats", stats);
     }
 
+    public int insertParticipantTimeline(ParticipantTimeline timeline) {
+        return sqlSession.insert("match-mapper.insertParticipantTimeline", timeline);
+    }
+
     public int checkMatch(HashMap<String, Object> hmap) {
         sqlSession.selectOne("match-mapper.checkMatch", hmap);
         return (int) hmap.get("result");
+    }
+
+    public List<String> selectMatchList(String summonerName) {
+        return sqlSession.selectList("match-mapper.selectMatchList", summonerName);
+    }
+
+    public int insertTimeLine(MatchPosition position) {
+        return sqlSession.insert("match-mapper.insertTimeLine", position);
+    }
+
+    public MatchReference selectTop(Map<String, Object> map) {
+        return sqlSession.selectOne("match-mapper.selectTop", map);
     }
 }

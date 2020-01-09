@@ -30,9 +30,27 @@ public class MatchReference implements Serializable {
 	private String role;
 	private int season;
 	private long timestamp;
+	private String summonerId;
+	private String summonerName;
 
 	public int getChampion() {
 		return champion;
+	}
+
+	public String getSummonerId() {
+		return summonerId;
+	}
+
+	public void setSummonerId(String summonerId) {
+		this.summonerId = summonerId;
+	}
+
+	public String getSummonerName() {
+		return summonerName;
+	}
+
+	public void setSummonerName(String summonerName) {
+		this.summonerName = summonerName;
 	}
 
 	public long getGameId() {
@@ -65,6 +83,52 @@ public class MatchReference implements Serializable {
 
 	@Override
 	public String toString() {
-		return String.valueOf(getGameId());
+		return "MatchReference{" +
+				"champion=" + champion +
+				", gameId=" + gameId +
+				", lane='" + lane + '\'' +
+				", platformId='" + platformId + '\'' +
+				", queue=" + queue +
+				", role='" + role + '\'' +
+				", season=" + season +
+				", timestamp=" + timestamp +
+				'}';
 	}
+
+	public static long getSerialVersionUID() {
+		return serialVersionUID;
+	}
+
+	public void setChampion(int champion) {
+		this.champion = champion;
+	}
+
+	public void setGameId(long gameId) {
+		this.gameId = gameId;
+	}
+
+	public void setLane(String lane) {
+		this.lane = lane;
+	}
+
+	public void setPlatformId(String platformId) {
+		this.platformId = platformId;
+	}
+
+	public void setQueue(int queue) {
+		this.queue = queue;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public void setSeason(int season) {
+		this.season = season;
+	}
+
+	public void setTimestamp(long timestamp) {
+		this.timestamp = timestamp;
+	}
+
 }

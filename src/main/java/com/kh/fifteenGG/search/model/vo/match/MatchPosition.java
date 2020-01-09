@@ -22,8 +22,58 @@ public class MatchPosition implements Serializable {
 
 	private static final long serialVersionUID = -6998248732159256525L;
 
+	private long gameId;
+	private long timestamp;
+	private int participantId;
 	private int x;
 	private int y;
+
+	public static long getSerialVersionUID() {
+		return serialVersionUID;
+	}
+
+	@Override
+	public String toString() {
+		return "MatchPosition{" +
+				"gameId=" + gameId +
+				", timestamp=" + timestamp +
+				", participantId=" + participantId +
+				", x=" + x +
+				", y=" + y +
+				'}';
+	}
+
+	public int getParticipantId() {
+		return participantId;
+	}
+
+	public void setParticipantId(int participantId) {
+		this.participantId = participantId;
+	}
+
+	public long getGameId() {
+		return gameId;
+	}
+
+	public void setGameId(long gameId) {
+		this.gameId = gameId;
+	}
+
+	public long getTimestamp() {
+		return timestamp;
+	}
+
+	public void setTimestamp(long timestamp) {
+		this.timestamp = timestamp;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
 
 	public int getX() {
 		return x;
@@ -33,8 +83,4 @@ public class MatchPosition implements Serializable {
 		return y;
 	}
 
-	@Override
-	public String toString() {
-		return "[" + getX() + "," + getY() + "]";
-	}
 }

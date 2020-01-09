@@ -23,6 +23,7 @@ public class MatchParticipantFrame implements Serializable {
 
 	private static final long serialVersionUID = -7134736662198942818L;
 
+	private long gameId;
 	private int currentGold;
 	private int dominionScore;
 	private int jungleMinionsKilled;
@@ -33,6 +34,58 @@ public class MatchParticipantFrame implements Serializable {
 	private int teamScore;
 	private int totalGold;
 	private int xp;
+
+	public static long getSerialVersionUID() {
+		return serialVersionUID;
+	}
+
+	public long getGameId() {
+		return gameId;
+	}
+
+	public void setGameId(long gameId) {
+		this.gameId = gameId;
+	}
+
+	public void setCurrentGold(int currentGold) {
+		this.currentGold = currentGold;
+	}
+
+	public void setDominionScore(int dominionScore) {
+		this.dominionScore = dominionScore;
+	}
+
+	public void setJungleMinionsKilled(int jungleMinionsKilled) {
+		this.jungleMinionsKilled = jungleMinionsKilled;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
+	}
+
+	public void setMinionsKilled(int minionsKilled) {
+		this.minionsKilled = minionsKilled;
+	}
+
+	public void setParticipantId(int participantId) {
+		this.participantId = participantId;
+	}
+
+	public void setPosition(MatchPosition position) {
+		this.position = position;
+	}
+
+	public void setTeamScore(int teamScore) {
+		this.teamScore = teamScore;
+	}
+
+	public void setTotalGold(int totalGold) {
+		this.totalGold = totalGold;
+	}
+
+	public void setXp(int xp) {
+		this.xp = xp;
+	}
 
 	public int getCurrentGold() {
 		return currentGold;
@@ -72,5 +125,21 @@ public class MatchParticipantFrame implements Serializable {
 
 	public int getXp() {
 		return xp;
+	}
+
+	@Override
+	public String toString() {
+		return "MatchParticipantFrame{" +
+				"currentGold=" + currentGold +
+				", dominionScore=" + dominionScore +
+				", jungleMinionsKilled=" + jungleMinionsKilled +
+				", level=" + level +
+				", minionsKilled=" + minionsKilled +
+				", participantId=" + participantId +
+				", position=" + position +
+				", teamScore=" + teamScore +
+				", totalGold=" + totalGold +
+				", xp=" + xp +
+				'}';
 	}
 }

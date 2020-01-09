@@ -134,6 +134,17 @@ public class ParticipantStats implements Serializable {
     private int statPerk0;
     private int statPerk1;
     private int statPerk2;
+    private int position;
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
+
+
 
     public int getAltarsCaptured() {
         return altarsCaptured;

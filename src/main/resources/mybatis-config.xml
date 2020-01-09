@@ -35,6 +35,12 @@
 				   alias="Participant"/>
 		<typeAlias type="com.kh.fifteenGG.search.model.vo.match.ParticipantStats"
 				   alias="ParticipantStats"/>
+		<typeAlias type="com.kh.fifteenGG.search.model.vo.match.ParticipantTimeline"
+				   alias="ParticipantTimeline"/>
+		<typeAlias type="com.kh.fifteenGG.search.model.vo.match.MatchReference"
+				   alias="MatchReference"/>
+		<typeAlias type="com.kh.fifteenGG.search.model.vo.match.MatchPosition"
+				   alias="MatchPosition"/>
 	</typeAliases>
 
 </configuration>
