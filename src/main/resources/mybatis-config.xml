@@ -47,6 +47,9 @@
 		<!-- 팁 게시판 -->
 		<typeAlias type="com.kh.fifteenGG.champion.model.vo.TipBoard"
 				   alias="TipBoard"/>
+		<!-- 파티 게시판 -->
+		<typeAlias type="com.kh.fifteenGG.partyBoard.model.vo.PartyBoard"
+				   alias="PartyBoard"/>
 	</typeAliases>
 
 </configuration>
