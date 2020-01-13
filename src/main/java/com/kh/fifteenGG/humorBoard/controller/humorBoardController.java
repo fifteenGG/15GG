@@ -367,7 +367,7 @@ public class humorBoardController {
 	
 	}
 	
-	@RequestMapping("/humorBoard/cmtList.do")
+	@RequestMapping(value = "/humorBoard/cmtList.do", produces ="application/text; charset=utf8")
 	@ResponseBody
 	public ResponseEntity selectCmtList(@RequestParam int bno, HttpSession session) {
 		HttpHeaders responseHeaders = new HttpHeaders();

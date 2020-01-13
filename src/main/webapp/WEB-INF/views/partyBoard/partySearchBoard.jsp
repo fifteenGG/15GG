@@ -422,26 +422,26 @@
 							<!-- 만료시간 구하기 -->
 							<script>
 
-								var x = setInterval(function() {
+								var x${status.index} = setInterval(function() {
 									var countDownDate${status.index} = ('${list.epoch}' * 1000) + ('${list.pbTimer}' * (1000 * 60));
-									var now = new Date().getTime();
-									var distance${status.index} = countDownDate${status.index} - now;
+									var now${status.index} = new Date().getTime();
+									var distance${status.index} = countDownDate${status.index} - now${status.index};
 									var days${status.index} = Math.floor(distance${status.index} / (1000 * 60 * 60 * 24));
 									var hours${status.index} = Math.floor((distance${status.index} % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
 									var minutes${status.index} = Math.floor((distance${status.index} % (1000 * 60 * 60)) / (1000 * 60));
 									var seconds${status.index} = Math.floor((distance${status.index} % (1000 * 60)) / 1000);
 
 									if (distance${status.index} < 0) {
-										clearInterval(x);
+										clearInterval(x${status.index});
 										document.getElementById("stopwatch${status.index}").innerHTML = "만료";
 										document.getElementById("cancelline${status.index}").style = 'text-decoration:line-through';
 
 									} else if (hours${status.index} == 0) {
-										clearInterval(x);
+										clearInterval(x${status.index});
 										document.getElementById("stopwatch${status.index}").innerHTML = minutes${status.index} + "분 뒤 만료";
 
 									} else if (hours${status.index} > 0) {
-										clearInterval(x);
+										clearInterval(x${status.index});
 										document.getElementById("stopwatch${status.index}").innerHTML = hours${status.index} + "시간 " + minutes${status.index} + "분 뒤 만료";
 									}
 								}, 1000);
@@ -451,10 +451,10 @@
 							<!-- 지난시간 구하기 -->
 							<script>
 
-								var after = setInterval(function() {
+								var after${status.index} = setInterval(function() {
 									var countDownDate1${status.index} = ('${list.epoch}' * 1000);
-									var now = new Date().getTime();
-									var distance1${status.index} = now - countDownDate1${status.index};
+									var now${status.index} = new Date().getTime();
+									var distance1${status.index} = now${status.index} - countDownDate1${status.index};
 									var days1${status.index} = Math.floor(distance1${status.index} / (1000 * 60 * 60 * 24));
 									var hours1${status.index} = Math.floor((distance1${status.index} % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
 									var minutes1${status.index} = Math.floor((distance1${status.index} % (1000 * 60 * 60)) / (1000 * 60));
@@ -463,14 +463,14 @@
 									/* $("#aftertime${status.index}").text(hours1${status.index} + "시간 " + minutes1${status.index} + "분 전"); */
 
 									if (days1${status.index} > 0) {
-										clearInterval(after);
+										clearInterval(after${status.index});
 										document.getElementById("aftertime${status.index}").innerHTML = "${list.pbDate}";
 
 									} else if (hours1${status.index} > 0) {
-										clearInterval(after);
+										clearInterval(after${status.index});
 										document.getElementById("aftertime${status.index}").innerHTML = hours1${status.index} + "시간 " + minutes1${status.index} + "분 전";
 									}else if (hours1${status.index} == 0) {
-										clearInterval(after);
+										clearInterval(after${status.index});
 										document.getElementById("aftertime${status.index}").innerHTML = minutes1${status.index} + "분 전";
 									}
 								}, 1000);
