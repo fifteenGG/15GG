@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix='c' uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix='c' uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
 <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 <!-- cnd방식으로 sockjs불러오기 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.3.0/sockjs.min.js"></script>
@@ -53,7 +54,7 @@
         var data=evt.data;//new text객체로 보내준 값을 받아옴.
         var host=null;//메세지를 보낸 사용자 ip저장
         var strArray=data.split("|");//데이터 파싱처리하기
-        var userName=null;//대화명 저장
+        var nickName=null;//대화명 저장
         
         //전송된 데이터 출력해보기
         for(var i=0;i<strArray.length;i++) {
@@ -61,10 +62,11 @@
         }
         
         if(strArray.length>1) {
+        	console.log(strArray);
             sessionId=strArray[0];
             message=strArray[1];
             host=strArray[2].substr(1,strArray[2].indexOf(":")-1);
-            userName=strArray[3];
+            nickName=strArray[4];
             today=new Date();
             printDate=today.getFullYear()+"/"+(today.getMonth()+1)+"/"+today.getDate()+" "+today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
             
@@ -80,7 +82,7 @@
                 var printHTML="<div class='well' style='margin-left: 30%;'>";
                 printHTML+="<div class='alert alert-info'>";
                 printHTML+="<sub>"+printDate+"</sub><br/>";
-                printHTML+="<strong>["+userName+"] : "+message+"</strong>";
+                printHTML+="<strong>["+nickName+"] : "+message+"</strong>";
                 printHTML+="</div>";
                 printHTML+="</div>";
                 $('#chatdata').append(printHTML);
@@ -88,7 +90,7 @@
                 var printHTML="<div class='well'  style='margin-left: -5%;margin-right:30%;'>";
                 printHTML+="<div class='alert alert-warning'>";
                 printHTML+="<sub>"+printDate+"</sub><br/>";
-                printHTML+="<strong>["+userName+"] : "+message+"</strong>";
+                printHTML+="<strong>["+nickName+"] : "+message+"</strong>";
                 printHTML+="</div>";
                 printHTML+="</div>";
                 $('#chatdata').append(printHTML);
@@ -121,7 +123,7 @@ div { padding:5%; }
 </head>
 <body>
 <div class='form-group'>
-    <label id='sessionuserid'><h3>${member.userName}님, 어서오세요!</h3></label><br/>
+    <label id='sessionuserid'><h3>${member.nickName}님, 어서오세요!</h3></label><br/>
     <!-- 대화내용이 출력되는 부분 -->
     <div class='panel panel-default'>
         <div id='chatdata' class='panel-body'></div>
