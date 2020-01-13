@@ -30,7 +30,7 @@ public class SummonerSearch {
     @Autowired
     SearchService searchService;
 
-    private String ApiKey = "RGAPI-8ccab60c-d0ce-439f-98af-c0693894aa2e";
+    private String ApiKey = "RGAPI-61123d6f-b742-4588-aa07-082e4b2f2205";
 
     // 검색 화면
     @RequestMapping("/search/SummonerSearch.do")
