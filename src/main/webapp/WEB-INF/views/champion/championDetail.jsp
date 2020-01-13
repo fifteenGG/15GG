@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>챔피언 공략 상세보기</title>
+<title>15.GG</title>
 <c:import url="../common/commonUtil.jsp"/>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/detail.css" />

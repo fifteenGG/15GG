@@ -7,7 +7,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>게시판 상세보기</title>
+	<title>15.GG</title>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/detail.css" />
 	<c:import url="../common/commonUtil.jsp"/>
 	<style>
