@@ -31,12 +31,12 @@
     </div>
     <ul class="navbar-nav ml-md-auto">
         <li class="nav-item d-flex">
-        <c:if test="${ empty member }">
-            <a class="nav-link" href="${pageContext.request.contextPath}/member/joinMemberView.do">join</a>
-            <a class="nav-link" href="${pageContext.request.contextPath}/member/loginMemberView.do">Login</a>
-        </c:if><c:if test="${ !empty member }">
-            <a class="nav-link" href="${pageContext.request.contextPath}/member/updateMemberView.do">update</a>
-            <a class="nav-link" href="${pageContext.request.contextPath}/member/memberLogout.do">Logout</a>
+            <c:if test="${ empty member }">
+                <a class="nav-link" href="${pageContext.request.contextPath}/member/loginMemberView.do">로그인</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/member/email.do">회원가입</a>
+            </c:if><c:if test="${ !empty member }">
+            <a class="nav-link" href="${pageContext.request.contextPath}/member/updateMemberView.do">정보 수정</a>
+            <a class="nav-link" href="${pageContext.request.contextPath}/member/memberLogout.do">로그아웃</a>
         </c:if>
         </li>
     </ul>

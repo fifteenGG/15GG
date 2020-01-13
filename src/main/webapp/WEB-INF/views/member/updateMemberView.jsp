@@ -88,7 +88,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                 </div>
-                <input id="password3" class="form-control" placeholder="새 비밀번호" type="password" required>
+                <input id="password3" class="form-control" placeholder="새 비밀번호" type="password" name="password" required>
             </div> <!-- form-group// -->
             
             <!-- 패스워드2 -->
@@ -96,7 +96,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                 </div>
-                <input id="password4" class="form-control" placeholder="비밀번호 확인" type="password" required>
+                <input id="password4" class="form-control" placeholder="비밀번호 확인" type="password" name="passwordChk" required>
             </div> <!-- form-group// -->
             <div class="alert alert-success" id="alert-success">비밀번호가 일치합니다.</div>
             <div class="alert alert-danger" id="alert-danger">비밀번호가 일치하지 않습니다.</div>

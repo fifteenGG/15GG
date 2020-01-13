@@ -78,7 +78,8 @@
         <p class="divider-text">
             <span class="bg-light">회원 가입</span>
         </p>
-        <form action="memberJoin.do" method="post"  >
+
+        <form action="${pageContext.request.contextPath}/member/memberJoin.do" method="post"  >
             <!-- 닉네임 -->
             <div class="form-group input-group">
                 <div class="input-group-prepend" id="userId-container">

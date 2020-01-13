@@ -7,12 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <style>
-	@charset "utf-8";
-
-
 @import url(//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css);
-
-
 
 div.main{
    background-image: url("${pageContext.request.contextPath}/resources/Images/member/jin.jpg");
@@ -199,7 +194,7 @@ fieldset{
           <fieldset class="clearfix">
     	  <div id="logo" ><b>15.GG</b></div>
 
-            <p ><span class="fa fa-user"></span><input name ="nickName" type="text"  Placeholder="이메일" required></p> <!-- JS because of IE support; better: placeholder="Username" -->
+            <p ><span class="fa fa-user"></span><input name ="email" type="text"  Placeholder="이메일" required></p> <!-- JS because of IE support; better: placeholder="Username" -->
             <p><span class="fa fa-lock"></span><input name ="password" type="password"  Placeholder="비밀번호" required></p> <!-- JS because of IE support; better: placeholder="Password" -->
             
              <div>

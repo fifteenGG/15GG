@@ -231,6 +231,15 @@ public class MemberController {
     @RequestMapping("/member/memberUpdate.do")
     public String memberUpdate(HttpSession session, Member member, Model model) {
     	System.out.println(member);
+
+		String password = member.getPassword();
+		System.out.println("암호화 전 비밀번호 : " + password);
+
+		String encPassword = bCryptPasswordEncoder.encode(password);
+
+		System.out.println("암호화 후 비밀번호 : " + encPassword);
+
+		member.setPassword(encPassword);
     	
     	int result = memberService.updateMember(member);
     	
@@ -239,7 +248,7 @@ public class MemberController {
     	
     	if(result > 0) {
     		msg = "회원 정보 수정 성공";
-    		session.setAttribute("member", member);
+			session.invalidate();
     	}else {
     		msg = "회원 정보 수정 실패";
     	}

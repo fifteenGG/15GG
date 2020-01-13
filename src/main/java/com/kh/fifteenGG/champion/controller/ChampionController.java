@@ -1,59 +1,79 @@
 package com.kh.fifteenGG.champion.controller;
 
-import com.merakianalytics.orianna.types.common.Region;
-import com.merakianalytics.orianna.types.core.champion.ChampionRotation;
-import com.merakianalytics.orianna.types.core.staticdata.Champion;
-import com.merakianalytics.orianna.types.core.staticdata.Item;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.merakianalytics.orianna.Orianna;
-import com.merakianalytics.orianna.types.core.staticdata.Champions;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.kh.fifteenGG.champion.model.service.TipBoardService;
+import com.kh.fifteenGG.champion.model.vo.TipBoard;
+import com.kh.fifteenGG.common.util.Utils;
+import com.merakianalytics.orianna.Orianna;
+import com.merakianalytics.orianna.types.common.Region;
+import com.merakianalytics.orianna.types.core.staticdata.Champion;
+import com.merakianalytics.orianna.types.core.staticdata.Champions;
+
 @Controller
 public class ChampionController {
-	
-	@RequestMapping("/champion/championList.do")
-	public String championList(Model model) {
 
-        Champions champions = Champions.withRegion(Region.KOREA).get();
+    @Autowired
+    TipBoardService tipBoardService;
 
-        model.addAttribute("champions", champions);
-
-        return "champion/championList";
-	}
-
-    @RequestMapping("/champion/freeChampion.do")
-    @ResponseBody
-    public List<String> freeChampion(){
+    @RequestMapping("/champion/championList.do")
+    public String championList(Model model) {
 
         Orianna.loadConfiguration("config.json");
         Orianna.setRiotAPIKey("RGAPI-61123d6f-b742-4588-aa07-082e4b2f2205");
 
-        Map<String, Object> map = new HashMap<>();
+        Champions champions = Orianna.getChampions();
 
-        ChampionRotation rotation = ChampionRotation.withRegion(Region.KOREA).get();
+        model.addAttribute("champions", champions);
 
-        List<String> list = new ArrayList<>();
+        // 정보 확인용
+        /* System.out.println(champions); */
 
-        for(int i = 0 ; i < rotation.getFreeChampions().size() ; i ++ ){
+        return "champion/championList";
+    }
 
-            String image = rotation.getFreeChampions().get(i).getImage().getFull();
+    @RequestMapping("/champion/championDetail.do")
+    public String championDetail(Model model ,@RequestParam String name, HttpSession session,
+                                 TipBoard tipBoard , HttpSession httpSession
+    ) {
 
-            list.add(image);
-        }
+        Orianna.loadConfiguration("config.json");
+        Orianna.setRiotAPIKey("RGAPI-61123d6f-b742-4588-aa07-082e4b2f2205");
 
-        System.out.println(list);
+        Champions champions = Orianna.getChampions();
+        Champion champion = Orianna.championNamed(name).get();
 
-        return list;
+        /* System.out.println(champion); */
+
+        /* model.addAttribute("champions", champions); */
+        /* model.addAttribute("champion", champion); */
+        session.setAttribute("champion", champion);
+        System.out.println("name : " + name);
+
+        TipBoard tipboard = (TipBoard)httpSession.getAttribute("tipBoard");
+
+        List<TipBoard> list = tipBoardService.selectMainList(name);
+
+        int totalContents = tipBoardService.selectTotalMainContents(name);
+
+        session.setAttribute("list", list);
+        /*
+         * model.addAttribute("list",list).addAttribute("championName", championName);
+         */
+
+
+        System.out.println("Detail list 확인:"+ list);
+        return "champion/championDetail";
+
     }
 }

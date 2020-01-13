@@ -13,7 +13,7 @@
 
     <select id="selectOneMember" parameterType="Member" resultType="Member">
         select * from MEMBER
-        where nickName = #{nickName}
+        where EMAIL = #{email}
     </select>
 
 	<delete id="deleteMember" parameterType="Member">
