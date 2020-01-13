@@ -75,6 +75,7 @@ public class MemberController {
     
     model.addAttribute("msg", msg);
     model.addAttribute("loc", loc);
+    model.addAttribute("member", member);
     
     
     return "common/msg";
