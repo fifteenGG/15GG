@@ -14,7 +14,7 @@ public class ChampionController {
 	public String championList(Model model) {
 
 		Orianna.loadConfiguration("config.json");
-        Orianna.setRiotAPIKey("RGAPI-c2d9129b-8619-47ae-901d-4f7b35db9ad5");
+        Orianna.setRiotAPIKey("RGAPI-08842216-199e-4def-a825-3053d1dd4f11");
 
         Champions champions = Orianna.getChampions();
         

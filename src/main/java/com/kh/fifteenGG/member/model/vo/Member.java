@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Member implements Serializable {
 	
-	private String userNo;
+	private int userNo;
 	private String email;
 	private String nickName;
 	private String password;
@@ -16,7 +16,7 @@ public class Member implements Serializable {
 	}
 
 
-	public Member(String userNo, String email, String nickName, String password) {
+	public Member(int userNo, String email, String nickName, String password) {
 		super();
 		this.userNo = userNo;
 		this.email = email;
@@ -25,12 +25,12 @@ public class Member implements Serializable {
 	}
 
 
-	public String getUserNo() {
+	public int getUserNo() {
 		return userNo;
 	}
 
 
-	public void setUserNo(String userNo) {
+	public void setUserNo(int userNo) {
 		this.userNo = userNo;
 	}
 

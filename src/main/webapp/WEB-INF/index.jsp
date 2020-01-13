@@ -8,10 +8,37 @@
     <title>15.GG</title>
     <%--  로고 font --%>
     <link href="https://fonts.googleapis.com/css?family=Baloo+Bhai&display=swap" rel="stylesheet">
-
-    <!-- chat css -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/chat.css">
-
+	<style>
+	.fcy-54fyyd {
+    -webkit-appearance: none;
+    -webkit-box-align: center;
+    align-items: center;
+    bottom: 0px;
+    display: block;
+    height: 60px;
+    -webkit-box-pack: center;
+    justify-content: center;
+    line-height: 60px;
+    position: relative;
+    user-select: none;
+    z-index: 999;
+    background-color: rgb(29, 46, 81);
+    color: white;
+    cursor: pointer;
+    min-width: 60px;
+    -webkit-tap-highlight-color: transparent;
+    border-radius: 200px;
+    margin: 0px;
+    outline: none;
+    padding: 0px;
+    border-width: initial;
+    border-style: none;
+    border-color: initial;
+    border-image: initial;
+    transition: background-color 200ms linear 0s, transform 200ms linear 0s;
+}
+	</style>
+	
 </head>
 <body>
 
@@ -29,7 +56,7 @@
         <%-- 메인 영역 --%>
         <div class="container-fluid">
             <!-- 로고 부분 -->
-            <div><p style="font-family: 'Baloo Bhai', cursive; font-size: 60px"><a href="${pageContext.request.contextPath}">15.GG</a></p></div>
+            <div><p style="font-family: 'Baloo Bhai', cursive; font-size: 60px">15.GG</p></div>
 
             <!-- 검색창 -->
             <div class="row mt-4 form-group">
@@ -72,16 +99,20 @@
 
         </div>
     </div>
-    <button onclick="chattingBtn();" class="fcy-54fyyd ewgv1620"></button>
-    <script>
-        function chattingBtn(){
-            var title = 'chatting';
-            var url = '${pageContext.request.contextPath}/chatting.do';
-            var status = 'width = 500px, heigh= 700px';
-
-            var popup = window.open(url, title, status);
-        }
-    </script>
-
+ <div>
+    
+        <c:if test="${ !empty member }">
+        <button onclick="chattingBtn();" class="fcy-54fyyd ewgv1620" data-toggle="modal"></button>
+        </c:if>
+</div>
+<script>
+		 	function chattingBtn(){
+		 		var title = 'chatting';
+		 		var url = '${pageContext.request.contextPath}/chatting.do';
+		 		var status = 'width = 500px, heigh= 700px';
+		 		
+		 		var popup = window.open(url, title, status);
+		 	}
+		 </script>
 </body>
 </html>

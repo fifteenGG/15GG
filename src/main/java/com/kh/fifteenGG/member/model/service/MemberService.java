@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.fifteenGG.member.model.dao.MemberDAO;
-import com.kh.fifteenGG.member.model.dao.MemberDAO;
 import com.kh.fifteenGG.member.model.vo.Member;
 
 @Service
@@ -39,7 +38,7 @@ public class MemberService {
 
     public int checkIdDuplicate(String nickName) {
 
-        HashMap<String, Object> hmap = new HashMap<>();
+        HashMap<String, Object> hmap = new HashMap<String, Object>();
 
         hmap.put("nickName", nickName);
 

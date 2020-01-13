@@ -12,6 +12,9 @@
             <li class="nav-item active">
                 <a class="nav-link" href="${pageContext.request.contextPath}/champion/championList.do">챔피언 공략<span class="sr-only">(current)</span></a>
             </li>
+             <li class="nav-item active">
+                <a class="nav-link" href="${pageContext.request.contextPath}/humorBoard/humorBoardList.do">유머 게시판<span class="sr-only">(current)</span></a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="${pageContext.request.contextPath}/partyBoard/partyBoardList.do">파티 찾기</a>
             </li>
