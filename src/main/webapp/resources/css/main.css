@@ -346,11 +346,11 @@ body {
     padding-bottom: 2px !important;
 }
 
-.gg-bg-positive {
+.gg-bg-true {
     background-color: #5582E9 !important;
 }
 
-.gg-bg-negative {
+.gg-bg-false {
     background-color: #DF3D53 !important;;
 }
 
@@ -370,7 +370,7 @@ body {
     border: 2px #ffffff solid;
 }
 
-.gg-border-positive {
+.gg-border-true {
     border-left: 1px #5582E9 solid;
 }
 
@@ -386,7 +386,7 @@ body {
     background: #DF3D53;
 }
 
-.gg-border-negative {
+.gg-border-false {
     border-left: 1px #DF3D53 solid;
 }
 
@@ -771,11 +771,11 @@ body {
     font-size: 20px !important;
 }
 
-.gg-matchlist-win {
+.gg-matchlist-true {
     background: #e1e6f3;
 }
 
-.gg-matchlist-lose {
+.gg-matchlist-false {
     background: #f3e1e3;
 }
 

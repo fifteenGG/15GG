@@ -33,6 +33,20 @@
 		<constructor-arg index="0" ref="sqlSessionFactoryBean"/>
 	</bean>
 
+	<!-- Gmail -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" />
+		<property name="username" value="fifteengg@gmail.com" />
+		<property name="password" value="fifteen15gg" />
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+			</props>
+		</property>
+	</bean>
+
 <!--	&lt;!&ndash;  트랜잭션 처리를 스프링이 하도록 권한 인계하기!  &ndash;&gt;-->
 <!--	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">-->
 <!--		<property name="dataSource" ref="dataSource"/>-->

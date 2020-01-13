@@ -41,6 +41,8 @@
 				   alias="MatchReference"/>
 		<typeAlias type="com.kh.fifteenGG.search.model.vo.match.MatchPosition"
 				   alias="MatchPosition"/>
+		<typeAlias type="com.kh.fifteenGG.search.model.vo.view.TeamView"
+				   alias="TeamView"/>
 	</typeAliases>
 
 </configuration>
