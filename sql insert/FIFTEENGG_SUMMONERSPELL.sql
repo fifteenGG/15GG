@@ -1,0 +1,14 @@
+insert into FIFTEENGG.SUMMONERSPELL (SPELLNO, SPELLNAME, SPELLID) values (21, 'SummonerBarrier', 'Barrier');
+insert into FIFTEENGG.SUMMONERSPELL (SPELLNO, SPELLNAME, SPELLID) values (1, 'SummonerBoost', 'Cleanse');
+insert into FIFTEENGG.SUMMONERSPELL (SPELLNO, SPELLNAME, SPELLID) values (14, 'SummonerDot', 'Ignite');
+insert into FIFTEENGG.SUMMONERSPELL (SPELLNO, SPELLNAME, SPELLID) values (3, 'SummonerExhaust', 'Exhaust');
+insert into FIFTEENGG.SUMMONERSPELL (SPELLNO, SPELLNAME, SPELLID) values (4, 'SummonerFlash', 'Flash');
+insert into FIFTEENGG.SUMMONERSPELL (SPELLNO, SPELLNAME, SPELLID) values (6, 'SummonerHaste', 'Ghost');
+insert into FIFTEENGG.SUMMONERSPELL (SPELLNO, SPELLNAME, SPELLID) values (7, 'SummonerHeal', 'Heal');
+insert into FIFTEENGG.SUMMONERSPELL (SPELLNO, SPELLNAME, SPELLID) values (13, 'SummonerMana', 'Clarity');
+insert into FIFTEENGG.SUMMONERSPELL (SPELLNO, SPELLNAME, SPELLID) values (30, 'SummonerPoroRecall', 'To the King!');
+insert into FIFTEENGG.SUMMONERSPELL (SPELLNO, SPELLNAME, SPELLID) values (31, 'SummonerPoroThrow', 'Poro Toss');
+insert into FIFTEENGG.SUMMONERSPELL (SPELLNO, SPELLNAME, SPELLID) values (11, 'SummonerSmite', 'Smite');
+insert into FIFTEENGG.SUMMONERSPELL (SPELLNO, SPELLNAME, SPELLID) values (39, 'SummonerSnowURFSnowball_Mark', 'Mark');
+insert into FIFTEENGG.SUMMONERSPELL (SPELLNO, SPELLNAME, SPELLID) values (32, 'SummonerSnowball', 'Mark');
+insert into FIFTEENGG.SUMMONERSPELL (SPELLNO, SPELLNAME, SPELLID) values (12, 'SummonerTeleport', 'Teleport');

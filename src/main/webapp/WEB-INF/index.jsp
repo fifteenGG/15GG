@@ -76,7 +76,9 @@
 
         </div>
     </div>
-    <button onclick="chattingBtn();" class="fcy-54fyyd ewgv1620"></button>
+    <c:if test="${ !empty member }">
+        <button onclick="chattingBtn();" class="fcy-54fyyd ewgv1620" data-toggle="modal"></button>
+    </c:if>
     <script>
         function chattingBtn(){
             var title = 'chatting';
