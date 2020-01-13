@@ -1,7 +1,7 @@
 package com.kh.fifteenGG.search.model.dao;
 
 import com.kh.fifteenGG.search.model.vo.match.*;
-import com.merakianalytics.orianna.types.core.match.Team;
+import com.kh.fifteenGG.search.model.vo.view.TeamView;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -61,7 +61,14 @@ public class SearchDAO {
         return sqlSession.insert("match-mapper.insertTimeLine", position);
     }
 
-    public MatchReference selectTop(Map<String, Object> map) {
-        return sqlSession.selectOne("match-mapper.selectTop", map);
+
+    public List<TeamView> selectTeam(String gameid) {
+        return sqlSession.selectList("match-mapper.selectTeam", gameid);
     }
+
+//    public int inesertChampList(StaticChampion staticChampion) {
+//        return sqlSession.insert("match-mapper.inesertChampList", staticChampion);
+//    }
+
+
 }

@@ -8,18 +8,13 @@ import com.kh.fifteenGG.search.model.vo.league.LeagueEntry;
 import com.kh.fifteenGG.search.model.vo.match.*;
 import com.kh.fifteenGG.search.model.vo.summoner.Summoner;
 
-import com.merakianalytics.orianna.Orianna;
-import com.merakianalytics.orianna.types.common.Region;
-import com.merakianalytics.orianna.types.core.champion.ChampionRotation;
-import com.merakianalytics.orianna.types.core.staticdata.Champions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
@@ -65,11 +60,12 @@ public class SummonerSearch {
             //=====================================================================================================================//
 
             // 매치 정보 가져오기
-            HashMap<String, Object> map = searchService.selectSummonerMatch(summonerName);
+            List map = searchService.selectSummonerMatch(summonerName);
 
             // 화면에 전달
             model.addAttribute("summoner", summoner);
             model.addAttribute("leagueEntry", leagueEntry);
+            model.addAttribute("matchViewList", map);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -149,20 +145,11 @@ public class SummonerSearch {
     }
 
 
-//    // 테스트용 메소드 완료시 삭제
-//    @RequestMapping("/search/testmethod.do")
-//    public String testmethod(Model model,@RequestParam String accountId, @RequestParam String summonerName){
-//
-//        Orianna.loadConfiguration("config.json");
-//        Orianna.setRiotAPIKey("RGAPI-8ccab60c-d0ce-439f-98af-c0693894aa2e");
-//
-//        ChampionRotation rotation = ChampionRotation.withRegion(Region.KOREA).get();
-//
-//        System.out.println(rotation);
-//
-//        model.addAttribute("rotation", rotation);
-//
-//        return "redirect:/";
-//    }
+    // 테스트용 메소드 완료시 삭제
+    @RequestMapping("/search/testmethod.do")
+    public String testmethod(Model model,@RequestParam String accountId, @RequestParam String summonerName){
+
+        return "redirect:/";
+    }
 
 }

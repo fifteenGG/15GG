@@ -4,6 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="for" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>15.GG</title>
@@ -16,11 +17,7 @@
     </style>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css">
 </head>
-<script>
-    function text(){
-        location.href = "${pageContext.request.contextPath}/search/testmethod.do?accountId=${summoner.accountId}&summonerName=${summoner.name}";
-    }
-</script>
+
 <body>
 
 <%-- nav 영역 --%>
@@ -29,9 +26,8 @@
 <%-- nav 와 div 사이의 영역 --%>
 <div class="row">
     <!-- 나중에 광고 혹은 분석 관련 탭이 들어갈 위치 -->
-    <button type="button" onclick="text();" value="체크용">
+    <button type="button" onclick="test1();">
     </button>
-
 </div>
 
 <!-- 전적 관련 영역 -->
@@ -44,7 +40,7 @@
             <div>
                 <a href="#">
                     <img class="rounded-circle"
-                         src="https://ddragon.leagueoflegends.com/cdn/9.24.2/img/profileicon/${summoner.profileIconId}.png"
+                         src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/profileicon/${summoner.profileIconId}.png"
                          width="80" height="80"/>
                 </a>
             </div>
@@ -443,7 +439,7 @@
                             data-href="/kr/profile/View/stats?cId=523&amp;c=FreeRank">
                             <td class="d-flex align-items-center justify-content-center">
                                 <img class="img-circled"
-                                     src="https://ddragon.leagueoflegends.com/cdn/9.24.2/img/champion/Aphelios.png"
+                                     src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/champion/Aphelios.png"
                                      width="30px" height="30px">
                             </td>
 
@@ -473,7 +469,7 @@
                             data-href="/kr/profile/View/stats?cId=145&amp;c=FreeRank">
                             <td class="d-flex align-items-center justify-content-center">
                                 <img class="img-circled"
-                                     src="https://ddragon.leagueoflegends.com/cdn/9.24.2/img/champion/Kaisa.png"
+                                     src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/champion/Kaisa.png"
                                      width="30px" height="30px">
                             </td>
 
@@ -503,7 +499,7 @@
                             data-href="/kr/profile/View/stats?cId=25&amp;c=FreeRank">
                             <td class="d-flex align-items-center justify-content-center">
                                 <img class="img-circled"
-                                     src="https://ddragon.leagueoflegends.com/cdn/9.24.2/img/champion/Morgana.png"
+                                     src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/champion/Morgana.png"
                                      width="30px" height="30px">
                             </td>
 
@@ -815,7 +811,7 @@
                                     <div class="gg-box gg-division text-left bg-primary text-white">
                                         <div class="d-flex align-items-center">
                                             <i class="fas fa-info"></i>
-                                            <span class="gg-box-title ml-2">View님 같은 분을 찾고 있습니다!</span>
+                                            <span class="gg-box-title ml-2"> ${summoner.name} 님 같은 분을 찾고 있습니다!</span>
                                         </div>
                                     </div>
                                     <div class="gg-box gg-action-area" data-event="DuoRequestRecommendationProfile"
@@ -853,6 +849,7 @@
                             <!-- 최근 매치 리스트 -->
                             <div class="gg-matchlist-box gg-division">
 
+                                <for:forEach var="matchView" items="${matchViewList}">
                                 <!-- 매치 리스트 -->
                                 <div class="tab-pane active" id="matchListAllArea">
 
@@ -864,18 +861,22 @@
                                          data-id="4059186115" data-href="/kr/profile/View/match/4059186115"
                                          data-event="MatchListMatch">
 
+                                        <c:forEach var="j" end="9" begin="0">
+                                        <c:set var="SearchSummoner" value="${summoner.name}"/>
+                                        <c:if test="${matchView.get(j).summonerName eq SearchSummoner}">
                                         <!-- 게임에 대한 내 정보 영역 -->
-                                        <div class="col-md-8 d-flex flex-column justify-content-between gg-matchlist-lose">
+                                        <div class="col-md-8 d-flex flex-column justify-content-between gg-matchlist-${matchView.get(j).win}">
                                             <div class="row no-gutters">
-                                                <div class="col-2 d-flex flex-column gg-bg-negative text-white">
+                                                <div class="col-2 d-flex flex-column gg-bg-${matchView.get(j).win} text-white">
                                                     <div class="d-flex flex-column my-auto justify-content-center py-2">
-                                                        <span class="gg-matchlist-meta-text">21시간 전</span>
+                                                        <span class="gg-matchlist-meta-text">시간</span>
                                                         <div class="d-block"><img class="py-1 gg-img-25x25"
                                                                                   src="${pageContext.request.contextPath}/resources/Images/ranked-positions/Position_Iron-Bot.png">
                                                         </div>
                                                     </div>
                                                     <div class="d-flex justify-content-center py-lg-2 py-1">
-                                                        패배
+                                                        <c:if test="${matchView.get(j).win eq true}">승리</c:if>
+                                                        <c:if test="${matchView.get(j).win eq false}">패배</c:if>
                                                     </div>
                                                 </div>
                                                 <div class="col-10">
@@ -883,7 +884,7 @@
                                                         <div class="col-2 col-lg-2 my-auto px-1 position-relative">
                                                             <div class="position-relative">
                                                                 <img class="img-md img-circled full-width"
-                                                                     src="https://ddragon.leagueoflegends.com/cdn/9.24.2/img/champion/Kaisa.png">
+                                                                     src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/champion/${matchView.get(j).champFullImg}">
                                                                 <span class="gg-matchlist-meta-text gg-matchlist-matchcategory rounded-circle">자</span>
                                                             </div>
                                                             <span class="d-block text-sm">29:27</span>
@@ -892,55 +893,55 @@
                                                             <div class="col-xs-12 gg-padding-1px">
 
                                                                 <img class="d-block img-xs rounded" alt="img"
-                                                                     src="https://ddragon.leagueoflegends.com/cdn/9.24.2/img/spell/SummonerHeal.png">
+                                                                     src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/spell/${matchView.get(j).spell1Id}.png">
 
                                                                 <img class="d-block img-xs rounded" alt="img"
-                                                                     src="https://ddragon.leagueoflegends.com/cdn/9.24.2/img/spell/SummonerFlash.png">
+                                                                     src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/spell/${matchView.get(j).spell2Id}.png">
 
                                                             </div>
                                                         </div>
                                                         <div class="col-2 col-lg-2 d-flex flex-column my-auto">
                                                         <span class="gg-important-number gg-text-negative">
-                                                            0.7
+                                                            <fmt:formatNumber value="${(matchView.get(j).kills+matchView.get(j).assists)/matchView.get(j).deaths}" type="number" pattern="0.0"/>
                                                         </span>
-                                                            <span class="gg-matchlist-sub-description text-truncate">인분</span>
+                                                            <span class="gg-matchlist-sub-description text-truncate">KDA</span>
                                                         </div>
                                                         <div class="col-lg-2 d-lg-flex flex-column my-auto d-none">
 
-                                                        <span><img
-                                                                src="${pageContext.request.contextPath}/resources/Images/ranked-emblems/GRANDMASTER.png"
-                                                                class="gg-img-25x25 pr-1"></span>
+<%--                                                        <span><img--%>
+<%--                                                                src="${pageContext.request.contextPath}/resources/Images/ranked-emblems/GRANDMASTER.png"--%>
+<%--                                                                class="gg-img-25x25 pr-1"></span>--%>
 
-                                                            <span>6.8</span>
-                                                            <span class="gg-sub-description">분당 CS</span>
+<%--                                                            <span>6.8</span>--%>
+<%--                                                            <span class="gg-sub-description">분당 CS</span>--%>
                                                         </div>
                                                         <div class="col-4 col-lg-3 d-flex py-0 my-auto justify-content-lg-start justify-content-center">
 
                                                             <div>
                                                                 <img class="d-block img-xs rounded"
-                                                                     src="https://ddragon.leagueoflegends.com/cdn/9.24.2/img/item/1055.png">
+                                                                     src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/item/${matchView.get(j).item0}.png">
 
 
                                                                 <img class="d-block img-xs rounded"
-                                                                     src="https://ddragon.leagueoflegends.com/cdn/9.24.2/img/item/2015.png">
+                                                                     src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/item/${matchView.get(j).item1}.png">
                                                             </div>
 
                                                             <div>
                                                                 <img class="d-block img-xs rounded"
-                                                                     src="https://ddragon.leagueoflegends.com/cdn/9.24.2/img/item/3095.png">
+                                                                     src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/item/${matchView.get(j).item2}.png">
 
 
                                                                 <img class="d-block img-xs rounded"
-                                                                     src="https://ddragon.leagueoflegends.com/cdn/9.24.2/img/item/3006.png">
+                                                                     src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/item/${matchView.get(j).item3}.png">
                                                             </div>
 
                                                             <div>
                                                                 <img class="d-block img-xs rounded"
-                                                                     src="https://ddragon.leagueoflegends.com/cdn/9.24.2/img/item/3124.png">
+                                                                     src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/item/${matchView.get(j).item4}.png">
 
 
                                                                 <img class="d-block img-xs rounded"
-                                                                     src="https://ddragon.leagueoflegends.com/cdn/9.24.2/img/item/3086.png">
+                                                                     src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/item/${matchView.get(j).item5}.png">
                                                             </div>
 
                                                         </div>
@@ -952,7 +953,7 @@
                                                     <div class="row no-gutters pt-1">
                                                         <div class="col-12 text-left d-flex align-items-center pl-2">
 
-                                                            <span class="badge badge-default">데이터 없음</span>
+                                                            <span class="badge badge-default"></span>
 
                                                         </div>
                                                     </div>
@@ -960,102 +961,45 @@
                                             </div>
                                         </div>
 
+                                        </c:if>
+                                        </c:forEach>
+
                                         <!-- 팀원 정보 영역 -->
-                                        <div class="col-md-4 d-none d-lg-flex align-items-center gg-matchlist-lose">
+                                        <c:forEach var="j" end="9" begin="0">
+                                        <c:set var="SearchSummoner" value="${summoner.name}"/>
+                                        <c:if test="${matchView.get(j).summonerName eq SearchSummoner}">
+                                        <div class="col-md-4 d-none d-lg-flex align-items-center gg-matchlist-${matchView.get(j).win}">
+                                        </c:if>
+                                        </c:forEach>
                                             <div class="row no-gutters w-100">
                                                 <div class="col-11">
                                                     <div class="row no-gutters">
+
+                                                            <%--    팀1 --%>
                                                         <div class="col-6">
-
-                                                            <div class="of-ellipsis text-left pl-1 gg-matchlist-item gg-border-negative">
+                                                            <c:forEach var="i" begin="0" end="4">
+                                                            <div class="of-ellipsis text-left pl-1 gg-matchlist-item gg-border-${matchView.get(i).win}">
                                                                 <img class="img-xs img-circled gg-img-18x18"
-                                                                     src="https://ddragon.leagueoflegends.com/cdn/9.24.2/img/champion/Vladimir.png">
+                                                                     src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/champion/${matchView.get(i).champFullImg}" >
                                                                 <a class="text-secondary" href="/kr/profile/KooNH">
-                                                                    <span class="gg-text-soso">KooNH</span>
+                                                                    <span class="gg-text-soso">${matchView.get(i).summonerName}</span>
                                                                 </a>
                                                             </div>
-
-                                                            <div class="of-ellipsis text-left pl-1 gg-matchlist-item gg-border-negative">
-                                                                <img class="img-xs img-circled gg-img-18x18"
-                                                                     src="https://ddragon.leagueoflegends.com/cdn/9.24.2/img/champion/Kindred.png">
-                                                                <a class="text-secondary" href="/kr/profile/AFTR">
-                                                                    <span class="gg-text-soso">AFTR</span>
-                                                                </a>
-                                                            </div>
-
-                                                            <div class="of-ellipsis text-left pl-1 gg-matchlist-item gg-border-negative">
-                                                                <img class="img-xs img-circled gg-img-18x18"
-                                                                     src="https://ddragon.leagueoflegends.com/cdn/9.24.2/img/champion/Renekton.png">
-                                                                <a class="text-secondary"
-                                                                   href="/kr/profile/%ED%8C%80%ED%98%B8%ED%8B%B0%EB%AA%A8">
-                                                                    <span class="gg-text-positive">팀호티모</span>
-                                                                </a>
-                                                            </div>
-
-                                                            <div class="of-ellipsis text-left pl-1 gg-matchlist-item gg-border-negative">
-                                                                <img class="img-xs img-circled gg-img-18x18"
-                                                                     src="https://ddragon.leagueoflegends.com/cdn/9.24.2/img/champion/Kaisa.png">
-                                                                <a class="text-secondary" href="/kr/profile/View">
-                                                                    <span class="gg-text-soso">View</span>
-                                                                </a>
-                                                            </div>
-
-                                                            <div class="of-ellipsis text-left pl-1 gg-matchlist-item gg-border-negative">
-                                                                <img class="img-xs img-circled gg-img-18x18"
-                                                                     src="https://ddragon.leagueoflegends.com/cdn/9.24.2/img/champion/Teemo.png">
-                                                                <a class="text-secondary"
-                                                                   href="/kr/profile/%EC%9D%B4%EB%B3%B5%EB%8D%A9">
-                                                                    <span class="gg-text-soso">이복덩</span>
-                                                                </a>
-                                                            </div>
+                                                            </c:forEach>
 
                                                         </div>
+                                                             <%--    팀2 --%>
                                                         <div class="col-6">
-
-                                                            <div class="of-ellipsis text-left pl-1 gg-matchlist-item gg-border-positive">
+                                                            <c:forEach var="i" begin="5" end="9">
+                                                            <div class="of-ellipsis text-left pl-1 gg-matchlist-item gg-border-${matchView.get(i).win}">
                                                                 <img class="img-xs img-circled gg-img-18x18"
-                                                                     src="https://ddragon.leagueoflegends.com/cdn/9.24.2/img/champion/Yasuo.png">
+                                                                     src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/champion/${matchView.get(i).champFullImg}">
                                                                 <a class="text-secondary"
                                                                    href="/kr/profile/%EC%9E%90%EA%B4%B4%EA%B0%90%EB%93%A0%EB%8B%A4">
-                                                                    <span class="gg-text-positive">자괴감든다</span>
+                                                                    <span class="gg-text-positive">${matchView.get(i).summonerName}</span>
                                                                 </a>
                                                             </div>
-
-                                                            <div class="of-ellipsis text-left pl-1 gg-matchlist-item gg-border-positive">
-                                                                <img class="img-xs img-circled gg-img-18x18"
-                                                                     src="https://ddragon.leagueoflegends.com/cdn/9.24.2/img/champion/Evelynn.png">
-                                                                <a class="text-secondary"
-                                                                   href="/kr/profile/%EC%A7%80%EC%9A%B4%EC%A0%84">
-                                                                    <span class="gg-text-positive">지운전</span>
-                                                                </a>
-                                                            </div>
-
-                                                            <div class="of-ellipsis text-left pl-1 gg-matchlist-item gg-border-positive">
-                                                                <img class="img-xs img-circled gg-img-18x18"
-                                                                     src="https://ddragon.leagueoflegends.com/cdn/9.24.2/img/champion/Darius.png">
-                                                                <a class="text-secondary"
-                                                                   href="/kr/profile/%EB%85%B8egg">
-                                                                    <span class="gg-text-soso">노egg</span>
-                                                                </a>
-                                                            </div>
-
-                                                            <div class="of-ellipsis text-left pl-1 gg-matchlist-item gg-border-positive">
-                                                                <img class="img-xs img-circled gg-img-18x18"
-                                                                     src="https://ddragon.leagueoflegends.com/cdn/9.24.2/img/champion/MissFortune.png">
-                                                                <a class="text-secondary"
-                                                                   href="/kr/profile/%EB%B9%A0%EC%82%90%EB%B9%A0%EC%82%90%EC%BD%94">
-                                                                    <span class="gg-text-soso">빠삐빠삐코</span>
-                                                                </a>
-                                                            </div>
-
-                                                            <div class="of-ellipsis text-left pl-1 gg-matchlist-item gg-border-positive">
-                                                                <img class="img-xs img-circled gg-img-18x18"
-                                                                     src="https://ddragon.leagueoflegends.com/cdn/9.24.2/img/champion/Morgana.png">
-                                                                <a class="text-secondary"
-                                                                   href="/kr/profile/%EC%84%B1%EC%9A%B4%EC%A0%84">
-                                                                    <span class="gg-text-positive">성운전</span>
-                                                                </a>
-                                                            </div>
+                                                            </c:forEach>
 
                                                         </div>
                                                     </div>
@@ -1067,7 +1011,9 @@
                                         </div>
 
                                     </div>
+
                                 </div>
+                                </for:forEach>
                             </div>
                         </div>
                         <!-- 우측 영역 끝 -->

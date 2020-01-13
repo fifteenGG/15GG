@@ -2,13 +2,11 @@ package com.kh.fifteenGG.search.model.service;
 
 import com.kh.fifteenGG.search.model.dao.SearchDAO;
 import com.kh.fifteenGG.search.model.vo.match.*;
+import com.kh.fifteenGG.search.model.vo.view.TeamView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class SearchService {
@@ -146,32 +144,39 @@ public class SearchService {
     }
 
     // 매치 정보 불러와서 화면에 출력용 서비스
-    public HashMap<String, Object> selectSummonerMatch(String summonerName) {
+    public List selectSummonerMatch(String summonerName) {
 
-        HashMap<String, Object> hmap = new HashMap<>();
+       HashMap<String, Object> map = new HashMap<>();
+
+        List list = new ArrayList();
 
         // 게임번호를 조회
         List<String> matchList = searchDAO.selectMatchList(summonerName);
 
-        // 소환사 정보
-        List<MatchReference> matchReferenceList = new ArrayList<>();
+        System.out.println("반복 시작");
 
         // 꺼내온 매치 리스트로 조회
-        for(int i = 0 ; i < matchList.size(); i++){
+        // matchList.size()
+        if(matchList.size() > 0){
+            for(int i = 0 ; i < 2 ; i++){
+                String gameid = matchList.get(i);
+                System.out.println("게임번호 : " + gameid);
 
-            Map<String, Object> Map = new HashMap<>();
+                // 팀
+                List<TeamView> team = searchDAO.selectTeam(gameid);
+                System.out.println("팀 " + team);
 
-            String gameid = matchList.get(i);
-
-            // 팀 100, 200
-            for(int tNo=100 ;tNo < 201 ; tNo+=100){
+                list.add(team);
 
 
             }
-
         }
 
-        return null;
+        System.out.println("반복 끝");
+        System.out.println(list);
+
+        return list;
+
     }
 
 }

@@ -7,10 +7,15 @@
 <head>
 <meta charset="UTF-8">
 <style>
-    @charset "UTF-8";
-    @import url(//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css);
+	@charset "utf-8";
+
+
+@import url(//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css);
+
+
+
 div.main{
-   /* background-image: url("${pageContext.request.contextPath}/resources/imges/piora.jpeg"); */
+   background-image: url("${pageContext.request.contextPath}/resources/Images/member/jin.jpg");
    background-size: cover;
 	height:calc(100vh);
 	width:100%;
@@ -94,18 +99,21 @@ p {
     width:40%;
 }
 #login{
-border-right:1px solid #fff;
+
   padding: 0px 22px;
   width: 59%;
 }
-.logo{
-color: black; ;
-font-size:50px;
+#logo{
   line-height: 125px;
+  font-size: 72px;
+background-image: linear-gradient(black, black, red, white, ghostwhite);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position:relative;  
 }
 
 #login form span.fa {
-	background-color: silver;
+background-image: linear-gradient(black , red, #fadadd, red, black);
 	border-radius: 3px 0px 0px 3px;
 	color: #000;
 	display: block;
@@ -127,19 +135,19 @@ fieldset{
 
 }
 #login form input[type="text"], input[type="password"] {
-	background-color: lightgrey;
+	background-color: white;
 	border-radius: 0px 3px 3px 0px;
 	color: #000;
 	margin-bottom: 1em;
 	padding: 0 16px;
 	width: 200px;
+	opacity: 0.8;
 }
-
 #login form input[type="submit"] {
   border-radius: 3px;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
-  background-color: #000000;
+  background-image: -webkit-linear-gradient(black,#5a0000,red);
   color: #eee;
   font-weight: bold;
   /* margin-bottom: 2em; */
@@ -149,7 +157,8 @@ fieldset{
 }
 
 #login form input[type="submit"]:hover {
-	background-color: #d44179;
+	
+	background-image: -webkit-linear-gradient(red,#5a0000, black);
 }
 
 #login > p {
@@ -188,14 +197,15 @@ fieldset{
         <form name="memberLogin" action="memberLogin.do" method="post">
 
           <fieldset class="clearfix">
+    	  <div id="logo" ><b>15.GG</b></div>
 
-            <p ><span class="fa fa-user"></span><input name ="nickName" type="text"  Placeholder="Username" required></p> <!-- JS because of IE support; better: placeholder="Username" -->
-            <p><span class="fa fa-lock"></span><input name ="password" type="password"  Placeholder="Password" required></p> <!-- JS because of IE support; better: placeholder="Password" -->
+            <p ><span class="fa fa-user"></span><input name ="nickName" type="text"  Placeholder="이메일" required></p> <!-- JS because of IE support; better: placeholder="Username" -->
+            <p><span class="fa fa-lock"></span><input name ="password" type="password"  Placeholder="비밀번호" required></p> <!-- JS because of IE support; better: placeholder="Password" -->
             
              <div>
-                                <span style="width:48%; text-align:left;  display: inline-block;"><a class="small-text" href="#">Forgot
-                                password?</a></span>
-                                <span style="width:50%; text-align:right;  display: inline-block;"><input type="submit" value="Sign In"></span>
+                                <span style="width:48%; text-align:left; text-decoration:underline; display: inline-block;"><a class="small-text" href="#">아이디 생성 하기
+                                </a></span>
+                                <span style="width:50%; text-align:right;  display: inline-block;"><input type="submit" value=" 로그인  "></span>
                             </div>
 
           </fieldset>
@@ -205,7 +215,6 @@ fieldset{
         <div class="clearfix"></div>
 
       </div> <!-- end login -->
-      <div class="logo">LOGO
           
           <div class="clearfix"></div>
       </div>
@@ -213,7 +222,7 @@ fieldset{
       </div>
 </center>
     </div>
+    
 
-</div>
 </body>
 </html>

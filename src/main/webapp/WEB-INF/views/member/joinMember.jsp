@@ -52,7 +52,16 @@
             border-color: #f8f9fa !important;
             color: red;
         }
-
+        .btn-primary{
+        	backgorund-color : black;
+        	
+		}
+		.alert-danger {
+			padding : 0;
+		}
+		.alert{
+			padding : 0;
+		}
         /*중복아이디체크관련*/
         div#userId-container{position:relative; padding:0px;}
         div#userId-container span.guide {display:none;font-size: 12px;position:absolute; top:12px; right:10px;}
@@ -69,12 +78,12 @@
         <p class="divider-text">
             <span class="bg-light">회원 가입</span>
         </p>
-        <form action="memberJoin.do" method="post">
+        <form action="memberJoin.do" method="post"  >
             <!-- 닉네임 -->
             <div class="form-group input-group">
                 <div class="input-group-prepend" id="userId-container">
                     <span class="input-group-text"> <i class="fa fa-user"></i> </span>
-                    <input id="nickName" name="nickName" class="form-control" placeholder="Nick name" type="text" required>
+                    <input id="nickName" name="nickName" class="form-control" placeholder="닉네임" type="text" required>
                     <span class="guide ok">사용 가능</span>
                     <span class="guide error">사용 불가</span>
                     <span class="guide invalid">8글자 이상</span>
@@ -87,7 +96,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
                 </div>
-                <input id="email" name="email" class="form-control" placeholder="Email address" type="email" required>
+                <input id="email" name="email" class="form-control" type="email" value="${ e_mail }" readonly>
             </div> <!-- form-group// -->
 
 
@@ -96,7 +105,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                 </div>
-                <input id="password" name="password" class="form-control" placeholder="Create password" type="password"
+                <input id="password" name="password" class="form-control" placeholder="비밀번호" type="password"
                        onchange="isSame()" required>
             </div> <!-- form-group// -->
 
@@ -105,7 +114,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                 </div>
-                <input id="password2" name="password2" class="form-control" placeholder="Repeat password"
+                <input id="password2" name="password2" class="form-control" placeholder="비밀번호 확인"
                        type="password" onchange="isSame()" required>
                 <span id="pass"></span>
             </div> <!-- form-group// -->
@@ -114,11 +123,11 @@
 
 
             <div class="form-group">
-                <button type="submit" class="btn btn-primary btn-block"> Create Account</button>
+                <button type="submit" class="btn btn-primary btn-block"> 회원 가입</button>
             </div> <!-- form-group// -->
 
 
-            <p class="text-center">Have an account? <a href="/member/loginMemberView.do">Log In</a></p>
+            <p class="text-center">로그인 바로가기/ <a href="${pageContext.request.contextPath}/member/loginMemberView.do">로그인</a></p>
         </form>
     </article>
 </div> <!-- card.// -->
@@ -152,6 +161,7 @@
             $(".guide.error").hide();
             $(".guide.ok").hide();
             $(".guide.invalid").show();
+   
             return;
 
         } else {
@@ -163,7 +173,7 @@
                 success: function (data) {
                     console.log(data);
                     // if(data=="true") //stream 방식
-                    if (data.isUsable == true) { //viewName 방식
+                    if (data.isUsable == true) { //viewNzame 방식
                         $(".guide.error").hide();
                         $(".guide.invalid").hide();
                         $(".guide.ok").show();
@@ -189,8 +199,8 @@
 
     function validate() {
         var nickName = $("#nickName");
-        if (nickName.val().trim().length < 4) {
-            alert("아이디는 최소 4자리이상이어야 합니다.");
+        if (nickName.val().trim().length < 2) {
+            alert("닉네임 최소 2자리이상이어야 합니다.");
             nickName.focus();
             return false;
         }

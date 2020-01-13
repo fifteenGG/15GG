@@ -15,10 +15,34 @@
 	    VO 클래스의 별칭을 정의하는 태그 -->
 	<typeAliases>
 <!--		 sql에서 사용할 때 직접 내용을 적지 않고 별칭으로도 접근이 가능하다.-->
+
+		<!-- 회원용 -->
 		<typeAlias type="com.kh.fifteenGG.member.model.vo.Member"
 			         alias="Member"/>
-		<typeAlias type="com.kh.fifteenGG.champion.model.vo.TipBoard"
-					 alias="TipBoard"/>
+
+		<!-- match 용 -->
+		<typeAlias type="com.kh.fifteenGG.search.model.vo.match.Match"
+				   alias="Match"/>
+		<typeAlias type="com.kh.fifteenGG.search.model.vo.match.TeamStats"
+				   alias="TeamStats"/>
+		<typeAlias type="com.kh.fifteenGG.search.model.vo.match.TeamBans"
+				   alias="TeamBans"/>
+		<typeAlias type="com.kh.fifteenGG.search.model.vo.match.ParticipantIdentity"
+				   alias="ParticipantIdentity"/>
+		<typeAlias type="com.kh.fifteenGG.search.model.vo.match.Player"
+				   alias="Player"/>
+		<typeAlias type="com.kh.fifteenGG.search.model.vo.match.Participant"
+				   alias="Participant"/>
+		<typeAlias type="com.kh.fifteenGG.search.model.vo.match.ParticipantStats"
+				   alias="ParticipantStats"/>
+		<typeAlias type="com.kh.fifteenGG.search.model.vo.match.ParticipantTimeline"
+				   alias="ParticipantTimeline"/>
+		<typeAlias type="com.kh.fifteenGG.search.model.vo.match.MatchReference"
+				   alias="MatchReference"/>
+		<typeAlias type="com.kh.fifteenGG.search.model.vo.match.MatchPosition"
+				   alias="MatchPosition"/>
+		<typeAlias type="com.kh.fifteenGG.search.model.vo.view.TeamView"
+				   alias="TeamView"/>
 	</typeAliases>
 
 </configuration>
