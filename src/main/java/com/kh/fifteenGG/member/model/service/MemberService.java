@@ -39,7 +39,7 @@ public class MemberService {
 
     public int checkIdDuplicate(String nickName) {
 
-        HashMap<String, Object> hmap = new HashMap<>();
+        HashMap<String, Object> hmap = new HashMap();
 
         hmap.put("nickName", nickName);
 
