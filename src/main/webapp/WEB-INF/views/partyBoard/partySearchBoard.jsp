@@ -185,7 +185,7 @@
 		<div class="btn-group bootstrap-select form-control my-0">                            
 			<select name="pbRanktype" class="form-control selectpicker my-0" data-style="btn btn-link gg-select" id="duoRequestListMatchCategorySelect" tabindex="-98">
 			                        
-				<option value="all">모든 큐</option>
+				<option value="모든 큐">모든 큐</option>
 				<option value="솔로랭크">솔로랭크</option>
 				<option value="자유랭크">자유랭크</option>
 				<option value="일반">일반</option>
