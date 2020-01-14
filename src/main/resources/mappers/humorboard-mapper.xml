@@ -34,7 +34,7 @@ WHERE HUMORBNO = #{HUMORBNO}
 
     <!-- ´ñ±Û µî·Ï -->
     <insert id="insertComment" parameterType="Comment">
-INSERT INTO HCOMMENT 
+INSERT INTO HCOMMENT
 VALUES(SEQ_CNO.NEXTVAL, #{humorBno}, #{userNo}, #{nickName}, #{cmtContent}, SYSDATE)
 </insert>
     <!-- ´ñ±Û ¸®½ºÆ® -->
@@ -52,4 +52,3 @@ UPDATE HUMORBOARD SET HUMORBOARDCOUNT = HUMORBOARDCOUNT +1 WHERE HUMORBNO = #{hu
 
 
 </mapper>
-
