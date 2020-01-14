@@ -28,7 +28,7 @@ WHERE HUMORBNO = #{HUMORBNO}
     <delete id="deleteBoard" parameterType="int"> DELETE FROM HUMORBOARD WHERE HUMORBNO = #{HUMORBNO}
 </delete>
 
-<update id="updateBoard" parameterType="humorBoard">
+    <update id="updateBoard" parameterType="humorBoard">
     UPDATE HUMORBOARD SET HUMORTITLE = #{humorTitle} , HUMORCONTENT = #{humorContent} WHERE HUMORBNO = #{humorbNo}
 </update>
 
