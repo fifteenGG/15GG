@@ -144,21 +144,19 @@ public class SearchService {
     }
 
     // 매치 정보 불러와서 화면에 출력용 서비스
-    public List selectSummonerMatch(String summonerName) {
-
-       HashMap<String, Object> map = new HashMap<>();
+    public List selectSummonerMatch(String summonerName, int cPage, int endPage) {
 
         List list = new ArrayList();
 
         // 게임번호를 조회
-        List<String> matchList = searchDAO.selectMatchList(summonerName);
+        List<String> matchList = searchDAO.selectMatchList(summonerName, cPage, endPage);
 
         System.out.println("반복 시작");
 
         // 꺼내온 매치 리스트로 조회
         // matchList.size()
         if(matchList.size() > 0){
-            for(int i = 0 ; i < 2 ; i++){
+            for(int i = 0 ; i < matchList.size() ; i++){
                 String gameid = matchList.get(i);
                 System.out.println("게임번호 : " + gameid);
 

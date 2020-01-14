@@ -1014,6 +1014,10 @@
 
                                 </div>
                                 </for:forEach>
+                                <div class="col-12 py-2 gg-bg-gray">
+                                    <button type="button" class="btn btn-info" onclick="moreMatch();">
+                                        더보기</button>
+                                </div>
                             </div>
                         </div>
                         <!-- 우측 영역 끝 -->
@@ -1026,6 +1030,16 @@
         </div>
 
     </div>
+
+<script>
+
+    var cPage = ${cPage};
+
+    function moreMatch() {
+        location.href = "${pageContext.request.contextPath}/search/SummonerSearch.do?cPage="+cPage+"&summonerName=${summoner.name}" ;
+    }
+
+</script>
 
 </body>
 </html>

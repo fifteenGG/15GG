@@ -53,14 +53,20 @@ public class SearchDAO {
         return (int) hmap.get("result");
     }
 
-    public List<String> selectMatchList(String summonerName) {
-        return sqlSession.selectList("match-mapper.selectMatchList", summonerName);
+    public List<String> selectMatchList(String summonerName, int cPage, int endPage) {
+
+        HashMap<String, Object> hmap = new HashMap<>();
+
+        hmap.put("summonerName", summonerName);
+        hmap.put("cPage", cPage);
+        hmap.put("endPage", endPage);
+
+        return sqlSession.selectList("match-mapper.selectMatchList", hmap);
     }
 
     public int insertTimeLine(MatchPosition position) {
         return sqlSession.insert("match-mapper.insertTimeLine", position);
     }
-
 
     public List<TeamView> selectTeam(String gameid) {
         return sqlSession.selectList("match-mapper.selectTeam", gameid);

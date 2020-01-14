@@ -30,11 +30,17 @@ public class SummonerSearch {
 
     // 검색 화면
     @RequestMapping("/search/SummonerSearch.do")
-    public String SummonerSearch(@RequestParam String summonerName, Model model) {
+    public String SummonerSearch(@RequestParam String summonerName,
+                                 @RequestParam(value = "cPage", required = false, defaultValue = "1") int cPage, Model model) {
+
+        int numPerPage = 5;
+        int endPage = numPerPage * cPage;
+
+        String serachName = summonerName.replaceAll(" ","%20");
 
         try {
             // 소환사 정보 뽑아오기
-            String urlStr = "https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/" + summonerName + "?api_key=" + ApiKey;
+            String urlStr = "https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/" + serachName + "?api_key=" + ApiKey;
 
             URL url1 = new URL(urlStr);
             BufferedReader br1 = new BufferedReader(new InputStreamReader(url1.openConnection().getInputStream()));
@@ -44,6 +50,8 @@ public class SummonerSearch {
             Gson gson = new Gson();
 
             Summoner summoner = gson.fromJson(string1, Summoner.class);
+
+            System.out.println(summoner.getName());
 
             //=====================================================================================================================//
 
@@ -61,9 +69,17 @@ public class SummonerSearch {
             //=====================================================================================================================//
 
             // 매치 정보 가져오기
-            List map = searchService.selectSummonerMatch(summonerName);
+
+            // 모든 매치 정보수 카운트
+//            int totalPage = searchService.totalPageCount(summonerName);
+
+            // 매치 정보 가져오기
+            List map = searchService.selectSummonerMatch(summonerName, cPage, endPage);
+
+            cPage += 1;
 
             // 화면에 전달
+            model.addAttribute("cPage", cPage);
             model.addAttribute("summoner", summoner);
             model.addAttribute("leagueEntry", leagueEntry);
             model.addAttribute("matchViewList", map);
@@ -102,6 +118,7 @@ public class SummonerSearch {
             // 매치 상세 정보 저장 반복문
             // 너무 오래된 정보는 가져오기 불가능. 최근10개 까지만 갱신
             System.out.println("반복문 시작");
+
             for (int i = 0; i < 20 ; i++) {
 
                 String urlStr2 = "https://kr.api.riotgames.com/lol/match/v4/matches/" + mlist.get(i).getGameId() + "?api_key=" + ApiKey;
