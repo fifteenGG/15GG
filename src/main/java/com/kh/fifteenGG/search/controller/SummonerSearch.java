@@ -3,6 +3,7 @@ package com.kh.fifteenGG.search.controller;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.kh.fifteenGG.common.apiKey.ApiKey;
 import com.kh.fifteenGG.search.model.service.SearchService;
 import com.kh.fifteenGG.search.model.vo.league.LeagueEntry;
 import com.kh.fifteenGG.search.model.vo.match.*;
@@ -25,7 +26,7 @@ public class SummonerSearch {
     @Autowired
     SearchService searchService;
 
-    private String ApiKey = "RGAPI-61123d6f-b742-4588-aa07-082e4b2f2205";
+    private String ApiKey = new ApiKey().getKey();
 
     // 검색 화면
     @RequestMapping("/search/SummonerSearch.do")

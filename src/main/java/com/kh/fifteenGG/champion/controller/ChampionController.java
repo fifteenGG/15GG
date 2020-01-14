@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import com.kh.fifteenGG.common.apiKey.ApiKey;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,11 +27,13 @@ public class ChampionController {
     @Autowired
     TipBoardService tipBoardService;
 
+    private String apiKey = new ApiKey().getKey();
+
     @RequestMapping("/champion/championList.do")
     public String championList(Model model) {
 
         Orianna.loadConfiguration("config.json");
-        Orianna.setRiotAPIKey("RGAPI-61123d6f-b742-4588-aa07-082e4b2f2205");
+        Orianna.setRiotAPIKey(apiKey);
 
         Champions champions = Orianna.getChampions();
 
@@ -48,7 +51,7 @@ public class ChampionController {
     ) {
 
         Orianna.loadConfiguration("config.json");
-        Orianna.setRiotAPIKey("RGAPI-61123d6f-b742-4588-aa07-082e4b2f2205");
+        Orianna.setRiotAPIKey(apiKey);
 
         Champions champions = Orianna.getChampions();
         Champion champion = Orianna.championNamed(name).get();
