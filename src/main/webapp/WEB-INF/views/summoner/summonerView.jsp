@@ -964,6 +964,9 @@
                                         </c:if>
                                         </c:forEach>
 
+<%--                                            ${fn:toLowerCase(list.col_name)}--%>
+<%--                                            ${fn:toLowerCase(matchView.get(j).summonerName eq SearchSummoner)}--%>
+
                                         <!-- 팀원 정보 영역 -->
                                         <c:forEach var="j" end="9" begin="0">
                                         <c:set var="SearchSummoner" value="${summoner.name}"/>

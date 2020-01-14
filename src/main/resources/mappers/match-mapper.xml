@@ -102,14 +102,6 @@
 
     <!--	검색 화면 조회용 쿼리 시작 -->
 
-    <!-- 매치리스트 게임아이디 뽑아오기	-->
-<!--        <select id="selectMatchList" parameterType="string" resultType="String">-->
-<!--    		select DISTINCT GAMEID from MATCH-->
-<!--    		join PLAYER using (GAMEID)-->
-<!--    		where regexp_like(SUMMONERNAME, #{summonerName}, 'i')-->
-<!--    		order by GAMEID desc-->
-<!--    	</select>-->
-
     <!-- 매치리스트 게임아이디 뽑아오기 페이징 추가	-->
     <select id="selectMatchList" parameterType="hashmap" resultType="string">
 		SELECT GAMEID
@@ -119,7 +111,8 @@
 					  select DISTINCT GAMEID
 					  from MATCH
 							   join PLAYER using (GAMEID)
-					  where regexp_like(SUMMONERNAME, #{summonerName}, 'i')
+					  where regexp_like(replace(SUMMONERNAME, ' ', ''), replace(#{summonerName}, ' ', ''),'i')
+					  order by GAMEID desc
 				  ) A
 			 )
 		WHERE RN BETWEEN #{cPage} AND #{endPage}
@@ -138,7 +131,6 @@
 		join SUMMONERSPELL S1 on S.SPELL1ID = S1.SPELLNO
 		join SUMMONERSPELL S2 on S.SPELL2ID = S2.SPELLNO
 		where GAMEID = #{gameid}
--- 		and QUEUEID in (420, 440)
 		order by TEAMID, GAMEID desc, POSITION
 	</select>
 

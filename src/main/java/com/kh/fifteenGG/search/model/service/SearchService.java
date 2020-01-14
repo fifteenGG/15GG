@@ -151,6 +151,8 @@ public class SearchService {
         // 게임번호를 조회
         List<String> matchList = searchDAO.selectMatchList(summonerName, cPage, endPage);
 
+        System.out.println(matchList);
+
         System.out.println("반복 시작");
 
         // 꺼내온 매치 리스트로 조회
