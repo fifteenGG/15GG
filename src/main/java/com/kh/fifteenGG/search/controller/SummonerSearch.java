@@ -38,6 +38,8 @@ public class SummonerSearch {
 
         String serachName = summonerName.replaceAll(" ","%20");
 
+        int result = 0;
+
         try {
             // 소환사 정보 뽑아오기
             String urlStr = "https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/" + serachName + "?api_key=" + ApiKey;
@@ -65,6 +67,10 @@ public class SummonerSearch {
 
             List<LeagueEntry> leagueEntry = gson.fromJson(string2, new TypeToken<List<LeagueEntry>>() {
             }.getType());
+
+            if(leagueEntry.size() > 0){
+                result = searchService.insertLeagueEntry(leagueEntry);
+            }
 
             //=====================================================================================================================//
 

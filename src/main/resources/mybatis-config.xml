@@ -20,6 +20,8 @@
 		<typeAlias type="com.kh.fifteenGG.member.model.vo.Member"
 			         alias="Member"/>
 		<!-- match 용 -->
+		<typeAlias type="com.kh.fifteenGG.search.model.vo.league.LeagueEntry"
+				   alias="LeagueEntry"/>
 		<typeAlias type="com.kh.fifteenGG.search.model.vo.match.Match"
 				   alias="Match"/>
 		<typeAlias type="com.kh.fifteenGG.search.model.vo.match.TeamStats"

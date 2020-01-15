@@ -37,6 +37,26 @@ public class LeagueEntry implements Serializable {
 	private boolean veteran;
 	private int wins;
 
+	@Override
+	public String toString() {
+		return "LeagueEntry{" +
+				"freshBlood=" + freshBlood +
+				", hotStreak=" + hotStreak +
+				", inactive=" + inactive +
+				", leagueId='" + leagueId + '\'' +
+				", leaguePoints=" + leaguePoints +
+				", losses=" + losses +
+				", miniSeries=" + miniSeries +
+				", queueType='" + queueType + '\'' +
+				", rank='" + rank + '\'' +
+				", summonerId='" + summonerId + '\'' +
+				", summonerName='" + summonerName + '\'' +
+				", tier='" + tier + '\'' +
+				", veteran=" + veteran +
+				", wins=" + wins +
+				'}';
+	}
+
 	public String getLeagueId() {
 		return leagueId;
 	}
@@ -153,8 +173,4 @@ public class LeagueEntry implements Serializable {
 		return veteran;
 	}
 
-	@Override
-	public String toString() {
-		return getQueueType();
-	}
 }

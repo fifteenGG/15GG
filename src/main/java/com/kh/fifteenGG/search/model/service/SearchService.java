@@ -1,6 +1,7 @@
 package com.kh.fifteenGG.search.model.service;
 
 import com.kh.fifteenGG.search.model.dao.SearchDAO;
+import com.kh.fifteenGG.search.model.vo.league.LeagueEntry;
 import com.kh.fifteenGG.search.model.vo.match.*;
 import com.kh.fifteenGG.search.model.vo.view.TeamView;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -179,4 +180,18 @@ public class SearchService {
 
     }
 
+    public int insertLeagueEntry(List<LeagueEntry> leagueEntry) {
+
+        int result = 0;
+
+        for(int i = 0 ; i < leagueEntry.size(); i++ ){
+
+            result = searchDAO.deleteLeagueEntry(leagueEntry.get(i).getSummonerName());
+
+            result = searchDAO.insertLeagueEntry(leagueEntry.get(i));
+
+        }
+
+        return result;
+    }
 }

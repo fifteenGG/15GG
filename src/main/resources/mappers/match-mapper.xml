@@ -6,6 +6,19 @@
 <mapper namespace="match-mapper">
     <!-- namespace : 현재 매퍼파일의 별칭 -->
 
+	<!--	LeagueEntry 저장용 -->
+	<insert id="insertLeagueEntry" parameterType="LeagueEntry">
+		insert into LEAGUEENTRY values (
+		#{freshBlood}, #{hotStreak}, #{inactive}, #{leagueId}, #{leaguePoints}
+		, #{losses}, #{wins}, #{queueType}, #{rank}, #{summonerId}
+		, #{summonerName}, #{tier}, #{veteran})
+	</insert>
+	<!--	LeagueEntry 삭제용 -->
+	<insert id="deleteLeagueEntry" parameterType="string">
+		delete from LEAGUEENTRY where summonerName = #{summonerName}
+	</insert>
+
+
     <!--	매치 정보 저장용	-->
     <insert id="insertMatch" parameterType="Match">
 		insert into MATCH values (

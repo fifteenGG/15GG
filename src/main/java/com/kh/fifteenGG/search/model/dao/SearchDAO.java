@@ -1,5 +1,6 @@
 package com.kh.fifteenGG.search.model.dao;
 
+import com.kh.fifteenGG.search.model.vo.league.LeagueEntry;
 import com.kh.fifteenGG.search.model.vo.match.*;
 import com.kh.fifteenGG.search.model.vo.view.TeamView;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -71,6 +72,16 @@ public class SearchDAO {
     public List<TeamView> selectTeam(String gameid) {
         return sqlSession.selectList("match-mapper.selectTeam", gameid);
     }
+
+    public int deleteLeagueEntry(String summonerName) {
+        return sqlSession.delete("match-mapper.deleteLeagueEntry", summonerName);
+    }
+
+    public int insertLeagueEntry(LeagueEntry leagueEntry) {
+        return sqlSession.insert("match-mapper.insertLeagueEntry", leagueEntry);
+    }
+
+
 
 //    public int inesertChampList(StaticChampion staticChampion) {
 //        return sqlSession.insert("match-mapper.inesertChampList", staticChampion);
