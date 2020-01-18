@@ -179,4 +179,52 @@ public class SearchService {
 
     }
 
+  // 검색한 놈 정보
+	public HashMap<String, Object> selectMyStat(String summonerName) {
+		
+		HashMap<String, Object> myStat = new HashMap<>();
+        int qualityPlay = 0;
+        int trollPlay = 0;
+        int totalCS = 0;
+        int totalDuration = 0;
+        int totalWin1 = 0;
+        int totalWin0 = 0;
+        int totalKDA = 0;
+        List<MatchKDA> list  = searchDAO.selectMyStat(summonerName); 
+          
+        System.out.println("myStat 확인 :" + list);
+        
+        for(MatchKDA m : list) {
+        	totalCS += m.getCs();
+        	totalDuration += m.getGameDuration();
+        	totalKDA += m.getKda();
+        	
+        	if(m.getWin() == 1) {
+        		totalWin1 += m.getWin();
+        	} else if (m.getWin() == 0) {
+        		totalWin0 += 1;
+        	}
+        	
+        	
+        	if( m.getKda() > 2.5) {
+        		qualityPlay += 1;
+        	}else if(m.getKda() < 1 && m.getKda() > 0 ) {
+        		trollPlay += 1;
+        	}else if (m.getKda() == 0) {
+        		qualityPlay += 1;
+        	}
+        	
+        }      
+        myStat.put("list", list);
+    	myStat.put("qualityPlay", qualityPlay);
+    	myStat.put("trollPlay", trollPlay);
+    	myStat.put("totalCS", totalCS);
+    	myStat.put("totalDuration", totalDuration);
+    	myStat.put("totalWin1", totalWin1);
+    	myStat.put("totalWin0", totalWin0);
+    	myStat.put("totalKDA", totalKDA);
+    	
+        return myStat;
+	}
+
 }

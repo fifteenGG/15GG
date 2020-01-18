@@ -75,7 +75,8 @@ public class SummonerSearch {
 
             // 매치 정보 가져오기
             List map = searchService.selectSummonerMatch(summonerName, cPage, endPage);
-
+            HashMap<String, Object> myStat = searchService.selectMyStat(summonerName);
+            
             cPage += 1;
 
             // 화면에 전달
@@ -83,6 +84,7 @@ public class SummonerSearch {
             model.addAttribute("summoner", summoner);
             model.addAttribute("leagueEntry", leagueEntry);
             model.addAttribute("matchViewList", map);
+            model.addAttribute("myStat", myStat);
 
         } catch (Exception e) {
             e.printStackTrace();

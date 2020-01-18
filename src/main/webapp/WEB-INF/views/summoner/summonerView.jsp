@@ -627,19 +627,21 @@
 
                                                 <div class="pt-1">
                                                     <i class="far fa-thumbs-up fa-2x"></i>
-                                                    <span class="gg-important-text py-4">50%</span>
+                                                    <span class="gg-important-text py-4">
+                                                    <fmt:formatNumber value="${(myStat.qualityPlay)*10}" type="number"/>%</span>
                                                 </div>
-                                                <span class="gg-sub-description">1인분 이상 10 경기</span>
+                                                <span class="gg-sub-description">최근10경기 KDA2.5이상 </span>
 
                                             </div>
                                             <div class="col-6">
-                                                <span class="gg-box-title">최근 트롤</span>
+                                                <span class="gg-box-title">최근 트롤 플레이</span>
 
                                                 <div class="pt-1">
                                                     <i class="far fa-thumbs-down fa-2x"></i>
-                                                    <span class="gg-important-text">10%</span>
+                                                    <span class="gg-important-text">
+                                                    <fmt:formatNumber value="${(myStat.trollPlay)*10}" type="number"/>%</span>
                                                 </div>
-                                                <span class="gg-sub-description">0.6인분 이하 2 경기</span>
+                                                <span class="gg-sub-description">최근10경기 KDA 1이하</span>
 
                                             </div>
 
@@ -655,16 +657,17 @@
                                             CS 역량
                                             - 분당 CS
                                         </span>
-                                                <span class="d-flex justify-content-center pt-1">
-                                            <span><img
+                                                <span class="d-flex justify-content-center pt-1" style="color:orangered;">
+                                            <%-- <span><img
                                                     src="${pageContext.request.contextPath}/resources/Images/ranked-emblems/GOLD.png"
-                                                    class="gg-img-30x30"></span>
-                                            <span class="gg-important-number ml-2">5.5</span>
+                                                    class="gg-img-30x30"></span> --%>
+                                            <span class="gg-important-number ml-2">
+                                            <fmt:formatNumber value="${(myStat.totalCS/(myStat.totalDuration/60))}" type="number" pattern="0.0"/></span>
                                         </span>
                                                 <span class="gg-sub-description pt-2">
                                             <a href="/kr/profile/View/feedback" class="gg-text-soso"
                                                data-event="Link-CsTierFeedback">
-                                                골드 평균 근접 ... 더보기
+                                                <!-- 골드 평균 근접 ... 더보기 -->
                                             </a>
                                         </span>
                                             </div>
@@ -677,16 +680,18 @@
                                         <div class="row justify-content-center">
 
                                             <div class="col-6">
-                                                <span class="gg-box-title">최근 5경기 승률</span>
-                                                <span class="gg-important-text pt-1 gg-text-negative">20%</span>
-                                                <span class="gg-sub-description">1W 4L 0.78 인분</span>
+                                                <span class="gg-box-title">최근 10경기 KDA</span>
+                                                <span class="gg-important-text pt-1 gg-text-negative">
+												<fmt:formatNumber value="${(myStat.totalKDA/10)}" type="number" pattern="0.0"/></span>
+                                                <!-- <span class="gg-sub-description">1W 4L 0.78 인분</span> -->
                                             </div>
 
 
                                             <div class="col-6">
                                                 <span class="gg-box-title">최근 10경기 승률</span>
-                                                <span class="gg-important-text pt-1 gg-text-soso">50%</span>
-                                                <span class="gg-sub-description">5W 5L 0.95 인분</span>
+                                                <span class="gg-important-text pt-1 gg-text-soso">
+                                                <fmt:formatNumber value="${(myStat.totalWin1*10)}" type="number"/>%</span>
+                                                <span class="gg-sub-description">${myStat.totalWin1}W ${myStat.totalWin0}L</span>
                                             </div>
 
                                         </div>

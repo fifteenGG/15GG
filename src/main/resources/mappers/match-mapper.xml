@@ -117,9 +117,31 @@
 			 )
 		WHERE RN BETWEEN #{cPage} AND #{endPage}
 	</select>
+	
+	<!-- 검색한 놈 최근 10경기  -->
+	    <select id="selectMyStat" parameterType="string" resultType="MatchKDA" >
+	    <![CDATA[
+				SELECT GAMEID,SUMMONERNAME, TRUNC((KILLS+ASSISTS)/DECODE(DEATHS,'0',0.1,DEATHS),2) AS KDA,
+                (TOTALMINIONSKILLED+NEUTRAKMINIONSKILLED) AS CS ,GAMEDURATION, WIN
+			FROM (
+				 SELECT ROWNUM RN, A.*
+				 FROM (
+					  select DISTINCT GAMEID,SUMMONERNAME,KILLS,ASSISTS,DEATHS,TOTALMINIONSKILLED,NEUTRAKMINIONSKILLED ,GAMEDURATION , WIN
+					  from MATCH
+							   join PLAYER using (GAMEID)
+                               join PARTICIPANTSTATS using(GAMEID,PARTICIPANTID)
+					  where regexp_like(replace(SUMMONERNAME, ' ', ''), replace(#{summonerName}, ' ', ''),'i')
+					  order by GAMEID desc
+				  ) A
+			 )
+             WHERE RN < 11
+		]]>
+		</select>
+	
 
     <!--	매치 조회용	-->
     <select id="selectTeam" parameterType="string" resultType="TeamView">
+    
 		select SUMMONERNAME, POSITION, CHAMPIONID, CHAMPname, ChampFullImg, S1.SPELLNAME as spell1Id, S2.SPELLNAME as spell2Id, TEAMID, ITEM0, ITEM1, ITEM2, ITEM3, ITEM4, ITEM5, ITEM6, KILLS, DEATHS, ASSISTS, TOTALMINIONSKILLED, WIN
 		from PATICIPANT S
 		join PARTICIPANTSTATS using (GAMEID, PARTICIPANTID)
@@ -133,5 +155,6 @@
 		where GAMEID = #{gameid}
 		order by TEAMID, GAMEID desc, POSITION
 	</select>
-
+	
+	
 </mapper>
