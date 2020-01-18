@@ -1,5 +1,6 @@
 package com.kh.fifteenGG.champion.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,8 @@ import javax.servlet.http.HttpSession;
 import com.kh.fifteenGG.champion.model.service.PercentageService;
 import com.kh.fifteenGG.champion.model.vo.Percentage;
 import com.kh.fifteenGG.common.apiKey.ApiKey;
+import com.merakianalytics.orianna.types.core.champion.ChampionRotation;
+import com.merakianalytics.orianna.types.dto.staticdata.ChampionList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +25,7 @@ import com.merakianalytics.orianna.Orianna;
 import com.merakianalytics.orianna.types.common.Region;
 import com.merakianalytics.orianna.types.core.staticdata.Champion;
 import com.merakianalytics.orianna.types.core.staticdata.Champions;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class ChampionController {
@@ -116,5 +120,29 @@ public class ChampionController {
 
         return "champion/championDetail";
 
+    }
+
+    @RequestMapping("/champion/freeChampion.do")
+    @ResponseBody
+    public HashMap<String, Object> freeChampion(Model model){
+
+        Orianna.loadConfiguration("config.json");
+        Orianna.setRiotAPIKey(apiKey);
+
+        ChampionRotation rotation = ChampionRotation.withRegion(Region.KOREA).get();
+
+        List<String> freeChampImage = new ArrayList<>();
+        List<String> freeChampName = new ArrayList<>();
+        HashMap<String, Object> hashMap = new HashMap<>();
+
+        for(Champion champion : rotation.getFreeChampions() ){
+            freeChampImage.add(champion.getImage().getFull());
+            freeChampName.add(champion.getName());
+        }
+
+        hashMap.put("freeChampImage", freeChampImage);
+        hashMap.put("freeChampName", freeChampName);
+
+        return hashMap;
     }
 }

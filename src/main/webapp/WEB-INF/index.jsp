@@ -12,7 +12,6 @@
     <!-- chat css -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/chat.css">
 
-
 </head>
 <body>
 
@@ -37,7 +36,7 @@
                 <div class="col-10 col-lg-8 px-2 mx-auto pb-1 bg-white">
                     <form action="${pageContext.request.contextPath}/search/SummonerSearch.do" class="form-group" style="
                     position: relative;
-                    width: 590px;
+                    width: 570px;
                     margin: 0 auto;
                     border-radius: 2px;
                     background-color: #f4f4f4;">
@@ -71,20 +70,18 @@
                 </div>
             </div>
 
-            <div id="freechamp">
-
-            </div>
-
-            <div id="num1Rune">
-                <div>
-                    <div>
-                        <img id="haha" src="https://opgg-static.akamaized.net/images/lol/perk/8010.png?image=e_grayscale" alt="">
+            <!-- 무료 챔피언 -->
+            <div class="mt-4">
+                <div class="col-10 col-lg-8 px-2 mx-auto pb-1 bg-white">
+                    <label class="control-label" style="font-size: 25px;">금주의 로테이션</label>
+                    <div id="championLote">
                     </div>
                 </div>
             </div>
 
         </div>
     </div>
+
     <c:if test="${ !empty member }">
         <button onclick="chattingBtn();" class="fcy-54fyyd ewgv1620" data-toggle="modal"></button>
     </c:if>
@@ -98,41 +95,30 @@
         }
     </script>
 
-
     <script>
+        $(()=>{
+            $.ajax({
+                url : "${pageContext.request.contextPath}/champion/freeChampion.do",
+                type : 'json',
+                success : function( data ){
+                    console.log( data );
+                    console.log(data['freeChampName'][0]);
 
-        <c:set var="test" value="8010"></c:set> // jstl 테스트용
+                    for(var i = 0; i < data['freeChampName'].length; i++){
+                        var html = "<a href='${pageContext.request.contextPath}/champion/championDetail.do?name="+data['freeChampName'][i]+"'><img src='https://ddragon.leagueoflegends.com/cdn/10.1.1/img/champion/"+data['freeChampImage'][i]+"'>'"+"</a>";
 
-        $( document ).ready( function() {
-            $('#num1Rune').find('img[src*=${test}]').attr('src', 'https://opgg-static.akamaized.net/images/lol/perk/${test}.png');
+                        if( i%5 == 4 ){
+                            html += "<br/>";
+                        }
+                        $("#championLote").append( html );
+                    }
+                },
+                error : function( xhr, txtStatus, err ){
+                    console.log( xhr, txtStatus, err );
+                }
+            })
         });
     </script>
-
-<%--    <script>--%>
-
-<%--        var freechmap =  $('#freechamp');--%>
-
-<%--        $(()=>{--%>
-<%--            $.ajax({--%>
-<%--                url : "${pageContext.request.contextPath}/champion/freeChampion.do",--%>
-<%--                type : 'json',--%>
-<%--                success : function (data) {--%>
-
-<%--                    console.log("ajax 성공");--%>
-
-<%--                    console.log(data);--%>
-
-<%--                    for(var i=0; i<data.length; i++){--%>
-<%--                        freechmap.append(data[i]);--%>
-<%--                    }--%>
-
-<%--                }, error : function (e) {--%>
-
-<%--                }--%>
-
-<%--            })--%>
-<%--        })--%>
-<%--    </script>--%>
 
 </body>
 </html>

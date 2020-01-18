@@ -76,10 +76,6 @@ public class SearchService {
                 // participants 저장 시작
                 List<Participant> participants = match.getParticipants();
 
-                // 포지션 중복 제거용 변수
-                int t1,j1,m1,a1,s1 = 0;
-                int t2,j2,m2,a2,s2 = 0;
-
                 for(Participant participant : participants){
                     // participant 저장
                     participant.setGameId(match.getGameId());

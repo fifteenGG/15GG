@@ -171,12 +171,4 @@ public class SummonerSearch {
         return "redirect:/search/SummonerSearch.do";
     }
 
-
-    // 테스트용 메소드 완료시 삭제
-    @RequestMapping("/search/testmethod.do")
-    public String testmethod(Model model,@RequestParam String accountId, @RequestParam String summonerName){
-
-        return "redirect:/";
-    }
-
 }
