@@ -124,7 +124,7 @@
 					  select DISTINCT GAMEID
 					  from MATCH
 							   join PLAYER using (GAMEID)
-					  where regexp_like(replace(SUMMONERNAME, ' ', ''), replace(#{summonerName}, ' ', ''),'i')
+					  where upper(replace(SUMMONERNAME, ' ', '')) = upper(replace(#{summonerName}, ' ', ''))
 					  order by GAMEID desc
 				  ) A
 			 )
@@ -151,8 +151,6 @@
     <select id="selectMyStat" parameterType="string" resultType="MatchKDA">
 	<![CDATA[
 
-
-
 			SELECT GAMEID,SUMMONERNAME, TRUNC((KILLS+ASSISTS)/DECODE(DEATHS,'0',0.1,DEATHS),2) AS KDA,
 			(TOTALMINIONSKILLED+NEUTRAKMINIONSKILLED) AS CS ,GAMEDURATION, WIN
 		FROM (
@@ -162,7 +160,7 @@
 				  from MATCH
 					   join PARTICIPANTSTATS using (GAMEID)
 					   join PLAYER using (PLATFORMID, GAMEID, PARTICIPANTID)
-				  where regexp_like(replace(SUMMONERNAME, ' ', ''), replace(#{summonerName}, ' ', ''),'i')
+				  where upper(replace(SUMMONERNAME, ' ', '')) = upper(replace(#{summonerName}, ' ', ''))
 				  order by GAMEID desc
 			  ) A
 		 )

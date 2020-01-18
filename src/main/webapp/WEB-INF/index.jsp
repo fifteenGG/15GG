@@ -12,6 +12,7 @@
     <!-- chat css -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/chat.css">
 
+
 </head>
 <body>
 
@@ -74,6 +75,14 @@
 
             </div>
 
+            <div id="num1Rune">
+                <div>
+                    <div>
+                        <img id="haha" src="https://opgg-static.akamaized.net/images/lol/perk/8010.png?image=e_grayscale" alt="">
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
     <c:if test="${ !empty member }">
@@ -87,6 +96,16 @@
 
             var popup = window.open(url, title, status);
         }
+    </script>
+
+
+    <script>
+
+        <c:set var="test" value="8010"></c:set> // jstl 테스트용
+
+        $( document ).ready( function() {
+            $('#num1Rune').find('img[src*=${test}]').attr('src', 'https://opgg-static.akamaized.net/images/lol/perk/${test}.png');
+        });
     </script>
 
 <%--    <script>--%>
