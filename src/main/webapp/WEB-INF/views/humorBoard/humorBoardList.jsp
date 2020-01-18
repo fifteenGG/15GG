@@ -36,7 +36,9 @@
 		
 			<section id="board-container" class="container">
 				<p>총 ${totalContents }건의 게시물이 있습니다.</p>
+				<c:if test="${ !empty member }">
 				<input type="button" value="글쓰기" id="btn-add" class="btn btn-outline-success" onclick="humorForm();"/>
+				</c:if>
 				<table id="tbl-board" class="table table-striped table-hover">
 					<tr>
 						<th>번호</th>
@@ -55,9 +57,28 @@
 					</tr>
 					</c:forEach>
 				</table>
-				
+				<c:out value="${pageBar}" escapeXml="false"/>
 			</section> 
 		
 	</div>
+<div class="form-group row justify-content-center">
+			<div class="w100" style="padding-right:10px">
+				<select class="form-control form-control-sm" name="searchType" id="searchType">
+					<option value="">검색조건</option>
+					<option value="humorTitle">제목</option>
+					<option value="humorWirter">작성자</option>
+					<option value="all">전체조건</option>
+				</select>
+			</div>
+			<div class="w300" style="padding-right:10px">
+				<input type="text" class="form-control form-control-sm" name="keyword" id="keyword" placeholder="검색어를 입력하세요">
+			</div>
+			<div>
+				<button class="btn btn-sm btn-primary" name="btnSearch" id="btnSearch" >검색</button>
+			</div>
+		</div>
+		
 </body>
+
 </html>
+

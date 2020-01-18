@@ -22,7 +22,7 @@ public class humorBoardDAO {
 		RowBounds rows = new RowBounds((cPage -1) * numPerPage, numPerPage);
 		
 		
-		return sqlSession.selectList("humorboard-mapper.selectList");
+		return sqlSession.selectList("humorboard-mapper.selectList",null,rows);
 		
 		
 	}
