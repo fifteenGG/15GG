@@ -2,6 +2,7 @@ package com.kh.fifteenGG.search.model.dao;
 
 import com.kh.fifteenGG.search.model.vo.league.LeagueEntry;
 import com.kh.fifteenGG.search.model.vo.match.*;
+import com.kh.fifteenGG.search.model.vo.view.MatchKDA;
 import com.kh.fifteenGG.search.model.vo.view.TeamView;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,6 +80,11 @@ public class SearchDAO {
 
     public int insertLeagueEntry(LeagueEntry leagueEntry) {
         return sqlSession.insert("match-mapper.insertLeagueEntry", leagueEntry);
+    }
+
+    public List<MatchKDA> selectMyStat(String summonerName) {
+
+        return sqlSession.selectList("match-mapper.selectMyStat", summonerName);
     }
 
 

@@ -44,6 +44,8 @@
 				   alias="MatchPosition"/>
 		<typeAlias type="com.kh.fifteenGG.search.model.vo.view.TeamView"
 				   alias="TeamView"/>
+		<typeAlias type="com.kh.fifteenGG.search.model.vo.view.MatchKDA"
+				   alias="MatchKDA"/>
 
 		<!-- 팁 게시판 -->
 		<typeAlias type="com.kh.fifteenGG.champion.model.vo.TipBoard"

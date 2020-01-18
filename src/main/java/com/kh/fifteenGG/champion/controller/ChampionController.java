@@ -69,13 +69,8 @@ public class ChampionController {
 
         int totalContents = tipBoardService.selectTotalMainContents(name);
 
-        session.setAttribute("list", list);
-        /*
-         * model.addAttribute("list",list).addAttribute("championName", championName);
-         */
+        session.setAttribute("list", list); // 팁 게시글 리스트
 
-
-        System.out.println("Detail list 확인:"+ list);
         return "champion/championDetail";
 
     }

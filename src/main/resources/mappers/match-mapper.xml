@@ -6,15 +6,15 @@
 <mapper namespace="match-mapper">
     <!-- namespace : 현재 매퍼파일의 별칭 -->
 
-	<!--	LeagueEntry 저장용 -->
-	<insert id="insertLeagueEntry" parameterType="LeagueEntry">
+    <!--	LeagueEntry 저장용 -->
+    <insert id="insertLeagueEntry" parameterType="LeagueEntry">
 		insert into LEAGUEENTRY values (
 		#{freshBlood}, #{hotStreak}, #{inactive}, #{leagueId}, #{leaguePoints}
 		, #{losses}, #{wins}, #{queueType}, #{rank}, #{summonerId}
 		, #{summonerName}, #{tier}, #{veteran})
 	</insert>
-	<!--	LeagueEntry 삭제용 -->
-	<insert id="deleteLeagueEntry" parameterType="string">
+    <!--	LeagueEntry 삭제용 -->
+    <insert id="deleteLeagueEntry" parameterType="string">
 		delete from LEAGUEENTRY where summonerName = #{summonerName}
 	</insert>
 
@@ -145,6 +145,29 @@
 		join SUMMONERSPELL S2 on S.SPELL2ID = S2.SPELLNO
 		where GAMEID = #{gameid}
 		order by TEAMID, GAMEID desc, POSITION
+	</select>
+
+    <!-- 최근 10경기 스탯  -->
+    <select id="selectMyStat" parameterType="string" resultType="MatchKDA">
+	<![CDATA[
+
+
+
+			SELECT GAMEID,SUMMONERNAME, TRUNC((KILLS+ASSISTS)/DECODE(DEATHS,'0',0.1,DEATHS),2) AS KDA,
+			(TOTALMINIONSKILLED+NEUTRAKMINIONSKILLED) AS CS ,GAMEDURATION, WIN
+		FROM (
+			 SELECT ROWNUM RN, A.*
+			 FROM (
+				  select DISTINCT GAMEID,SUMMONERNAME,KILLS,ASSISTS,DEATHS,TOTALMINIONSKILLED,NEUTRAKMINIONSKILLED ,GAMEDURATION , WIN
+				  from MATCH
+					   join PARTICIPANTSTATS using (GAMEID)
+					   join PLAYER using (PLATFORMID, GAMEID, PARTICIPANTID)
+				  where regexp_like(replace(SUMMONERNAME, ' ', ''), replace(#{summonerName}, ' ', ''),'i')
+				  order by GAMEID desc
+			  ) A
+		 )
+		 WHERE RN < 11
+        ]]>
 	</select>
 
 </mapper>
