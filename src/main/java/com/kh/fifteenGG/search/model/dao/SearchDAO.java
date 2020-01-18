@@ -73,6 +73,13 @@ public class SearchDAO {
     public List<TeamView> selectTeam(String gameid) {
         return sqlSession.selectList("match-mapper.selectTeam", gameid);
     }
+    
+
+	public List<MatchKDA> selectMyStat(String summonerName) {
+
+		return sqlSession.selectList("match-mapper.selectMyStat", summonerName);
+	}
+
 
     public int deleteLeagueEntry(String summonerName) {
         return sqlSession.delete("match-mapper.deleteLeagueEntry", summonerName);
