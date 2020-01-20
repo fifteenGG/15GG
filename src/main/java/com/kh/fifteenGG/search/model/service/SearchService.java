@@ -94,6 +94,7 @@ public class SearchService {
                     ParticipantStats participantStats = participant.getStats();
                     participantStats.setGameId(match.getGameId());
 
+                    // 포지션 처리
                     if(participantTimeline.getLane().equals("TOP")){
                         System.out.println(participantTimeline.getLane());
                         participantStats.setPosition(1);
@@ -108,6 +109,23 @@ public class SearchService {
                     }else {
                         participantStats.setPosition(6);
                     }
+
+                    // 아이탬 정렬
+                    ArrayList<Integer> itemList = new ArrayList();
+                    itemList.add(participantStats.getItem0());
+                    itemList.add(participantStats.getItem1());
+                    itemList.add(participantStats.getItem2());
+                    itemList.add(participantStats.getItem3());
+                    itemList.add(participantStats.getItem4());
+                    itemList.add(participantStats.getItem5());
+                    Collections.sort(itemList);
+                    Collections.reverse(itemList);
+                    participantStats.setItem0(itemList.get(0));
+                    participantStats.setItem1(itemList.get(1));
+                    participantStats.setItem2(itemList.get(2));
+                    participantStats.setItem3(itemList.get(3));
+                    participantStats.setItem4(itemList.get(4));
+                    participantStats.setItem5(itemList.get(5));
 
                     result = searchDAO.insertParticipantStats(participantStats);
 
@@ -237,6 +255,16 @@ public class SearchService {
         myStat.put("totalWin1", totalWin1);
         myStat.put("totalWin0", totalWin0);
         myStat.put("totalKDA", totalKDA);
+
+        // 내 게임 비율 , 모스트 챔프
+        List<Object> list1 = searchDAO.selectMostChamp(summonerName);
+        List<Object> list2 = searchDAO.selectMostQueueId(summonerName);
+        List<Object> list3 = searchDAO.selectMostPosition(summonerName);
+
+        myStat.put("MostChamp", list1);
+        myStat.put("MostQueue", list2);
+        myStat.put("MostPosition", list3);
+
 
         return myStat;
     }

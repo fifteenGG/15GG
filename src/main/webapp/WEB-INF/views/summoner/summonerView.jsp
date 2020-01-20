@@ -26,8 +26,6 @@
 <%-- nav 와 div 사이의 영역 --%>
 <div class="row">
     <!-- 나중에 광고 혹은 분석 관련 탭이 들어갈 위치 -->
-    <button type="button" onclick="test1();">
-    </button>
 </div>
 
 <!-- 전적 관련 영역 -->
@@ -119,7 +117,7 @@
                 <div class="px-2 text-left">
 
                     <span class="gg-sub-description">
-                        자유랭크
+                       Unranked
                     </span>
                     <span class="gg-summoner-navigation-tier">
                         N/A
@@ -332,8 +330,18 @@
 
         </div>
 
-        <!-- 모스트 영역 -->
-        <div class="row bg-white">
+    <!-- 모스트 영역 -->
+
+    <c:if test="${myStat.MostQueue.size() > 0}">
+
+    <c:set value="${myStat.MostQueue.get(0).QUEUECOUNT*100/(myStat.MostQueue.get(0).QUEUECOUNT+myStat.MostQueue.get(1).QUEUECOUNT+myStat.MostQueue.get(2).QUEUECOUNT)}" var="queue1"/>
+    <c:set value="${myStat.MostQueue.get(1).QUEUECOUNT*100/(myStat.MostQueue.get(0).QUEUECOUNT+myStat.MostQueue.get(1).QUEUECOUNT+myStat.MostQueue.get(2).QUEUECOUNT)}" var="queue2"/>
+    <c:set value="${myStat.MostQueue.get(2).QUEUECOUNT*100/(myStat.MostQueue.get(0).QUEUECOUNT+myStat.MostQueue.get(1).QUEUECOUNT+myStat.MostQueue.get(2).QUEUECOUNT)}" var="queue3"/>
+    <c:set value="${myStat.MostPosition.get(0).POSITIONCOUNT*100/(myStat.MostPosition.get(0).POSITIONCOUNT+myStat.MostPosition.get(1).POSITIONCOUNT+myStat.MostPosition.get(2).POSITIONCOUNT)}" var="postion1"/>
+    <c:set value="${myStat.MostPosition.get(1).POSITIONCOUNT*100/(myStat.MostPosition.get(0).POSITIONCOUNT+myStat.MostPosition.get(1).POSITIONCOUNT+myStat.MostPosition.get(2).POSITIONCOUNT)}" var="postion2"/>
+    <c:set value="${myStat.MostPosition.get(2).POSITIONCOUNT*100/(myStat.MostPosition.get(0).POSITIONCOUNT+myStat.MostPosition.get(1).POSITIONCOUNT+myStat.MostPosition.get(2).POSITIONCOUNT)}" var="postion3"/>
+    <!-- 모스트 큐 -->
+    <div class="row bg-white">
 
             <div class="col-lg-2 d-flex align-items-center justify-content-center">
                 <div class="gg-division flex-grow">
@@ -341,12 +349,14 @@
                     <div>
                         <div class="gg-action-area" data-href="/kr/profile/View/stats?c=Normal"
                              data-event="MostMatchCategoryTopStats">
-                            <div class="gg-important-text">일반</div>
-                            <span class="gg-sub-description">69%</span>
+                            <div class="gg-important-text">${myStat.MostQueue.get(0).QUEUENAME}</div>
+                            <span class="gg-sub-description">
+                                 <fmt:formatNumber value="${queue1}"/>%
+                            </span>
                             <div class="progress progress-line-primary mb-1">
                                 <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="100"
-                                     aria-valuemin="0" aria-valuemax="100" style="width: 69%;">
-                                    <span class="sr-only">69%</span>
+                                     aria-valuemin="0" aria-valuemax="100" style="width: ${queue1}%;">
+                                    <span class="sr-only"><fmt:formatNumber value="${queue1}"/>%</span>
                                 </div>
                             </div>
                         </div>
@@ -354,26 +364,26 @@
 
                             <div class="gg-action-area col-6 pr-1" data-href="/kr/profile/View/stats?c=FreeRank"
                                  data-event="MostMatchCategoryStats">
-                                <span class="gg-important-text-sm">자유랭크</span>
-                                <span class="gg-sub-description">28%</span>
+                                <span class="gg-important-text-sm">${myStat.MostQueue.get(1).QUEUENAME}</span>
+                                <span class="gg-sub-description"> <fmt:formatNumber value="${queue2}"/>%</span>
                                 <div class="progress progress-line-primary mb-2">
                                     <div class="progress-bar progress-bar-primary" role="progressbar"
                                          aria-valuenow="100"
-                                         aria-valuemin="0" aria-valuemax="100" style="width: 28%;">
-                                        <span class="sr-only">28%</span>
+                                         aria-valuemin="0" aria-valuemax="100" style="width: ${queue2+10}%;">
+                                        <span class="sr-only"> <fmt:formatNumber value="${queue2}"/>%</span>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="gg-action-area col-6 pl-1" data-href="/kr/profile/View/stats?c=SoloRank"
                                  data-event="MostMatchCategoryStats">
-                                <span class="gg-important-text-sm">솔로랭크</span>
-                                <span class="gg-sub-description">2%</span>
+                                <span class="gg-important-text-sm">${myStat.MostQueue.get(2).QUEUENAME}</span>
+                                <span class="gg-sub-description"> <fmt:formatNumber value="${queue3}"/>%</span>
                                 <div class="progress progress-line-primary mb-2">
                                     <div class="progress-bar progress-bar-primary" role="progressbar"
                                          aria-valuenow="100"
-                                         aria-valuemin="0" aria-valuemax="100" style="width: 2%;">
-                                        <span class="sr-only">2%</span>
+                                         aria-valuemin="0" aria-valuemax="100" style="width: ${queue3+10}%;">
+                                        <span class="sr-only"> <fmt:formatNumber value="${queue3}"/>%</span>
                                     </div>
                                 </div>
                             </div>
@@ -389,12 +399,12 @@
 
                     <div class="gg-action-area" data-href="/kr/profile/View/stats?l=Adc&amp;c=FreeRank"
                          data-event="MostLaneTopStats">
-                        <div class="gg-important-text">원딜</div>
-                        <span class="gg-sub-description">42%</span>
+                        <div class="gg-important-text">${myStat.MostPosition.get(0).POSITIONNAME}</div>
+                        <span class="gg-sub-description"><fmt:formatNumber value="${postion1}"/>%</span>
                         <div class="progress progress-line-primary mb-1">
                             <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="100"
-                                 aria-valuemin="0" aria-valuemax="100" style="width: 42%;">
-                                <span class="sr-only">42%</span>
+                                 aria-valuemin="0" aria-valuemax="100" style="width: ${postion1}%;">
+                                <span class="sr-only"><fmt:formatNumber value="${postion1}"/>%</span>
                             </div>
                         </div>
                     </div>
@@ -402,24 +412,24 @@
 
                         <div class="gg-action-area col-6 pr-1" data-href="/kr/profile/View/stats?l=Mid&amp;c=SoloRank"
                              data-event="MostLaneStats">
-                            <span class="gg-important-text-sm">미드</span>
-                            <span class="gg-sub-description">35%</span>
+                            <span class="gg-important-text-sm">${myStat.MostPosition.get(1).POSITIONNAME}</span>
+                            <span class="gg-sub-description"><fmt:formatNumber value="${postion2}"/>%</span>
                             <div class="progress progress-line-primary mb-2">
                                 <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="100"
-                                     aria-valuemin="0" aria-valuemax="100" style="width: 35%;">
-                                    <span class="sr-only">35%</span>
+                                     aria-valuemin="0" aria-valuemax="100" style="width: ${postion2+10}%;">
+                                    <span class="sr-only"><fmt:formatNumber value="${postion2}"/>%</span>
                                 </div>
                             </div>
                         </div>
 
                         <div class="gg-action-area col-6 pl-1" data-href="/kr/profile/View/stats?l=Sup&amp;c=FreeRank"
                              data-event="MostLaneStats">
-                            <span class="gg-important-text-sm">서폿</span>
-                            <span class="gg-sub-description">15%</span>
+                            <span class="gg-important-text-sm">${myStat.MostPosition.get(2).POSITIONNAME}</span>
+                            <span class="gg-sub-description"><fmt:formatNumber value="${postion3}"/>%</span>
                             <div class="progress progress-line-primary mb-2">
                                 <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="100"
-                                     aria-valuemin="0" aria-valuemax="100" style="width: 15%;">
-                                    <span class="sr-only">15%</span>
+                                     aria-valuemin="0" aria-valuemax="100" style="width: ${postion3+10}%;">
+                                    <span class="sr-only"><fmt:formatNumber value="${postion3}"/>%</span>
                                 </div>
                             </div>
                         </div>
@@ -428,103 +438,44 @@
                 </div>
             </div>
 
-
+            <!-- 모스트 챔프 -->
             <div class="col-lg-4 d-flex align-items-center justify-content-center">
                 <div class="gg-division flex-grow">
 
                     <table class="table">
 
+                        <c:forEach var="MostChamp" items="${myStat.MostChamp}">
                         <tbody>
                         <tr class="gg-action-area" data-event="SummonerNavigationStats"
                             data-href="/kr/profile/View/stats?cId=523&amp;c=FreeRank">
                             <td class="d-flex align-items-center justify-content-center">
                                 <img class="img-circled"
-                                     src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/champion/Aphelios.png"
+                                     src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/champion/${MostChamp.CHAMPFULLIMG}"
                                      width="30px" height="30px">
                             </td>
 
                             <td class="text-left">
 
-                                <span class="badge badge-pill badge-default">자</span>
-
-                                <span class="badge badge-pill badge-default">일</span>
+                                <span class="badge badge-pill badge-default">${MostChamp.CHAMPNAME}</span>
 
                             </td>
 
                             <td class="text-center">
-                                6
+                                ${MostChamp.TOTALCOUNT}
                                 <span class="gg-sub-description">경기</span>
                             </td>
                             <td class="text-center">
-                                <span class="gg-text-negative">16%</span>
-                                <span class="gg-sub-description">1W 5L</span>
+                                <span class="gg-text-negative">
+                                    <fmt:formatNumber value="${MostChamp.RATE}" type="percent"/>
+                                </span>
+                                <span class="gg-sub-description">${MostChamp.WIN}W ${MostChamp.LOSE}L</span>
                             </td>
                             <td class="text-center">
-                                <span class=" gg-text-negative">0.74</span>
-                                <span class="gg-sub-description">인분</span>
+                                <span class=" gg-text-negative">${MostChamp.KDA}</span>
+                                <span class="gg-sub-description">KDA</span>
                             </td>
                         </tr>
-
-                        <tr class="gg-action-area" data-event="SummonerNavigationStats"
-                            data-href="/kr/profile/View/stats?cId=145&amp;c=FreeRank">
-                            <td class="d-flex align-items-center justify-content-center">
-                                <img class="img-circled"
-                                     src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/champion/Kaisa.png"
-                                     width="30px" height="30px">
-                            </td>
-
-                            <td class="text-left">
-
-                                <span class="badge badge-pill badge-default">자</span>
-
-                                <span class="badge badge-pill badge-default">일</span>
-
-                            </td>
-
-                            <td class="text-center">
-                                5
-                                <span class="gg-sub-description">경기</span>
-                            </td>
-                            <td class="text-center">
-                                <span class="gg-text-positive">100%</span>
-                                <span class="gg-sub-description">5W 0L</span>
-                            </td>
-                            <td class="text-center">
-                                <span class=" gg-text-positive">1.23</span>
-                                <span class="gg-sub-description">인분</span>
-                            </td>
-                        </tr>
-
-                        <tr class="gg-action-area" data-event="SummonerNavigationStats"
-                            data-href="/kr/profile/View/stats?cId=25&amp;c=FreeRank">
-                            <td class="d-flex align-items-center justify-content-center">
-                                <img class="img-circled"
-                                     src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/champion/Morgana.png"
-                                     width="30px" height="30px">
-                            </td>
-
-                            <td class="text-left">
-
-                                <span class="badge badge-pill badge-default">자</span>
-
-                                <span class="badge badge-pill badge-default">일</span>
-
-                            </td>
-
-                            <td class="text-center">
-                                3
-                                <span class="gg-sub-description">경기</span>
-                            </td>
-                            <td class="text-center">
-                                <span class="gg-text-positive">66%</span>
-                                <span class="gg-sub-description">2W 1L</span>
-                            </td>
-                            <td class="text-center">
-                                <span class=" gg-text-positive">1.33</span>
-                                <span class="gg-sub-description">인분</span>
-                            </td>
-                        </tr>
-
+                        </c:forEach>
                         </tbody>
                     </table>
                 </div>
@@ -536,7 +487,7 @@
                     여기에 승률 그래프 넣을 예정
                 </span>
             </div>
-
+            </c:if>
             <div class="gg-thin-line mx-3"></div>
             <div class="col-12 d-flex align-items-center justify-content-center justify-content-lg-start gg-text-normal py-2 bg-white">
                 <span><i class="material-icons gg-text-normal text-info">Notice</i></span>
@@ -697,62 +648,62 @@
                                         </div>
                                     </div>
 
-                                    <div class="gg-box gg-division">
+<%--                                    <div class="gg-box gg-division">--%>
 
-                                <span class="gg-box-title">
-                                    최근 듀오
-                                </span>
+<%--                                <span class="gg-box-title">--%>
+<%--                                    최근 듀오--%>
+<%--                                </span>--%>
 
-                                        <table class="table gg-friends-table">
+<%--                                        <table class="table gg-friends-table">--%>
 
-                                            <tbody>
-                                            <tr class="gg-action-area" data-href="/kr/profile/KooNH"
-                                                data-event="DuoHistory">
-                                                <td class="text-center"><span
-                                                        class="gg-summoner-name gg-text-normal">KooNH</span></td>
-                                                <td class="text-center">
-                                                    <span>9</span>
-                                                    <span class="gg-sub-description">Matches</span>
-                                                </td>
-                                                <td class="text-center">
-                                                    <span class="gg-text-positive">66%</span>
-                                                    <span class="gg-sub-description">6W 3L</span>
-                                                </td>
-                                            </tr>
+<%--                                            <tbody>--%>
+<%--                                            <tr class="gg-action-area" data-href="/kr/profile/KooNH"--%>
+<%--                                                data-event="DuoHistory">--%>
+<%--                                                <td class="text-center"><span--%>
+<%--                                                        class="gg-summoner-name gg-text-normal">KooNH</span></td>--%>
+<%--                                                <td class="text-center">--%>
+<%--                                                    <span>9</span>--%>
+<%--                                                    <span class="gg-sub-description">Matches</span>--%>
+<%--                                                </td>--%>
+<%--                                                <td class="text-center">--%>
+<%--                                                    <span class="gg-text-positive">66%</span>--%>
+<%--                                                    <span class="gg-sub-description">6W 3L</span>--%>
+<%--                                                </td>--%>
+<%--                                            </tr>--%>
 
-                                            <tr class="gg-action-area" data-href="/kr/profile/BONS"
-                                                data-event="DuoHistory">
-                                                <td class="text-center"><span
-                                                        class="gg-summoner-name gg-text-normal">BONS</span></td>
-                                                <td class="text-center">
-                                                    <span>8</span>
-                                                    <span class="gg-sub-description">Matches</span>
-                                                </td>
-                                                <td class="text-center">
-                                                    <span class="gg-text-positive">62%</span>
-                                                    <span class="gg-sub-description">5W 3L</span>
-                                                </td>
-                                            </tr>
+<%--                                            <tr class="gg-action-area" data-href="/kr/profile/BONS"--%>
+<%--                                                data-event="DuoHistory">--%>
+<%--                                                <td class="text-center"><span--%>
+<%--                                                        class="gg-summoner-name gg-text-normal">BONS</span></td>--%>
+<%--                                                <td class="text-center">--%>
+<%--                                                    <span>8</span>--%>
+<%--                                                    <span class="gg-sub-description">Matches</span>--%>
+<%--                                                </td>--%>
+<%--                                                <td class="text-center">--%>
+<%--                                                    <span class="gg-text-positive">62%</span>--%>
+<%--                                                    <span class="gg-sub-description">5W 3L</span>--%>
+<%--                                                </td>--%>
+<%--                                            </tr>--%>
 
-                                            <tr class="gg-action-area"
-                                                data-href="/kr/profile/%EB%B0%A9%EB%8C%95%EC%9D%B4"
-                                                data-event="DuoHistory">
-                                                <td class="text-center"><span
-                                                        class="gg-summoner-name gg-text-normal">방댕이</span></td>
-                                                <td class="text-center">
-                                                    <span>8</span>
-                                                    <span class="gg-sub-description">Matches</span>
-                                                </td>
-                                                <td class="text-center">
-                                                    <span class="gg-text-positive">62%</span>
-                                                    <span class="gg-sub-description">5W 3L</span>
-                                                </td>
-                                            </tr>
+<%--                                            <tr class="gg-action-area"--%>
+<%--                                                data-href="/kr/profile/%EB%B0%A9%EB%8C%95%EC%9D%B4"--%>
+<%--                                                data-event="DuoHistory">--%>
+<%--                                                <td class="text-center"><span--%>
+<%--                                                        class="gg-summoner-name gg-text-normal">방댕이</span></td>--%>
+<%--                                                <td class="text-center">--%>
+<%--                                                    <span>8</span>--%>
+<%--                                                    <span class="gg-sub-description">Matches</span>--%>
+<%--                                                </td>--%>
+<%--                                                <td class="text-center">--%>
+<%--                                                    <span class="gg-text-positive">62%</span>--%>
+<%--                                                    <span class="gg-sub-description">5W 3L</span>--%>
+<%--                                                </td>--%>
+<%--                                            </tr>--%>
 
-                                            </tbody>
-                                        </table>
+<%--                                            </tbody>--%>
+<%--                                        </table>--%>
 
-                                    </div>
+<%--                                    </div>--%>
 
 
                                     <div class="row no-gutters ad">

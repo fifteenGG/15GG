@@ -87,6 +87,24 @@ public class SearchDAO {
         return sqlSession.selectList("match-mapper.selectMyStat", summonerName);
     }
 
+    public List<Object> selectMostChamp(String summonerName) {
+        return sqlSession.selectList("match-mapper.selectMostChamp", summonerName);
+    }
+
+    public List<Object> selectMostQueueId(String summonerName) {
+
+        List<Object> list = sqlSession.selectList("match-mapper.selectMostQueueId", summonerName);
+
+        System.out.println(list.toString());
+
+        return list;
+    }
+
+    public List<Object> selectMostPosition(String summonerName) {
+        List<Object> list = sqlSession.selectList("match-mapper.selectMostPosition", summonerName);
+        System.out.println(list.toString());
+        return list;
+    }
 
 
 //    public int inesertChampList(StaticChampion staticChampion) {

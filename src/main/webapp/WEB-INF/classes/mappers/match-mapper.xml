@@ -151,21 +151,86 @@
     <select id="selectMyStat" parameterType="string" resultType="MatchKDA">
 	<![CDATA[
 
-			SELECT GAMEID,SUMMONERNAME, TRUNC((KILLS+ASSISTS)/DECODE(DEATHS,'0',0.1,DEATHS),2) AS KDA,
-			(TOTALMINIONSKILLED+NEUTRAKMINIONSKILLED) AS CS ,GAMEDURATION, WIN
-		FROM (
-			 SELECT ROWNUM RN, A.*
-			 FROM (
-				  select DISTINCT GAMEID,SUMMONERNAME,KILLS,ASSISTS,DEATHS,TOTALMINIONSKILLED,NEUTRAKMINIONSKILLED ,GAMEDURATION , WIN
-				  from MATCH
-					   join PARTICIPANTSTATS using (GAMEID)
-					   join PLAYER using (PLATFORMID, GAMEID, PARTICIPANTID)
-				  where upper(replace(SUMMONERNAME, ' ', '')) = upper(replace(#{summonerName}, ' ', ''))
-				  order by GAMEID desc
-			  ) A
-		 )
-		 WHERE RN < 11
+
+
+
+
+                                                SELECT GAMEID,SUMMONERNAME, TRUNC((KILLS+ASSISTS)/DECODE(DEATHS,'0',0.1,DEATHS),2) AS KDA,
+                                                (TOTALMINIONSKILLED+NEUTRAKMINIONSKILLED) AS CS ,GAMEDURATION, WIN
+                                            FROM (
+                                                 SELECT ROWNUM RN, A.*
+                                                 FROM (
+                                                      select DISTINCT GAMEID,SUMMONERNAME,KILLS,ASSISTS,DEATHS,TOTALMINIONSKILLED,NEUTRAKMINIONSKILLED ,GAMEDURATION , WIN
+                                                      from MATCH
+                                                           join PARTICIPANTSTATS using (GAMEID)
+                                                           join PLAYER using (PLATFORMID, GAMEID, PARTICIPANTID)
+                                                      where upper(replace(SUMMONERNAME, ' ', '')) = upper(replace(#{summonerName}, ' ', ''))
+                                                      order by GAMEID desc
+                                                  ) A
+                                             )
+                                             WHERE RN < 11
+
+
         ]]>
 	</select>
 
+    <!-- 모스트 챔프 -->
+    <select id="selectMostChamp" parameterType="String" resultType="hashmap">
+	<![CDATA[
+                    select * from
+            (
+                select ROWNUM rn, A.*
+                from
+                    (select CHAMPNAME, CHAMPFULLIMG, count(*) as totalCount, sum(WIN) as win,
+                            sum(decode(win, '0', 1, '1', 0)) as lose,
+                            trunc((avg(KILLS + ASSISTS) / avg(decode(DEATHS,0,null,DEATHS))), 1) as kda,
+                            trunc((sum(win)/count(*)),2) as rate
+                     from PARTICIPANTSTATS
+                              join PATICIPANT using (GAMEID, PARTICIPANTID)
+                              join PLAYER using (GAMEID, PARTICIPANTID)
+                              join CHAMPION using (CHAMPIONID)
+                     where upper(replace(SUMMONERNAME, ' ', '')) = upper(replace(#{summonerName}, ' ', ''))
+                    and DEATHS != 0
+                     group by CHAMPNAME, CHAMPFULLIMG order by totalCount desc) A
+            )
+        where rn < 4
+
+
+        ]]>
+	</select>
+
+    <select id="selectMostQueueId" parameterType="String" resultType="hashmap">
+    	select QUEUEID, count(*) as queuecount, QUEUENAME
+        from MATCH
+                 join PLAYER using (GAMEID)
+                 join PARTICIPANTSTATS using (GAMEID, PARTICIPANTID)
+                 join PATICIPANT using (GAMEID, PARTICIPANTID)
+                join QUEUETYPE using (QUEUEID)
+        where upper(replace(SUMMONERNAME, ' ', '')) = upper(replace(#{summonerName}, ' ', ''))
+        group by QUEUEID, QUEUENAME
+        order by queuecount desc
+	</select>
+
+    <select id="selectMostPosition" parameterType="string" resultType="hashmap">
+		<![CDATA[
+
+                select POSITION, positioncount, positionName
+                from (
+                select ROWNUM rn, A.*
+                from (
+                select POSITION, count(*) as positioncount, positionName
+                from MATCH
+                join PLAYER using (GAMEID)
+                join PARTICIPANTSTATS using (GAMEID, PARTICIPANTID)
+                join PATICIPANT using (GAMEID, PARTICIPANTID)
+                join positionType using (POSITION)
+                where upper(replace(SUMMONERNAME, ' ', '')) = upper(replace(#{summonerName}, ' ', ''))
+                group by POSITION, positionName
+                order by positioncount desc
+                ) A
+                )
+                where rn < 4
+
+        ]]>
+	</select>
 </mapper>
