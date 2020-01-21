@@ -184,7 +184,6 @@ public class SearchService {
 
                 list.add(team);
 
-
             }
         }
 

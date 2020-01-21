@@ -32,7 +32,7 @@
 <div class="container-fluid">
 
     <!-- 소환사명 ~ 티어 -->
-    <div class="row bg-white align-items-center">
+    <div class="row bg-white align-items-center" style="margin-top: 10px">
         <!-- 소환사 아이콘 & 소환사 명 -->
         <div class="col-lg-4 d-flex justify-content-start align-items-center py-2 px-3">
             <div>
@@ -332,16 +332,14 @@
 
     <!-- 모스트 영역 -->
 
-    <c:if test="${myStat.MostQueue.size() > 0}">
 
-    <c:set value="${myStat.MostQueue.get(0).QUEUECOUNT*100/(myStat.MostQueue.get(0).QUEUECOUNT+myStat.MostQueue.get(1).QUEUECOUNT+myStat.MostQueue.get(2).QUEUECOUNT)}" var="queue1"/>
-    <c:set value="${myStat.MostQueue.get(1).QUEUECOUNT*100/(myStat.MostQueue.get(0).QUEUECOUNT+myStat.MostQueue.get(1).QUEUECOUNT+myStat.MostQueue.get(2).QUEUECOUNT)}" var="queue2"/>
-    <c:set value="${myStat.MostQueue.get(2).QUEUECOUNT*100/(myStat.MostQueue.get(0).QUEUECOUNT+myStat.MostQueue.get(1).QUEUECOUNT+myStat.MostQueue.get(2).QUEUECOUNT)}" var="queue3"/>
-    <c:set value="${myStat.MostPosition.get(0).POSITIONCOUNT*100/(myStat.MostPosition.get(0).POSITIONCOUNT+myStat.MostPosition.get(1).POSITIONCOUNT+myStat.MostPosition.get(2).POSITIONCOUNT)}" var="postion1"/>
-    <c:set value="${myStat.MostPosition.get(1).POSITIONCOUNT*100/(myStat.MostPosition.get(0).POSITIONCOUNT+myStat.MostPosition.get(1).POSITIONCOUNT+myStat.MostPosition.get(2).POSITIONCOUNT)}" var="postion2"/>
-    <c:set value="${myStat.MostPosition.get(2).POSITIONCOUNT*100/(myStat.MostPosition.get(0).POSITIONCOUNT+myStat.MostPosition.get(1).POSITIONCOUNT+myStat.MostPosition.get(2).POSITIONCOUNT)}" var="postion3"/>
     <!-- 모스트 큐 -->
     <div class="row bg-white">
+
+            <c:if test="${myStat.MostQueue.size() > 2}">
+            <c:set value="${myStat.MostQueue.get(0).QUEUECOUNT*100/(myStat.MostQueue.get(0).QUEUECOUNT+myStat.MostQueue.get(1).QUEUECOUNT+myStat.MostQueue.get(2).QUEUECOUNT)}" var="queue1"/>
+            <c:set value="${myStat.MostQueue.get(1).QUEUECOUNT*100/(myStat.MostQueue.get(0).QUEUECOUNT+myStat.MostQueue.get(1).QUEUECOUNT+myStat.MostQueue.get(2).QUEUECOUNT)}" var="queue2"/>
+            <c:set value="${myStat.MostQueue.get(2).QUEUECOUNT*100/(myStat.MostQueue.get(0).QUEUECOUNT+myStat.MostQueue.get(1).QUEUECOUNT+myStat.MostQueue.get(2).QUEUECOUNT)}" var="queue3"/>
 
             <div class="col-lg-2 d-flex align-items-center justify-content-center">
                 <div class="gg-division flex-grow">
@@ -392,7 +390,12 @@
                     </div>
                 </div>
             </div>
+            </c:if>
 
+            <c:if test="${myStat.MostPosition.size() > 2}">
+            <c:set value="${myStat.MostPosition.get(0).POSITIONCOUNT*100/(myStat.MostPosition.get(0).POSITIONCOUNT+myStat.MostPosition.get(1).POSITIONCOUNT+myStat.MostPosition.get(2).POSITIONCOUNT)}" var="postion1"/>
+            <c:set value="${myStat.MostPosition.get(1).POSITIONCOUNT*100/(myStat.MostPosition.get(0).POSITIONCOUNT+myStat.MostPosition.get(1).POSITIONCOUNT+myStat.MostPosition.get(2).POSITIONCOUNT)}" var="postion2"/>
+            <c:set value="${myStat.MostPosition.get(2).POSITIONCOUNT*100/(myStat.MostPosition.get(0).POSITIONCOUNT+myStat.MostPosition.get(1).POSITIONCOUNT+myStat.MostPosition.get(2).POSITIONCOUNT)}" var="postion3"/>
             <div class="col-lg-2 d-flex align-items-center justify-content-center">
                 <div class="gg-division flex-grow">
 
@@ -437,6 +440,7 @@
                     </div>
                 </div>
             </div>
+            </c:if>
 
             <!-- 모스트 챔프 -->
             <div class="col-lg-4 d-flex align-items-center justify-content-center">
@@ -487,7 +491,7 @@
                     여기에 승률 그래프 넣을 예정
                 </span>
             </div>
-            </c:if>
+
             <div class="gg-thin-line mx-3"></div>
             <div class="col-12 d-flex align-items-center justify-content-center justify-content-lg-start gg-text-normal py-2 bg-white">
                 <span><i class="material-icons gg-text-normal text-info">Notice</i></span>
@@ -827,7 +831,7 @@
                                                     <div class="d-flex flex-column my-auto justify-content-center py-2">
                                                         <span class="gg-matchlist-meta-text">시간</span>
                                                         <div class="d-block"><img class="py-1 gg-img-25x25"
-                                                                                  src="${pageContext.request.contextPath}/resources/Images/ranked-positions/Position_Iron-Bot.png">
+                                                                                  src="${pageContext.request.contextPath}/resources/Images/position/${matchView.get(j).position}.svg">
                                                         </div>
                                                     </div>
                                                     <div class="d-flex justify-content-center py-lg-2 py-1">
@@ -864,19 +868,20 @@
                                                         </div>
                                                         <div class="col-lg-2 d-lg-flex flex-column my-auto d-none">
 
-<%--                                                        <span><img--%>
-<%--                                                                src="${pageContext.request.contextPath}/resources/Images/ranked-emblems/GRANDMASTER.png"--%>
-<%--                                                                class="gg-img-25x25 pr-1"></span>--%>
+                                                        <span><img
+                                                                src="${pageContext.request.contextPath}/resources/Images/ranked-emblems/GRANDMASTER.png"
+                                                                class="gg-img-25x25 pr-1"></span>
 
-<%--                                                            <span>6.8</span>--%>
-<%--                                                            <span class="gg-sub-description">분당 CS</span>--%>
+                                                            <span>
+                                                                <fmt:formatNumber value="${matchView.get(j).totalMinionKilled}" pattern="0.0" type="number"/>
+                                                            </span>
+                                                            <span class="gg-sub-description">분당 CS</span>
                                                         </div>
                                                         <div class="col-4 col-lg-3 d-flex py-0 my-auto justify-content-lg-start justify-content-center">
 
                                                             <div>
                                                                 <img class="d-block img-xs rounded"
                                                                      src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/item/${matchView.get(j).item0}.png">
-
 
                                                                 <img class="d-block img-xs rounded"
                                                                      src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/item/${matchView.get(j).item1}.png">
@@ -940,7 +945,7 @@
                                                             <div class="of-ellipsis text-left pl-1 gg-matchlist-item gg-border-${matchView.get(i).win}">
                                                                 <img class="img-xs img-circled gg-img-18x18"
                                                                      src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/champion/${matchView.get(i).champFullImg}" >
-                                                                <a class="text-secondary" href="/kr/profile/KooNH">
+                                                                <a class="text-secondary" href="${pageContext.request.contextPath}/search/SummonerSearch.do?summonerName=${matchView.get(i).summonerName}">
                                                                     <span class="gg-text-soso">${matchView.get(i).summonerName}</span>
                                                                 </a>
                                                             </div>
@@ -954,7 +959,7 @@
                                                                 <img class="img-xs img-circled gg-img-18x18"
                                                                      src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/champion/${matchView.get(i).champFullImg}">
                                                                 <a class="text-secondary"
-                                                                   href="/kr/profile/%EC%9E%90%EA%B4%B4%EA%B0%90%EB%93%A0%EB%8B%A4">
+                                                                   href="${pageContext.request.contextPath}/search/SummonerSearch.do?summonerName=${matchView.get(i).summonerName}">
                                                                     <span class="gg-text-positive">${matchView.get(i).summonerName}</span>
                                                                 </a>
                                                             </div>

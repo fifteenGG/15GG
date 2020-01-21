@@ -133,7 +133,7 @@
 
     <!--	매치 조회용	-->
     <select id="selectTeam" parameterType="string" resultType="TeamView">
-		select SUMMONERNAME, POSITION, CHAMPIONID, CHAMPname, ChampFullImg, S1.SPELLNAME as spell1Id, S2.SPELLNAME as spell2Id, TEAMID, ITEM0, ITEM1, ITEM2, ITEM3, ITEM4, ITEM5, ITEM6, KILLS, DEATHS, ASSISTS, TOTALMINIONSKILLED, WIN
+		select SUMMONERNAME, POSITION, CHAMPIONID, CHAMPname, ChampFullImg, S1.SPELLNAME as spell1Id, S2.SPELLNAME as spell2Id, TEAMID, ITEM0, ITEM1, ITEM2, ITEM3, ITEM4, ITEM5, ITEM6, KILLS, DEATHS, ASSISTS, trunc(((TOTALMINIONSKILLED + NEUTRAKMINIONSKILLED)/GAMEDURATION*60),1) as totalMinionKilled, WIN
 		from PATICIPANT S
 		join PARTICIPANTSTATS using (GAMEID, PARTICIPANTID)
 		join PARTICIPANTIDENTITY using (GAMEID, PARTICIPANTID)
@@ -150,25 +150,20 @@
     <!-- 최근 10경기 스탯  -->
     <select id="selectMyStat" parameterType="string" resultType="MatchKDA">
 	<![CDATA[
-
-
-
-
-
-                                                SELECT GAMEID,SUMMONERNAME, TRUNC((KILLS+ASSISTS)/DECODE(DEATHS,'0',0.1,DEATHS),2) AS KDA,
-                                                (TOTALMINIONSKILLED+NEUTRAKMINIONSKILLED) AS CS ,GAMEDURATION, WIN
-                                            FROM (
-                                                 SELECT ROWNUM RN, A.*
-                                                 FROM (
-                                                      select DISTINCT GAMEID,SUMMONERNAME,KILLS,ASSISTS,DEATHS,TOTALMINIONSKILLED,NEUTRAKMINIONSKILLED ,GAMEDURATION , WIN
-                                                      from MATCH
-                                                           join PARTICIPANTSTATS using (GAMEID)
-                                                           join PLAYER using (PLATFORMID, GAMEID, PARTICIPANTID)
-                                                      where upper(replace(SUMMONERNAME, ' ', '')) = upper(replace(#{summonerName}, ' ', ''))
-                                                      order by GAMEID desc
-                                                  ) A
-                                             )
-                                             WHERE RN < 11
+			SELECT GAMEID,SUMMONERNAME, TRUNC((KILLS+ASSISTS)/DECODE(DEATHS,'0',0.1,DEATHS),2) AS KDA,
+			(TOTALMINIONSKILLED+NEUTRAKMINIONSKILLED) AS CS ,GAMEDURATION, WIN
+		FROM (
+			 SELECT ROWNUM RN, A.*
+			 FROM (
+				  select DISTINCT GAMEID,SUMMONERNAME,KILLS,ASSISTS,DEATHS,TOTALMINIONSKILLED,NEUTRAKMINIONSKILLED ,GAMEDURATION , WIN
+				  from MATCH
+					   join PARTICIPANTSTATS using (GAMEID)
+					   join PLAYER using (PLATFORMID, GAMEID, PARTICIPANTID)
+				  where upper(replace(SUMMONERNAME, ' ', '')) = upper(replace(#{summonerName}, ' ', ''))
+				  order by GAMEID desc
+			  ) A
+		 )
+		 WHERE RN < 11
 
 
         ]]>
@@ -177,26 +172,25 @@
     <!-- 모스트 챔프 -->
     <select id="selectMostChamp" parameterType="String" resultType="hashmap">
 	<![CDATA[
-                    select * from
-            (
-                select ROWNUM rn, A.*
-                from
-                    (select CHAMPNAME, CHAMPFULLIMG, count(*) as totalCount, sum(WIN) as win,
-                            sum(decode(win, '0', 1, '1', 0)) as lose,
-                            trunc((avg(KILLS + ASSISTS) / avg(decode(DEATHS,0,null,DEATHS))), 1) as kda,
-                            trunc((sum(win)/count(*)),2) as rate
-                     from PARTICIPANTSTATS
-                              join PATICIPANT using (GAMEID, PARTICIPANTID)
-                              join PLAYER using (GAMEID, PARTICIPANTID)
-                              join CHAMPION using (CHAMPIONID)
-                     where upper(replace(SUMMONERNAME, ' ', '')) = upper(replace(#{summonerName}, ' ', ''))
-                    and DEATHS != 0
-                     group by CHAMPNAME, CHAMPFULLIMG order by totalCount desc) A
-            )
-        where rn < 4
+				select * from
+		(
+			select ROWNUM rn, A.*
+			from
+				(select CHAMPNAME, CHAMPFULLIMG, count(*) as totalCount, sum(WIN) as win,
+						sum(decode(win, '0', 1, '1', 0)) as lose,
+						trunc((avg(KILLS + ASSISTS) / avg(decode(DEATHS,0,null,DEATHS))), 1) as kda,
+						trunc((sum(win)/count(*)),2) as rate
+				 from PARTICIPANTSTATS
+						  join PATICIPANT using (GAMEID, PARTICIPANTID)
+						  join PLAYER using (GAMEID, PARTICIPANTID)
+						  join CHAMPION using (CHAMPIONID)
+				 where upper(replace(SUMMONERNAME, ' ', '')) = upper(replace(#{summonerName}, ' ', ''))
+				and DEATHS != 0
+				 group by CHAMPNAME, CHAMPFULLIMG order by totalCount desc) A
+		)
+	where rn < 4
 
-
-        ]]>
+	]]>
 	</select>
 
     <select id="selectMostQueueId" parameterType="String" resultType="hashmap">

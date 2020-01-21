@@ -4,13 +4,14 @@ public class TeamView {
 
     private String summonerName, position, champion, champName, ChampFullImg;
     private String spell1Id, spell2Id, teamId, item0, item1, item2, item3, item4, item5, item6;
-    private int kills, deaths, assists, totalMinionKilled;
+    private int kills, deaths, assists;
+    private float totalMinionKilled;
     private boolean win;
 
     public TeamView() {
     }
 
-    public TeamView(String summonerName, String position, String champion, String champName, String champFullImg, String spell1Id, String spell2Id, String teamId, String item0, String item1, String item2, String item3, String item4, String item5, String item6, int kills, int deaths, int assists, int totalMinionKilled, boolean win) {
+    public TeamView(String summonerName, String position, String champion, String champName, String champFullImg, String spell1Id, String spell2Id, String teamId, String item0, String item1, String item2, String item3, String item4, String item5, String item6, int kills, int deaths, int assists, float totalMinionKilled, boolean win) {
         this.summonerName = summonerName;
         this.position = position;
         this.champion = champion;
@@ -163,11 +164,11 @@ public class TeamView {
         this.assists = assists;
     }
 
-    public int getTotalMinionKilled() {
+    public float getTotalMinionKilled() {
         return totalMinionKilled;
     }
 
-    public void setTotalMinionKilled(int totalMinionKilled) {
+    public void setTotalMinionKilled(float totalMinionKilled) {
         this.totalMinionKilled = totalMinionKilled;
     }
 

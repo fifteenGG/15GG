@@ -346,6 +346,14 @@ body {
     padding-bottom: 2px !important;
 }
 
+.gg-bg-positive {
+    background-color: #343a40 !important;
+}
+
+.gg-bg-negative {
+    background-color: #DF3D53 !important;;
+}
+
 .gg-bg-true {
     background-color: #5582E9 !important;
 }
