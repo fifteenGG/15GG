@@ -11,7 +11,8 @@ create table MEMBER
 
 create table CHAMPION
 (
-    CHAMPIONID   VARCHAR2(100) not null,
+    CHAMPIONID   VARCHAR2(100) not null
+        primary key,
     CHAMPNAME    VARCHAR2(100),
     CHAMPFULLIMG VARCHAR2(100)
 )
@@ -347,62 +348,72 @@ create table PARTYBOARD
 )
 /
 
-
-create procedure MATCH_DUP_CHECK(V_ID in MATCH.GAMEID%TYPE, PR_RESULT OUT NUMBER)
-    is
-BEGIN
-    select count(*)
-    into PR_RESULT
-    from MATCH
-    where GAMEID = V_ID;
-end;
+create table HUMORBOARD
+(
+    HUMORBNO        NUMBER not null
+        primary key,
+    USERNO          NUMBER
+        constraint FK_USERNO
+            references MEMBER
+                on delete cascade,
+    HUMORTITLE      VARCHAR2(50),
+    HUMORWRITER     VARCHAR2(20),
+    HUMORCONTENT    VARCHAR2(2000),
+    HUMORDATE       DATE   default SYSDATE,
+    HUMORBOARDCOUNT NUMBER default 0
+)
 /
 
-
-create procedure NK_DUP_CHECK(V_NK in MEMBER.NICKNAME%TYPE, PR_RESULT OUT NUMBER)
-    is
-BEGIN
-    select count(*)
-    into PR_RESULT
-    from MEMBER
-    where NICKNAME = V_NK;
-end;
+create table HCOMMENT
+(
+    CMTNO      NUMBER         not null
+        primary key,
+    HUMORBNO   NUMBER         not null
+        constraint FK_HUMORBNO
+            references HUMORBOARD
+                on delete cascade,
+    USERNO     NUMBER         not null
+        constraint FK_USERNO2
+            references MEMBER
+                on delete cascade,
+    NICKNAME   VARCHAR2(20)   not null,
+    CMTCONTENT VARCHAR2(2000) not null,
+    CMTDATE    DATE default SYSDATE
+)
 /
 
-create sequence SEQ_MEM
+create table LEAGUEENTRY
+(
+    FRESHBLOOD   VARCHAR2(200),
+    HOTSTREAK    VARCHAR2(200),
+    INACTIVE     VARCHAR2(200),
+    LEAGUEID     VARCHAR2(200),
+    LEAGUEPOINTS NUMBER,
+    LOSSES       NUMBER,
+    WINS         NUMBER,
+    QUEUETYPE    VARCHAR2(200),
+    RANK         VARCHAR2(200),
+    SUMMONERID   VARCHAR2(200),
+    SUMMONERNAME VARCHAR2(200) not null
+        primary key,
+    TIER         VARCHAR2(200),
+    VETERAN      VARCHAR2(200)
+)
 /
 
-create sequence SEQ_TEAMSTATSNO
+create table QUEUETYPE
+(
+    QUEUEID   NUMBER not null
+        primary key,
+    QUEUENAME VARCHAR2(100)
+)
 /
 
-create sequence SEQ_TIPBNO
+create table POSITIONTYPE
+(
+    POSITION     NUMBER not null
+        primary key,
+    POSITIONNAME VARCHAR2(100)
+)
 /
 
-create sequence SEQ_PB
-/
-
-CREATE TABLE HCOMMENT (
-    CMTNO NUMBER PRIMARY KEY,
-    HUMORBNO NUMBER NOT NULL,
-    USERNO NUMBER NOT NULL,
-    NICKNAME VARCHAR2(20) NOT NULL,
-    CMTCONTENT VARCHAR2(2000) NOT NULL,
-    CMTDATE DATE DEFAULT SYSDATE,
-    CONSTRAINT FK_USERNO2 FOREIGN KEY(USERNO) REFERENCES MEMBER(USERNO) ON DELETE CASCADE,
-    CONSTRAINT FK_HUMORBNO FOREIGN KEY(HUMORBNO) REFERENCES HUMORBOARD(HUMORBNO) ON DELETE CASCADE
-);
-----------
-CREATE SEQUENCE SEQ_CNO;
-
-CREATE TABLE HUMORBOARD (
-    HUMORBNO NUMBER PRIMARY KEY,
-    USERNO NUMBER,
-   HUMORTITLE VARCHAR2(50) ,
-   HUMORWRITER VARCHAR2(20) ,
-    HUMORCONTENT VARCHAR2(2000),
-   HUMORDATE DATE DEFAULT SYSDATE,
-   HUMORBOARDCOUNT NUMBER DEFAULT 0,
-    CONSTRAINT FK_USERNO FOREIGN KEY(USERNO) REFERENCES MEMBER(USERNO) ON DELETE CASCADE
-);
-
-CREATE SEQUENCE SEQ_HUMORB;

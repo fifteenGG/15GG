@@ -14,9 +14,30 @@
             width: 60px;
             height: 60px;
         }
+        .wrap-loading{ /*화면 전체를 어둡게 합니다.*/
+            position: fixed;
+            left:0;
+            right:0;
+            top:0;
+            bottom:0;
+            background: rgba(0,0,0,0.2); /*not in ie */
+            filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#20000000',endColorstr='#20000000');    /* ie */
+
+        }
+        .wrap-loading div{ /*로딩 이미지*/
+            position: fixed;
+            top:50%;
+            left:50%;
+            margin-left: -21px;
+            margin-top: -21px;
+        }
+        .display-none{ /*감추기*/
+            display:none;
+        }
     </style>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css">
 </head>
+
 
 <body>
 
@@ -45,6 +66,7 @@
             <div class="px-3 d-flex flex-column">
                 <div class="gg-summoner-name gg-important-text"
                      href="/kr/profile/View">
+                    <input type="hidden" id="summonerName" value="${summoner.name}">
                     ${summoner.name}
                 </div>
                 <div>
@@ -69,7 +91,7 @@
 
                 </div>
                 <div>
-                    날짜
+                    <%--                    날짜--%>
                 </div>
             </div>
         </div>
@@ -84,97 +106,99 @@
 
                 <!-- 아무것도 없을 떄 -->
                 <c:if test="${empty leagueEntry}">
-                <div class="px-2">
-                    <div class="d-flex align-items-center flex-column">
-                        <img class="gg-profile-tier"
-                             src="${pageContext.request.contextPath}/resources/Images/ranked-emblems/default.png"/>
+                    <div class="px-2">
+                        <div class="d-flex align-items-center flex-column">
+                            <img class="gg-profile-tier"
+                                 src="${pageContext.request.contextPath}/resources/Images/ranked-emblems/default.png"/>
+                        </div>
                     </div>
-                </div>
-                <div class="px-2 text-left">
+                    <div class="px-2 text-left">
 
                     <span class="gg-sub-description">
                         솔로랭크
                     </span>
-                    <span class="gg-summoner-navigation-tier">
+                        <span class="gg-summoner-navigation-tier">
                         Unranked
                     </span>
-                    <span class="d-block">
+                        <span class="d-block">
                         N/A
                     </span>
-                    <span class="d-block">
+                        <span class="d-block">
                         N/A
                     </span>
 
-                </div>
-
-                <div class="px-2">
-                    <div class="d-flex align-items-center flex-column">
-                        <img class="profile-tier"
-                             src="${pageContext.request.contextPath}/resources/Images/ranked-emblems/default.png"/>
                     </div>
-                </div>
 
-                <div class="px-2 text-left">
+                    <div class="px-2">
+                        <div class="d-flex align-items-center flex-column">
+                            <img class="profile-tier"
+                                 src="${pageContext.request.contextPath}/resources/Images/ranked-emblems/default.png"/>
+                        </div>
+                    </div>
+
+                    <div class="px-2 text-left">
 
                     <span class="gg-sub-description">
-                       Unranked
+                       자유랭크
                     </span>
-                    <span class="gg-summoner-navigation-tier">
-                        N/A
+                        <span class="gg-summoner-navigation-tier">
+                        Unranked
                     </span>
-                    <span class="d-block">
+                        <span class="d-block">
                        N/A
                     </span>
-                    <span class="d-block">
+                        <span class="d-block">
                         N/A
                     </span>
 
-                </div>
+                    </div>
                 </c:if>
 
                 <!-- 솔로랭크만 있을 때 -->
                 <c:if test="${leagueEntry.size() == 1 && leagueEntry.get(0).queueType == 'RANKED_SOLO_5x5'}">
                     <div class="px-2">
-                    <div class="d-flex align-items-center flex-column">
-                    <img class="gg-profile-tier"
-                    src="${pageContext.request.contextPath}/resources/Images/ranked-emblems/${leagueEntry.get(0).tier}.png"/>
-                    </div>
+                        <div class="d-flex align-items-center flex-column">
+                            <img class="gg-profile-tier"
+                                 src="${pageContext.request.contextPath}/resources/Images/ranked-emblems/${leagueEntry.get(0).tier}.png"/>
+                        </div>
                     </div>
                     <div class="px-2 text-left">
 
                     <span class="gg-sub-description">
                     솔로랭크
                     </span>
-                    <span class="gg-summoner-navigation-tier">
-                    ${leagueEntry.get(0).tier}
-                    </span>
-                    <span class="d-block">
-                    <fmt:formatNumber value="${(leagueEntry.get(0).wins/(leagueEntry.get(0).losses + leagueEntry.get(0).wins))*100}" type="number"/>%
+                        <span class="gg-summoner-navigation-tier">
+                                ${leagueEntry.get(0).tier}
+                        </span>
+                        <span class="d-block">
+                    <fmt:formatNumber
+                            value="${(leagueEntry.get(0).wins/(leagueEntry.get(0).losses + leagueEntry.get(0).wins))*100}"
+                            type="number"/>%
                     ${leagueEntry.get(0).leaguePoints}LP
                     </span>
-                    <span class="d-block">
+                        <span class="d-block">
                     ${leagueEntry.get(0).wins}W ${leagueEntry.get(0).losses}L
                     </span>
                     </div>
 
                     <div class="px-2">
-                    <div class="d-flex align-items-center flex-column">
-                    <img class="gg-profile-tier"
-                    src="${pageContext.request.contextPath}/resources/Images/ranked-emblems/default.png"/>
-                    </div>
+                        <div class="d-flex align-items-center flex-column">
+                            <img class="gg-profile-tier"
+                                 src="${pageContext.request.contextPath}/resources/Images/ranked-emblems/default.png"/>
+                        </div>
                     </div>
                     <div class="px-2 text-left">
 
                     <span class="gg-sub-description">
                     자유랭크
                     </span>
-                    <span class="gg-summoner-navigation-tier">
+                        <span class="gg-summoner-navigation-tier">
                         Unranked
                     </span>
-                    <span class="d-block">
+                        <span class="d-block">
                         N/A
                     </span>
-                    <span class="d-block">
+                        <span class="d-block">
                         N/A
                     </span>
 
@@ -218,9 +242,11 @@
                     </span>
                         <span class="gg-summoner-navigation-tier">
                                 ${leagueEntry.get(0).tier}
-                    </span>
+                        </span>
                         <span class="d-block">
-                         <fmt:formatNumber value="${(leagueEntry.get(0).wins/(leagueEntry.get(0).losses + leagueEntry.get(0).wins))*100}" type="number"/>%
+                         <fmt:formatNumber
+                                 value="${(leagueEntry.get(0).wins/(leagueEntry.get(0).losses + leagueEntry.get(0).wins))*100}"
+                                 type="number"/>%
                     ${leagueEntry.get(0).leaguePoints}LP
                     </span>
                         <span class="d-block">
@@ -247,7 +273,9 @@
                                 ${leagueEntry.get(1).tier}
                         </span>
                         <span class="d-block">
-                              <fmt:formatNumber value="${(leagueEntry.get(1).wins/(leagueEntry.get(1).losses + leagueEntry.get(1).wins))*100}" type="number"/>%
+                              <fmt:formatNumber
+                                      value="${(leagueEntry.get(1).wins/(leagueEntry.get(1).losses + leagueEntry.get(1).wins))*100}"
+                                      type="number"/>%
                     ${leagueEntry.get(1).leaguePoints}LP
                     </span>
                         <span class="d-block">
@@ -270,7 +298,9 @@
                                 ${leagueEntry.get(0).tier}
                         </span>
                         <span class="d-block">
-                         <fmt:formatNumber value="${(leagueEntry.get(0).wins/(leagueEntry.get(0).losses + leagueEntry.get(0).wins))*100}" type="number"/>%
+                         <fmt:formatNumber
+                                 value="${(leagueEntry.get(0).wins/(leagueEntry.get(0).losses + leagueEntry.get(0).wins))*100}"
+                                 type="number"/>%
                     ${leagueEntry.get(0).leaguePoints}LP
                     </span>
                         <span class="d-block">
@@ -280,55 +310,55 @@
                     </div>
                 </c:if>
 
-                </div>
             </div>
         </div>
+    </div>
 
-        <!-- 색 있는 라인 -->
-        <div class="row py-2 py-lg-0 px-3 bg-white">
+    <!-- 색 있는 라인 -->
+    <div class="row py-2 py-lg-0 px-3 bg-white">
 
-            <div class="flex-grow gg-bg-negative" style="height: 1px"></div>
+        <div class="flex-grow gg-bg-negative" style="height: 1px"></div>
 
-            <div class="flex-grow gg-bg-negative" style="height: 1px"></div>
+        <div class="flex-grow gg-bg-negative" style="height: 1px"></div>
 
-            <div class="flex-grow gg-bg-negative" style="height: 1px"></div>
+        <div class="flex-grow gg-bg-negative" style="height: 1px"></div>
 
-            <div class="flex-grow gg-bg-positive" style="height: 1px"></div>
+        <div class="flex-grow gg-bg-positive" style="height: 1px"></div>
 
-            <div class="flex-grow gg-bg-negative" style="height: 1px"></div>
+        <div class="flex-grow gg-bg-negative" style="height: 1px"></div>
 
-            <div class="flex-grow gg-bg-positive" style="height: 1px"></div>
+        <div class="flex-grow gg-bg-positive" style="height: 1px"></div>
 
-            <div class="flex-grow gg-bg-positive" style="height: 1px"></div>
+        <div class="flex-grow gg-bg-positive" style="height: 1px"></div>
 
-            <div class="flex-grow gg-bg-positive" style="height: 1px"></div>
+        <div class="flex-grow gg-bg-positive" style="height: 1px"></div>
 
-            <div class="flex-grow gg-bg-positive" style="height: 1px"></div>
+        <div class="flex-grow gg-bg-positive" style="height: 1px"></div>
 
-            <div class="flex-grow gg-bg-negative" style="height: 1px"></div>
+        <div class="flex-grow gg-bg-negative" style="height: 1px"></div>
 
-            <div class="flex-grow gg-bg-positive" style="height: 1px"></div>
+        <div class="flex-grow gg-bg-positive" style="height: 1px"></div>
 
-            <div class="flex-grow gg-bg-negative" style="height: 1px"></div>
+        <div class="flex-grow gg-bg-negative" style="height: 1px"></div>
 
-            <div class="flex-grow gg-bg-positive" style="height: 1px"></div>
+        <div class="flex-grow gg-bg-positive" style="height: 1px"></div>
 
-            <div class="flex-grow gg-bg-negative" style="height: 1px"></div>
+        <div class="flex-grow gg-bg-negative" style="height: 1px"></div>
 
-            <div class="flex-grow gg-bg-positive" style="height: 1px"></div>
+        <div class="flex-grow gg-bg-positive" style="height: 1px"></div>
 
-            <div class="flex-grow gg-bg-negative" style="height: 1px"></div>
+        <div class="flex-grow gg-bg-negative" style="height: 1px"></div>
 
-            <div class="flex-grow gg-bg-negative" style="height: 1px"></div>
+        <div class="flex-grow gg-bg-negative" style="height: 1px"></div>
 
-            <div class="flex-grow gg-bg-positive" style="height: 1px"></div>
+        <div class="flex-grow gg-bg-positive" style="height: 1px"></div>
 
-            <div class="flex-grow gg-bg-positive" style="height: 1px"></div>
+        <div class="flex-grow gg-bg-positive" style="height: 1px"></div>
 
-            <div class="flex-grow gg-bg-positive" style="height: 1px"></div>
+        <div class="flex-grow gg-bg-positive" style="height: 1px"></div>
 
 
-        </div>
+    </div>
 
     <!-- 모스트 영역 -->
 
@@ -336,10 +366,13 @@
     <!-- 모스트 큐 -->
     <div class="row bg-white">
 
-            <c:if test="${myStat.MostQueue.size() > 2}">
-            <c:set value="${myStat.MostQueue.get(0).QUEUECOUNT*100/(myStat.MostQueue.get(0).QUEUECOUNT+myStat.MostQueue.get(1).QUEUECOUNT+myStat.MostQueue.get(2).QUEUECOUNT)}" var="queue1"/>
-            <c:set value="${myStat.MostQueue.get(1).QUEUECOUNT*100/(myStat.MostQueue.get(0).QUEUECOUNT+myStat.MostQueue.get(1).QUEUECOUNT+myStat.MostQueue.get(2).QUEUECOUNT)}" var="queue2"/>
-            <c:set value="${myStat.MostQueue.get(2).QUEUECOUNT*100/(myStat.MostQueue.get(0).QUEUECOUNT+myStat.MostQueue.get(1).QUEUECOUNT+myStat.MostQueue.get(2).QUEUECOUNT)}" var="queue3"/>
+        <c:if test="${myStat.MostQueue.size() > 2}">
+            <c:set value="${myStat.MostQueue.get(0).QUEUECOUNT*100/(myStat.MostQueue.get(0).QUEUECOUNT+myStat.MostQueue.get(1).QUEUECOUNT+myStat.MostQueue.get(2).QUEUECOUNT)}"
+                   var="queue1"/>
+            <c:set value="${myStat.MostQueue.get(1).QUEUECOUNT*100/(myStat.MostQueue.get(0).QUEUECOUNT+myStat.MostQueue.get(1).QUEUECOUNT+myStat.MostQueue.get(2).QUEUECOUNT)}"
+                   var="queue2"/>
+            <c:set value="${myStat.MostQueue.get(2).QUEUECOUNT*100/(myStat.MostQueue.get(0).QUEUECOUNT+myStat.MostQueue.get(1).QUEUECOUNT+myStat.MostQueue.get(2).QUEUECOUNT)}"
+                   var="queue3"/>
 
             <div class="col-lg-2 d-flex align-items-center justify-content-center">
                 <div class="gg-division flex-grow">
@@ -390,12 +423,15 @@
                     </div>
                 </div>
             </div>
-            </c:if>
+        </c:if>
 
-            <c:if test="${myStat.MostPosition.size() > 2}">
-            <c:set value="${myStat.MostPosition.get(0).POSITIONCOUNT*100/(myStat.MostPosition.get(0).POSITIONCOUNT+myStat.MostPosition.get(1).POSITIONCOUNT+myStat.MostPosition.get(2).POSITIONCOUNT)}" var="postion1"/>
-            <c:set value="${myStat.MostPosition.get(1).POSITIONCOUNT*100/(myStat.MostPosition.get(0).POSITIONCOUNT+myStat.MostPosition.get(1).POSITIONCOUNT+myStat.MostPosition.get(2).POSITIONCOUNT)}" var="postion2"/>
-            <c:set value="${myStat.MostPosition.get(2).POSITIONCOUNT*100/(myStat.MostPosition.get(0).POSITIONCOUNT+myStat.MostPosition.get(1).POSITIONCOUNT+myStat.MostPosition.get(2).POSITIONCOUNT)}" var="postion3"/>
+        <c:if test="${myStat.MostPosition.size() > 2}">
+            <c:set value="${myStat.MostPosition.get(0).POSITIONCOUNT*100/(myStat.MostPosition.get(0).POSITIONCOUNT+myStat.MostPosition.get(1).POSITIONCOUNT+myStat.MostPosition.get(2).POSITIONCOUNT)}"
+                   var="postion1"/>
+            <c:set value="${myStat.MostPosition.get(1).POSITIONCOUNT*100/(myStat.MostPosition.get(0).POSITIONCOUNT+myStat.MostPosition.get(1).POSITIONCOUNT+myStat.MostPosition.get(2).POSITIONCOUNT)}"
+                   var="postion2"/>
+            <c:set value="${myStat.MostPosition.get(2).POSITIONCOUNT*100/(myStat.MostPosition.get(0).POSITIONCOUNT+myStat.MostPosition.get(1).POSITIONCOUNT+myStat.MostPosition.get(2).POSITIONCOUNT)}"
+                   var="postion3"/>
             <div class="col-lg-2 d-flex align-items-center justify-content-center">
                 <div class="gg-division flex-grow">
 
@@ -440,570 +476,544 @@
                     </div>
                 </div>
             </div>
-            </c:if>
+        </c:if>
 
-            <!-- 모스트 챔프 -->
-            <div class="col-lg-4 d-flex align-items-center justify-content-center">
-                <div class="gg-division flex-grow">
+        <!-- 모스트 챔프 -->
+        <div class="col-lg-4 d-flex align-items-center justify-content-center">
+            <div class="gg-division flex-grow">
 
-                    <table class="table">
+                <table class="table">
 
-                        <c:forEach var="MostChamp" items="${myStat.MostChamp}">
-                        <tbody>
-                        <tr class="gg-action-area" data-event="SummonerNavigationStats"
-                            data-href="/kr/profile/View/stats?cId=523&amp;c=FreeRank">
-                            <td class="d-flex align-items-center justify-content-center">
-                                <img class="img-circled"
-                                     src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/champion/${MostChamp.CHAMPFULLIMG}"
-                                     width="30px" height="30px">
-                            </td>
+                    <c:forEach var="MostChamp" items="${myStat.MostChamp}">
+                    <tbody>
+                    <tr class="gg-action-area" data-event="SummonerNavigationStats"
+                        data-href="/kr/profile/View/stats?cId=523&amp;c=FreeRank">
+                        <td class="d-flex align-items-center justify-content-center">
+                            <img class="img-circled"
+                                 src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/champion/${MostChamp.CHAMPFULLIMG}"
+                                 width="30px" height="30px">
+                        </td>
 
-                            <td class="text-left">
+                        <td class="text-left">
 
-                                <span class="badge badge-pill badge-default">${MostChamp.CHAMPNAME}</span>
+                            <span class="badge badge-pill badge-default">${MostChamp.CHAMPNAME}</span>
 
-                            </td>
+                        </td>
 
-                            <td class="text-center">
+                        <td class="text-center">
                                 ${MostChamp.TOTALCOUNT}
-                                <span class="gg-sub-description">경기</span>
-                            </td>
-                            <td class="text-center">
+                            <span class="gg-sub-description">경기</span>
+                        </td>
+                        <td class="text-center">
                                 <span class="gg-text-negative">
                                     <fmt:formatNumber value="${MostChamp.RATE}" type="percent"/>
                                 </span>
-                                <span class="gg-sub-description">${MostChamp.WIN}W ${MostChamp.LOSE}L</span>
-                            </td>
-                            <td class="text-center">
-                                <span class=" gg-text-negative">${MostChamp.KDA}</span>
-                                <span class="gg-sub-description">KDA</span>
-                            </td>
-                        </tr>
-                        </c:forEach>
-                        </tbody>
-                    </table>
-                </div>
+                            <span class="gg-sub-description">${MostChamp.WIN}W ${MostChamp.LOSE}L</span>
+                        </td>
+                        <td class="text-center">
+                            <span class=" gg-text-negative">${MostChamp.KDA}</span>
+                            <span class="gg-sub-description">KDA</span>
+                        </td>
+                    </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
             </div>
+        </div>
 
-            <div class="gg-thin-line mx-3 d-block d-lg-none"></div>
-            <div id="ratingArea" class="col-lg-4 align-items-center">
+        <div class="gg-thin-line mx-3 d-block d-lg-none"></div>
+        <div id="ratingArea" class="col-lg-4 align-items-center">
                 <span>
                     여기에 승률 그래프 넣을 예정
                 </span>
-            </div>
-
-            <div class="gg-thin-line mx-3"></div>
-            <div class="col-12 d-flex align-items-center justify-content-center justify-content-lg-start gg-text-normal py-2 bg-white">
-                <span><i class="material-icons gg-text-normal text-info">Notice</i></span>
-                <span class="ml-1 gg-sub-description text-left">사이트 출시 이전의 데이터는 통계 할 수 없습니다.</span>
-            </div>
         </div>
 
-        <!-- 선 -->
-        <div class="row no-gutters my-5">
-            <div class="col-12">
-                <div class="row no-gutters ad">
-                    <div class="col-lg-12 ml-0 mr-0 pl-0 pr-0">
-                        <ins class="adsbygoogle" style="display:block;margin-top: 0.5rem !important;"
-                             data-ad-client="ca-pub-7895542192161438" data-ad-slot="6685595608" data-ad-format="auto"
-                             data-full-width-responsive="true">
-                        </ins>
-                    </div>
+        <div class="gg-thin-line mx-3"></div>
+        <div class="col-12 d-flex align-items-center justify-content-center justify-content-lg-start gg-text-normal py-2 bg-white">
+            <span><i class="material-icons gg-text-normal text-info">Notice</i></span>
+            <span class="ml-1 gg-sub-description text-left">사이트 출시 이전의 데이터는 통계 할 수 없습니다.</span>
+        </div>
+    </div>
+
+    <!-- 선 -->
+    <div class="row no-gutters my-5">
+        <div class="col-12">
+            <div class="row no-gutters ad">
+                <div class="col-lg-12 ml-0 mr-0 pl-0 pr-0">
+                    <ins class="adsbygoogle" style="display:block;margin-top: 0.5rem !important;"
+                         data-ad-client="ca-pub-7895542192161438" data-ad-slot="6685595608" data-ad-format="auto"
+                         data-full-width-responsive="true">
+                    </ins>
                 </div>
-
             </div>
+
+        </div>
+    </div>
+
+    <!-- 매치 리스트 영역 -->
+    <div id="content" class="gg-action-areas collapse" style="display: block;">
+
+        <!-- 게임 종류 선택 버튼 -->
+        <div class="row gg-division">
+            <ul class="nav nav-pills justify-content-start flex-nowrap align-content-center nav-pills-info gg-matchlist-menu"
+                role="tablist">
+                <li class="nav-item bg-white">
+                    <a class="nav-link active rounded-0 gg-box-title" href="#matchAll" data-toggle="tab"
+                       role="tablist">
+                        최근
+                        <span class="mx-1 badge badge-info border rounded-circle border-white"></span>
+                    </a>
+                </li>
+
+                <li class="nav-item bg-white">
+                    <a class="nav-link rounded-0 gg-box-title" href="#matchSoloRank" data-id="SoloRank"
+                       data-toggle="tab" role="tablist" onclick="showMatchCategory(this)">
+                        솔로랭크
+                    </a>
+                </li>
+
+                <li class="nav-item bg-white">
+                    <a class="nav-link rounded-0 gg-box-title" href="#matchFreeRank" data-id="FreeRank"
+                       data-toggle="tab" role="tablist" onclick="showMatchCategory(this)">
+                        자유랭크
+                    </a>
+                </li>
+
+                <li class="nav-item bg-white">
+                    <a class="nav-link rounded-0 gg-box-title" href="#matchNormal" data-id="Normal"
+                       data-toggle="tab"
+                       role="tablist" onclick="showMatchCategory(this)">
+                        일반
+                    </a>
+                </li>
+
+                <li class="nav-item bg-white">
+                    <a class="nav-link rounded-0 gg-box-title" href="#matchAram" data-id="Aram" data-toggle="tab"
+                       role="tablist" onclick="showMatchCategory(this)">
+                        칼바람
+                    </a>
+                </li>
+
+            </ul>
         </div>
 
-        <!-- 매치 리스트 영역 -->
-        <div id="content" class="gg-action-areas collapse" style="display: block;">
+        <!-- 게임 종류에 따른 매치 -->
+        <div class="row gg-division tab-content">
 
-            <!-- 게임 종류 선택 버튼 -->
-            <div class="row gg-division">
-                <ul class="nav nav-pills justify-content-start flex-nowrap align-content-center nav-pills-info gg-matchlist-menu"
-                    role="tablist">
-                    <li class="nav-item bg-white">
-                        <a class="nav-link active rounded-0 gg-box-title" href="#matchAll" data-toggle="tab"
-                           role="tablist">
-                            최근
-                            <span class="mx-1 badge badge-info border rounded-circle border-white"></span>
-                        </a>
-                    </li>
+            <!-- 모든 매치 -->
+            <div class="col-12 tab-pane active" id="matchAll">
 
-                    <li class="nav-item bg-white">
-                        <a class="nav-link rounded-0 gg-box-title" href="#matchSoloRank" data-id="SoloRank"
-                           data-toggle="tab" role="tablist" onclick="showMatchCategory(this)">
-                            솔로랭크
-                        </a>
-                    </li>
+                <div class="row">
 
-                    <li class="nav-item bg-white">
-                        <a class="nav-link rounded-0 gg-box-title" href="#matchFreeRank" data-id="FreeRank"
-                           data-toggle="tab" role="tablist" onclick="showMatchCategory(this)">
-                            자유랭크
-                        </a>
-                    </li>
+                    <!-- 좌측 영역 -->
+                    <div class="col-lg-4 px-0">
+                        <div class="row no-gutters">
+                            <div class="col-12 px-0">
 
-                    <li class="nav-item bg-white">
-                        <a class="nav-link rounded-0 gg-box-title" href="#matchNormal" data-id="Normal"
-                           data-toggle="tab"
-                           role="tablist" onclick="showMatchCategory(this)">
-                            일반
-                        </a>
-                    </li>
+                                <div class="gg-box gg-division">
 
-                    <li class="nav-item bg-white">
-                        <a class="nav-link rounded-0 gg-box-title" href="#matchAram" data-id="Aram" data-toggle="tab"
-                           role="tablist" onclick="showMatchCategory(this)">
-                            칼바람
-                        </a>
-                    </li>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <span class="gg-box-title">최근 정상인 플레이</span>
 
-                </ul>
-            </div>
-
-            <!-- 게임 종류에 따른 매치 -->
-            <div class="row gg-division tab-content">
-
-                <!-- 모든 매치 -->
-                <div class="col-12 tab-pane active" id="matchAll">
-
-                    <div class="row">
-
-                        <!-- 좌측 영역 -->
-                        <div class="col-lg-4 px-0">
-                            <div class="row no-gutters">
-                                <div class="col-12 px-0">
-
-                                    <div class="gg-box gg-division">
-
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <span class="gg-box-title">최근 정상인 플레이</span>
-
-                                                <div class="pt-1">
-                                                    <i class="far fa-thumbs-up fa-2x"></i>
-                                                    <span class="gg-important-text py-4">
+                                            <div class="pt-1">
+                                                <i class="far fa-thumbs-up fa-2x"></i>
+                                                <span class="gg-important-text py-4">
                                                     <fmt:formatNumber value="${(myStat.qualityPlay)*10}" type="number"/>%</span>
-                                                </div>
-                                                <span class="gg-sub-description">최근10경기 KDA2.5이상 </span>
-
                                             </div>
-                                            <div class="col-6">
-                                                <span class="gg-box-title">최근 트롤 플레이</span>
-
-                                                <div class="pt-1">
-                                                    <i class="far fa-thumbs-down fa-2x"></i>
-                                                    <span class="gg-important-text">
-                                                    <fmt:formatNumber value="${(myStat.trollPlay)*10}" type="number"/>%</span>
-                                                </div>
-                                                <span class="gg-sub-description">최근10경기 KDA 1이하</span>
-
-                                            </div>
+                                            <span class="gg-sub-description">최근10경기 KDA2.5이상 </span>
 
                                         </div>
+                                        <div class="col-6">
+                                            <span class="gg-box-title">최근 트롤 플레이</span>
+
+                                            <div class="pt-1">
+                                                <i class="far fa-thumbs-down fa-2x"></i>
+                                                <span class="gg-important-text">
+                                                    <fmt:formatNumber value="${(myStat.trollPlay)*10}"
+                                                                      type="number"/>%</span>
+                                            </div>
+                                            <span class="gg-sub-description">최근10경기 KDA 1이하</span>
+
+                                        </div>
+
                                     </div>
+                                </div>
 
-                                    <div class="gg-box gg-division">
+                                <div class="gg-box gg-division">
 
 
-                                        <div class="row">
-                                            <div class="col-12 d-flex flex-column">
+                                    <div class="row">
+                                        <div class="col-12 d-flex flex-column">
                                         <span class="gg-box-title">
                                             CS 역량
                                             - 분당 CS
                                         </span>
-                                                <span class="d-flex justify-content-center pt-1" style="color:orangered;">
+                                            <span class="d-flex justify-content-center pt-1" style="color:orangered;">
                                             <%-- <span><img
                                                     src="${pageContext.request.contextPath}/resources/Images/ranked-emblems/GOLD.png"
                                                     class="gg-img-30x30"></span> --%>
                                             <span class="gg-important-number ml-2">
-                                            <fmt:formatNumber value="${(myStat.totalCS/(myStat.totalDuration/60))}" type="number" pattern="0.0"/></span>
+                                            <fmt:formatNumber value="${(myStat.totalCS/(myStat.totalDuration/60))}"
+                                                              type="number" pattern="0.0"/></span>
                                         </span>
-                                                <span class="gg-sub-description pt-2">
+                                            <span class="gg-sub-description pt-2">
                                             <a href="/kr/profile/View/feedback" class="gg-text-soso"
                                                data-event="Link-CsTierFeedback">
                                                 <!-- 골드 평균 근접 ... 더보기 -->
                                             </a>
                                         </span>
-                                            </div>
                                         </div>
                                     </div>
+                                </div>
 
-                                    <div class="gg-box gg-division">
-
-
-                                        <div class="row justify-content-center">
-
-                                            <div class="col-6">
-                                                <span class="gg-box-title">최근 10경기 KDA</span>
-                                                <span class="gg-important-text pt-1 gg-text-negative">
-												<fmt:formatNumber value="${(myStat.totalKDA/10)}" type="number" pattern="0.0"/></span>
-                                                <!-- <span class="gg-sub-description">1W 4L 0.78 인분</span> -->
-                                            </div>
+                                <div class="gg-box gg-division">
 
 
-                                            <div class="col-6">
-                                                <span class="gg-box-title">최근 10경기 승률</span>
-                                                <span class="gg-important-text pt-1 gg-text-soso">
-                                                <fmt:formatNumber value="${(myStat.totalWin1*10)}" type="number"/>%</span>
-                                                <span class="gg-sub-description">${myStat.totalWin1}W ${myStat.totalWin0}L</span>
-                                            </div>
+                                    <div class="row justify-content-center">
 
-                                        </div>
-                                    </div>
-
-<%--                                    <div class="gg-box gg-division">--%>
-
-<%--                                <span class="gg-box-title">--%>
-<%--                                    최근 듀오--%>
-<%--                                </span>--%>
-
-<%--                                        <table class="table gg-friends-table">--%>
-
-<%--                                            <tbody>--%>
-<%--                                            <tr class="gg-action-area" data-href="/kr/profile/KooNH"--%>
-<%--                                                data-event="DuoHistory">--%>
-<%--                                                <td class="text-center"><span--%>
-<%--                                                        class="gg-summoner-name gg-text-normal">KooNH</span></td>--%>
-<%--                                                <td class="text-center">--%>
-<%--                                                    <span>9</span>--%>
-<%--                                                    <span class="gg-sub-description">Matches</span>--%>
-<%--                                                </td>--%>
-<%--                                                <td class="text-center">--%>
-<%--                                                    <span class="gg-text-positive">66%</span>--%>
-<%--                                                    <span class="gg-sub-description">6W 3L</span>--%>
-<%--                                                </td>--%>
-<%--                                            </tr>--%>
-
-<%--                                            <tr class="gg-action-area" data-href="/kr/profile/BONS"--%>
-<%--                                                data-event="DuoHistory">--%>
-<%--                                                <td class="text-center"><span--%>
-<%--                                                        class="gg-summoner-name gg-text-normal">BONS</span></td>--%>
-<%--                                                <td class="text-center">--%>
-<%--                                                    <span>8</span>--%>
-<%--                                                    <span class="gg-sub-description">Matches</span>--%>
-<%--                                                </td>--%>
-<%--                                                <td class="text-center">--%>
-<%--                                                    <span class="gg-text-positive">62%</span>--%>
-<%--                                                    <span class="gg-sub-description">5W 3L</span>--%>
-<%--                                                </td>--%>
-<%--                                            </tr>--%>
-
-<%--                                            <tr class="gg-action-area"--%>
-<%--                                                data-href="/kr/profile/%EB%B0%A9%EB%8C%95%EC%9D%B4"--%>
-<%--                                                data-event="DuoHistory">--%>
-<%--                                                <td class="text-center"><span--%>
-<%--                                                        class="gg-summoner-name gg-text-normal">방댕이</span></td>--%>
-<%--                                                <td class="text-center">--%>
-<%--                                                    <span>8</span>--%>
-<%--                                                    <span class="gg-sub-description">Matches</span>--%>
-<%--                                                </td>--%>
-<%--                                                <td class="text-center">--%>
-<%--                                                    <span class="gg-text-positive">62%</span>--%>
-<%--                                                    <span class="gg-sub-description">5W 3L</span>--%>
-<%--                                                </td>--%>
-<%--                                            </tr>--%>
-
-<%--                                            </tbody>--%>
-<%--                                        </table>--%>
-
-<%--                                    </div>--%>
-
-
-                                    <div class="row no-gutters ad">
-                                        <div class="col-lg-12 ml-0 mr-0 pl-0 pr-0">
-                                            <ins class="adsbygoogle"
-                                                 style="display:block;margin-top: 0.5rem !important;"
-                                                 data-ad-client="ca-pub-7895542192161438" data-ad-slot="5280841216"
-                                                 data-ad-format="auto" data-full-width-responsive="true">
-                                            </ins>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="row d-flex justify-content-center">
                                         <div class="col-6">
+                                            <span class="gg-box-title">최근 10경기 KDA</span>
+                                            <span class="gg-important-text pt-1 gg-text-negative">
+												<fmt:formatNumber value="${(myStat.totalKDA/10)}" type="number"
+                                                                  pattern="0.0"/></span>
+                                            <!-- <span class="gg-sub-description">1W 4L 0.78 인분</span> -->
+                                        </div>
 
 
-                                            <div class="row no-gutters ad">
-                                                <div class="col-lg-12 ml-0 mr-0 pl-0 pr-0">
-                                                    <ins class="adsbygoogle"
-                                                         style="display:block;margin-top: 0.5rem !important;"
-                                                         data-ad-client="ca-pub-7895542192161438"
-                                                         data-ad-slot="5280841216"
-                                                         data-ad-format="auto" data-full-width-responsive="true">
-                                                    </ins>
-                                                </div>
+                                        <div class="col-6">
+                                            <span class="gg-box-title">최근 10경기 승률</span>
+                                            <span class="gg-important-text pt-1 gg-text-soso">
+                                                <fmt:formatNumber value="${(myStat.totalWin1*10)}"
+                                                                  type="number"/>%</span>
+                                            <span class="gg-sub-description">${myStat.totalWin1}W ${myStat.totalWin0}L</span>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <%--                                    <div class="gg-box gg-division">--%>
+
+                                <%--                                <span class="gg-box-title">--%>
+                                <%--                                    최근 듀오--%>
+                                <%--                                </span>--%>
+
+                                <%--                                        <table class="table gg-friends-table">--%>
+
+                                <%--                                            <tbody>--%>
+                                <%--                                            <tr class="gg-action-area" data-href="/kr/profile/KooNH"--%>
+                                <%--                                                data-event="DuoHistory">--%>
+                                <%--                                                <td class="text-center"><span--%>
+                                <%--                                                        class="gg-summoner-name gg-text-normal">KooNH</span></td>--%>
+                                <%--                                                <td class="text-center">--%>
+                                <%--                                                    <span>9</span>--%>
+                                <%--                                                    <span class="gg-sub-description">Matches</span>--%>
+                                <%--                                                </td>--%>
+                                <%--                                                <td class="text-center">--%>
+                                <%--                                                    <span class="gg-text-positive">66%</span>--%>
+                                <%--                                                    <span class="gg-sub-description">6W 3L</span>--%>
+                                <%--                                                </td>--%>
+                                <%--                                            </tr>--%>
+
+                                <%--                                            <tr class="gg-action-area" data-href="/kr/profile/BONS"--%>
+                                <%--                                                data-event="DuoHistory">--%>
+                                <%--                                                <td class="text-center"><span--%>
+                                <%--                                                        class="gg-summoner-name gg-text-normal">BONS</span></td>--%>
+                                <%--                                                <td class="text-center">--%>
+                                <%--                                                    <span>8</span>--%>
+                                <%--                                                    <span class="gg-sub-description">Matches</span>--%>
+                                <%--                                                </td>--%>
+                                <%--                                                <td class="text-center">--%>
+                                <%--                                                    <span class="gg-text-positive">62%</span>--%>
+                                <%--                                                    <span class="gg-sub-description">5W 3L</span>--%>
+                                <%--                                                </td>--%>
+                                <%--                                            </tr>--%>
+
+                                <%--                                            <tr class="gg-action-area"--%>
+                                <%--                                                data-href="/kr/profile/%EB%B0%A9%EB%8C%95%EC%9D%B4"--%>
+                                <%--                                                data-event="DuoHistory">--%>
+                                <%--                                                <td class="text-center"><span--%>
+                                <%--                                                        class="gg-summoner-name gg-text-normal">방댕이</span></td>--%>
+                                <%--                                                <td class="text-center">--%>
+                                <%--                                                    <span>8</span>--%>
+                                <%--                                                    <span class="gg-sub-description">Matches</span>--%>
+                                <%--                                                </td>--%>
+                                <%--                                                <td class="text-center">--%>
+                                <%--                                                    <span class="gg-text-positive">62%</span>--%>
+                                <%--                                                    <span class="gg-sub-description">5W 3L</span>--%>
+                                <%--                                                </td>--%>
+                                <%--                                            </tr>--%>
+
+                                <%--                                            </tbody>--%>
+                                <%--                                        </table>--%>
+
+                                <%--                                    </div>--%>
+
+
+                                <div class="row no-gutters ad">
+                                    <div class="col-lg-12 ml-0 mr-0 pl-0 pr-0">
+                                        <ins class="adsbygoogle"
+                                             style="display:block;margin-top: 0.5rem !important;"
+                                             data-ad-client="ca-pub-7895542192161438" data-ad-slot="5280841216"
+                                             data-ad-format="auto" data-full-width-responsive="true">
+                                        </ins>
+                                    </div>
+                                </div>
+
+
+                                <div class="row d-flex justify-content-center">
+                                    <div class="col-6">
+
+
+                                        <div class="row no-gutters ad">
+                                            <div class="col-lg-12 ml-0 mr-0 pl-0 pr-0">
+                                                <ins class="adsbygoogle"
+                                                     style="display:block;margin-top: 0.5rem !important;"
+                                                     data-ad-client="ca-pub-7895542192161438"
+                                                     data-ad-slot="5280841216"
+                                                     data-ad-format="auto" data-full-width-responsive="true">
+                                                </ins>
                                             </div>
+                                        </div>
 
+                                    </div>
+                                </div>
+                                <div class="row d-flex justify-content-center">
+                                    <div class="col-10">
+
+
+                                        <div class="row no-gutters ad">
+                                            <div class="col-lg-12 ml-0 mr-0 pl-0 pr-0">
+                                                <ins class="adsbygoogle"
+                                                     style="display:block;margin-top: 0.5rem !important;"
+                                                     data-ad-client="ca-pub-7895542192161438"
+                                                     data-ad-slot="5280841216"
+                                                     data-ad-format="auto" data-full-width-responsive="true">
+                                                </ins>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 좌측 영역 끝 -->
+
+                    <!-- 우측 영역 -->
+                    <div class="col-lg-8 px-0">
+
+                        <!-- 듀오 게시판 추천 글 -->
+                        <div class="col-12 px-0">
+                            <div class="col-12 px-0 gg-action-area"
+                                 data-show-interaction="DuoRequestRecommendation">
+                                <div class="gg-box gg-division text-left bg-primary text-white">
+                                    <div class="d-flex align-items-center">
+                                        <i class="fas fa-info"></i>
+                                        <span class="gg-box-title ml-2"> ${summoner.name} 님 같은 분을 찾고 있습니다!</span>
+                                    </div>
+                                </div>
+                                <div class="gg-box gg-action-area" data-event="DuoRequestRecommendationProfile"
+                                     data-href="/kr/profile/%EC%A0%84%EC%82%B0%EC%9D%98%EC%86%90%EB%86%80%EB%A6%BC">
+                                    <div class="d-flex justify-content-between py-2">
+                                        <div class="d-flex align-items-center gg-profile-duo-request-list-title">
+                                            <div class="aa">자유랭크 실버4</div>
+                                            <div class="px-1"></div>
+                                            <div>모든 포지션 구함</div>
+                                            <div class="px-1"></div>
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-end">
+                                            <div class="gg-text-normal">
+                                                <i class="fas fa-user-edit"></i>
+                                                <span>전산의손놀림</span>
+                                            </div>
+                                            <div class="px-1"></div>
                                         </div>
                                     </div>
-                                    <div class="row d-flex justify-content-center">
-                                        <div class="col-10">
-
-
-                                            <div class="row no-gutters ad">
-                                                <div class="col-lg-12 ml-0 mr-0 pl-0 pr-0">
-                                                    <ins class="adsbygoogle"
-                                                         style="display:block;margin-top: 0.5rem !important;"
-                                                         data-ad-client="ca-pub-7895542192161438"
-                                                         data-ad-slot="5280841216"
-                                                         data-ad-format="auto" data-full-width-responsive="true">
-                                                    </ins>
-                                                </div>
-                                            </div>
-
-                                        </div>
+                                    <div class="d-flex text-secondary text-left my-font">
+                                        골플 자유랭 모집 욕안하는 착한유저들 구합니다 즐빡겜!!!
                                     </div>
-
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between py-1 bg-white">
+                                <div class="col-12 d-flex justify-content-end gg-sub-description">
+                                    <a href="${pageContext.request.contextPath}/partyBoard/partyBoardList.do">
+                                        듀오 구하기 더보기 ···
+                                    </a>
                                 </div>
                             </div>
                         </div>
-                        <!-- 좌측 영역 끝 -->
 
-                        <!-- 우측 영역 -->
-                        <div class="col-lg-8 px-0">
-
-                            <!-- 듀오 게시판 추천 글 -->
-                            <div class="col-12 px-0">
-                                <div class="col-12 px-0 gg-action-area"
-                                     data-show-interaction="DuoRequestRecommendation">
-                                    <div class="gg-box gg-division text-left bg-primary text-white">
-                                        <div class="d-flex align-items-center">
-                                            <i class="fas fa-info"></i>
-                                            <span class="gg-box-title ml-2"> ${summoner.name} 님 같은 분을 찾고 있습니다!</span>
-                                        </div>
-                                    </div>
-                                    <div class="gg-box gg-action-area" data-event="DuoRequestRecommendationProfile"
-                                         data-href="/kr/profile/%EC%A0%84%EC%82%B0%EC%9D%98%EC%86%90%EB%86%80%EB%A6%BC">
-                                        <div class="d-flex justify-content-between py-2">
-                                            <div class="d-flex align-items-center gg-profile-duo-request-list-title">
-                                                <div class="aa">자유랭크 실버4</div>
-                                                <div class="px-1"></div>
-                                                <div>모든 포지션 구함</div>
-                                                <div class="px-1"></div>
-                                            </div>
-                                            <div class="d-flex align-items-center justify-content-end">
-                                                <div class="gg-text-normal">
-                                                    <i class="fas fa-user-edit"></i>
-                                                    <span>전산의손놀림</span>
-                                                </div>
-                                                <div class="px-1"></div>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex text-secondary text-left my-font">
-                                            골플 자유랭 모집 욕안하는 착한유저들 구합니다 즐빡겜!!!
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-between py-1 bg-white">
-                                    <div class="col-12 d-flex justify-content-end gg-sub-description">
-                                        <a href="/kr/duo/request" data-event="More-DuoRequestRecommendationDuoRequest">
-                                            듀오 구하기 더보기 ···
-                                        </a>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <!-- 최근 매치 리스트 -->
-                            <div class="gg-matchlist-box gg-division">
-
-                                <for:forEach var="matchView" items="${matchViewList}">
-                                <!-- 매치 리스트 -->
-                                <div class="tab-pane active" id="matchListAllArea">
-
-                                    <!-- 선 -->
-                                    <div class="Normal gg-thin-line"></div>
-
-                                    <!-- 1번 매치 -->
-                                    <div id="matchListAllArea" class="row no-gutters gg-action gg-matchlist FreeRank"
-                                         data-id="4059186115" data-href="/kr/profile/View/match/4059186115"
-                                         data-event="MatchListMatch">
-
-                                        <c:forEach var="j" end="9" begin="0">
-                                        <c:set var="SearchSummoner" value="${summoner.name}"/>
-                                        <c:if test="${matchView.get(j).summonerName eq SearchSummoner}">
-                                        <!-- 게임에 대한 내 정보 영역 -->
-                                        <div class="col-md-8 d-flex flex-column justify-content-between gg-matchlist-${matchView.get(j).win}">
-                                            <div class="row no-gutters">
-                                                <div class="col-2 d-flex flex-column gg-bg-${matchView.get(j).win} text-white">
-                                                    <div class="d-flex flex-column my-auto justify-content-center py-2">
-                                                        <span class="gg-matchlist-meta-text">시간</span>
-                                                        <div class="d-block"><img class="py-1 gg-img-25x25"
-                                                                                  src="${pageContext.request.contextPath}/resources/Images/position/${matchView.get(j).position}.svg">
-                                                        </div>
-                                                    </div>
-                                                    <div class="d-flex justify-content-center py-lg-2 py-1">
-                                                        <c:if test="${matchView.get(j).win eq true}">승리</c:if>
-                                                        <c:if test="${matchView.get(j).win eq false}">패배</c:if>
-                                                    </div>
-                                                </div>
-                                                <div class="col-10">
-                                                    <div class="row no-gutters px-2 pt-2">
-                                                        <div class="col-2 col-lg-2 my-auto px-1 position-relative">
-                                                            <div class="position-relative">
-                                                                <img class="img-md img-circled full-width"
-                                                                     src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/champion/${matchView.get(j).champFullImg}">
-                                                                <span class="gg-matchlist-meta-text gg-matchlist-matchcategory rounded-circle">자</span>
-                                                            </div>
-                                                            <span class="d-block text-sm">29:27</span>
-                                                        </div>
-                                                        <div class="col-2 col-lg-1 d-flex justify-content-center justify-content-lg-start px-0 my-auto">
-                                                            <div class="col-xs-12 gg-padding-1px">
-
-                                                                <img class="d-block img-xs rounded" alt="img"
-                                                                     src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/spell/${matchView.get(j).spell1Id}.png">
-
-                                                                <img class="d-block img-xs rounded" alt="img"
-                                                                     src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/spell/${matchView.get(j).spell2Id}.png">
-
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-2 col-lg-2 d-flex flex-column my-auto">
-                                                        <span class="gg-important-number gg-text-negative">
-                                                            <fmt:formatNumber value="${(matchView.get(j).kills+matchView.get(j).assists)/matchView.get(j).deaths}" type="number" pattern="0.0"/>
-                                                        </span>
-                                                            <span class="gg-matchlist-sub-description text-truncate">KDA</span>
-                                                        </div>
-                                                        <div class="col-lg-2 d-lg-flex flex-column my-auto d-none">
-
-                                                        <span><img
-                                                                src="${pageContext.request.contextPath}/resources/Images/ranked-emblems/GRANDMASTER.png"
-                                                                class="gg-img-25x25 pr-1"></span>
-
-                                                            <span>
-                                                                <fmt:formatNumber value="${matchView.get(j).totalMinionKilled}" pattern="0.0" type="number"/>
-                                                            </span>
-                                                            <span class="gg-sub-description">분당 CS</span>
-                                                        </div>
-                                                        <div class="col-4 col-lg-3 d-flex py-0 my-auto justify-content-lg-start justify-content-center">
-
-                                                            <div>
-                                                                <img class="d-block img-xs rounded"
-                                                                     src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/item/${matchView.get(j).item0}.png">
-
-                                                                <img class="d-block img-xs rounded"
-                                                                     src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/item/${matchView.get(j).item1}.png">
-                                                            </div>
-
-                                                            <div>
-                                                                <img class="d-block img-xs rounded"
-                                                                     src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/item/${matchView.get(j).item2}.png">
+                        <!-- 최근 매치 리스트 -->
+                        <div id="matchAllArea" class="gg-matchlist-box gg-division"></div>
 
 
-                                                                <img class="d-block img-xs rounded"
-                                                                     src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/item/${matchView.get(j).item3}.png">
-                                                            </div>
-
-                                                            <div>
-                                                                <img class="d-block img-xs rounded"
-                                                                     src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/item/${matchView.get(j).item4}.png">
-
-
-                                                                <img class="d-block img-xs rounded"
-                                                                     src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/item/${matchView.get(j).item5}.png">
-                                                            </div>
-
-                                                        </div>
-                                                        <div class="col-2 d-flex px-0 flex-column justify-content-center style=">
-                                                            <span class="gg-important-text gg-text-soso">보통</span>
-                                                            <span class="gg-matchlist-sub-description gg-text-break">팀운</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row no-gutters pt-1">
-                                                        <div class="col-12 text-left d-flex align-items-center pl-2">
-
-                                                            <span class="badge badge-default"></span>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        </c:if>
-                                        </c:forEach>
-
-<%--                                            ${fn:toLowerCase(list.col_name)}--%>
-<%--                                            ${fn:toLowerCase(matchView.get(j).summonerName eq SearchSummoner)}--%>
-
-                                        <!-- 팀원 정보 영역 -->
-                                        <c:forEach var="j" end="9" begin="0">
-                                        <c:set var="SearchSummoner" value="${summoner.name}"/>
-                                        <c:if test="${matchView.get(j).summonerName eq SearchSummoner}">
-                                        <div class="col-md-4 d-none d-lg-flex align-items-center gg-matchlist-${matchView.get(j).win}">
-                                        </c:if>
-                                        </c:forEach>
-                                            <div class="row no-gutters w-100">
-                                                <div class="col-11">
-                                                    <div class="row no-gutters">
-
-                                                            <%--    팀1 --%>
-                                                        <div class="col-6">
-                                                            <c:forEach var="i" begin="0" end="4">
-                                                            <div class="of-ellipsis text-left pl-1 gg-matchlist-item gg-border-${matchView.get(i).win}">
-                                                                <img class="img-xs img-circled gg-img-18x18"
-                                                                     src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/champion/${matchView.get(i).champFullImg}" >
-                                                                <a class="text-secondary" href="${pageContext.request.contextPath}/search/SummonerSearch.do?summonerName=${matchView.get(i).summonerName}">
-                                                                    <span class="gg-text-soso">${matchView.get(i).summonerName}</span>
-                                                                </a>
-                                                            </div>
-                                                            </c:forEach>
-
-                                                        </div>
-                                                             <%--    팀2 --%>
-                                                        <div class="col-6">
-                                                            <c:forEach var="i" begin="5" end="9">
-                                                            <div class="of-ellipsis text-left pl-1 gg-matchlist-item gg-border-${matchView.get(i).win}">
-                                                                <img class="img-xs img-circled gg-img-18x18"
-                                                                     src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/champion/${matchView.get(i).champFullImg}">
-                                                                <a class="text-secondary"
-                                                                   href="${pageContext.request.contextPath}/search/SummonerSearch.do?summonerName=${matchView.get(i).summonerName}">
-                                                                    <span class="gg-text-positive">${matchView.get(i).summonerName}</span>
-                                                                </a>
-                                                            </div>
-                                                            </c:forEach>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-1 d-flex align-items-center justify-content-center gg-text-bold">
-                                                    &gt;
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-                                </for:forEach>
-                                <div class="col-12 py-2 gg-bg-gray">
-                                    <button type="button" class="btn btn-info" onclick="moreMatch();">
-                                        더보기</button>
-                                </div>
-                            </div>
+                        <div class="col-12 py-2 gg-bg-gray">
+                            <button type="button" class="btn btn-info" onclick="moreMatch();">
+                                더보기
+                            </button>
                         </div>
                         <!-- 우측 영역 끝 -->
-
                     </div>
                 </div>
 
             </div>
-
         </div>
 
     </div>
 
+</div>
 <script>
-
     var cPage = ${cPage};
 
     function moreMatch() {
-        location.href = "${pageContext.request.contextPath}/search/SummonerSearch.do?cPage="+cPage+"&summonerName=${summoner.name}" ;
+        location.href = "${pageContext.request.contextPath}/search/MatchSearch.do?cPage=" + cPage + "&summonerName=${summoner.name}";
     }
 
 </script>
+
+<script>
+    $(function () {
+
+        $.ajax({
+            url: "${pageContext.request.contextPath}/search/MatchSearch.do",
+            data: {summonerName: '${summoner.name}'},
+            type: "POST",
+            dataType: "json",
+            success: function (data) {
+
+                var name = $('#summonerName').val();
+
+                if (data.matchViewList.length == 0) {
+                    alert('데이터가 없습니다. 업데이트를 실행하세요.');
+                }
+
+                for (var i = 0; i < data.matchViewList.length; i++) {
+                    $('#matchAllArea').append('<div class="tab-pane active">');
+
+                    $('#matchAllArea>div').eq(i).append('<div class="Normal gg-thin-line">').append('<div id="matchListAllArea" class="row no-gutters gg-action gg-matchlist FreeRank">');
+
+                    for (var j = 0; j < 10; j++) {
+
+                        if (data.matchViewList[i][j].summonerName == name) {
+
+                            // ===== 승패 포지션
+
+                            $('.gg-matchlist').eq(i).append('<div id="myStatView" class="col-md-8 d-flex flex-column justify-content-between gg-matchlist-' + data.matchViewList[i][j].win + '">\n' +
+                                '                                                <div class="row no-gutters myMatchInfoArea">');
+
+                            $('.myMatchInfoArea').eq(i).append('<div class="col-2 position d-flex flex-column gg-bg-' + data.matchViewList[i][j].win + ' text-white">');
+                            $('.position').eq(i).append('<div class="d-flex flex-column my-auto justify-content-center py-2 durationtime">');
+                            $('.durationtime').eq(i).append('<span class="gg-matchlist-meta-text">시간');
+                            $('.durationtime').eq(i).append('<div class="d-block"><img class="py-1 gg-img-25x25" src="${pageContext.request.contextPath}/resources/Images/position/' + data.matchViewList[i][j].position + '.svg">');
+
+                            if (data.matchViewList[i][j].win == true) {
+                                $('.position').eq(i).append('<div class="d-flex justify-content-center py-lg-2 py-1">승리');
+                            } else if (data.matchViewList[i][j].win == false) {
+                                $('.position').eq(i).append('<div class="d-flex justify-content-center py-lg-2 py-1">패배');
+                            }
+
+                            // ======= 내 정보
+
+                            $('.myMatchInfoArea').eq(i).append('<div class="col-10 myMatchInfo" >');
+                            $('.myMatchInfo').eq(i).append(' <div class="row no-gutters px-2 pt-2 itq ">');
+                            $('.myMatchInfo').eq(i).append(' <div class="row no-gutters pt-1">');
+                            $('.itq').eq(i).append('<div class="col-2 col-lg-2 my-auto px-1 position-relative">\n' +
+                                '                                                                <div class="position-relative matchduration">\n' +
+                                '                                                                    <img class="img-md img-circled full-width" src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/champion/' + data.matchViewList[i][j].champFullImg + '">\n' +
+                                '                                                                    <span class="gg-matchlist-meta-text gg-matchlist-matchcategory rounded-circle">자');
+                            $('.matchduration').eq(i).append('<span class="d-block text-sm">29:27');
+
+                            $('.myMatchInfo>div:eq(1)').eq(i).append('<div class="col-12 text-left d-flex align-items-center pl-2">').append('<span class="badge badge-default">');
+                            $('.itq').eq(i).append(' <div class="col-2 col-lg-1 d-flex justify-content-center justify-content-lg-start px-0 my-auto">\n' +
+                                '                                                                <div class="col-xs-12 gg-padding-1px spellImg">');
+                            $('.spellimg').eq(i).append(' <img class="d-block img-xs rounded" alt="img"\n' +
+                                '                                                                         src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/spell/' + data.matchViewList[i][j].spell1Id + '.png">\n' +
+                                '\n' +
+                                '                                                                    <img class="d-block img-xs rounded" alt="img"\n' +
+                                '                                                                         src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/spell/' + data.matchViewList[i][j].spell2Id + '.png">');
+                            $('.itq').eq(i).append('<div class="col-2 col-lg-2 d-flex flex-column my-auto mykda">');
+
+                            $('.mykda').eq(i).append('<span class="gg-important-number gg-text-negative">' + ((data.matchViewList[i][j].kills + data.matchViewList[i][j].assists) / data.matchViewList[i][j].deaths).toFixed(1)).append('<span class="gg-matchlist-sub-description text-truncate">KDA');
+
+                            $('.itq').eq(i).append('<div class="col-lg-2 d-lg-flex flex-column my-auto d-none myCS">');
+
+                            $('.myCS').eq(i).append('<span><img src="${pageContext.request.contextPath}/resources/Images/ranked-emblems/GRANDMASTER.png" class="gg-img-25x25 pr-1"></span>').append('<span>' + data.matchViewList[i][j].totalMinionKilled + '').append('<span class="gg-sub-description">분당 CS');
+
+                            $('.itq').eq(i).append('<div class="col-4 col-lg-3 d-flex py-0 my-auto justify-content-lg-start justify-content-center myItem">');
+
+
+                            $('.myItem').eq(i).append('<div>\n' +
+                                '     <img class="d-block img-xs rounded" src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/item/' + data.matchViewList[i][j].item0 + '.png">\n' +
+                                '     <img class="d-block img-xs rounded" src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/item/' + data.matchViewList[i][j].item1 + '.png">');
+                            $('.myItem').eq(i).append('<div>\n' +
+                                '     <img class="d-block img-xs rounded" src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/item/' + data.matchViewList[i][j].item2 + '.png">\n' +
+                                '     <img class="d-block img-xs rounded" src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/item/' + data.matchViewList[i][j].item3 + '.png">');
+                            $('.myItem').eq(i).append('<div>\n' +
+                                '     <img class="d-block img-xs rounded" src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/item/' + data.matchViewList[i][j].item4 + '.png">\n' +
+                                '     <img class="d-block img-xs rounded" src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/item/' + data.matchViewList[i][j].item5 + '.png">');
+
+                            $('.itq').eq(i).append('<div class="col-2 d-flex px-0 flex-column justify-content-center teamBalance">');
+                            $('.teamBalance').eq(i).append('<span class="gg-important-text gg-text-soso">보통').append('<span class="gg-matchlist-sub-description gg-text-break">팀운');
+
+                            $('.itq').eq(i).append('<div class="row no-gutters pt-1">\n' +
+                                '                                                            <div class="col-12 text-left d-flex align-items-center pl-2">\n' +
+                                '                                                                <span class="badge badge-default"></span>\n' +
+                                '                                                            </div>\n' +
+                                '                                                        </div>');
+
+                            // ======= 팀 정보
+                            $('.gg-matchlist').eq(i).append('<div class="teamArea col-md-4 d-none d-lg-flex align-items-center gg-matchlist-' + data.matchViewList[i][j].win + '">');
+                            $('.teamArea').eq(i).append('<div class="row no-gutters w-100">\n' +
+                                '                                            <div class="col-11">\n' +
+                                '                                                <div class="teamMember row no-gutters">');
+                            $('.teamMember').eq(i).append('<div class="col-6 team1">').append('<div class="col-6 team2">');
+
+                            for (var m = 0; m < 5; m++) {
+                                $('.team1').eq(i).append('<div class="of-ellipsis text-left pl-1 gg-matchlist-item gg-border-' + data.matchViewList[i][m].win + '">\n' +
+                                    '                                                                <img class="img-xs img-circled gg-img-18x18"\n' +
+                                    '                                                                     src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/champion/' + data.matchViewList[i][m].champFullImg + '" >\n' +
+                                    '                                                                <a class="text-secondary" href="${pageContext.request.contextPath}/search/SummonerSearch.do?summonerName=' + data.matchViewList[i][m].summonerName + '">\n' +
+                                    '                                                                    <span class="gg-text-soso">' + data.matchViewList[i][m].summonerName + '</span>\n' +
+                                    '                                                                </a>\n' +
+                                    '                                                            </div>');
+                            }
+                            for (var m = 5; m < 10; m++) {
+                                $('.team2').eq(i).append('<div class="of-ellipsis text-left pl-1 gg-matchlist-item gg-border-' + data.matchViewList[i][m].win + '">\n' +
+                                    '                                                                <img class="img-xs img-circled gg-img-18x18"\n' +
+                                    '                                                                     src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/champion/' + data.matchViewList[i][m].champFullImg + '" >\n' +
+                                    '                                                                <a class="text-secondary" href="${pageContext.request.contextPath}/search/SummonerSearch.do?summonerName=' + data.matchViewList[i][m].summonerName + '">\n' +
+                                    '                                                                    <span class="gg-text-soso">' + data.matchViewList[i][m].summonerName + '</span>\n' +
+                                    '                                                                </a>\n' +
+                                    '                                                            </div>');
+                            }
+
+                        }
+
+                    }
+
+                }
+
+
+            }, error: function (e) {
+                console.log("ajax 처리 실패");
+
+            },
+            beforeSend: function () {
+                $('.wrap-loading').removeClass('display-none');
+
+            }
+            , complete: function () {
+                $('.wrap-loading').addClass('display-none');
+            }, timeout:100000
+        });
+    })
+</script>
+
+<div class="wrap-loading display-none">
+    <div><img src="${pageContext.request.contextPath}/resources/Images/ajaxCall.gif" /></div>
+</div>
 
 </body>
 </html>

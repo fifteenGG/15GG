@@ -160,9 +160,9 @@ public class SearchService {
     }
 
     // 매치 정보 불러와서 화면에 출력용 서비스
-    public List selectSummonerMatch(String summonerName, int cPage, int endPage) {
+    public List<Object> selectSummonerMatch(String summonerName, int cPage, int endPage) {
 
-        List list = new ArrayList();
+        List<Object> list = new ArrayList<>();
 
         // 게임번호를 조회
         List<String> matchList = searchDAO.selectMatchList(summonerName, cPage, endPage);

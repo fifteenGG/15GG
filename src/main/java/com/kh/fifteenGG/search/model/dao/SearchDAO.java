@@ -104,6 +104,7 @@ public class SearchDAO {
         List<Object> list = sqlSession.selectList("match-mapper.selectMostPosition", summonerName);
         System.out.println(list.toString());
         return list;
+
     }
 
 

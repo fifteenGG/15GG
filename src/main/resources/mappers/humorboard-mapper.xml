@@ -45,7 +45,6 @@ VALUES(SEQ_CNO.NEXTVAL, #{humorBno}, #{userNo}, #{nickName}, #{cmtContent}, SYSD
 
     <!-- ´ñ±Û »èÁ¦ -->
 
-
     <update id="readCount" parameterType="int">
 UPDATE HUMORBOARD SET HUMORBOARDCOUNT = HUMORBOARDCOUNT +1 WHERE HUMORBNO = #{humorbNo}
 </update>

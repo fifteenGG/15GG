@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.*;
 import java.net.URL;
@@ -80,18 +81,21 @@ public class SummonerSearch {
 //            int totalPage = searchService.totalPageCount(summonerName);
 
             // 매치 정보 가져오기
-            List map = searchService.selectSummonerMatch(summonerName, cPage, endPage);
-            HashMap<String, Object> myStat = searchService.selectMyStat(summonerName);
+//            List map = searchService.selectSummonerMatch(summonerName, cPage, endPage);
+//            HashMap<String, Object> myStat = searchService.selectMyStat(summonerName);
 
 
             cPage += 1;
+
+            HashMap<String, Object> myStat = searchService.selectMyStat(summonerName);
+            model.addAttribute("myStat", myStat);
 
             // 화면에 전달
             model.addAttribute("cPage", cPage);
             model.addAttribute("summoner", summoner);
             model.addAttribute("leagueEntry", leagueEntry);
-            model.addAttribute("matchViewList", map);
-            model.addAttribute("myStat", myStat);
+//            model.addAttribute("matchViewList", map);
+//            model.addAttribute("myStat", myStat);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -169,6 +173,33 @@ public class SummonerSearch {
 
         // 업데이트 후 다시 리다이렉트로 SummonerSearch 컨트롤러로 전송
         return "redirect:/search/SummonerSearch.do";
+    }
+
+    // ajax 매치 조회
+    @RequestMapping("/search/MatchSearch.do")
+    @ResponseBody
+    public HashMap<String, Object> MatchSearch(@RequestParam String summonerName,
+                                               @RequestParam(value = "cPage", required = false, defaultValue = "1") int cPage ){
+
+        HashMap<String, Object> hashMap = new HashMap<>();
+
+        System.out.println("ajax 실행 확인 컨트롤러");
+
+        int numPerPage = 5;
+        int endPage = numPerPage * cPage;
+
+        String serachName = summonerName.replaceAll(" ","%20");
+
+        cPage += 1;
+
+        // 매치 정보 가져오기
+        List<Object> list = searchService.selectSummonerMatch(summonerName, cPage, endPage);
+        System.out.println("matchViewList" + list);
+
+        hashMap.put("matchViewList", list);
+        hashMap.put("cPage", cPage);
+
+        return hashMap;
     }
 
 }
