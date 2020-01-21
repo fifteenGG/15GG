@@ -241,7 +241,7 @@
 <span id="list10${status.index}">
 
    <span id="cancelline${status.index }">
-      <div class="d-flex flex-column w-100 gg-action p-2 listView" id="listView" data-event="DuoRequestProfile" data-href="/kr/profile/2417">
+      <div class="d-flex flex-column w-100 gg-action p-2 listView" id="listView" data-event="DuoRequestProfile" data-href="/kr/profile/2417" onclick="partySearch('${list.pbUser}');">
          <div class="d-flex align-items-center gg-duo-request-list-title">
             <div class="aa">${list.pbRanktype}</div>
             <div class="px-1">${list.pbTier}</div>
@@ -530,6 +530,13 @@
 
 
 </script>
+<script>
+function partySearch(pbUser){
+location.href = "${pageContext.request.contextPath}/search/SummonerSearch.do?summonerName="+pbUser
+}
+</script>
+
+
 <script src="https://s3-ap-northeast-1.amazonaws.com/ggtics-static/material-pro/assets/js/plugins/bootstrap-selectpicker.js" type="text/javascript"></script>
 
 

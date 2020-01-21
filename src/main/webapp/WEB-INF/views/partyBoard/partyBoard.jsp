@@ -271,7 +271,7 @@
 
                               <div class="d-flex flex-column w-100 gg-action p-2 listView"
 								   id="listView" data-event="DuoRequestProfile"
-								   data-href="/kr/profile/2417">
+								   data-href="/kr/profile/2417" onclick="partySearch('${list.pbUser}');">
                                  <div
 										 class="d-flex align-items-center gg-duo-request-list-title">
                                     <div class="aa">${list.pbRanktype}</div>
@@ -436,7 +436,11 @@
 
 </script>
 
-
+<script>
+function partySearch(pbUser){
+location.href = "${pageContext.request.contextPath}/search/SummonerSearch.do?summonerName="+pbUser
+}
+</script>
 
 
 <script
