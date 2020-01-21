@@ -440,7 +440,7 @@
 function partySearch(pbUser){
 location.href = "${pageContext.request.contextPath}/search/SummonerSearch.do?summonerName="+pbUser
 }
-</script>
+</script>;
 
 
 <script

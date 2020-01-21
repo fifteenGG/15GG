@@ -534,7 +534,7 @@
 function partySearch(pbUser){
 location.href = "${pageContext.request.contextPath}/search/SummonerSearch.do?summonerName="+pbUser
 }
-</script>
+</script>;
 
 
 <script src="https://s3-ap-northeast-1.amazonaws.com/ggtics-static/material-pro/assets/js/plugins/bootstrap-selectpicker.js" type="text/javascript"></script>
