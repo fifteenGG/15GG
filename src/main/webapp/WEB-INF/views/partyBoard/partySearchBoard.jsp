@@ -1,7 +1,7 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 
 <html>
@@ -17,11 +17,13 @@
 		.noContent {
 			color: white !important;
 			background-color: #999999 !important;
-			pointer-events: none;
+			pointer-events: hover;
 		}
 	</style>
 	<title>팀서치</title>
 	<c:import url="../common/commonUtil.jsp"/>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/party.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css"/>
 
 
 	<!-- 내용 입력 안할시 메세지 띄우는 함수. -->
@@ -42,16 +44,10 @@
 	</script>
 
 
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css"/>
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/party.css">
 
 </head>
 
-<body style="background: #f4f4f4; !important;
-      max-width: 1011px;
-      text-align: center;
-      font-weight: normal;
-      margin: 0 auto;">
+<body style="background: #f4f4f4; ! important; max-width: 1011px; text-align: center; font-weight: normal; margin: 0 auto;">
 
 <c:import url="../common/navbar.jsp"/>
 

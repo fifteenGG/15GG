@@ -15,13 +15,15 @@
              <li class="nav-item active">
                 <a class="nav-link" href="${pageContext.request.contextPath}/humorBoard/humorBoardList.do">유머 게시판<span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/partyBoard/partyBoardList.do">파티 찾기</a>
+            <li class="nav-item active">
+                <a class="nav-link" href="${pageContext.request.contextPath}/partyBoard/partyBoardList.do">파티 찾기<span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/statisticsBoard/statisticsBoardView.do">통계<span class="sr-only">(current)</span></a>
+            <li class="nav-item active">
+                <a class="nav-link" href="${pageContext.request.contextPath}/statisticsBoard/objectWinPercentageView.do">통계<span class="sr-only">(current)</span></a>
             </li>
-
+            <li class="nav-item active">
+                <a class="nav-link" href="${pageContext.request.contextPath}/statisticsBoard/dataTablePackageBoardView.do">통계테이블<span class="sr-only">(current)</span></a>
+            </li>
         </ul>
     </div>
     <ul class="navbar-nav ml-md-auto">
