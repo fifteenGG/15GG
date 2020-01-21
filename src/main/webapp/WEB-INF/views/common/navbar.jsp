@@ -24,6 +24,7 @@
             <li class="nav-item active">
                 <a class="nav-link" href="${pageContext.request.contextPath}/statisticsBoard/dataTablePackageBoardView.do">통계테이블<span class="sr-only">(current)</span></a>
             </li>
+
         </ul>
     </div>
     <ul class="navbar-nav ml-md-auto">
