@@ -56,7 +56,8 @@
 				   alias="PartyBoard"/>
 		<typeAlias type="com.kh.fifteenGG.humorBoard.model.vo.humorBoard" alias="humorBoard"/>
 		<typeAlias type="com.kh.fifteenGG.humorBoard.model.vo.Comment" alias="Comment"/>
-		<typeAlias alias="StatisticsBoard" type="com.kh.fifteenGG.statisticsBoard.model.vo.StatisticsBoard"/>
+		<typeAlias alias="ObjectPercentage" type="com.kh.fifteenGG.statisticsBoard.model.vo.ObjectPercentage"/>
+		<typeAlias alias="DataTablePackageBoard" type="com.kh.fifteenGG.statisticsBoard.model.vo.DataTablePackageBoard"/>
 	</typeAliases>
 
 </configuration>

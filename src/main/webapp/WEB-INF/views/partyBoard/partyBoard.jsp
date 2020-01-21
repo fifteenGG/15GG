@@ -9,10 +9,7 @@
 <head>
 
 	<!-- poper.js 추가 Poper없으면 select option이 안먹힘 -->
-	<script
-			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-			integrity="sha256-98vAGjEDGN79TjHkYWVD4s87rvWkdWLHPs5MC3FvFX4="
-			crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha256-98vAGjEDGN79TjHkYWVD4s87rvWkdWLHPs5MC3FvFX4=" crossorigin="anonymous"></script>
 
 
 	<meta charset="UTF-8">
@@ -25,6 +22,8 @@
 	</style>
 	<title>팀서치</title>
 	<c:import url="../common/commonUtil.jsp" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/party.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css" />
 
 
 	<!-- 내용 입력 안할시 메세지 띄우는 함수. -->
@@ -45,15 +44,10 @@
 	</script>
 
 
-	<link rel="stylesheet"
-		  href="${pageContext.request.contextPath}/resources/css/main.css" />
-	<link rel="stylesheet"
-		  href="${pageContext.request.contextPath}/resources/css/party.css">
 
 </head>
 
-<body
-		style="background: #f4f4f4; ! important; max-width: 1011px; text-align: center; font-weight: normal; margin: 0 auto;">
+<body style="background: #f4f4f4; ! important; max-width: 1011px; text-align: center; font-weight: normal; margin: 0 auto;">
 
 <c:import url="../common/navbar.jsp" />
 
@@ -277,7 +271,7 @@
 
                               <div class="d-flex flex-column w-100 gg-action p-2 listView"
 								   id="listView" data-event="DuoRequestProfile"
-								   data-href="/kr/profile/2417">
+								   data-href="/kr/profile/2417" onclick="partySearch('${list.pbUser}');">
                                  <div
 										 class="d-flex align-items-center gg-duo-request-list-title">
                                     <div class="aa">${list.pbRanktype}</div>
@@ -442,7 +436,11 @@
 
 </script>
 
-
+<script>
+function partySearch(pbUser){
+location.href = "${pageContext.request.contextPath}/search/SummonerSearch.do?summonerName="+pbUser
+}
+</script>;
 
 
 <script

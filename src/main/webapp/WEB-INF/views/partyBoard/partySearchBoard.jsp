@@ -1,7 +1,7 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 
 <html>
@@ -17,11 +17,13 @@
 		.noContent {
 			color: white !important;
 			background-color: #999999 !important;
-			pointer-events: none;
+			pointer-events: hover;
 		}
 	</style>
 	<title>팀서치</title>
 	<c:import url="../common/commonUtil.jsp"/>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/party.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css"/>
 
 
 	<!-- 내용 입력 안할시 메세지 띄우는 함수. -->
@@ -42,16 +44,10 @@
 	</script>
 
 
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css"/>
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/party.css">
 
 </head>
 
-<body style="background: #f4f4f4; !important;
-      max-width: 1011px;
-      text-align: center;
-      font-weight: normal;
-      margin: 0 auto;">
+<body style="background: #f4f4f4; ! important; max-width: 1011px; text-align: center; font-weight: normal; margin: 0 auto;">
 
 <c:import url="../common/navbar.jsp"/>
 
@@ -245,7 +241,7 @@
 <span id="list10${status.index}">
 
    <span id="cancelline${status.index }">
-      <div class="d-flex flex-column w-100 gg-action p-2 listView" id="listView" data-event="DuoRequestProfile" data-href="/kr/profile/2417">
+      <div class="d-flex flex-column w-100 gg-action p-2 listView" id="listView" data-event="DuoRequestProfile" data-href="/kr/profile/2417" onclick="partySearch('${list.pbUser}');">
          <div class="d-flex align-items-center gg-duo-request-list-title">
             <div class="aa">${list.pbRanktype}</div>
             <div class="px-1">${list.pbTier}</div>
@@ -534,6 +530,13 @@
 
 
 </script>
+<script>
+function partySearch(pbUser){
+location.href = "${pageContext.request.contextPath}/search/SummonerSearch.do?summonerName="+pbUser
+}
+</script>;
+
+
 <script src="https://s3-ap-northeast-1.amazonaws.com/ggtics-static/material-pro/assets/js/plugins/bootstrap-selectpicker.js" type="text/javascript"></script>
 
 
