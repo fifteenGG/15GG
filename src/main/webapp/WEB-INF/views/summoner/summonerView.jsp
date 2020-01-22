@@ -907,8 +907,18 @@
 
                             $('.myMatchInfoArea').eq(i).append('<div class="col-2 position d-flex flex-column gg-bg-' + data.matchViewList[i][j].win + ' text-white">');
                             $('.position').eq(i).append('<div class="d-flex flex-column my-auto justify-content-center py-2 durationtime">');
-                            $('.durationtime').eq(i).append('<span class="gg-matchlist-meta-text">시간');
+
+
+                            var time = data.matchViewList[i][j].gameCreation;
+                            console.log(time);
+                            var date = new Date();
+                            date.setTime(time);
+                            dateString = date.getMonth()+ 1 + "/" + date.getDate();
+
+                            $('.durationtime').eq(i).append('<span class="gg-matchlist-meta-text">'+ dateString +'');
+
                             $('.durationtime').eq(i).append('<div class="d-block"><img class="py-1 gg-img-25x25" src="${pageContext.request.contextPath}/resources/Images/position/' + data.matchViewList[i][j].position + '.svg">');
+
 
                             if (data.matchViewList[i][j].win == true) {
                                 $('.position').eq(i).append('<div class="d-flex justify-content-center py-lg-2 py-1">승리');
@@ -917,6 +927,13 @@
                             }
 
                             // ======= 내 정보
+                            var rankType = data.matchViewList[i][j].queueName.substr(0, 1);
+                            var gameDuration = data.matchViewList[i][j].gameDuration;
+                            var min = parseInt((gameDuration%3600)/60);
+                            var sec = gameDuration%60;
+
+                            if (min.toString().length==1) min = "0" + min;
+                            if (sec.toString().length==1) sec = "0" + sec;
 
                             $('.myMatchInfoArea').eq(i).append('<div class="col-10 myMatchInfo" >');
                             $('.myMatchInfo').eq(i).append(' <div class="row no-gutters px-2 pt-2 itq ">');
@@ -924,8 +941,8 @@
                             $('.itq').eq(i).append('<div class="col-2 col-lg-2 my-auto px-1 position-relative">\n' +
                                 '                                                                <div class="position-relative matchduration">\n' +
                                 '                                                                    <img class="img-md img-circled full-width" src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/champion/' + data.matchViewList[i][j].champFullImg + '">\n' +
-                                '                                                                    <span class="gg-matchlist-meta-text gg-matchlist-matchcategory rounded-circle">');
-                            $('.matchduration').eq(i).append('<span class="d-block text-sm">29:27');
+                                '                                                                    <span class="gg-matchlist-meta-text gg-matchlist-matchcategory rounded-circle">'+rankType+'');
+                            $('.matchduration').eq(i).append('<span class="d-block text-sm">'+min+':'+sec+'');
 
                             $('.myMatchInfo>div:eq(1)').eq(i).append('<div class="col-12 text-left d-flex align-items-center pl-2">').append('<span class="badge badge-default">');
                             $('.itq').eq(i).append(' <div class="col-2 col-lg-1 d-flex justify-content-center justify-content-lg-start px-0 my-auto">\n' +
@@ -1057,7 +1074,6 @@
                 }
 
 
-
                 var name = $('#summonerName').val();
 
                 if (data.matchViewList.length == 0) {
@@ -1082,7 +1098,15 @@
 
                             $('.myMatchInfoArea').eq(i).append('<div class="col-2 position d-flex flex-column gg-bg-' + data.matchViewList[i][j].win + ' text-white">');
                             $('.position').eq(i).append('<div class="d-flex flex-column my-auto justify-content-center py-2 durationtime">');
-                            $('.durationtime').eq(i).append('<span class="gg-matchlist-meta-text">시간');
+
+                            var time = data.matchViewList[i][j].gameCreation;
+                            console.log(time);
+                            var date = new Date();
+                            date.setTime(time);
+                            dateString = date.getMonth()+ 1 + "/" + date.getDate();
+
+                            $('.durationtime').eq(i).append('<span class="gg-matchlist-meta-text">'+ dateString +'');
+
                             $('.durationtime').eq(i).append('<div class="d-block"><img class="py-1 gg-img-25x25" src="${pageContext.request.contextPath}/resources/Images/position/' + data.matchViewList[i][j].position + '.svg">');
 
                             if (data.matchViewList[i][j].win == true) {
@@ -1093,14 +1117,24 @@
 
                             // ======= 내 정보
 
+
+                            var gameType = data.matchViewList[i][j].queueName.substr(0,1);
+
+                            var gameDuration = data.matchViewList[i][j].gameDuration;
+                            var min = parseInt((gameDuration%3600)/60);
+                            var sec = gameDuration%60;
+
+                            if (min.toString().length==1) min = "0" + min;
+                            if (sec.toString().length==1) sec = "0" + sec;
+
                             $('.myMatchInfoArea').eq(i).append('<div class="col-10 myMatchInfo" >');
                             $('.myMatchInfo').eq(i).append(' <div class="row no-gutters px-2 pt-2 itq ">');
                             $('.myMatchInfo').eq(i).append(' <div class="row no-gutters pt-1">');
                             $('.itq').eq(i).append('<div class="col-2 col-lg-2 my-auto px-1 position-relative">\n' +
                                 ' <div class="position-relative matchduration">\n' +
                                 ' <img class="img-md img-circled full-width" src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/champion/' + data.matchViewList[i][j].champFullImg + '">\n' +
-                                ' <span class="gg-matchlist-meta-text gg-matchlist-matchcategory rounded-circle">');
-                            $('.matchduration').eq(i).append('<span class="d-block text-sm">29:27');
+                                ' <span class="gg-matchlist-meta-text gg-matchlist-matchcategory rounded-circle">'+gameType+'');
+                            $('.matchduration').eq(i).append('<span class="d-block text-sm">'+min+':'+sec+'');
 
                             $('.myMatchInfo>div:eq(1)').eq(i).append('<div class="col-12 text-left d-flex align-items-center pl-2">').append('<span class="badge badge-default">');
                             $('.itq').eq(i).append(' <div class="col-2 col-lg-1 d-flex justify-content-center justify-content-lg-start px-0 my-auto">\n' +

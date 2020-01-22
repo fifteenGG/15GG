@@ -31,8 +31,8 @@
 
         <%-- nav 와 div 사이의 영역 --%>
         <div class="row">
-
         </div>
+
 
         <%-- 메인 영역 --%>
         <div class="container-fluid">

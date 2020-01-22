@@ -1,6 +1,8 @@
 package com.kh.fifteenGG.search.model.vo.view;
 
-public class TeamView {
+import java.io.Serializable;
+
+public class TeamView implements Serializable {
 
     private String summonerName, position, champion, champName, ChampFullImg;
     private String spell1Id, spell2Id, teamId, item0, item1, item2, item3, item4, item5, item6;
@@ -8,6 +10,39 @@ public class TeamView {
     private float totalMinionKilled;
     private boolean win;
     private String perk0, perkSubStyle;
+    private long gameDuration, gameCreation;
+    private String queueName;
+
+    public TeamView() {
+    }
+
+    public TeamView(String summonerName, String position, String champion, String champName, String champFullImg, String spell1Id, String spell2Id, String teamId, String item0, String item1, String item2, String item3, String item4, String item5, String item6, int kills, int deaths, int assists, float totalMinionKilled, boolean win, String perk0, String perkSubStyle, long gameDuration, long gameCreation, String queueName) {
+        this.summonerName = summonerName;
+        this.position = position;
+        this.champion = champion;
+        this.champName = champName;
+        ChampFullImg = champFullImg;
+        this.spell1Id = spell1Id;
+        this.spell2Id = spell2Id;
+        this.teamId = teamId;
+        this.item0 = item0;
+        this.item1 = item1;
+        this.item2 = item2;
+        this.item3 = item3;
+        this.item4 = item4;
+        this.item5 = item5;
+        this.item6 = item6;
+        this.kills = kills;
+        this.deaths = deaths;
+        this.assists = assists;
+        this.totalMinionKilled = totalMinionKilled;
+        this.win = win;
+        this.perk0 = perk0;
+        this.perkSubStyle = perkSubStyle;
+        this.gameDuration = gameDuration;
+        this.gameCreation = gameCreation;
+        this.queueName = queueName;
+    }
 
     @Override
     public String toString() {
@@ -34,51 +69,58 @@ public class TeamView {
                 ", win=" + win +
                 ", perk0='" + perk0 + '\'' +
                 ", perkSubStyle='" + perkSubStyle + '\'' +
+                ", gameDuration=" + gameDuration +
+                ", gameCreation=" + gameCreation +
+                ", queueName='" + queueName + '\'' +
                 '}';
     }
 
-    public String getPerk0() {
-        return perk0;
+    public String getQueueName() {
+        return queueName;
     }
 
-    public void setPerk0(String perk0) {
-        this.perk0 = perk0;
+    public void setQueueName(String queueName) {
+        this.queueName = queueName;
     }
 
-    public String getPerkSubStyle() {
-        return perkSubStyle;
+    public String getSummonerName() {
+        return summonerName;
     }
 
-    public void setPerkSubStyle(String perkSubStyle) {
-        this.perkSubStyle = perkSubStyle;
-    }
-
-    public TeamView() {
-    }
-
-    public TeamView(String summonerName, String position, String champion, String champName, String champFullImg, String spell1Id, String spell2Id, String teamId, String item0, String item1, String item2, String item3, String item4, String item5, String item6, int kills, int deaths, int assists, float totalMinionKilled, boolean win, String perk0, String perkSubStyle) {
+    public void setSummonerName(String summonerName) {
         this.summonerName = summonerName;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
         this.position = position;
+    }
+
+    public String getChampion() {
+        return champion;
+    }
+
+    public void setChampion(String champion) {
         this.champion = champion;
+    }
+
+    public String getChampName() {
+        return champName;
+    }
+
+    public void setChampName(String champName) {
         this.champName = champName;
+    }
+
+    public String getChampFullImg() {
+        return ChampFullImg;
+    }
+
+    public void setChampFullImg(String champFullImg) {
         ChampFullImg = champFullImg;
-        this.spell1Id = spell1Id;
-        this.spell2Id = spell2Id;
-        this.teamId = teamId;
-        this.item0 = item0;
-        this.item1 = item1;
-        this.item2 = item2;
-        this.item3 = item3;
-        this.item4 = item4;
-        this.item5 = item5;
-        this.item6 = item6;
-        this.kills = kills;
-        this.deaths = deaths;
-        this.assists = assists;
-        this.totalMinionKilled = totalMinionKilled;
-        this.win = win;
-        this.perk0 = perk0;
-        this.perkSubStyle = perkSubStyle;
     }
 
     public String getSpell1Id() {
@@ -201,43 +243,35 @@ public class TeamView {
         this.win = win;
     }
 
-    public String getSummonerName() {
-        return summonerName;
+    public String getPerk0() {
+        return perk0;
     }
 
-    public void setSummonerName(String summonerName) {
-        this.summonerName = summonerName;
+    public void setPerk0(String perk0) {
+        this.perk0 = perk0;
     }
 
-    public String getPosition() {
-        return position;
+    public String getPerkSubStyle() {
+        return perkSubStyle;
     }
 
-    public void setPosition(String position) {
-        this.position = position;
+    public void setPerkSubStyle(String perkSubStyle) {
+        this.perkSubStyle = perkSubStyle;
     }
 
-    public String getChampion() {
-        return champion;
+    public long getGameDuration() {
+        return gameDuration;
     }
 
-    public void setChampion(String champion) {
-        this.champion = champion;
+    public void setGameDuration(long gameDuration) {
+        this.gameDuration = gameDuration;
     }
 
-    public String getChampName() {
-        return champName;
+    public long getGameCreation() {
+        return gameCreation;
     }
 
-    public void setChampName(String champName) {
-        this.champName = champName;
-    }
-
-    public String getChampFullImg() {
-        return ChampFullImg;
-    }
-
-    public void setChampFullImg(String champFullImg) {
-        ChampFullImg = champFullImg;
+    public void setGameCreation(long gameCreation) {
+        this.gameCreation = gameCreation;
     }
 }

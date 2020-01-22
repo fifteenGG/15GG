@@ -178,6 +178,8 @@ public class SearchService {
                 String gameid = matchList.get(i);
                 System.out.println("게임번호 : " + gameid);
 
+                System.out.println("팀 불러오기 시작");
+
                 // 팀
                 List<TeamView> team = searchDAO.selectTeam(gameid);
                 System.out.println("팀 " + team);
