@@ -6,15 +6,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>15.GG</title>
+<meta charset="UTF-8">
+<title>게시판 상세보기</title>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/detail.css" />
 	<c:import url="../common/commonUtil.jsp"/>
-	<style>
-		div#board-container{width:400px; margin:0 auto; text-align:center;}
-		div#board-container input,div#board-container button{margin-bottom:15px;}
+<style>
+div#board-container{width:400px; margin:0 auto; text-align:center;}
+div#board-container input,div#board-container button{margin-bottom:15px;}
 		
-		#wrapper {
+#wrapper {
 	font-family:verdana;
 	margin: 30px auto ;
 	padding: 30px;
@@ -31,6 +31,7 @@ label {
 	padding: 13px 0;
 	color: #fff;
 	text-shadow: 1px 1px 1px #666;
+	text-align:left;
 }
 
 input {
@@ -104,22 +105,24 @@ label {
 html, body {
     height: -webkit-fill-available;
 }
-	</style>
+</style>
 </head>
 
-
-<body style="height: -webkit-fill-available; !important;">
+<body style="height: -webkit-fill-available; !important;
+			max-width: 1200px;
+    		font-weight: normal;
+   			margin:0 auto;">
 	<c:import url="../common/navbar.jsp"/>
 	<div id="wrapper">
 		<form id="form">
-			<label>제목</label>
+			<label><b>제목</b></label>
 			<input type="text"  name="boardTitle" value="${tipboard.tipTitle }" readonly required />
-			<label >작성자</label>
-			<input type="text"  name="boardWriter" value="${member.nickName }" readonly required />
-			<label for="message">내용</label>
+			<label ><b>작성자</b></label>
+			<input type="text"  name="boardWriter" value="${tipboard.nickName }" readonly required />
+			<label for="message"><b>내용</b></label>
 			<textarea name="message" id="message" cols="30" rows="10" readonly required>${tipboard.tipContent }</textarea><br />
 			<div>
-			<input type="button" class="btnDelete" name="btnDelete" id="btnDelete" value="돌아가기" style="width: 200px; height: 50px; display: inline-block;" onclick="location.href='${pageContext.request.contextPath}/champion/back.do'"/>
+			<input type="button" class="btnDelete" name="btnDelete" id="btnDelete" value="돌아가기" style="width: 200px; height: 50px; display: inline-block;" onclick="location.href='${pageContext.request.contextPath}/champion/championDetail.do?name=${champion.name}'"/>
 			<c:if test="${member.userNo eq tipboard.tipWriter}">
 			<input type="button" class="btnDelete" name="btnDelete" id="btnDelete" value="삭제"/ style="width: 200px; height: 50px;" onclick="location.href='${pageContext.request.contextPath}/champion/tipBoardDelete.do?tipBno=${tipboard.tipBno}'">
 			</c:if>

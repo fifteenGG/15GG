@@ -54,4 +54,6 @@
 			SET TIPREADCOUNT = TIPREADCOUNT +1
 			WHERE TIPBNO = #{tipBno}
 	</update>
+	
+	
 </mapper>

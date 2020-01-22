@@ -2,7 +2,7 @@ package com.kh.fifteenGG.common.apiKey;
 
 public class ApiKey {
 
-    private String key = "RGAPI-69aa1df5-d67b-4438-bd13-09022b50cb39";
+    private String key = "RGAPI-b0f1c9f8-bc6b-48c9-bd2d-e303c45548ff";
 
     public ApiKey() {
     }

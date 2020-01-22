@@ -54,6 +54,8 @@ public class TipBoardService {
 		
 		return tipBoardDAO.readCount(tipBno);
 	}
+
+
 	
 	
 }

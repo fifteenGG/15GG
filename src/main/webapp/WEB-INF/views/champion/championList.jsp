@@ -207,7 +207,7 @@
 							</tr>
 							</thead>
 
-							<tbody class="tabItem champion-trend-tier-TOP"
+							<tbody class="PATCH"
 								   style="position:absolute;
 								   background-color: darkgray; table-low-group;
 								   width: 400px;">
@@ -295,40 +295,40 @@
 			</div>
 			<div class="champion-index-trend tabWrap _recognized" style="width:400px; margin-top:250px;">
 				<div class="champion-index-trend-header">
-					<h2>챔피언 티어</h2>
+					<h2>라인별 1티어</h2>
 
 					<div class="champion-index-trend-content">
 						<div class="tabItems">
 							<div class="tabItem champion-trend champion-trend-tier" style="display:block;">
 								<div class="tabWrap _recognized" style="width : 400px; height:1000px;">
 									<ul class="champion-index-trend-position tabHeaders">
-										<li class="champion-index-trend-position__item tabHeader active"
+										<li class="champion-index-trend-position__item tabHeader active Top"
 											data-tab-show-class="champion-trend-tier-TOP"
-											data-position="TOP" style="width:69px; height:36px; ">
+											data-position="TOP" style="width:69px; height:36px; " onclick="topShow();">
 											<a href="#" style="font-weight:bolder;">탑</a>
 										</li>
 
-										<li class="champion-index-trend-position__item tabHeader active"
+										<li class="champion-index-trend-position__item tabHeader active Jungle"
 											data-tab-show-class="champion-trend-tier-JUNGLE"
-											data-position="JUNGLE" style="width:69px; height:36px; ">
+											data-position="JUNGLE" style="width:69px; height:36px; " onclick="jungleShow();">
 											<a href="#" style="font-weight:bolder;">정글</a>
 										</li>
 
-										<li class="champion-index-trend-position__item tabHeader active"
+										<li class="champion-index-trend-position__item tabHeader active Mid"
 											data-tab-show-class="champion-trend-tier-MID"
-											data-position="MID" style="width:69px; height:36px; ">
+											data-position="MID" style="width:69px; height:36px; " onclick="midShow();">
 											<a href="#" style="font-weight:bolder;">미드</a>
 										</li>
 
-										<li class="champion-index-trend-position__item tabHeader active"
+										<li class="champion-index-trend-position__item tabHeader active ADC"
 											data-tab-show-class="champion-trend-tier-ADC"
-											data-position="ADC" style="width:69px; height:36px; ">
+											data-position="ADC" style="width:69px; height:36px; " onclick="adcShow();">
 											<a href="#" style="font-weight:bolder;">원딜</a>
 										</li>
 
-										<li class="champion-index-trend-position__item tabHeader active"
+										<li class="champion-index-trend-position__item tabHeader active Support"
 											data-tab-show-class="champion-trend-tier-SUPPORT"
-											data-position="SUPPORT" style="width:69px; height:36px; ">
+											data-position="SUPPORT" style="width:69px; height:36px; " onclick="supportShow();">
 											<a href="#" style="font-weight:bolder;">서포터</a>
 										</li>
 									</ul>
@@ -350,13 +350,15 @@
 											<th class="champion-index-table__header" style="padding-right:40px; width:80px;">티어</th>
 										</tr>
 										</thead>
+										<!-- 탑 1티어 -->
+									<c:forEach items="${topFiveList}" var="topFiveList">
 										<tbody class="tabItem champion-trend-tier-TOP" style="display:table-row-group;">
-										<tr>
-											<td class="champion-index-table__cell champion-index-table__cell--rank">1</td>
+										<tr class="champion-trend-tier-TOP" style="display:none;">
+											<td class="champion-index-table__cell champion-index-table__cell--rank">${topFiveList.rnum}</td>
 											<td class="champion-index-table__cell champion-index-table__cell--image">
-												<a href="/fifteenGG/champion/championDetail.do?name=모데카이저"
+												<a href="/fifteenGG/champion/championDetail.do?name=${topFiveList.champName}"
 												   style="display:inline-block; width:36px; height:36px;">
-													<img src="https://ddragon.leagueoflegends.com/cdn/9.24.2/img/champion/Mordekaiser.png"
+													<img src="https://ddragon.leagueoflegends.com/cdn/9.24.2/img/champion/${topFiveList.champFullIMG}"
 														 style="width:36px; height:36px; position:absolute;" />
 													<i class="__sprite __spc32 __spc32-74"
 													   style="display:inline-block; width:36px; height:36px;"></i>
@@ -364,22 +366,329 @@
 											</td>
 											<td class="champion-index-table__cell champion-index-table__cell--champion"
 												style="font-size: small;">
-												<a href="/fifteenGG/champion/championDetail.do?name=모데카이저">
-													<div class="champion-index-table__name">모데카이저</div>
+												<a href="/fifteenGG/champion/championDetail.do?name=${topFiveList.champName}">
+													<div class="champion-index-table__name">${topFiveList.champName}</div>
 												</a>
 											</td>
 											<td class="champion-index-table__cell
 		  		   						   champion-index-table__cell--value"
-												style="font-size: small;">51.99%</td>
+												style="font-size: small;">${topFiveList.winPercent}%</td>
 											<td class="champion-index-table__cell
 		  		   				           champion-index-table__cell--value"
-												style="font-size: small;">16.75%</td>
+												style="font-size: small;">${topFiveList.picPercent}%</td>
 											<td class="champion-index-table__cell
-		  		   				          champion-index-table__cell--value">
+		  		   				          champion-index-table__cell--value" style="padding-right : 40px;">
 												<img src="//opgg-static.akamaized.net/images/site/champion/icon-champtier-1.png" alt="" />
 											</td>
 										</tr>
 										</tbody>
+									</c:forEach>		
+									<!-- 탑 2티어 -->
+									<c:forEach items="${topTenList}" var="topTenList">
+										<tbody class="tabItem champion-trend-tier-TOP" style="display:table-row-group;">
+										<tr class="champion-trend-tier-TOP" style="display:none;">
+											<td class="champion-index-table__cell champion-index-table__cell--rank">${topTenList.rnum}</td>
+											<td class="champion-index-table__cell champion-index-table__cell--image">
+												<a href="/fifteenGG/champion/championDetail.do?name=${topTenList.champName}"
+												   style="display:inline-block; width:36px; height:36px;">
+													<img src="https://ddragon.leagueoflegends.com/cdn/9.24.2/img/champion/${topTenList.champFullIMG}"
+														 style="width:36px; height:36px; position:absolute;" />
+													<i class="__sprite __spc32 __spc32-74"
+													   style="display:inline-block; width:36px; height:36px;"></i>
+												</a>
+											</td>
+											<td class="champion-index-table__cell champion-index-table__cell--champion"
+												style="font-size: small;">
+												<a href="/fifteenGG/champion/championDetail.do?name=${topTenList.champName}">
+													<div class="champion-index-table__name">${topTenList.champName}</div>
+												</a>
+											</td>
+											<td class="champion-index-table__cell
+		  		   						   champion-index-table__cell--value"
+												style="font-size: small;">${topTenList.winPercent}%</td>
+											<td class="champion-index-table__cell
+		  		   				           champion-index-table__cell--value"
+												style="font-size: small;">${topTenList.picPercent}%</td>
+											<td class="champion-index-table__cell
+		  		   				          champion-index-table__cell--value" style="padding-right : 40px;">
+												<img src="//opgg-static.akamaized.net/images/site/champion/icon-champtier-2.png" alt="" />
+											</td>
+										</tr>
+										</tbody>
+									</c:forEach>
+									<!-- 정글 1티어 -->
+									<c:forEach items="${jungleFiveList}" var="jungleFiveList">
+										<tbody class="tabItem champion-trend-tier-JUNGLE" style="display:table-row-group;">
+										<tr class="champion-trend-tier-JUNGLE" style="display:none;">
+											<td class="champion-index-table__cell champion-index-table__cell--rank">${jungleFiveList.rnum}</td>
+											<td class="champion-index-table__cell champion-index-table__cell--image">
+												<a href="/fifteenGG/champion/championDetail.do?name=${jungleFiveList.champName}"
+												   style="display:inline-block; width:36px; height:36px;">
+													<img src="https://ddragon.leagueoflegends.com/cdn/9.24.2/img/champion/${jungleFiveList.champFullIMG}"
+														 style="width:36px; height:36px; position:absolute;" />
+													<i class="__sprite __spc32 __spc32-74"
+													   style="display:inline-block; width:36px; height:36px;"></i>
+												</a>
+											</td>
+											<td class="champion-index-table__cell champion-index-table__cell--champion"
+												style="font-size: small;">
+												<a href="/fifteenGG/champion/championDetail.do?name=${jungleFiveList.champName}">
+													<div class="champion-index-table__name">${jungleFiveList.champName}</div>
+												</a>
+											</td>
+											<td class="champion-index-table__cell
+		  		   						   champion-index-table__cell--value"
+												style="font-size: small;">${jungleFiveList.winPercent}%</td>
+											<td class="champion-index-table__cell
+		  		   				           champion-index-table__cell--value"
+												style="font-size: small;">${jungleFiveList.picPercent}%</td>
+											<td class="champion-index-table__cell
+		  		   				          champion-index-table__cell--value" style="padding-right : 40px;">
+												<img src="//opgg-static.akamaized.net/images/site/champion/icon-champtier-1.png" alt="" />
+											</td>
+										</tr>
+										</tbody>
+									</c:forEach>
+									
+									<!-- 정글 2티어 -->
+									<c:forEach items="${jungleTenList}" var="jungleTenList">
+										<tbody class="tabItem champion-trend-tier-JUNGLE" style="display:table-row-group;">
+										<tr class="champion-trend-tier-JUNGLE" style="display:none;">
+											<td class="champion-index-table__cell champion-index-table__cell--rank">${jungleTenList.rnum}</td>
+											<td class="champion-index-table__cell champion-index-table__cell--image">
+												<a href="/fifteenGG/champion/championDetail.do?name=${jungleTenList.champName}"
+												   style="display:inline-block; width:36px; height:36px;">
+													<img src="https://ddragon.leagueoflegends.com/cdn/9.24.2/img/champion/${jungleTenList.champFullIMG}"
+														 style="width:36px; height:36px; position:absolute;" />
+													<i class="__sprite __spc32 __spc32-74"
+													   style="display:inline-block; width:36px; height:36px;"></i>
+												</a>
+											</td>
+											<td class="champion-index-table__cell champion-index-table__cell--champion"
+												style="font-size: small;">
+												<a href="/fifteenGG/champion/championDetail.do?name=${jungleTenList.champName}">
+													<div class="champion-index-table__name">${jungleTenList.champName}</div>
+												</a>
+											</td>
+											<td class="champion-index-table__cell
+		  		   						   champion-index-table__cell--value"
+												style="font-size: small;">${jungleTenList.winPercent}%</td>
+											<td class="champion-index-table__cell
+		  		   				           champion-index-table__cell--value"
+												style="font-size: small;">${jungleTenList.picPercent}%</td>
+											<td class="champion-index-table__cell
+		  		   				          champion-index-table__cell--value" style="padding-right : 40px;">
+												<img src="//opgg-static.akamaized.net/images/site/champion/icon-champtier-2.png" alt="" />
+											</td>
+										</tr>
+										</tbody>
+									</c:forEach>
+									
+									<!-- 미드 1티어 -->
+									<c:forEach items="${midFiveList}" var="midFiveList">
+										<tbody class="tabItem champion-trend-tier-MID" style="display:table-row-group;">
+										<tr class="champion-trend-tier-MID" style="display:none;">
+											<td class="champion-index-table__cell champion-index-table__cell--rank">${midFiveList.rnum}</td>
+											<td class="champion-index-table__cell champion-index-table__cell--image">
+												<a href="/fifteenGG/champion/championDetail.do?name=${midFiveList.champName}"
+												   style="display:inline-block; width:36px; height:36px;">
+													<img src="https://ddragon.leagueoflegends.com/cdn/9.24.2/img/champion/${midFiveList.champFullIMG}"
+														 style="width:36px; height:36px; position:absolute;" />
+													<i class="__sprite __spc32 __spc32-74"
+													   style="display:inline-block; width:36px; height:36px;"></i>
+												</a>
+											</td>
+											<td class="champion-index-table__cell champion-index-table__cell--champion"
+												style="font-size: small;">
+												<a href="/fifteenGG/champion/championDetail.do?name=${midFiveList.champName}">
+													<div class="champion-index-table__name">${midFiveList.champName}</div>
+												</a>
+											</td>
+											<td class="champion-index-table__cell
+		  		   						   champion-index-table__cell--value"
+												style="font-size: small;">${midFiveList.winPercent}%</td>
+											<td class="champion-index-table__cell
+		  		   				           champion-index-table__cell--value"
+												style="font-size: small;">${midFiveList.picPercent}%</td>
+											<td class="champion-index-table__cell
+		  		   				          champion-index-table__cell--value" style="padding-right : 40px;">
+												<img src="//opgg-static.akamaized.net/images/site/champion/icon-champtier-1.png" alt="" />
+											</td>
+										</tr>
+										</tbody>
+									</c:forEach>
+									
+									<!-- 미드 2티어 -->
+									<c:forEach items="${midTenList}" var="midTenList">
+										<tbody class="tabItem champion-trend-tier-MID" style="display:table-row-group;">
+										<tr class="champion-trend-tier-MID" style="display:none;">
+											<td class="champion-index-table__cell champion-index-table__cell--rank">${midTenList.rnum}</td>
+											<td class="champion-index-table__cell champion-index-table__cell--image">
+												<a href="/fifteenGG/champion/championDetail.do?name=${midTenList.champName}"
+												   style="display:inline-block; width:36px; height:36px;">
+													<img src="https://ddragon.leagueoflegends.com/cdn/9.24.2/img/champion/${midTenList.champFullIMG}"
+														 style="width:36px; height:36px; position:absolute;" />
+													<i class="__sprite __spc32 __spc32-74"
+													   style="display:inline-block; width:36px; height:36px;"></i>
+												</a>
+											</td>
+											<td class="champion-index-table__cell champion-index-table__cell--champion"
+												style="font-size: small;">
+												<a href="/fifteenGG/champion/championDetail.do?name=${midTenList.champName}">
+													<div class="champion-index-table__name">${midTenList.champName}</div>
+												</a>
+											</td>
+											<td class="champion-index-table__cell
+		  		   						   champion-index-table__cell--value"
+												style="font-size: small;">${midTenList.winPercent}%</td>
+											<td class="champion-index-table__cell
+		  		   				           champion-index-table__cell--value"
+												style="font-size: small;">${midTenList.picPercent}%</td>
+											<td class="champion-index-table__cell
+		  		   				          champion-index-table__cell--value" style="padding-right : 40px;">
+												<img src="//opgg-static.akamaized.net/images/site/champion/icon-champtier-2.png" alt="" />
+											</td>
+										</tr>
+										</tbody>
+									</c:forEach>
+									
+									
+									<!-- 원딜 1티어 -->
+									<c:forEach items="${adcFiveList}" var="adcFiveList">
+										<tbody class="tabItem champion-trend-tier-ADC" style="display:table-row-group;">
+										<tr class="champion-trend-tier-ADC" style="display:none;">
+											<td class="champion-index-table__cell champion-index-table__cell--rank">${adcFiveList.rnum}</td>
+											<td class="champion-index-table__cell champion-index-table__cell--image">
+												<a href="/fifteenGG/champion/championDetail.do?name=${adcFiveList.champName}"
+												   style="display:inline-block; width:36px; height:36px;">
+													<img src="https://ddragon.leagueoflegends.com/cdn/9.24.2/img/champion/${adcFiveList.champFullIMG}"
+														 style="width:36px; height:36px; position:absolute;" />
+													<i class="__sprite __spc32 __spc32-74"
+													   style="display:inline-block; width:36px; height:36px;"></i>
+												</a>
+											</td>
+											<td class="champion-index-table__cell champion-index-table__cell--champion"
+												style="font-size: small;">
+												<a href="/fifteenGG/champion/championDetail.do?name=${adcFiveList.champName}">
+													<div class="champion-index-table__name">${adcFiveList.champName}</div>
+												</a>
+											</td>
+											<td class="champion-index-table__cell
+		  		   						   champion-index-table__cell--value"
+												style="font-size: small;">${adcFiveList.winPercent}%</td>
+											<td class="champion-index-table__cell
+		  		   				           champion-index-table__cell--value"
+												style="font-size: small;">${adcFiveList.picPercent}%</td>
+											<td class="champion-index-table__cell
+		  		   				          champion-index-table__cell--value" style="padding-right : 40px;">
+												<img src="//opgg-static.akamaized.net/images/site/champion/icon-champtier-1.png" alt="" />
+											</td>
+										</tr>
+										</tbody>
+									</c:forEach>
+									
+									<!-- 원딜 2티어 -->
+									<c:forEach items="${adcTenList}" var="adcTenList">
+										<tbody class="tabItem champion-trend-tier-ADC" style="display:table-row-group;">
+										<tr class="champion-trend-tier-ADC" style="display:none;">
+											<td class="champion-index-table__cell champion-index-table__cell--rank">${adcTenList.rnum}</td>
+											<td class="champion-index-table__cell champion-index-table__cell--image">
+												<a href="/fifteenGG/champion/championDetail.do?name=${adcTenList.champName}"
+												   style="display:inline-block; width:36px; height:36px;">
+													<img src="https://ddragon.leagueoflegends.com/cdn/9.24.2/img/champion/${adcTenList.champFullIMG}"
+														 style="width:36px; height:36px; position:absolute;" />
+													<i class="__sprite __spc32 __spc32-74"
+													   style="display:inline-block; width:36px; height:36px;"></i>
+												</a>
+											</td>
+											<td class="champion-index-table__cell champion-index-table__cell--champion"
+												style="font-size: small;">
+												<a href="/fifteenGG/champion/championDetail.do?name=${adcTenList.champName}">
+													<div class="champion-index-table__name">${adcTenList.champName}</div>
+												</a>
+											</td>
+											<td class="champion-index-table__cell
+		  		   						   champion-index-table__cell--value"
+												style="font-size: small;">${adcTenList.winPercent}%</td>
+											<td class="champion-index-table__cell
+		  		   				           champion-index-table__cell--value"
+												style="font-size: small;">${adcTenList.picPercent}%</td>
+											<td class="champion-index-table__cell
+		  		   				          champion-index-table__cell--value" style="padding-right : 40px;">
+												<img src="//opgg-static.akamaized.net/images/site/champion/icon-champtier-2.png" alt="" />
+											</td>
+										</tr>
+										</tbody>
+									</c:forEach>
+									
+									<!-- 서포터 1티어 -->
+									<c:forEach items="${supportFiveList}" var="supportFiveList">
+										<tbody class="tabItem champion-trend-tier-SUPPORT" style="display:table-row-group;">
+										<tr class="champion-trend-tier-SUPPORT" style="display:none;">
+											<td class="champion-index-table__cell champion-index-table__cell--rank">${supportFiveList.rnum}</td>
+											<td class="champion-index-table__cell champion-index-table__cell--image">
+												<a href="/fifteenGG/champion/championDetail.do?name=${supportFiveList.champName}"
+												   style="display:inline-block; width:36px; height:36px;">
+													<img src="https://ddragon.leagueoflegends.com/cdn/9.24.2/img/champion/${supportFiveList.champFullIMG}"
+														 style="width:36px; height:36px; position:absolute;" />
+													<i class="__sprite __spc32 __spc32-74"
+													   style="display:inline-block; width:36px; height:36px;"></i>
+												</a>
+											</td>
+											<td class="champion-index-table__cell champion-index-table__cell--champion"
+												style="font-size: small;">
+												<a href="/fifteenGG/champion/championDetail.do?name=${supportFiveList.champName}">
+													<div class="champion-index-table__name">${supportFiveList.champName}</div>
+												</a>
+											</td>
+											<td class="champion-index-table__cell
+		  		   						   champion-index-table__cell--value"
+												style="font-size: small;">${supportFiveList.winPercent}%</td>
+											<td class="champion-index-table__cell
+		  		   				           champion-index-table__cell--value"
+												style="font-size: small;">${supportFiveList.picPercent}%</td>
+											<td class="champion-index-table__cell
+		  		   				          champion-index-table__cell--value" style="padding-right : 40px;">
+												<img src="//opgg-static.akamaized.net/images/site/champion/icon-champtier-1.png" alt="" />
+											</td>
+										</tr>
+										</tbody>
+									</c:forEach>
+									
+									<!-- 서포터 2티어 -->
+									<c:forEach items="${supportTenList}" var="supportTenList">
+										<tbody class="tabItem champion-trend-tier-SUPPORT" style="display:table-row-group;">
+										<tr class="champion-trend-tier-SUPPORT" style="display:none;">
+											<td class="champion-index-table__cell champion-index-table__cell--rank">${supportTenList.rnum}</td>
+											<td class="champion-index-table__cell champion-index-table__cell--image">
+												<a href="/fifteenGG/champion/championDetail.do?name=${supportTenList.champName}"
+												   style="display:inline-block; width:36px; height:36px;">
+													<img src="https://ddragon.leagueoflegends.com/cdn/9.24.2/img/champion/${supportTenList.champFullIMG}"
+														 style="width:36px; height:36px; position:absolute;" />
+													<i class="__sprite __spc32 __spc32-74"
+													   style="display:inline-block; width:36px; height:36px;"></i>
+												</a>
+											</td>
+											<td class="champion-index-table__cell champion-index-table__cell--champion"
+												style="font-size: small;">
+												<a href="/fifteenGG/champion/championDetail.do?name=${supportTenList.champName}">
+													<div class="champion-index-table__name">${supportTenList.champName}</div>
+												</a>
+											</td>
+											<td class="champion-index-table__cell
+		  		   						   champion-index-table__cell--value"
+												style="font-size: small;">${supportTenList.winPercent}%</td>
+											<td class="champion-index-table__cell
+		  		   				           champion-index-table__cell--value"
+												style="font-size: small;">${supportTenList.picPercent}%</td>
+											<td class="champion-index-table__cell
+		  		   				          champion-index-table__cell--value" style="padding-right : 40px;">
+												<img src="//opgg-static.akamaized.net/images/site/champion/icon-champtier-2.png" alt="" />
+											</td>
+										</tr>
+										</tbody>
+									</c:forEach>
+																													
 									</table>
 
 								</div>
@@ -397,12 +706,51 @@
 <script>
 	function onload() {
 		console.log(${champions});
+		$('.champion-trend-tier-TOP').show();
+	
 	}
 
 	function championDetail(name){
 		location.href = "${pageContext.request.contextPath}/champion/championDetail.do?name="+name;
 	}
-
+	
+	function topShow(){
+		$('.champion-trend-tier-TOP').show();
+		$('.champion-trend-tier-JUNGLE').hide();
+		$('.champion-trend-tier-MID').hide();
+		$('.champion-trend-tier-ADC').hide();
+		$('.champion-trend-tier-SUPPORT').hide();
+	}
+	function jungleShow(){
+		$('.champion-trend-tier-TOP').hide();
+		$('.champion-trend-tier-JUNGLE').show();
+		$('.champion-trend-tier-MID').hide();
+		$('.champion-trend-tier-ADC').hide();
+		$('.champion-trend-tier-SUPPORT').hide();
+	}
+	function midShow(){
+		$('.champion-trend-tier-TOP').hide();
+		$('.champion-trend-tier-JUNGLE').hide();
+		$('.champion-trend-tier-MID').show();
+		$('.champion-trend-tier-ADC').hide();
+		$('.champion-trend-tier-SUPPORT').hide();
+	}
+	
+	function adcShow(){
+		$('.champion-trend-tier-TOP').hide();
+		$('.champion-trend-tier-JUNGLE').hide();
+		$('.champion-trend-tier-MID').hide();
+		$('.champion-trend-tier-ADC').show();
+		$('.champion-trend-tier-SUPPORT').hide();
+	}
+	
+	function supportShow(){
+		$('.champion-trend-tier-TOP').hide();
+		$('.champion-trend-tier-JUNGLE').hide();
+		$('.champion-trend-tier-MID').hide();
+		$('.champion-trend-tier-ADC').hide();
+		$('.champion-trend-tier-SUPPORT').show();
+	}
 </script>
 
 

@@ -60,7 +60,7 @@ public class TipBaordDAO {
 			return sqlSession.update("tipBoard-mapper.readCount", tipBno);
 		}
 
-		
+	
 
 
 }
