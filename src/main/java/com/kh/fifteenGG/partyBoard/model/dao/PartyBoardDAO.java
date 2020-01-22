@@ -41,6 +41,8 @@ public class PartyBoardDAO {
 
 
     public PartyBoard SelectRcParty(String tierInfo) {
+		System.out.println("dao옴");
 		return sqlSession.selectOne("partyBoard-mapper.SelectRcParty", tierInfo);
     }
+
 }

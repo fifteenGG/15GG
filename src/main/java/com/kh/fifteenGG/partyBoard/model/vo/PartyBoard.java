@@ -11,8 +11,7 @@ import java.util.GregorianCalendar;
 public class PartyBoard  implements Serializable{
 	
 	Calendar cal = new GregorianCalendar();
-	
-	
+
 	private long epoch = System.currentTimeMillis()/1000;	
 	private int pbNo;
 	private int pbTimer;

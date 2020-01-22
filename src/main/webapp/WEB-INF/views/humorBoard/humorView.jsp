@@ -147,28 +147,28 @@
 			</div>
 		</div>
 
-		<div class="ads__gpt__728-90__mid" style="margin:auto;">
-			<div class="row1"
-				 style="height: 90px; display: flex; align-items: center; justify-content: center; position: relative; margin: 0 auto; overflow: hidden;">
-				<div id="div-gpt-ad-1562917435090-0"
-					 data-google-query-id="COK-spL-lecCFcssvQodzpMMlg">
+<%--		<div class="ads__gpt__728-90__mid" style="margin:auto;">--%>
+<%--			<div class="row1"--%>
+<%--				 style="height: 90px; display: flex; align-items: center; justify-content: center; position: relative; margin: 0 auto; overflow: hidden;">--%>
+<%--				<div id="div-gpt-ad-1562917435090-0"--%>
+<%--					 data-google-query-id="COK-spL-lecCFcssvQodzpMMlg">--%>
 
-					<div
-							id="google_ads_iframe_/114726905/NEW_OP.GG_Talk_Top_728x90_0__container__"
-							style="border: 0pt none;">
-						<iframe
-								id="google_ads_iframe_/114726905/NEW_OP.GG_Talk_Top_728x90_0"
-								title="3rd party ad content"
-								name="google_ads_iframe_/114726905/NEW_OP.GG_Talk_Top_728x90_0"
-								width="728" height="90" scrolling="no" marginwidth="0"
-								marginheight="0" frameborder="0" srcdoc=""
-								sandbox="allow-forms allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation"
-								style="border: 0px; vertical-align: bottom;"
-								data-google-container-id="2" data-load-complete="true"></iframe>
-					</div>
-				</div>
-			</div>
-		</div>
+<%--					<div--%>
+<%--							id="google_ads_iframe_/114726905/NEW_OP.GG_Talk_Top_728x90_0__container__"--%>
+<%--							style="border: 0pt none;">--%>
+<%--						<iframe--%>
+<%--								id="google_ads_iframe_/114726905/NEW_OP.GG_Talk_Top_728x90_0"--%>
+<%--								title="3rd party ad content"--%>
+<%--								name="google_ads_iframe_/114726905/NEW_OP.GG_Talk_Top_728x90_0"--%>
+<%--								width="728" height="90" scrolling="no" marginwidth="0"--%>
+<%--								marginheight="0" frameborder="0" srcdoc=""--%>
+<%--								sandbox="allow-forms allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation"--%>
+<%--								style="border: 0px; vertical-align: bottom;"--%>
+<%--								data-google-container-id="2" data-load-complete="true"></iframe>--%>
+<%--					</div>--%>
+<%--				</div>--%>
+<%--			</div>--%>
+<%--		</div>--%>
 
 		<div id="comment">
 			<div data-v-4a6d76c9="" data-post="1757489">

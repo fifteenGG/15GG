@@ -103,6 +103,8 @@ public class SummonerSearch {
 
         } catch (Exception e) {
             e.printStackTrace();
+            return "common/errorPage";
+
         }
 
         return "summoner/summonerView";
@@ -200,9 +202,9 @@ public class SummonerSearch {
         // 매치 정보 가져오기
         List<Object> list = searchService.selectSummonerMatch(summonerName, cPage, endPage);
 
-        PartyBoard partyBoard = partyBoardService.SelectRcParty(tierInfo);
+        System.out.println("내 티어 정보 시작 : " + tierInfo );
 
-        System.out.println("내 티어 정보" + tierInfo);
+        PartyBoard partyBoard = partyBoardService.SelectRcParty(tierInfo);
 
         System.out.println("추천파티정보 : "+partyBoard);
 
