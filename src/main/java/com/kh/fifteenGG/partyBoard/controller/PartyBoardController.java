@@ -33,19 +33,16 @@ public class PartyBoardController {
 		return "partyBoard/partyBoard";
 	}
 	
-	/*
-	 * @RequestMapping(value = "/getmorefdlist.pms", method = RequestMethod.GET)
-	 * public List<Object> getMoreFdList(Model model, Locale locale,
-	 * 
-	 * @RequestParam("viewCountList") int viewCountList) {
-	 * 
-	 * 
-	 * 
-	 * List<Object> list = partyBoardService.getViewCountList(viewCountList); return
-	 * list;
-	 * 
-	 * }
-	 */
+	
+	@RequestMapping("/partyBoard/indexPartyBoardList.do")
+	public String indexPartyBoardList(PartyBoard partyBoard, Model model){
+		
+		List<PartyBoard> list = partyBoardService.indexPartyBoardList(partyBoard);
+		model.addAttribute("list", list); 
+		
+		return "partyBoard/indexPartyBoard";
+	}
+
 	 
 	@RequestMapping("/partyBoard/partyBoardInsert.do")
 	public String insertPartyBoard(PartyBoard partyBoard, Model model) {

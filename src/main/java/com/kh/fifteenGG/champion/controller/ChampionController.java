@@ -59,6 +59,7 @@ public class ChampionController {
         List<Percentage> supportTenList = percentageService.winPercentSupportTen();
 
 
+        List<Percentage> champAll = percentageService.champAll();
         List<Percentage> supportAll = percentageService.supportAll();
         List<Percentage> adcAll = percentageService.adcAll();
         List<Percentage> topAll = percentageService.topAll();
@@ -82,7 +83,8 @@ public class ChampionController {
              .addAttribute("adcAll", adcAll)
              .addAttribute("topAll", topAll)
              .addAttribute("midAll", midAll)
-             .addAttribute("jungleAll", jungleAll);
+             .addAttribute("jungleAll", jungleAll)
+        	 .addAttribute("champAll", champAll);
 
 
 

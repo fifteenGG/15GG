@@ -524,7 +524,7 @@
         <div class="gg-thin-line mx-3 d-block d-lg-none"></div>
         <div id="ratingArea" class="col-lg-4 align-items-center">
                 <span>
-                    여기에 승률 그래프 넣을 예정
+<%--                    미구현 영역--%>
                 </span>
         </div>
 
@@ -818,20 +818,20 @@
                                      data-href="/kr/profile/%EC%A0%84%EC%82%B0%EC%9D%98%EC%86%90%EB%86%80%EB%A6%BC">
                                     <div class="d-flex justify-content-between py-2">
                                         <div class="d-flex align-items-center gg-profile-duo-request-list-title">
-                                            <div class="aa">자유랭크 실버4</div>
+                                            <div id="partyTier" class="aa">자유랭크 실버4</div>
                                             <div class="px-1"></div>
-                                            <div>모든 포지션 구함</div>
+                                            <div id="partyPosition">모든 포지션 구함</div>
                                             <div class="px-1"></div>
                                         </div>
                                         <div class="d-flex align-items-center justify-content-end">
                                             <div class="gg-text-normal">
                                                 <i class="fas fa-user-edit"></i>
-                                                <span>전산의손놀림</span>
+                                                <span id="partyWriter">전산의손놀림</span>
                                             </div>
                                             <div class="px-1"></div>
                                         </div>
                                     </div>
-                                    <div class="d-flex text-secondary text-left my-font">
+                                    <div id="partyContent" class="d-flex text-secondary text-left my-font">
                                         골플 자유랭 모집 욕안하는 착한유저들 구합니다 즐빡겜!!!
                                     </div>
                                 </div>
@@ -853,6 +853,7 @@
                             <button type="button" class="btn btn-info" onclick="moreMatch();">
                                 더보기
                             </button>
+                            <input type="hidden" id="cPage">
                         </div>
                         <!-- 우측 영역 끝 -->
                     </div>
@@ -864,30 +865,24 @@
     </div>
 
 </div>
+<%--페이징--%>
 <script>
-    var cPage = ${cPage};
+    var $cPage = $('#cPage');
 
     function moreMatch() {
-        location.href = "${pageContext.request.contextPath}/search/MatchSearch.do?cPage=" + cPage + "&summonerName=${summoner.name}";
-    }
-
-</script>
-
-<script>
-    $(function () {
-
         $.ajax({
             url: "${pageContext.request.contextPath}/search/MatchSearch.do",
-            data: {summonerName: '${summoner.name}'},
+            data: {summonerName: '${summoner.name}',
+            cPage : $cPage.val()},
             type: "POST",
             dataType: "json",
             success: function (data) {
 
+                $('#matchAllArea').empty();
+
                 var name = $('#summonerName').val();
 
-                if (data.matchViewList.length == 0) {
-                    alert('데이터가 없습니다. 업데이트를 실행하세요.');
-                }
+                $cPage.val(data.cPage);
 
                 for (var i = 0; i < data.matchViewList.length; i++) {
                     $('#matchAllArea').append('<div class="tab-pane active">');
@@ -933,6 +928,16 @@
                                 '\n' +
                                 '                                                                    <img class="d-block img-xs rounded" alt="img"\n' +
                                 '                                                                         src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/spell/' + data.matchViewList[i][j].spell2Id + '.png">');
+
+                            $('.itq').eq(i).append(' <div class="col-2 col-lg-1 d-flex justify-content-center justify-content-lg-start px-0 my-auto">\n' +
+                                '                                                                <div class="col-xs-12 gg-padding-1px perkImg">');
+                            $('.perkImg').eq(i).append(' <img class="rune d-block img-xs rounded" alt="img"\n' +
+                                '                                                                         src="https://opgg-static.akamaized.net/images/lol/perk/' + data.matchViewList[i][j].perk0 + '.png">\n' +
+                                '\n' +
+                                '                                                                    <img class="rune d-block img-xs rounded" alt="img"\n' +
+                                '                                                                         src="https://opgg-static.akamaized.net/images/lol/perkStyle/' + data.matchViewList[i][j].perkSubStyle + '.png">');
+
+
                             $('.itq').eq(i).append('<div class="col-2 col-lg-2 d-flex flex-column my-auto mykda">');
 
                             $('.mykda').eq(i).append('<span class="gg-important-number gg-text-negative">' + ((data.matchViewList[i][j].kills + data.matchViewList[i][j].assists) / data.matchViewList[i][j].deaths).toFixed(1)).append('<span class="gg-matchlist-sub-description text-truncate">KDA');
@@ -954,8 +959,171 @@
                                 '     <img class="d-block img-xs rounded" src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/item/' + data.matchViewList[i][j].item4 + '.png">\n' +
                                 '     <img class="d-block img-xs rounded" src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/item/' + data.matchViewList[i][j].item5 + '.png">');
 
-                            $('.itq').eq(i).append('<div class="col-2 d-flex px-0 flex-column justify-content-center teamBalance">');
-                            $('.teamBalance').eq(i).append('<span class="gg-important-text gg-text-soso">보통').append('<span class="gg-matchlist-sub-description gg-text-break">팀운');
+                            // $('.itq').eq(i).append('<div class="col-2 d-flex px-0 flex-column justify-content-center teamBalance">');
+                            // $('.teamBalance').eq(i).append('<span class="gg-important-text gg-text-soso">보통').append('<span class="gg-matchlist-sub-description gg-text-break">팀운');
+
+                            $('.itq').eq(i).append('<div class="row no-gutters pt-1">\n' +
+                                '                                                            <div class="col-12 text-left d-flex align-items-center pl-2">\n' +
+                                '                                                                <span class="badge badge-default"></span>\n' +
+                                '                                                            </div>\n' +
+                                '                                                        </div>');
+
+                            // ======= 팀 정보
+                            $('.gg-matchlist').eq(i).append('<div class="teamArea col-md-4 d-none d-lg-flex align-items-center gg-matchlist-' + data.matchViewList[i][j].win + '">');
+                            $('.teamArea').eq(i).append('<div class="row no-gutters w-100">\n' +
+                                '                                            <div class="col-11">\n' +
+                                '                                                <div class="teamMember row no-gutters">');
+                            $('.teamMember').eq(i).append('<div class="col-6 team1">').append('<div class="col-6 team2">');
+
+                            for (var m = 0; m < 5; m++) {
+                                $('.team1').eq(i).append('<div class="of-ellipsis text-left pl-1 gg-matchlist-item gg-border-' + data.matchViewList[i][m].win + '">\n' +
+                                    '                                                                <img class="img-xs img-circled gg-img-18x18"\n' +
+                                    '                                                                     src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/champion/' + data.matchViewList[i][m].champFullImg + '" >\n' +
+                                    '                                                                <a class="text-secondary" href="${pageContext.request.contextPath}/search/SummonerSearch.do?summonerName=' + data.matchViewList[i][m].summonerName + '">\n' +
+                                    '                                                                    <span class="gg-text-soso">' + data.matchViewList[i][m].summonerName + '</span>\n' +
+                                    '                                                                </a>\n' +
+                                    '                                                            </div>');
+                            }
+                            for (var m = 5; m < 10; m++) {
+                                $('.team2').eq(i).append('<div class="of-ellipsis text-left pl-1 gg-matchlist-item gg-border-' + data.matchViewList[i][m].win + '">\n' +
+                                    '                                                                <img class="img-xs img-circled gg-img-18x18"\n' +
+                                    '                                                                     src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/champion/' + data.matchViewList[i][m].champFullImg + '" >\n' +
+                                    '                                                                <a class="text-secondary" href="${pageContext.request.contextPath}/search/SummonerSearch.do?summonerName=' + data.matchViewList[i][m].summonerName + '">\n' +
+                                    '                                                                    <span class="gg-text-soso">' + data.matchViewList[i][m].summonerName + '</span>\n' +
+                                    '                                                                </a>\n' +
+                                    '                                                            </div>');
+                            }
+
+                        }
+
+                    }
+
+                }
+
+
+            }, error: function (e) {
+                console.log("ajax 처리 실패");
+
+            },
+            beforeSend: function () {
+                $('.wrap-loading').removeClass('display-none');
+
+            }
+            , complete: function () {
+                $('.wrap-loading').addClass('display-none');
+            }, timeout:100000
+        });
+    }
+
+</script>
+<%--불러오기--%>
+<script>
+    $(function () {
+        var $cPage = $('#cPage');
+        var $partyTier = $('#partyTier');
+        var $partyPosition = $('#partyPosition');
+        var $partyContent = $('#partyContent');
+        var $partyWriter = $('#partyWriter');
+
+        $.ajax({
+            url: "${pageContext.request.contextPath}/search/MatchSearch.do",
+            data: {summonerName: '${summoner.name}',
+                cPage : $cPage.val()},
+            type: "POST",
+            dataType: "json",
+            success: function (data) {
+
+                console.log(data);
+
+                $partyTier.empty();
+                $partyPosition.empty();
+                $partyContent.empty();
+                $partyWriter.empty();
+
+                var name = $('#summonerName').val();
+
+                if (data.matchViewList.length == 0) {
+                    alert('데이터가 없습니다. 업데이트를 실행하세요.');
+                }
+
+                $cPage.val(data.cPage);
+
+                for (var i = 0; i < data.matchViewList.length; i++) {
+                    $('#matchAllArea').append('<div class="tab-pane active">');
+
+                    $('#matchAllArea>div').eq(i).append('<div class="Normal gg-thin-line">').append('<div id="matchListAllArea" class="row no-gutters gg-action gg-matchlist FreeRank">');
+
+                    for (var j = 0; j < 10; j++) {
+
+                        if (data.matchViewList[i][j].summonerName == name) {
+
+                            // ===== 승패 포지션
+
+                            $('.gg-matchlist').eq(i).append('<div id="myStatView" class="col-md-8 d-flex flex-column justify-content-between gg-matchlist-' + data.matchViewList[i][j].win + '">\n' +
+                                '                                                <div class="row no-gutters myMatchInfoArea">');
+
+                            $('.myMatchInfoArea').eq(i).append('<div class="col-2 position d-flex flex-column gg-bg-' + data.matchViewList[i][j].win + ' text-white">');
+                            $('.position').eq(i).append('<div class="d-flex flex-column my-auto justify-content-center py-2 durationtime">');
+                            $('.durationtime').eq(i).append('<span class="gg-matchlist-meta-text">시간');
+                            $('.durationtime').eq(i).append('<div class="d-block"><img class="py-1 gg-img-25x25" src="${pageContext.request.contextPath}/resources/Images/position/' + data.matchViewList[i][j].position + '.svg">');
+
+                            if (data.matchViewList[i][j].win == true) {
+                                $('.position').eq(i).append('<div class="d-flex justify-content-center py-lg-2 py-1">승리');
+                            } else if (data.matchViewList[i][j].win == false) {
+                                $('.position').eq(i).append('<div class="d-flex justify-content-center py-lg-2 py-1">패배');
+                            }
+
+                            // ======= 내 정보
+
+                            $('.myMatchInfoArea').eq(i).append('<div class="col-10 myMatchInfo" >');
+                            $('.myMatchInfo').eq(i).append(' <div class="row no-gutters px-2 pt-2 itq ">');
+                            $('.myMatchInfo').eq(i).append(' <div class="row no-gutters pt-1">');
+                            $('.itq').eq(i).append('<div class="col-2 col-lg-2 my-auto px-1 position-relative">\n' +
+                                '                                                                <div class="position-relative matchduration">\n' +
+                                '                                                                    <img class="img-md img-circled full-width" src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/champion/' + data.matchViewList[i][j].champFullImg + '">\n' +
+                                '                                                                    <span class="gg-matchlist-meta-text gg-matchlist-matchcategory rounded-circle">자');
+                            $('.matchduration').eq(i).append('<span class="d-block text-sm">29:27');
+
+                            $('.myMatchInfo>div:eq(1)').eq(i).append('<div class="col-12 text-left d-flex align-items-center pl-2">').append('<span class="badge badge-default">');
+                            $('.itq').eq(i).append(' <div class="col-2 col-lg-1 d-flex justify-content-center justify-content-lg-start px-0 my-auto">\n' +
+                                '                                                                <div class="col-xs-12 gg-padding-1px spellImg">');
+                            $('.spellimg').eq(i).append(' <img class="d-block img-xs rounded" alt="img"\n' +
+                                '                                                                         src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/spell/' + data.matchViewList[i][j].spell1Id + '.png">\n' +
+                                '\n' +
+                                '                                                                    <img class="d-block img-xs rounded" alt="img"\n' +
+                                '                                                                         src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/spell/' + data.matchViewList[i][j].spell2Id + '.png">');
+
+                            $('.itq').eq(i).append(' <div class="col-2 col-lg-1 d-flex justify-content-center justify-content-lg-start px-0 my-auto">\n' +
+                                '                                                                <div class="col-xs-12 gg-padding-1px perkImg">');
+                            $('.perkImg').eq(i).append(' <img class="rune d-block img-xs rounded" alt="img"\n' +
+                                '                                                                         src="https://opgg-static.akamaized.net/images/lol/perk/' + data.matchViewList[i][j].perk0 + '.png">\n' +
+                                '\n' +
+                                '                                                                    <img class="rune d-block img-xs rounded" alt="img"\n' +
+                                '                                                                         src="https://opgg-static.akamaized.net/images/lol/perkStyle/' + data.matchViewList[i][j].perkSubStyle + '.png">');
+
+                            $('.itq').eq(i).append('<div class="col-2 col-lg-2 d-flex flex-column my-auto mykda">');
+
+                            $('.mykda').eq(i).append('<span class="gg-important-number gg-text-negative">' + ((data.matchViewList[i][j].kills + data.matchViewList[i][j].assists) / data.matchViewList[i][j].deaths).toFixed(1)).append('<span class="gg-matchlist-sub-description text-truncate">KDA');
+
+                            $('.itq').eq(i).append('<div class="col-lg-2 d-lg-flex flex-column my-auto d-none myCS">');
+
+                            $('.myCS').eq(i).append('<span><img src="${pageContext.request.contextPath}/resources/Images/ranked-emblems/GRANDMASTER.png" class="gg-img-25x25 pr-1"></span>').append('<span>' + data.matchViewList[i][j].totalMinionKilled + '').append('<span class="gg-sub-description">분당 CS');
+
+                            $('.itq').eq(i).append('<div class="col-4 col-lg-3 d-flex py-0 my-auto justify-content-lg-start justify-content-center myItem">');
+
+
+                            $('.myItem').eq(i).append('<div>\n' +
+                                '     <img class="d-block img-xs rounded" src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/item/' + data.matchViewList[i][j].item0 + '.png">\n' +
+                                '     <img class="d-block img-xs rounded" src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/item/' + data.matchViewList[i][j].item1 + '.png">');
+                            $('.myItem').eq(i).append('<div>\n' +
+                                '     <img class="d-block img-xs rounded" src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/item/' + data.matchViewList[i][j].item2 + '.png">\n' +
+                                '     <img class="d-block img-xs rounded" src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/item/' + data.matchViewList[i][j].item3 + '.png">');
+                            $('.myItem').eq(i).append('<div>\n' +
+                                '     <img class="d-block img-xs rounded" src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/item/' + data.matchViewList[i][j].item4 + '.png">\n' +
+                                '     <img class="d-block img-xs rounded" src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/item/' + data.matchViewList[i][j].item5 + '.png">');
+
+                            // $('.itq').eq(i).append('<div class="col-2 d-flex px-0 flex-column justify-content-center teamBalance">');
+                            // $('.teamBalance').eq(i).append('<span class="gg-important-text gg-text-soso">보통').append('<span class="gg-matchlist-sub-description gg-text-break">팀운');
 
                             $('.itq').eq(i).append('<div class="row no-gutters pt-1">\n' +
                                 '                                                            <div class="col-12 text-left d-flex align-items-center pl-2">\n' +

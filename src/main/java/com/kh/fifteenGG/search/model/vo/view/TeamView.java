@@ -7,32 +7,7 @@ public class TeamView {
     private int kills, deaths, assists;
     private float totalMinionKilled;
     private boolean win;
-
-    public TeamView() {
-    }
-
-    public TeamView(String summonerName, String position, String champion, String champName, String champFullImg, String spell1Id, String spell2Id, String teamId, String item0, String item1, String item2, String item3, String item4, String item5, String item6, int kills, int deaths, int assists, float totalMinionKilled, boolean win) {
-        this.summonerName = summonerName;
-        this.position = position;
-        this.champion = champion;
-        this.champName = champName;
-        ChampFullImg = champFullImg;
-        this.spell1Id = spell1Id;
-        this.spell2Id = spell2Id;
-        this.teamId = teamId;
-        this.item0 = item0;
-        this.item1 = item1;
-        this.item2 = item2;
-        this.item3 = item3;
-        this.item4 = item4;
-        this.item5 = item5;
-        this.item6 = item6;
-        this.kills = kills;
-        this.deaths = deaths;
-        this.assists = assists;
-        this.totalMinionKilled = totalMinionKilled;
-        this.win = win;
-    }
+    private String perk0, perkSubStyle;
 
     @Override
     public String toString() {
@@ -57,7 +32,53 @@ public class TeamView {
                 ", assists=" + assists +
                 ", totalMinionKilled=" + totalMinionKilled +
                 ", win=" + win +
+                ", perk0='" + perk0 + '\'' +
+                ", perkSubStyle='" + perkSubStyle + '\'' +
                 '}';
+    }
+
+    public String getPerk0() {
+        return perk0;
+    }
+
+    public void setPerk0(String perk0) {
+        this.perk0 = perk0;
+    }
+
+    public String getPerkSubStyle() {
+        return perkSubStyle;
+    }
+
+    public void setPerkSubStyle(String perkSubStyle) {
+        this.perkSubStyle = perkSubStyle;
+    }
+
+    public TeamView() {
+    }
+
+    public TeamView(String summonerName, String position, String champion, String champName, String champFullImg, String spell1Id, String spell2Id, String teamId, String item0, String item1, String item2, String item3, String item4, String item5, String item6, int kills, int deaths, int assists, float totalMinionKilled, boolean win, String perk0, String perkSubStyle) {
+        this.summonerName = summonerName;
+        this.position = position;
+        this.champion = champion;
+        this.champName = champName;
+        ChampFullImg = champFullImg;
+        this.spell1Id = spell1Id;
+        this.spell2Id = spell2Id;
+        this.teamId = teamId;
+        this.item0 = item0;
+        this.item1 = item1;
+        this.item2 = item2;
+        this.item3 = item3;
+        this.item4 = item4;
+        this.item5 = item5;
+        this.item6 = item6;
+        this.kills = kills;
+        this.deaths = deaths;
+        this.assists = assists;
+        this.totalMinionKilled = totalMinionKilled;
+        this.win = win;
+        this.perk0 = perk0;
+        this.perkSubStyle = perkSubStyle;
     }
 
     public String getSpell1Id() {

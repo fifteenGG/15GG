@@ -4,6 +4,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/main.css" />
     <c:import url="views/common/commonUtil.jsp"/>
     <title>15.GG</title>
     <%--  로고 font --%>
@@ -11,6 +13,12 @@
 
     <!-- chat css -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/chat.css">
+
+<script>
+	$(document).ready(function(){
+	    $("#content").load("${pageContext.request.contextPath}/partyBoard/indexPartyBoardList.do");
+	});
+</script>
 
 </head>
 <body>
@@ -73,14 +81,20 @@
             <!-- 무료 챔피언 -->
             <div class="mt-4">
                 <div class="col-10 col-lg-8 px-2 mx-auto pb-1 bg-white">
-                    <label class="control-label" style="font-size: 25px;">금주의 로테이션</label>
+                    <label class="control-label" style="font-size: 25px;">무료 챔피언</label>
                     <div id="championLote">
                     </div>
                 </div>
             </div>
+            <br />
+            <br />
+<div id="content"></div>
 
         </div>
     </div>
+   
+
+
 
     <c:if test="${ !empty member }">
         <button onclick="chattingBtn();" class="fcy-54fyyd ewgv1620" data-toggle="modal"></button>
@@ -105,9 +119,9 @@
                     console.log(data['freeChampName'][0]);
 
                     for(var i = 0; i < data['freeChampName'].length; i++){
-                        var html = "<a href='${pageContext.request.contextPath}/champion/championDetail.do?name="+data['freeChampName'][i]+"'><img src='https://ddragon.leagueoflegends.com/cdn/10.1.1/img/champion/"+data['freeChampImage'][i]+"'>'"+"</a>";
+                        var html = "<a href='${pageContext.request.contextPath}/champion/championDetail.do?name="+data['freeChampName'][i]+"'><img id='freeChampImg' src='https://ddragon.leagueoflegends.com/cdn/10.1.1/img/champion/"+data['freeChampImage'][i]+"'>'"+"</a>";
 
-                        if( i%5 == 4 ){
+                        if( i%8 == 7 ){
                             html += "<br/>";
                         }
                         $("#championLote").append( html );

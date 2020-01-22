@@ -117,6 +117,7 @@
 
     <!-- 매치리스트 게임아이디 뽑아오기 페이징 추가	-->
     <select id="selectMatchList" parameterType="hashmap" resultType="string">
+<![CDATA[
 		SELECT GAMEID
 			FROM (
 				 SELECT ROWNUM RN, A.*
@@ -128,12 +129,12 @@
 					  order by GAMEID desc
 				  ) A
 			 )
-		WHERE RN BETWEEN #{cPage} AND #{endPage}
-	</select>
+		WHERE RN <= #{endPage}
+	]]></select>
 
     <!--	매치 조회용	-->
     <select id="selectTeam" parameterType="string" resultType="TeamView">
-		select SUMMONERNAME, POSITION, CHAMPIONID, CHAMPname, ChampFullImg, S1.SPELLNAME as spell1Id, S2.SPELLNAME as spell2Id, TEAMID, ITEM0, ITEM1, ITEM2, ITEM3, ITEM4, ITEM5, ITEM6, KILLS, DEATHS, ASSISTS, trunc(((TOTALMINIONSKILLED + NEUTRAKMINIONSKILLED)/GAMEDURATION*60),1) as totalMinionKilled, WIN
+		select SUMMONERNAME, POSITION, CHAMPIONID, CHAMPname, ChampFullImg, S1.SPELLNAME as spell1Id, S2.SPELLNAME as spell2Id, TEAMID, ITEM0, ITEM1, ITEM2, ITEM3, ITEM4, ITEM5, ITEM6, KILLS, DEATHS, ASSISTS, trunc(((TOTALMINIONSKILLED + NEUTRAKMINIONSKILLED)/GAMEDURATION*60),1) as totalMinionKilled, WIN, PERK0, PERKSUBSTYLE
 		from PATICIPANT S
 		join PARTICIPANTSTATS using (GAMEID, PARTICIPANTID)
 		join PARTICIPANTIDENTITY using (GAMEID, PARTICIPANTID)

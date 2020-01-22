@@ -179,19 +179,21 @@ public class SummonerSearch {
     @RequestMapping("/search/MatchSearch.do")
     @ResponseBody
     public HashMap<String, Object> MatchSearch(@RequestParam String summonerName,
-                                               @RequestParam(value = "cPage", required = false, defaultValue = "1") int cPage ){
+                                               @RequestParam(value = "cPage", required = false, defaultValue = "0") int cPage ){
+
+
 
         HashMap<String, Object> hashMap = new HashMap<>();
 
         System.out.println("ajax 실행 확인 컨트롤러");
 
         int numPerPage = 5;
-        int endPage = numPerPage * cPage;
+        int endPage = numPerPage * ( cPage + 1) ;
 
         String serachName = summonerName.replaceAll(" ","%20");
 
         cPage += 1;
-
+        System.out.println("현재 페이지 확인 : " + cPage);
         // 매치 정보 가져오기
         List<Object> list = searchService.selectSummonerMatch(summonerName, cPage, endPage);
         System.out.println("matchViewList" + list);

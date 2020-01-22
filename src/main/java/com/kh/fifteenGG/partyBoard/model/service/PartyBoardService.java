@@ -21,6 +21,11 @@ public class PartyBoardService {
 	public List<PartyBoard> partyBoardList(PartyBoard partyBoard) {
 		return partyBoardDAO.partyBoardList(partyBoard);
 	}
+	
+	
+	public List<PartyBoard> indexPartyBoardList(PartyBoard partyBoard) {
+		return partyBoardDAO.indexPartyBoardList(partyBoard);
+	}
 
 	public int totalCountContent() {
 		return partyBoardDAO.totalCountContent();

@@ -18,17 +18,19 @@ public class StatisticsBoardController {
 	@Autowired
 	StatisticsBoardService statisticsBoardService;
 
-	
-	@RequestMapping("/statisticsBoard/objectWinPercentageView.do")
-	public String objectWinPercentageView(ObjectPercentage objectPercentage, Model model) {
-		
-		List<ObjectPercentage> objectWinPercentage = statisticsBoardService.objectWinPercentage(objectPercentage);
-		System.out.println("objectWinPercentage 확인 : " + objectWinPercentage);
-		model.addAttribute("objectWinPercentage", objectWinPercentage);
 
-		return "statisticsBoard/objectPercentage";
-	}
-	
+	   @RequestMapping("/statisticsBoard/objectWinPercentageView.do")
+	   public String objectWinPercentageView(ObjectPercentage objectPercentage, Model model) {
+	      
+	      List<ObjectPercentage> objectWinPercentage = statisticsBoardService.objectWinPercentage(objectPercentage);
+	      System.out.println("objectWinPercentage 확인 : " + objectWinPercentage);
+	      System.out.println("objectWinPercentage 타입 확인 : " + objectWinPercentage.getClass().getName());
+	      System.out.println("objectWinPercentage 타입 확인 : " + objectWinPercentage.get(0));
+	   
+	      model.addAttribute("objectWinPercentage", objectWinPercentage.get(0));
+
+	      return "statisticsBoard/objectPercentage";
+	   }
 	
 	@RequestMapping("/statisticsBoard/dataTablePackageBoardView.do")
 	public String dataTablePackageBoardView(DataTablePackageBoard dataTablePackageBoard, Model model) {

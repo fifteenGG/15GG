@@ -968,3 +968,7 @@ div {
 .my-font {
     font-size: 0.8rem !important;
 }
+
+#freeChampImg {
+    width: 60px;
+}
