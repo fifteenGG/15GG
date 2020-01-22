@@ -23,6 +23,11 @@ public class PartyBoardDAO {
 	public List<PartyBoard> partyBoardList(PartyBoard partyBoard) { 
 		return sqlSession.selectList("partyBoard-mapper.selectListParty", partyBoard); 
 		}
+	
+	
+	public List<PartyBoard> indexPartyBoardList(PartyBoard partyBoard) { 
+		return sqlSession.selectList("partyBoard-mapper.indexPartyBoardList", partyBoard); 
+	}
 	 
 
 	public int totalCountContent() {

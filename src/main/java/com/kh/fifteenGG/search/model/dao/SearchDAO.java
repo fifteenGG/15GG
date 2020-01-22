@@ -95,7 +95,7 @@ public class SearchDAO {
 
         List<Object> list = sqlSession.selectList("match-mapper.selectMostQueueId", summonerName);
 
-        System.out.println(list.toString());
+        System.out.println(list);
 
         return list;
     }

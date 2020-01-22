@@ -18,6 +18,7 @@
             <li class="nav-item active">
                 <a class="nav-link" href="${pageContext.request.contextPath}/partyBoard/partyBoardList.do">파티 찾기<span class="sr-only">(current)</span></a>
             </li>
+
             <li class="nav-item active">
                 <a class="nav-link" href="${pageContext.request.contextPath}/statisticsBoard/objectWinPercentageView.do">통계<span class="sr-only">(current)</span></a>
             </li>

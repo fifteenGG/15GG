@@ -284,4 +284,10 @@
 		]]>
 </select>
 	
+<select resultType="Percentage" id="champAll">
+
+		SELECT * FROM CHAMPION
+        ORDER BY 2
+
+</select>
 </mapper>

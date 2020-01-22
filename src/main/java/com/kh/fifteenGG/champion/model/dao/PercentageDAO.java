@@ -75,4 +75,10 @@ public class PercentageDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("percentage-mapper.jungleAll");
 	}
+
+	public List<Percentage> champAll() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("percentage-mapper.champAll");
+
+	}
 }

@@ -15,10 +15,18 @@
     	ORDER BY PBDATE DESC
 	</select>
 	
+	
 	<select id="totalCountContent" resultType="int">
 		SELECT COUNT(*) FROM PARTYBOARD
 	</select>
 	
+	
+	<select id="indexPartyBoardList" resultType="PartyBoard">
+	 <![CDATA[
+      SELECT * FROM(SELECT * FROM PARTYBOARD ORDER BY EPOCH DESC)
+        WHERE ROWNUM <= 4
+   ]]>
+	</select>
 	
 <!-- 검색용 쿼리 -->	
 	<select id="searchList" resultType="PartyBoard">

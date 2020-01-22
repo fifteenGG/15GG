@@ -100,4 +100,10 @@ public List<Percentage> supportAll() {
 
 	}
 
+
+	public List<Percentage> champAll() {
+		// TODO Auto-generated method stub
+		return percentageDAO.champAll();
+	}
+
 }

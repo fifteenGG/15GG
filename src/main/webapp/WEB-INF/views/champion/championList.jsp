@@ -134,9 +134,7 @@
 
 <%-- nav 와 div 사이의 영역 --%>
 <div class="row">
-	<!-- 나중에 광고 혹은 분석 관련 탭이 들어갈 위치 -->
-	<button value="확인용" type="button" onclick="check()">
-	</button>
+
 </div>
 
 <div class="l-champion-index-content--main" >
@@ -166,19 +164,15 @@
 	</div> <!-- 선택 메뉴div -->
 	
 	<table>
-	<c:forEach var="champions" items="${champions}">
-		<div class="champion-index__champion-list">
-			<div class="champion-index__champion-item
-					champion-index__champion-item--TOP
-					champion-index__champion-item--MID"
-				 data-champion-name="가렌"
-				 data-champion-key="garen">
+	<c:forEach var="champAll" items="${champAll}">
+		<div class="champion-index__champion-champAll">
+			<div class="champion-index__champion-item">
 				<!-- <a href="/champion/garen/statistics"> -->
 				<div class="champion-index__champion-item__image">
-					<img src="https://ddragon.leagueoflegends.com/cdn/9.24.2/img/champion/${champions.image.full}"
-						 class="__sprite __spc82 __spc82-33" onclick="championDetail('${champions.name}');" style="cursor:pointer"/>
+					<img src="https://ddragon.leagueoflegends.com/cdn/9.24.2/img/champion/${champAll.champFullIMG}"
+						 class="__sprite __spc82 __spc82-33" onclick="championDetail('${champAll.champName}');" style="cursor:pointer"/>
 				</div>
-				<div class="champion-index__champion-item__name">${champions.name}</div>
+				<div class="champion-index__champion-item__name">${champAll.champName}</div>
 				<!-- </a> -->
 			</div> <!-- 챔피온 칸 -->
 		</div> <!-- 챔피언 한칸 제일 큰놈 -->
@@ -187,12 +181,7 @@
 	
 	 	<c:forEach var="supportAll" items="${supportAll}">
 			<div class="champion-index__champion-supportAll" style="display:none;">
-				<div class="champion-index__champion-item
-						champion-index__champion-item--TOP
-						champion-index__champion-item--MID"
-					 data-champion-name="가렌"
-					 data-champion-key="garen">
-					<!-- <a href="/champion/garen/statistics"> -->
+				<div class="champion-index__champion-item">
 					<div class="champion-index__champion-item__image">
 						<img src="https://ddragon.leagueoflegends.com/cdn/9.24.2/img/champion/${supportAll.champFullIMG}"	
 								class="__sprite __spc82 __spc82-33" onclick="championDetail('${supportAll.champName}');" style="cursor:pointer"/>
@@ -849,7 +838,7 @@
 	
 	/* 라인별 챔프 정리 */
 	function AllShow(){
-		$('.champion-index__champion-list').show();
+		$('.champion-index__champion-champAll').show();
 		$('.champion-index__champion-supportAll').hide();	
 		$('.champion-index__champion-adcAll').hide();
 		$('.champion-index__champion-midAll').hide();
@@ -858,7 +847,7 @@
 	}
 	
 	function supportAllShow(){
-		$('.champion-index__champion-list').hide();
+		$('.champion-index__champion-champAll').hide();
 		$('.champion-index__champion-supportAll').show();		
 		$('.champion-index__champion-adcAll').hide();
 		$('.champion-index__champion-midAll').hide();
@@ -867,7 +856,7 @@
 	}
 	
 	function adcAllShow(){
-		$('.champion-index__champion-list').hide();
+		$('.champion-index__champion-champAll').hide();
 		$('.champion-index__champion-supportAll').hide();	
 		$('.champion-index__champion-adcAll').show();
 		$('.champion-index__champion-midAll').hide();
@@ -875,7 +864,7 @@
 		$('.champion-index__champion-jungleAll').hide();
 	}
 	function midAllShow(){
-		$('.champion-index__champion-list').hide();
+		$('.champion-index__champion-champAll').hide();
 		$('.champion-index__champion-supportAll').hide();	
 		$('.champion-index__champion-adcAll').hide();
 		$('.champion-index__champion-midAll').show();
@@ -883,7 +872,7 @@
 		$('.champion-index__champion-jungleAll').hide();
 	}
 	function topAllShow(){
-		$('.champion-index__champion-list').hide();
+		$('.champion-index__champion-champAll').hide();
 		$('.champion-index__champion-supportAll').hide();	
 		$('.champion-index__champion-adcAll').hide();
 		$('.champion-index__champion-midAll').hide();
@@ -891,7 +880,7 @@
 		$('.champion-index__champion-jungleAll').hide();
 	}
 	function jungleAllShow(){
-		$('.champion-index__champion-list').hide();
+		$('.champion-index__champion-champAll').hide();
 		$('.champion-index__champion-supportAll').hide();	
 		$('.champion-index__champion-adcAll').hide();
 		$('.champion-index__champion-midAll').hide();

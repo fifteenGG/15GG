@@ -4,6 +4,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/main.css" />
     <c:import url="views/common/commonUtil.jsp"/>
     <title>15.GG</title>
     <%--  로고 font --%>
@@ -11,6 +13,13 @@
 
     <!-- chat css -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/chat.css">
+
+<script>
+	$(document).ready(function(){
+	    $("#content").load("http://localhost:8088/fifteenGG/partyBoard/indexPartyBoardList.do");
+	});
+</script>
+
 
 </head>
 <body>
@@ -78,9 +87,17 @@
                     </div>
                 </div>
             </div>
+            <br />
+            <br />
+<div id="content"></div>
 
         </div>
     </div>
+   
+    
+    
+    
+
 
     <c:if test="${ !empty member }">
         <button onclick="chattingBtn();" class="fcy-54fyyd ewgv1620" data-toggle="modal"></button>
