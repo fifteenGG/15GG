@@ -36,4 +36,7 @@ public class PartyBoardService {
 	}
 
 
+	public PartyBoard SelectRcParty(String tierInfo) {
+		return partyBoardDAO.SelectRcParty(tierInfo);
+	}
 }

@@ -43,15 +43,15 @@
 		</choose>
 		
 		<choose>
-			<when test="pbTier != '티어 상관없이'">
+			<when test="pbTier != 'ALL'">
 				AND PBTIER = #{pbTier}
 			</when>
 			<otherwise>
-				AND (PBTIER='티어 상관없이' OR PBTIER='언랭 이상' 
-					OR PBTIER='아이언 이상' OR PBTIER='브론즈 이상' 
-					OR PBTIER='실버 이상' OR PBTIER='골드 이상' 
-					OR PBTIER='플레 이상' OR PBTIER='다이아 이상' 
-					OR PBTIER='마스터 이상' OR PBTIER='그마 이상' OR PBTIER='챌린저')
+				AND (PBTIER='ALL' OR PBTIER='Unranked'
+					OR PBTIER='IRON' OR PBTIER='BRONZE'
+					OR PBTIER='SILVER' OR PBTIER='GOLD'
+					OR PBTIER='PLATINUM' OR PBTIER='DIAMOND'
+					OR PBTIER='MASTER' OR PBTIER='GRANDMASTER' OR PBTIER='CHALLENGER')
 			</otherwise>
 		</choose>
 
@@ -69,7 +69,10 @@
 		</where>
 		ORDER BY PBDATE DESC
 	</select>
-	
+
+	<select id="SelectRcParty" parameterType="string" resultType="PartyBoard">
+		select * from PARTYBOARD where regexp_like(PBTIER, #{tierInfo} ,'i') order by PBNO desc
+	</select>
 	
 
 </mapper>

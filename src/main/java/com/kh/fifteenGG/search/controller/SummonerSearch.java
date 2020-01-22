@@ -4,6 +4,8 @@ package com.kh.fifteenGG.search.controller;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.kh.fifteenGG.common.apiKey.ApiKey;
+import com.kh.fifteenGG.partyBoard.model.service.PartyBoardService;
+import com.kh.fifteenGG.partyBoard.model.vo.PartyBoard;
 import com.kh.fifteenGG.search.model.service.SearchService;
 import com.kh.fifteenGG.search.model.vo.league.LeagueEntry;
 import com.kh.fifteenGG.search.model.vo.match.*;
@@ -26,6 +28,8 @@ public class SummonerSearch {
 
     @Autowired
     SearchService searchService;
+    @Autowired
+    PartyBoardService partyBoardService;
 
     private String ApiKey = new ApiKey().getKey();
 
@@ -179,9 +183,8 @@ public class SummonerSearch {
     @RequestMapping("/search/MatchSearch.do")
     @ResponseBody
     public HashMap<String, Object> MatchSearch(@RequestParam String summonerName,
-                                               @RequestParam(value = "cPage", required = false, defaultValue = "0") int cPage ){
-
-
+                                               @RequestParam(value = "cPage", required = false, defaultValue = "0") int cPage,
+                                               @RequestParam String tierInfo ){
 
         HashMap<String, Object> hashMap = new HashMap<>();
 
@@ -193,11 +196,19 @@ public class SummonerSearch {
         String serachName = summonerName.replaceAll(" ","%20");
 
         cPage += 1;
-        System.out.println("현재 페이지 확인 : " + cPage);
+
         // 매치 정보 가져오기
         List<Object> list = searchService.selectSummonerMatch(summonerName, cPage, endPage);
+
+        PartyBoard partyBoard = partyBoardService.SelectRcParty(tierInfo);
+
+        System.out.println("내 티어 정보" + tierInfo);
+
+        System.out.println("추천파티정보 : "+partyBoard);
+
         System.out.println("matchViewList" + list);
 
+        hashMap.put("partyBoard", partyBoard);
         hashMap.put("matchViewList", list);
         hashMap.put("cPage", cPage);
 

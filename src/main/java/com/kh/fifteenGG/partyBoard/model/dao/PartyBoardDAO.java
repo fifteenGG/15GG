@@ -40,9 +40,7 @@ public class PartyBoardDAO {
 	}
 
 
-
-	
-	
-	
-
+    public PartyBoard SelectRcParty(String tierInfo) {
+		return sqlSession.selectOne("partyBoard-mapper.SelectRcParty", tierInfo);
+    }
 }

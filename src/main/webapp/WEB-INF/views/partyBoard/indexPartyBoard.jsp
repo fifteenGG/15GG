@@ -18,7 +18,7 @@
 
 
 			<div class="col-9" style="float: none; margin: 0 auto;">
-				<div class="row gg-box">
+				<div class="row gg-box" style="border: 1px solid grey !important;">
 	
 					<div id="content" class="col-12 collapse" style="display: block;">
 						
@@ -153,7 +153,7 @@
 <br />
 						<div id="duoRequestMoreArea" class="col-12 px-0 mb-4">
 							<button id="duoRequestMoreBtn" data-next-page="2"
-								class="btn btn-info rounded-0"  onclick="location.href='http://localhost:8088/fifteenGG/partyBoard/partyBoardList.do'">파티 찾기</button>
+								class="btn btn-info rounded-0"  onclick="location.href='${pageContext.request.contextPath}/partyBoard/partyBoardList.do'">파티 찾기</button>
 						</div>
 <br />
 <br />
