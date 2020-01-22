@@ -71,4 +71,8 @@ public class humorBoardDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("humorboard-mapper.selectCmtList",cmt);
 	}
+
+	public int deleteCmt(int cno) {
+	      return sqlSession.delete("humorboard-mapper.deleteCmt",cno);
+	   }
 }

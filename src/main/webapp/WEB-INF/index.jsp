@@ -81,10 +81,11 @@
 
         </div>
     </div>
-
+	
     <c:if test="${ !empty member }">
-        <button onclick="chattingBtn();" class="fcy-54fyyd ewgv1620" data-toggle="modal"></button>
+        <button onclick="chattingBtn();" class="fcy-54fyyd ewgv1620" data-toggle="modal" style="margin-left:870px;"></button>
     </c:if>
+    
     <script>
         function chattingBtn(){
             var title = 'chatting';

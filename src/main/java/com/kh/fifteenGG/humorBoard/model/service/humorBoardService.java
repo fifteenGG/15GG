@@ -66,6 +66,10 @@ public class humorBoardService {
 				public List<Comment> selectCmtList(Comment cmt) {
 					return humorBoardDAO.selectCmtList(cmt);
 				}
+
+				public int deleteCmt(int cno) {
+		               return humorBoardDAO.deleteCmt(cno);
+		            }
 				
 		}
 

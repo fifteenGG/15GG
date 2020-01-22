@@ -19,9 +19,11 @@
                 <a class="nav-link" href="${pageContext.request.contextPath}/partyBoard/partyBoardList.do">파티 찾기</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/statisticsBoard/statisticsBoardView.do">통계<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/statisticsBoard/objectWinPercentageView.do">통계<span class="sr-only">(current)</span></a>
             </li>
-
+            <li class="nav-item">
+                <a class="nav-link" href="${pageContext.request.contextPath}/statisticsBoard/dataTablePackageBoardView.do">통계테이블<span class="sr-only">(current)</span></a>
+            </li>
         </ul>
     </div>
     <ul class="navbar-nav ml-md-auto">

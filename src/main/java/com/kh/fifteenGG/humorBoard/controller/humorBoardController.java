@@ -193,12 +193,12 @@ public class humorBoardController {
 	 * printWriter.close(); } } } } } return null; }
 	 */
 	@RequestMapping("/humorBoard/humorView.do")
-	public String selectOneBoard(@RequestParam("bno") int humorbNo, @RequestParam("humorWriter") String humorWriter,
+	public String selectOneBoard(@RequestParam("bno") int humorbNo,
 			Model model) {
 		System.out.println("humorbNo : " + humorbNo);
-		System.out.println("humorWriter : " + humorWriter);
+		// System.out.println("humorWriter : " + humorWriter);
 		humorBoard hb = humorBoardService.selectOne(humorbNo);
-		hb.setHumorWriter(humorWriter);
+		// hb.setHumorWriter(humorWriter);
 		System.out.println("hb : " + hb);
 
 		int humorBoardCount = humorBoardService.readCount(humorbNo);
@@ -324,7 +324,10 @@ public class humorBoardController {
 
 				hm.put("comment", commentList.get(i).getCmtContent());
 				hm.put("writer", commentList.get(i).getNickName());
-
+				hm.put("date", commentList.get(i).getCmtDate());
+                hm.put("cno", commentList.get(i).getCmtNo());
+                hm.put("uno", commentList.get(i).getUserNo());
+                
 				hmlist.add(hm);
 				System.out.println("hm : " + hm);
 			}
@@ -335,5 +338,28 @@ public class humorBoardController {
 		return new ResponseEntity(json.toString(), responseHeaders, HttpStatus.CREATED);
 
 	}
-
+	
+	@RequestMapping("/humorBoard/hcommentDelete.do")
+	   public String hcommentDelete(@RequestParam int cno , Model model, HttpSession session) {
+	      
+	      System.out.println("cno : " + cno);
+	      
+	      int result = humorBoardService.deleteCmt(cno);
+	      
+	      
+	      String msg = "";
+	      String loc = "";
+	      
+	      if(result > 0) {
+	         msg = "댓글 삭제 성공!";
+	      } else {
+	         msg = "댓글 삭제 실패!";
+	      }
+	      
+	      model.addAttribute("msg", msg)
+	           .addAttribute("loc", loc);
+	      
+	      return "common/msg";
+	   }
+		
 }

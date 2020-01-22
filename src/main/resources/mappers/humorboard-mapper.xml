@@ -39,12 +39,14 @@ VALUES(SEQ_CNO.NEXTVAL, #{humorBno}, #{userNo}, #{nickName}, #{cmtContent}, SYSD
 </insert>
     <!-- ´ñ±Û ¸®½ºÆ® -->
 
-
-    <select id="selectCmtList" parameterType="Comment"
-            resultMap="commentMap"> SELECT nickName , cmtContent FROM HCOMMENT WHERE HUMORBNO=#{humorBno} </select>
+<select id="selectCmtList" parameterType="Comment" resultMap="commentMap"> 
+    SELECT nickName , cmtContent, cmtDate, cmtNo, userNo  FROM HCOMMENT WHERE HUMORBNO=#{humorBno} 
+    </select>
 
     <!-- ´ñ±Û »èÁ¦ -->
-
+   <delete id="deleteCmt" parameterType="int" >
+   DELETE FROM HCOMMENT WHERE CMTNO= #{cmtNo} 
+   </delete>
 
     <update id="readCount" parameterType="int">
 UPDATE HUMORBOARD SET HUMORBOARDCOUNT = HUMORBOARDCOUNT +1 WHERE HUMORBNO = #{humorbNo}
