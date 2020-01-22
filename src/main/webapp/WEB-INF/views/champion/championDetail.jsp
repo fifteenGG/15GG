@@ -24,7 +24,7 @@ input[type=submit]{
   font-weight: bold;
   line-height: 1.4;
   padding: 10px;
-  width: 180px
+  width: 160px
 }
 
 
@@ -34,14 +34,29 @@ input[type=submit]{
 	opacity: 0.8;
 }
 
+#tipfont1{
+
+    font-size: 30px;
+    font-weight: bold;
+    position: relative;
+    top: 0px;
+    left: -110px;
+    text-decoration: underline;
+    
+}
+
 #tipfont{
 
     font-size: 30px;
     font-weight: bold;
     position: relative;
-    top: 20px;
+    top: -5px;
+    left: 30px;
     text-decoration: underline;
-    left: -100px;
+    
+}
+.modal{
+background:rgba(0, 0, 0, 0.5);
 }
 
 </style>
@@ -2487,8 +2502,8 @@ input[type=submit]{
 							<div class="champion-box-content">
 								<div class="champion-stats-trend champion-stats-trend--up">
 									<div class="champion-stats-trend-rank">
-										
-										<b>10.01.ver = ${ChampChartList.get(0).PANSU }</b>판
+										<div class="champion-stats-trend-rate">10.01.ver =</div>
+										 <b>${ChampChartList.get(0).PANSU }</b>판
 									</div>
 									<div class="champion-stats-trend-rate">${ChampChartList.get(0).ODDS} %</div>
 								</div>
@@ -2568,12 +2583,14 @@ input[type=submit]{
       
       <form method="get" action="tipboard.do" style="top-margin:3em;">
          <c:if test="${!empty member }">
+         <span id=tipfont1>TIP Board</span>
          <div class="button-1">
     		<div class="eff-1"></div>
          	<a class="btnsuccess" data-toggle="modal"  href="#registerModal" id="btn" style="display: block;">글쓰기</a></div>
          </c:if>
-        <span id=tipfont>TIP Board</span>
+         
          <c:if test="${empty member }">
+         <span id=tipfont>TIP Board</span>
          <a  class="btnsuccess" style="display:none; position: relative; left: 880px;" data-toggle="modal"  href="#registerModal" id="btn-add" >글쓰기</a>
          </c:if>
       </form>
@@ -2600,7 +2617,7 @@ input[type=submit]{
             <center><div class="champion-stats-comment-write__patch">★유저들에게 좋은 정보를 공유해주세요★ </div></center>
                      
                      </div>
-      <center><div>
+      <center><div style="height: 50px;">
          <input type="submit" class="btnsuccess" value="등록">
       </div></center>
       </form>
