@@ -101,7 +101,7 @@
 
 
     <c:if test="${ !empty member }">
-        <button onclick="chattingBtn();" class="fcy-54fyyd ewgv1620" data-toggle="modal"></button>
+        <i type="radio" id="ok2" onclick="chattingBtn();" class="far fa-comments" data-toggle="modal" style="margin-left:870px; font-size:48px; color:navy; "></i>
     </c:if>
     <script>
         function chattingBtn(){
@@ -135,6 +135,14 @@
                     console.log( xhr, txtStatus, err );
                 }
             })
+        });
+    </script>
+
+    <script>
+        $('#ok2').hover(function(){
+            $(this).css("color","red");
+        }, function(){
+            $(this).css("color","blue");
         });
     </script>
 

@@ -64,7 +64,7 @@
         }
         #card{
             background: currentColor !important;
-            margin-top: 60px;
+
         }
         html{
             background: #29467D;
@@ -74,8 +74,13 @@
 
         }
         #mini{
-            margin-top: 310px;
-            margin-left: 240px;
+            width:300px ;
+            height:300px;
+            position: relative;
+            left: -300px;
+            top: 60px;
+
+
 
         }
         #lolo{
@@ -92,6 +97,21 @@
             background: brown;
             border : brown;
         }
+        #card{
+            height: 450px;
+        }
+
+        #fr{
+            position: relative;
+            left: 40px;
+            top: -250px;
+        }
+        .card-body mx-auto{
+            max-width: 400px;
+            position: relative;
+            top: -160px;
+            margin: auto;
+        }
     </style>
 </head>
 <body>
@@ -102,11 +122,13 @@
 
 
 <div id="card" class="card bg-light">
-    <article class="card-body mx-auto" style="max-width: 400px;">
+    <article class="card-body mx-auto">
 
 
 
-        <form action="memberUpdate.do" method="post">
+
+        <img id="mini" src="${pageContext.request.contextPath}/resources/Images/member/mini.png">
+        <form action="memberUpdate.do" method="post" id="fr">
             <!-- 이름 -->
             <div class="form-group input-group">
                 <div class="input-group-prepend">
@@ -152,8 +174,8 @@
             </div> <!-- form-group// -->
 
             <button type="reset" class="btn btn-primary btn-block"> 취 소  </button>
+            <button id="dele" class="btn btn-primary btn-block" onclick="deleteGo()" > 회원 탈퇴  </button>
         </form>
-        <button id="dele" class="btn btn-primary btn-block" onclick="deleteGo()" > 회원 탈퇴  </button>
     </article>
 </div> <!-- card.// -->
 
@@ -163,38 +185,37 @@
 <br><br>
 <p id="mit"> 문의 사항 : hotzpr16@gmail.com <br />
     전화 번호 : 010-4739-7943</p>
-<div id="mini" style="position:absolute; width:300px; height:300px; top:50px; left:50;">
-    <img src="${pageContext.request.contextPath}/resources/Images/member/mini.png" width:300px height:300px>
 
 
 
 
-    <script>
-        $(function () {
-            $("#alert-success").hide();
-            $("#alert-danger").hide();
-            $("input").keyup(function () {
-                var pwd3 = $("#password3").val();
-                var pwd4 = $("#password4").val();
-                if (pwd3 != "" || pwd4 != "") {
-                    if (pwd3 == pwd4) {
-                        $("#alert-success").show();
-                        $("#alert-danger").hide();
-                        $("#submit").removeAttr("disabled");
-                    } else {
-                        $("#alert-success").hide();
-                        $("#alert-danger").show();
-                        $("#submit").attr("disabled", "disabled");
-                    }
+
+<script>
+    $(function () {
+        $("#alert-success").hide();
+        $("#alert-danger").hide();
+        $("input").keyup(function () {
+            var pwd3 = $("#password3").val();
+            var pwd4 = $("#password4").val();
+            if (pwd3 != "" || pwd4 != "") {
+                if (pwd3 == pwd4) {
+                    $("#alert-success").show();
+                    $("#alert-danger").hide();
+                    $("#submit").removeAttr("disabled");
+                } else {
+                    $("#alert-success").hide();
+                    $("#alert-danger").show();
+                    $("#submit").attr("disabled", "disabled");
                 }
-            });
+            }
         });
-        function deleteGo() {
+    });
+    function deleteGo() {
 
-            location.href="${pageContext.request.contextPath}/member/memberDelete.do";
+        location.href="${pageContext.request.contextPath}/member/memberDelete.do";
 
-        }
+    }
 
-    </script>
+</script>
 </body>
 </html>

@@ -64,7 +64,7 @@
         }
         #card{
             background: currentColor !important;
-            margin-top: 60px;
+
         }
         html{
             background: #29467D;
@@ -74,8 +74,13 @@
 
         }
         #mini{
-            margin-top: 260px;
-            margin-left: 240px;
+            width:300px ;
+            height:300px;
+            position: relative;
+            left: -300px;
+            top: 40px;
+
+
 
         }
         #lolo{
@@ -87,6 +92,25 @@
             margin-left: 700px;
             font-weight: 500;
             color: white;
+        }
+        #dele{
+            background: brown;
+            border : brown;
+        }
+        #card{
+            height: 400px;
+        }
+
+        #fr{
+            position: relative;
+            left: 40px;
+            top: -250px;
+        }
+        .card-body mx-auto{
+            max-width: 400px;
+            position: relative;
+            top: -160px;
+            margin: auto;
         }
 
 
@@ -106,11 +130,11 @@
     <span id="lolo">15.GG</span>
 </div>
 <div id="card" class="card bg-light">
-    <article class="card-body mx-auto" style="max-width: 400px;">
+    <article class="card-body mx-auto">
 
+        <img id="mini" src="${pageContext.request.contextPath}/resources/Images/member/mini.png">
 
-
-        <form action="${pageContext.request.contextPath}/member/memberJoin.do" method="post"  >
+        <form action="${pageContext.request.contextPath}/member/memberJoin.do" method="post" id="fr" >
             <!-- 닉네임 -->
             <div class="form-group input-group">
                 <div class="input-group-prepend" id="userId-container">
@@ -163,94 +187,92 @@
 </div> <!-- card.// -->
 <p id="mit"> 문의 사항 : hotzpr16@gmail.com <br />
     전화 번호 : 010-4739-7943</p>
-<div id="mini" style="position:absolute; width:300px; height:300px; top:50px; left:50;">
-    <img src="${pageContext.request.contextPath}/resources/Images/member/mini.png" width:300px height:300px>
 
-    <script>
-        $(function () {
-            $("#alert-success").hide();
-            $("#alert-danger").hide();
-            $("input").keyup(function () {
-                var pwd1 = $("#password").val();
-                var pwd2 = $("#password2").val();
-                if (pwd1 != "" || pwd2 != "") {
-                    if (pwd1 == pwd2) {
-                        $("#alert-success").show();
-                        $("#alert-danger").hide();
-                        $("#submit").removeAttr("disabled");
+<script>
+    $(function () {
+        $("#alert-success").hide();
+        $("#alert-danger").hide();
+        $("input").keyup(function () {
+            var pwd1 = $("#password").val();
+            var pwd2 = $("#password2").val();
+            if (pwd1 != "" || pwd2 != "") {
+                if (pwd1 == pwd2) {
+                    $("#alert-success").show();
+                    $("#alert-danger").hide();
+                    $("#submit").removeAttr("disabled");
+                } else {
+                    $("#alert-success").hide();
+                    $("#alert-danger").show();
+                    $("#submit").attr("disabled", "disabled");
+                }
+            }
+        });
+    });
+    //----------------------------------------//
+
+    $("#nickName").on("keyup", function () {
+        var nickName = $(this).val().trim();
+
+        if (nickName.length > 8) {
+            $(".guide.error").hide();
+            $(".guide.ok").hide();
+            $(".guide.invalid").show();
+
+            return;
+
+        } else {
+
+            $.ajax({
+                url: "${pageContext.request.contextPath}/member/checkIdDuplicate.do",
+                data: {nickName: nickName},
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+                    // if(data=="true") //stream 방식
+                    if (data.isUsable == true) { //viewNzame 방식
+                        $(".guide.error").hide();
+                        $(".guide.invalid").hide();
+                        $(".guide.ok").show();
+                        $("#idDuplicateCheck").val(1);
                     } else {
-                        $("#alert-success").hide();
-                        $("#alert-danger").show();
-                        $("#submit").attr("disabled", "disabled");
+                        $(".guide.error").show();
+                        $(".guide.invalid").hide();
+                        $(".guide.ok").hide();
+                        $("#idDuplicateCheck").val(0);
                     }
+                }, error: function (jqxhr, textStatus, errorThrown) {
+                    console.log("ajax 처리 실패");
+                    //에러로그
+                    console.log(jqxhr);
+                    console.log(textStatus);
+                    console.log(errorThrown);
                 }
             });
-        });
-        //----------------------------------------//
-
-        $("#nickName").on("keyup", function () {
-            var nickName = $(this).val().trim();
-
-            if (nickName.length > 8) {
-                $(".guide.error").hide();
-                $(".guide.ok").hide();
-                $(".guide.invalid").show();
-
-                return;
-
-            } else {
-
-                $.ajax({
-                    url: "${pageContext.request.contextPath}/member/checkIdDuplicate.do",
-                    data: {nickName: nickName},
-                    dataType: "json",
-                    success: function (data) {
-                        console.log(data);
-                        // if(data=="true") //stream 방식
-                        if (data.isUsable == true) { //viewNzame 방식
-                            $(".guide.error").hide();
-                            $(".guide.invalid").hide();
-                            $(".guide.ok").show();
-                            $("#idDuplicateCheck").val(1);
-                        } else {
-                            $(".guide.error").show();
-                            $(".guide.invalid").hide();
-                            $(".guide.ok").hide();
-                            $("#idDuplicateCheck").val(0);
-                        }
-                    }, error: function (jqxhr, textStatus, errorThrown) {
-                        console.log("ajax 처리 실패");
-                        //에러로그
-                        console.log(jqxhr);
-                        console.log(textStatus);
-                        console.log(errorThrown);
-                    }
-                });
-            }
-            //console.log(userId);
-        });
-
-
-        function validate() {
-            var nickName = $("#nickName");
-            if (nickName.val().trim().length < 2) {
-                alert("닉네임 최소 2자리이상이어야 합니다.");
-                nickName.focus();
-                return false;
-            }
-
-            //아이디중복체크여부
-            if ($("#idDuplicateCheck").val() == 0) {
-                alert("사용가능한 아이디를 입력해주세요.");
-                return false;
-            }
-
-            return true;
         }
-    </script>
-    <!--container end.//-->
+        //console.log(userId);
+    });
 
-    <br><br>
+
+    function validate() {
+        var nickName = $("#nickName");
+        if (nickName.val().trim().length < 2) {
+            alert("닉네임 최소 2자리이상이어야 합니다.");
+            nickName.focus();
+            return false;
+        }
+
+        //아이디중복체크여부
+        if ($("#idDuplicateCheck").val() == 0) {
+            alert("사용가능한 아이디를 입력해주세요.");
+            return false;
+        }
+
+        return true;
+    }
+</script>
+<!--container end.//-->
+
+<br><br>
 
 </body>
 </html>
