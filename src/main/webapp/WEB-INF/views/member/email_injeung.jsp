@@ -6,8 +6,8 @@
 <head>
     <title>인증 받은 번호 입력 화면</title>
     <c:import url="../common/commonUtil.jsp"/>
-    <style>
-        .divider-text {
+   <style>
+		.divider-text {
             position: relative;
             text-align: center;
             margin-top: 15px;
@@ -25,7 +25,7 @@
             content: "";
             position: absolute;
             width: 100%;
-            border-bottom: 1px solid #ddd;
+            border-bottom: hidden;
             top: 55%;
             left: 0;
             z-index: 1;
@@ -56,17 +56,134 @@
         	backgorund-color : black;
         	
 		}
-   
+   		.bg-light{
+   			background : none !important;
+   			
+   		}
+   		#font{
+   		    font-family: fantasy;
+   			font-size : 50px;
+   			color: maroon;
+   		}
+   		.divider-text{
+   			border-bottom: unset;;
+   		}
+   		body{
+		   	 background-image: url("${pageContext.request.contextPath}/resources/Images/member/da.jpg"); 
+  			 background-size: cover; 
+  			
+   		}
+   		.card bg-light{
+   		  	border-bottom-color: transparent;
+   		    height: -webkit-fill-available;
+   		}
+   		.card{
+   		   	border-color: transparent;
+   		
+   		}
+   		.video-film{
+    	box-shadow : rgba(0,7,15,0.7) 0 0 0 9999px;
+		z-index : 100;
+	}
+    .video-background {
+        background: #000;
+        position: fixed;
+        top: 0; right: 0; bottom: 0; left: 0;
+        z-index: -99;
+    }
+	    .video-foreground,
+	    .video-background iframe {
+	        position: absolute;
+	        top: 0;
+	        left: 0;
+	        width: 100%;
+	        height: 100%;
+	        pointer-events: none;
+    }
+    @media (min-aspect-ratio: 16/9) {
+    .video-foreground { height: 300%; top: -100%; }
+    }
+    @media (max-aspect-ratio: 16/9) {
+    .video-foreground { width: 300%; left: -100%; }
+    }
+    #od{
+        padding-top: 300px;
+   		padding-right: 700px;
+    
+    }
+    .button {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #413e47;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 28px;
+  padding: 0px;
+  width: 100px;
+  height : 50px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+  
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+  
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+.form-control{
+	color : #dee2e6;
+	border: 1px solid #6c757d;
+}
+.input-group-text{
+    border-color: gray;
+    background: gray;
+    color: black;
+}
+.form-control{
+    background: darkgray;
+}
+.text-center{
+	color: papayawhip;
+}
     </style>
 </head>
 
 <body>
-<div class="card bg-light">
-    <article class="card-body mx-auto" style="max-width: 400px;">
+<div class="video-background">
+    <div class="video-foreground">
+    <div id="muteYouTubeVideoPlayer"></div>
+    </div>
+  </div>
+<div id="card" class="card bg-light">
+
+    <article id="od" class="card-body mx-auto" >
 
 
         <p class="divider-text">
-            <span class="bg-light">인증 번호 입력</span>
+            <span id="font" class="bg-light" >15.GG</span>
         </p>
         <form action="join_injeung.do/${dice}" method="post"  > <!-- 받아온 인증코드를 컨트롤러로 넘겨서 일치하는지 확인 -->
             
@@ -78,8 +195,10 @@
                 <input name="email_injeung" class="form-control" placeholder="인증 번호 입력" type="text" required>
             </div> <!-- form-group// -->
 
+            <!-- 버튼 -->
             <div class="form-group">
-                <button type="submit" name="submit" class="btn btn-primary btn-block">인증 번호 확인</button>
+           		 <button class="button" name="submit" type="submit"style="vertical-align:middle"><span>send</span></button>
+                
             </div> <!-- form-group// -->
 
 
@@ -88,5 +207,38 @@
     </article>
 </div> <!-- card.// -->
 
+<!-- video -->
+ <div class="video-film"></div>
+ 
+  <script async src="https://www.youtube.com/iframe_api"></script>
+<script type="text/javascript">
+  var player;
+  function onYouTubePlayerAPIReady() {
+    player = new YT.Player('muteYouTubeVideoPlayer', {
+    	videoId: '73PRV4dn81M',
+    	playerVars: {
+    	      autoplay: 1,        // Auto-play the video on load
+    	      controls: 0,        // Show pause/play buttons in player
+    	      rel : 0,
+    	      start: 105,
+    	      end: 301,
+    	      showinfo : 0,
+    	      showinfo: 0,        // Hide the video title
+    	      modestbranding: 1,  // Hide the Youtube Logo
+    	      loop: 1,            // Run the video in a loop
+    	      playlist : '73PRV4dn81M',
+    	      fs: 0,              // Hide the full screen button
+    	      cc_load_policy: 0, // Hide closed captions
+    	      iv_load_policy: 3,  // Hide the Video Annotations
+    	      autohide: 1         // Hide video controls when playing
+    	    },
+    	events: {
+    	      onReady: function(e) {
+    	        e.target.mute();
+    	      }
+    		}
+    });
+  }
+</script>
 </body>
 </html>

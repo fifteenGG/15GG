@@ -25,6 +25,7 @@ public class TipBoardController {
 	@Autowired
 	TipBoardService tipBoardService;
 	
+
 	@RequestMapping("/champion/tipBoard.do")
 	public String tipBoard(TipBoard tipBoard, Model model, HttpSession httpSession,
 			 				@RequestParam String championName ) {
@@ -35,7 +36,7 @@ public class TipBoardController {
 		tipBoard.setTipWriter(member.getUserNo());
 		 tipBoard.setChampionName(championName); 
 		
-		System.out.println(tipBoard);
+		/* System.out.println(tipBoard); */
 		
 		int result = tipBoardService.insertTipBoard(tipBoard);
 		
@@ -90,7 +91,8 @@ public class TipBoardController {
 	}
 	
 	@RequestMapping("/champion/tipBoardView.do")
-	public String selectOneTipBoard(@RequestParam("no") int tipBno, Model model, HttpSession session) {
+	public String selectOneTipBoard(@RequestParam("no") int tipBno, Model model, HttpSession session,
+									@RequestParam("name") String name) {
 		
 		
 		Member member = (Member) session.getAttribute("member");
@@ -108,11 +110,15 @@ public class TipBoardController {
 			}
 			
 			b.setTipreadCount(tipreadCount);
-			System.out.println("tipreadCount :" + tipreadCount);
+		/* System.out.println("tipreadCount :" + tipreadCount); */
 		
-		model.addAttribute("tipboard", b);
-		System.out.println("view페이지:" +b);
-		System.out.println(member);
+		model.addAttribute("tipboard", b)
+			 .addAttribute("name", name);
+		/*
+		 * System.out.println("view페이지:" +b);
+		 *  System.out.println(member);
+		 */
+
 		return "champion/tipBoardView";
 	}
 	
@@ -136,13 +142,6 @@ public class TipBoardController {
 		
 		return "common/msg";
 	}
-	
-	@RequestMapping("/champion/back.do")
-	public String backPage(HttpServletRequest request) {
-		String referer = request.getHeader("Referer");
-		request.getSession().setAttribute("redirectURI", referer);
-		
-		return "/champion/championDetail";
-	}
+
 	
 }

@@ -51,6 +51,8 @@
 		<typeAlias type="com.kh.fifteenGG.champion.model.vo.TipBoard"
 				   alias="TipBoard"/>
 		<typeAlias type="com.kh.fifteenGG.champion.model.vo.Percentage" alias="Percentage"/>
+		<typeAlias type="com.kh.fifteenGG.champion.model.vo.ChampionSpellRC" alias="ChampionSpellRC"/>
+		<typeAlias type="com.kh.fifteenGG.champion.model.vo.ChampionRunRC" alias="ChampionRunRC"/>
 		<!-- 파티 게시판 -->
 		<typeAlias type="com.kh.fifteenGG.partyBoard.model.vo.PartyBoard"
 				   alias="PartyBoard"/>

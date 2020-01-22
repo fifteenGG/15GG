@@ -19,18 +19,18 @@ public class SearchService {
     // 매치 업데이트
     public int insertMatch(Match match, List<MatchFrame> mfList) {
         int result = 0;
+        HashMap<String, Object> hmap = new HashMap<>();
 
         // 기존 매치 정보와 비교
-        HashMap<String, Object> hmap = new HashMap<>();
         hmap.put("gameId", match.getGameId());
-        int checkMatch = searchDAO.checkMatch(hmap);
 
-        System.out.println("중복 체크 확인 : " + checkMatch);
+        int checkMatch = searchDAO.checkMatch(hmap);
 
         // 기존 매치가 없다면
         if(checkMatch == 0){
             // 먼저 match 정보를 db에 저장.
             System.out.println("매치정보 업데이트 시작.");
+
             result = searchDAO.insertMatch(match);
 
             // 매치가 성공적으로 저장되었다면
@@ -82,7 +82,7 @@ public class SearchService {
                     result = searchDAO.insertParticipant(participant);
 
                     // participantTimeline 저장
-                    // 타임라인은 사용하기 어려울 것 같아 일부만 저장
+
                     ParticipantTimeline participantTimeline = participant.getTimeline();
                     participantTimeline.setGameId(match.getGameId());
                     result = searchDAO.insertParticipantTimeline(participantTimeline);

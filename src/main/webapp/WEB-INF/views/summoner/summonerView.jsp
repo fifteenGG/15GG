@@ -36,8 +36,8 @@
         }
     </style>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css">
-</head>
 
+</head>
 
 <body>
 
@@ -924,7 +924,7 @@
                             $('.itq').eq(i).append('<div class="col-2 col-lg-2 my-auto px-1 position-relative">\n' +
                                 '                                                                <div class="position-relative matchduration">\n' +
                                 '                                                                    <img class="img-md img-circled full-width" src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/champion/' + data.matchViewList[i][j].champFullImg + '">\n' +
-                                '                                                                    <span class="gg-matchlist-meta-text gg-matchlist-matchcategory rounded-circle">자');
+                                '                                                                    <span class="gg-matchlist-meta-text gg-matchlist-matchcategory rounded-circle">');
                             $('.matchduration').eq(i).append('<span class="d-block text-sm">29:27');
 
                             $('.myMatchInfo>div:eq(1)').eq(i).append('<div class="col-12 text-left d-flex align-items-center pl-2">').append('<span class="badge badge-default">');
@@ -955,7 +955,6 @@
 
                             $('.itq').eq(i).append('<div class="col-4 col-lg-3 d-flex py-0 my-auto justify-content-lg-start justify-content-center myItem">');
 
-
                             $('.myItem').eq(i).append('<div>\n' +
                                 '     <img class="d-block img-xs rounded" src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/item/' + data.matchViewList[i][j].item0 + '.png">\n' +
                                 '     <img class="d-block img-xs rounded" src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/item/' + data.matchViewList[i][j].item1 + '.png">');
@@ -965,9 +964,6 @@
                             $('.myItem').eq(i).append('<div>\n' +
                                 '     <img class="d-block img-xs rounded" src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/item/' + data.matchViewList[i][j].item4 + '.png">\n' +
                                 '     <img class="d-block img-xs rounded" src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/item/' + data.matchViewList[i][j].item5 + '.png">');
-
-                            // $('.itq').eq(i).append('<div class="col-2 d-flex px-0 flex-column justify-content-center teamBalance">');
-                            // $('.teamBalance').eq(i).append('<span class="gg-important-text gg-text-soso">보통').append('<span class="gg-matchlist-sub-description gg-text-break">팀운');
 
                             $('.itq').eq(i).append('<div class="row no-gutters pt-1">\n' +
                                 '                                                            <div class="col-12 text-left d-flex align-items-center pl-2">\n' +
@@ -983,6 +979,7 @@
                             $('.teamMember').eq(i).append('<div class="col-6 team1">').append('<div class="col-6 team2">');
 
                             for (var m = 0; m < 5; m++) {
+
                                 $('.team1').eq(i).append('<div class="of-ellipsis text-left pl-1 gg-matchlist-item gg-border-' + data.matchViewList[i][m].win + '">\n' +
                                     '                                                                <img class="img-xs img-circled gg-img-18x18"\n' +
                                     '                                                                     src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/champion/' + data.matchViewList[i][m].champFullImg + '" >\n' +
@@ -1007,6 +1004,7 @@
 
                 }
 
+                $('img[src*="item/0.png"]').attr('src', '${pageContext.request.contextPath}/resources/Images/none.png');
 
             }, error: function (e) {
                 console.log("ajax 처리 실패");
@@ -1049,10 +1047,16 @@
                 $partyContent.empty();
                 $partyWriter.empty();
 
-                $partyTier.text(data.partyBoard.pbRanktype +" "+ data.partyBoard.pbTier);
-                $partyPosition.text(data.partyBoard.pbPosition);
-                $partyContent.text(data.partyBoard.pbContent);
-                $partyWriter.text(data.partyBoard.pbUser);
+                if (data.partyBoard != null){
+                    $partyTier.text(data.partyBoard.pbRanktype +" "+ data.partyBoard.pbTier);
+                    $partyPosition.text(data.partyBoard.pbPosition);
+                    $partyContent.text(data.partyBoard.pbContent);
+                    $partyWriter.text(data.partyBoard.pbUser);
+                }else {
+                    $partyContent.text('조건에 맞는 게시글이 없습니다.');
+                }
+
+
 
                 var name = $('#summonerName').val();
 
@@ -1095,7 +1099,7 @@
                             $('.itq').eq(i).append('<div class="col-2 col-lg-2 my-auto px-1 position-relative">\n' +
                                 ' <div class="position-relative matchduration">\n' +
                                 ' <img class="img-md img-circled full-width" src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/champion/' + data.matchViewList[i][j].champFullImg + '">\n' +
-                                ' <span class="gg-matchlist-meta-text gg-matchlist-matchcategory rounded-circle">자');
+                                ' <span class="gg-matchlist-meta-text gg-matchlist-matchcategory rounded-circle">');
                             $('.matchduration').eq(i).append('<span class="d-block text-sm">29:27');
 
                             $('.myMatchInfo>div:eq(1)').eq(i).append('<div class="col-12 text-left d-flex align-items-center pl-2">').append('<span class="badge badge-default">');
@@ -1176,6 +1180,8 @@
                     }
 
                 }
+
+                $('img[src*="item/0.png"]').attr('src', '${pageContext.request.contextPath}/resources/Images/none.png');
 
 
             }, error: function (e) {

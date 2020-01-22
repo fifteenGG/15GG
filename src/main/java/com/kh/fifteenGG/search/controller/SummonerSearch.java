@@ -133,10 +133,9 @@ public class SummonerSearch {
             List<MatchReference> mlist = matchList.getMatches();
 
             // 매치 상세 정보 저장 반복문
-            // 너무 오래된 정보는 가져오기 불가능. 최근10개 까지만 갱신
             System.out.println("반복문 시작");
 
-            for (int i = 0; i < 20 ; i++) {
+            for (int i = 0; i < 15 ; i++) {
 
                 String urlStr2 = "https://kr.api.riotgames.com/lol/match/v4/matches/" + mlist.get(i).getGameId() + "?api_key=" + ApiKey;
 
@@ -178,6 +177,7 @@ public class SummonerSearch {
         // 업데이트 후 다시 리다이렉트로 SummonerSearch 컨트롤러로 전송
         return "redirect:/search/SummonerSearch.do";
     }
+
 
     // ajax 매치 조회
     @RequestMapping("/search/MatchSearch.do")

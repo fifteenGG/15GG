@@ -18,7 +18,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.fifteenGG.champion.model.service.DetailPercentageService;
+import com.kh.fifteenGG.champion.model.service.PercentageService;
 import com.kh.fifteenGG.champion.model.service.TipBoardService;
+import com.kh.fifteenGG.champion.model.vo.ChampionRunRC;
+import com.kh.fifteenGG.champion.model.vo.ChampionSpellRC;
+import com.kh.fifteenGG.champion.model.vo.Percentage;
 import com.kh.fifteenGG.champion.model.vo.TipBoard;
 import com.kh.fifteenGG.common.util.Utils;
 import com.merakianalytics.orianna.Orianna;
@@ -36,6 +41,8 @@ public class ChampionController {
     @Autowired
     PercentageService percentageService;
 
+    @Autowired
+    DetailPercentageService detailpercentageService;
 
     private String apiKey = new ApiKey().getKey();
 
@@ -105,21 +112,56 @@ public class ChampionController {
         Champions champions = Orianna.getChampions();
         Champion champion = Orianna.championNamed(name).get();
 
-        /* System.out.println(champion); */
-
+		/*System.out.println(champion); */
         /* model.addAttribute("champions", champions); */
         /* model.addAttribute("champion", champion); */
         session.setAttribute("champion", champion);
-        System.out.println("name : " + name);
+		/* System.out.println("name : " + name); */
 
+       // 팁게시판 부분
         TipBoard tipboard = (TipBoard)httpSession.getAttribute("tipBoard");
 
+       // 리스트로 불러올 부분
         List<TipBoard> list = tipBoardService.selectMainList(name);
+
+        // 챔피언 스펠 승률 & 픽률
+        List<ChampionSpellRC> spellList = detailpercentageService.spellPercentageList(name);
+
+        // 챔피언 룬 승률 & 픽률
+        List<ChampionRunRC> RunList = detailpercentageService.runRcList(name);
+
+        // 챔피언 아이템 승률 & 픽률
+        List<Object> itemList = detailpercentageService.itemList(name);
+        List<Object> shoesList = detailpercentageService.shoesList(name);
+        List<Object> startList = detailpercentageService.startList(name);
+        // 차트
+        List<Object> ChampChartList = detailpercentageService.champChart(name);
+        List<Object> benPercent = detailpercentageService.benPerChart(name);
+
 
         int totalContents = tipBoardService.selectTotalMainContents(name);
 
-        session.setAttribute("list", list); // 팁 게시글 리스트
+        session.setAttribute("list", list);
+        model.addAttribute("spellList",spellList)
+        	 .addAttribute("RunList", RunList)
+        	 .addAttribute("itemList", itemList)
+        	 .addAttribute("shoesList", shoesList)
+        	 .addAttribute("startList", startList)
+        	 .addAttribute("ChampChartList", ChampChartList)
+        	 .addAttribute("benPercent", benPercent);
 
+		/*
+		 * // 챔피언 스펠 승률 &픽률 확인 System.out.println("spellList : " + spellList); // 챔피언 룬
+		 * 승률 & 픽률 확인 System.out.println("RunList : " + RunList); // 챔피언 아이템 승률 & 픽률 확인
+		 * System.out.println("itemList" + itemList);
+		 *
+		 * System.out.println("shoesList"+ shoesList); // chartList
+		 * System.out.println("ChampChartList" + ChampChartList);
+		 * System.out.println("benPercent" + benPercent);
+		 *
+		 * System.out.println("Board List :"+ list);
+		 * System.out.println("startList" +startList);
+		 */
         return "champion/championDetail";
 
     }
