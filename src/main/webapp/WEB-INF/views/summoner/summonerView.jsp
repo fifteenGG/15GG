@@ -210,7 +210,7 @@
 
                 <!-- 자유랭크만 있을 경우 -->
                 <c:if test="${leagueEntry.size() == 1 && leagueEntry.get(0).queueType == 'RANKED_FLEX_SR'}">
-                    <input id="tierInfo" type="hidden" value="${leagueEntry.get(1).tier}">
+                    <input id="tierInfo" type="hidden" value="${leagueEntry.get(0).tier}">
                     <div class="px-2">
                         <div class="d-flex align-items-center flex-column">
                             <img class="gg-profile-tier"

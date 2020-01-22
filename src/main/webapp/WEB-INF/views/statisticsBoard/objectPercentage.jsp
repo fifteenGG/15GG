@@ -17,18 +17,15 @@
 
 <title>Insert title here</title>
 
-
+<c:import url="../common/commonUtil.jsp" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/main.css" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/party.css">
-	<c:import url="../common/commonUtil.jsp" />
+
 
 <style>
-	.row{
-	background-image: url("${pageContext.request.contextPath}/resources/Images/member/KHinfo.jpg");
-	
-	}
+
 </style>
 
 </head>

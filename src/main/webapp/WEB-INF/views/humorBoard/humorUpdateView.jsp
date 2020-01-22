@@ -7,12 +7,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>유머 게시글 작성</title>
+<title>15.GG 게시글 수정</title>
 <c:import url="../common/commonUtil.jsp"/>
 <c:import url="../common/navbar.jsp"/>
 <script src="//cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/humor.css" />
+<style>
+
+
+</style>
 </head>
-<body>
+<body style="background: #f4f4f4; ! important; max-width: 1011px; text-align: center; font-weight: normal; margin: 0 auto;"
+	onload="onload();">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 								<form action="humorUpdate.do" method="post">
 								<input type="hidden" name="humorbNo" value="${humorBoard.humorbNo}">
@@ -22,10 +29,11 @@
 								
 								<textarea id="ckeditor" name="humorContent" required>${humorBoard.humorContent }</textarea>
 								<br>
-								<p align="center"><button class="btn btn-success" type="submit">crystal 완료</button>&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
-								<button class="btn btn-warning" type="button" onclick="javascript:history.back();">작성 취소</button>
-								<input type="button" class="btn btn-outline-danger" value="삭제" onclick="location.href='${pageContext.request.contextPath}/humorBoard/humorDelete.do?humorbNo=${humorBoard.humorbNo}'"/>
-								</p>
+								
+								
+								<button class="btn btn-outline-secondary"type="button" onclick="javascript:history.back();">취소</button>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+								<button class="btn btn-outline-info" type="submit">수정 완료</button>
+								
 						</form>
 					</div>
 		<script>
