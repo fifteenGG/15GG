@@ -94,6 +94,8 @@ public class SummonerSearch {
             HashMap<String, Object> myStat = searchService.selectMyStat(summonerName);
             model.addAttribute("myStat", myStat);
 
+            System.out.println(myStat);
+
             // 화면에 전달
             model.addAttribute("cPage", cPage);
             model.addAttribute("summoner", summoner);

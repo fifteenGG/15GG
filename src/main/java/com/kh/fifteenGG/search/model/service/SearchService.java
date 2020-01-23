@@ -164,33 +164,20 @@ public class SearchService {
 
         List<Object> list = new ArrayList<>();
 
-        // 게임번호를 조회
+
         List<String> matchList = searchDAO.selectMatchList(summonerName, cPage, endPage);
 
-        System.out.println(matchList);
-
-        System.out.println("반복 시작");
-
-        // 꺼내온 매치 리스트로 조회
-        // matchList.size()
         if(matchList.size() > 0){
             for(int i = 0 ; i < matchList.size() ; i++){
                 String gameid = matchList.get(i);
-                System.out.println("게임번호 : " + gameid);
-
-                System.out.println("팀 불러오기 시작");
 
                 // 팀
                 List<TeamView> team = searchDAO.selectTeam(gameid);
-                System.out.println("팀 " + team);
 
                 list.add(team);
 
             }
         }
-
-        System.out.println("반복 끝");
-        System.out.println(list);
 
         return list;
 

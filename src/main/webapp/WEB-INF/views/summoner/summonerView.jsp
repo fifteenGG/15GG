@@ -22,7 +22,6 @@
             bottom:0;
             background: rgba(0,0,0,0.2); /*not in ie */
             filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#20000000',endColorstr='#20000000');    /* ie */
-
         }
         .wrap-loading div{ /*로딩 이미지*/
             position: fixed;
@@ -371,6 +370,121 @@
     <!-- 모스트 큐 -->
     <div class="row bg-white">
 
+<%--    1    --%>
+        <c:if test="${myStat.MostQueue.size() == 1}">
+            <c:set value="${myStat.MostQueue.get(0).QUEUECOUNT*100/(myStat.MostQueue.get(0).QUEUECOUNT)}"
+                   var="queue1"/>
+
+            <div class="col-lg-2 d-flex align-items-center justify-content-center">
+                <div class="gg-division flex-grow">
+
+                    <div>
+                        <div class="gg-action-area" data-href="/kr/profile/View/stats?c=Normal"
+                             data-event="MostMatchCategoryTopStats">
+                            <div class="gg-important-text">${myStat.MostQueue.get(0).QUEUENAME}</div>
+                            <span class="gg-sub-description">
+                                 <fmt:formatNumber value="${queue1}"/>%
+                            </span>
+                            <div class="progress progress-line-primary mb-1">
+                                <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="100"
+                                     aria-valuemin="0" aria-valuemax="100" style="width: ${queue1}%;">
+                                    <span class="sr-only"><fmt:formatNumber value="${queue1}"/>%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row no-gutters justify-content-md-center">
+
+                            <div class="gg-action-area col-6 pr-1" data-href="/kr/profile/View/stats?c=FreeRank"
+                                 data-event="MostMatchCategoryStats">
+                                <span class="gg-important-text-sm">데이터 없음</span>
+                                <span class="gg-sub-description"> <fmt:formatNumber value="0"/>%</span>
+                                <div class="progress progress-line-primary mb-2">
+                                    <div class="progress-bar progress-bar-primary" role="progressbar"
+                                         aria-valuenow="100"
+                                         aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                                        <span class="sr-only"> <fmt:formatNumber value="0"/>%</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="gg-action-area col-6 pl-1" data-href="/kr/profile/View/stats?c=SoloRank"
+                                 data-event="MostMatchCategoryStats">
+                                <span class="gg-important-text-sm">데이터 없음</span>
+                                <span class="gg-sub-description"> <fmt:formatNumber value="0"/>%</span>
+                                <div class="progress progress-line-primary mb-2">
+                                    <div class="progress-bar progress-bar-primary" role="progressbar"
+                                         aria-valuenow="100"
+                                         aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                                        <span class="sr-only"> <fmt:formatNumber value="0"/>%</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </c:if>
+
+<%--    2--%>
+
+        <c:if test="${myStat.MostQueue.size() == 2}">
+            <c:set value="${myStat.MostQueue.get(0).QUEUECOUNT*100/(myStat.MostQueue.get(0).QUEUECOUNT+myStat.MostQueue.get(1).QUEUECOUNT)}"
+                   var="queue1"/>
+            <c:set value="${myStat.MostQueue.get(1).QUEUECOUNT*100/(myStat.MostQueue.get(0).QUEUECOUNT+myStat.MostQueue.get(1).QUEUECOUNT)}"
+                   var="queue2"/>
+
+            <div class="col-lg-2 d-flex align-items-center justify-content-center">
+                <div class="gg-division flex-grow">
+
+                    <div>
+                        <div class="gg-action-area" data-href="/kr/profile/View/stats?c=Normal"
+                             data-event="MostMatchCategoryTopStats">
+                            <div class="gg-important-text">${myStat.MostQueue.get(0).QUEUENAME}</div>
+                            <span class="gg-sub-description">
+                                 <fmt:formatNumber value="${queue1}"/>%
+                            </span>
+                            <div class="progress progress-line-primary mb-1">
+                                <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="100"
+                                     aria-valuemin="0" aria-valuemax="100" style="width: ${queue1}%;">
+                                    <span class="sr-only"><fmt:formatNumber value="${queue1}"/>%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row no-gutters justify-content-md-center">
+
+                            <div class="gg-action-area col-6 pr-1" data-href="/kr/profile/View/stats?c=FreeRank"
+                                 data-event="MostMatchCategoryStats">
+                                <span class="gg-important-text-sm">${myStat.MostQueue.get(1).QUEUENAME}</span>
+                                <span class="gg-sub-description"> <fmt:formatNumber value="${queue2}"/>%</span>
+                                <div class="progress progress-line-primary mb-2">
+                                    <div class="progress-bar progress-bar-primary" role="progressbar"
+                                         aria-valuenow="100"
+                                         aria-valuemin="0" aria-valuemax="100" style="width: ${queue2+10}%;">
+                                        <span class="sr-only"> <fmt:formatNumber value="${queue2}"/>%</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="gg-action-area col-6 pl-1" data-href="/kr/profile/View/stats?c=SoloRank"
+                                 data-event="MostMatchCategoryStats">
+                                <span class="gg-important-text-sm">데이터 없음</span>
+                                <span class="gg-sub-description"> <fmt:formatNumber value="0"/>%</span>
+                                <div class="progress progress-line-primary mb-2">
+                                    <div class="progress-bar progress-bar-primary" role="progressbar"
+                                         aria-valuenow="100"
+                                         aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                                        <span class="sr-only"> <fmt:formatNumber value="0"/>%</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </c:if>
+
         <c:if test="${myStat.MostQueue.size() > 2}">
             <c:set value="${myStat.MostQueue.get(0).QUEUECOUNT*100/(myStat.MostQueue.get(0).QUEUECOUNT+myStat.MostQueue.get(1).QUEUECOUNT+myStat.MostQueue.get(2).QUEUECOUNT)}"
                    var="queue1"/>
@@ -429,6 +543,8 @@
                 </div>
             </div>
         </c:if>
+
+
 
         <c:if test="${myStat.MostPosition.size() > 2}">
             <c:set value="${myStat.MostPosition.get(0).POSITIONCOUNT*100/(myStat.MostPosition.get(0).POSITIONCOUNT+myStat.MostPosition.get(1).POSITIONCOUNT+myStat.MostPosition.get(2).POSITIONCOUNT)}"
@@ -529,7 +645,7 @@
         <div class="gg-thin-line mx-3 d-block d-lg-none"></div>
         <div id="ratingArea" class="col-lg-4 align-items-center">
                 <span>
-<%--                    미구현 영역--%>
+                    <%--                    미구현 영역--%>
                 </span>
         </div>
 
@@ -872,69 +988,48 @@
 <%--페이징--%>
 <script>
     var $cPage = $('#cPage');
-
     var $tierInfo = $('#tierInfo');
-
     function moreMatch() {
         $.ajax({
             url: "${pageContext.request.contextPath}/search/MatchSearch.do",
             data: {summonerName: '${summoner.name}',
-            cPage : $cPage.val(),
+                cPage : $cPage.val(),
                 tierInfo : $tierInfo.val()},
             type: "POST",
             dataType: "json",
             success: function (data) {
-
                 $('#matchAllArea').empty();
-
                 var name = $('#summonerName').val();
-
                 $cPage.val(data.cPage);
-
                 for (var i = 0; i < data.matchViewList.length; i++) {
                     $('#matchAllArea').append('<div class="tab-pane active">');
-
                     $('#matchAllArea>div').eq(i).append('<div class="Normal gg-thin-line">').append('<div id="matchListAllArea" class="row no-gutters gg-action gg-matchlist FreeRank">');
-
                     for (var j = 0; j < 10; j++) {
-
                         if (data.matchViewList[i][j].summonerName == name) {
-
                             // ===== 승패 포지션
-
                             $('.gg-matchlist').eq(i).append('<div id="myStatView" class="col-md-8 d-flex flex-column justify-content-between gg-matchlist-' + data.matchViewList[i][j].win + '">\n' +
                                 '                                                <div class="row no-gutters myMatchInfoArea">');
-
                             $('.myMatchInfoArea').eq(i).append('<div class="col-2 position d-flex flex-column gg-bg-' + data.matchViewList[i][j].win + ' text-white">');
                             $('.position').eq(i).append('<div class="d-flex flex-column my-auto justify-content-center py-2 durationtime">');
-
-
                             var time = data.matchViewList[i][j].gameCreation;
                             console.log(time);
                             var date = new Date();
                             date.setTime(time);
                             dateString = date.getMonth()+ 1 + "/" + date.getDate();
-
                             $('.durationtime').eq(i).append('<span class="gg-matchlist-meta-text">'+ dateString +'');
-
                             $('.durationtime').eq(i).append('<div class="d-block"><img class="py-1 gg-img-25x25" src="${pageContext.request.contextPath}/resources/Images/position/' + data.matchViewList[i][j].position + '.svg">');
-
-
                             if (data.matchViewList[i][j].win == true) {
                                 $('.position').eq(i).append('<div class="d-flex justify-content-center py-lg-2 py-1">승리');
                             } else if (data.matchViewList[i][j].win == false) {
                                 $('.position').eq(i).append('<div class="d-flex justify-content-center py-lg-2 py-1">패배');
                             }
-
                             // ======= 내 정보
                             var rankType = data.matchViewList[i][j].queueName.substr(0, 1);
                             var gameDuration = data.matchViewList[i][j].gameDuration;
                             var min = parseInt((gameDuration%3600)/60);
                             var sec = gameDuration%60;
-
                             if (min.toString().length==1) min = "0" + min;
                             if (sec.toString().length==1) sec = "0" + sec;
-
                             $('.myMatchInfoArea').eq(i).append('<div class="col-10 myMatchInfo" >');
                             $('.myMatchInfo').eq(i).append(' <div class="row no-gutters px-2 pt-2 itq ">');
                             $('.myMatchInfo').eq(i).append(' <div class="row no-gutters pt-1">');
@@ -943,7 +1038,6 @@
                                 '                                                                    <img class="img-md img-circled full-width" src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/champion/' + data.matchViewList[i][j].champFullImg + '">\n' +
                                 '                                                                    <span class="gg-matchlist-meta-text gg-matchlist-matchcategory rounded-circle">'+rankType+'');
                             $('.matchduration').eq(i).append('<span class="d-block text-sm">'+min+':'+sec+'');
-
                             $('.myMatchInfo>div:eq(1)').eq(i).append('<div class="col-12 text-left d-flex align-items-center pl-2">').append('<span class="badge badge-default">');
                             $('.itq').eq(i).append(' <div class="col-2 col-lg-1 d-flex justify-content-center justify-content-lg-start px-0 my-auto">\n' +
                                 '                                                                <div class="col-xs-12 gg-padding-1px spellImg">');
@@ -952,7 +1046,6 @@
                                 '\n' +
                                 '                                                                    <img class="d-block img-xs rounded" alt="img"\n' +
                                 '                                                                         src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/spell/' + data.matchViewList[i][j].spell2Id + '.png">');
-
                             $('.itq').eq(i).append(' <div class="col-2 col-lg-1 d-flex justify-content-center justify-content-lg-start px-0 my-auto">\n' +
                                 '                                                                <div class="col-xs-12 gg-padding-1px perkImg">');
                             $('.perkImg').eq(i).append(' <img class="rune d-block img-xs rounded" alt="img"\n' +
@@ -960,18 +1053,11 @@
                                 '\n' +
                                 '                                                                    <img class="rune d-block img-xs rounded" alt="img"\n' +
                                 '                                                                         src="https://opgg-static.akamaized.net/images/lol/perkStyle/' + data.matchViewList[i][j].perkSubStyle + '.png">');
-
-
                             $('.itq').eq(i).append('<div class="col-2 col-lg-2 d-flex flex-column my-auto mykda">');
-
                             $('.mykda').eq(i).append('<span class="gg-important-number gg-text-negative">' + ((data.matchViewList[i][j].kills + data.matchViewList[i][j].assists) / data.matchViewList[i][j].deaths).toFixed(1)).append('<span class="gg-matchlist-sub-description text-truncate">KDA');
-
                             $('.itq').eq(i).append('<div class="col-lg-2 d-lg-flex flex-column my-auto d-none myCS">');
-
                             $('.myCS').eq(i).append('<span><img src="${pageContext.request.contextPath}/resources/Images/ranked-emblems/GRANDMASTER.png" class="gg-img-25x25 pr-1"></span>').append('<span>' + data.matchViewList[i][j].totalMinionKilled + '').append('<span class="gg-sub-description">분당 CS');
-
                             $('.itq').eq(i).append('<div class="col-4 col-lg-3 d-flex py-0 my-auto justify-content-lg-start justify-content-center myItem">');
-
                             $('.myItem').eq(i).append('<div>\n' +
                                 '     <img class="d-block img-xs rounded" src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/item/' + data.matchViewList[i][j].item0 + '.png">\n' +
                                 '     <img class="d-block img-xs rounded" src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/item/' + data.matchViewList[i][j].item1 + '.png">');
@@ -981,22 +1067,18 @@
                             $('.myItem').eq(i).append('<div>\n' +
                                 '     <img class="d-block img-xs rounded" src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/item/' + data.matchViewList[i][j].item4 + '.png">\n' +
                                 '     <img class="d-block img-xs rounded" src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/item/' + data.matchViewList[i][j].item5 + '.png">');
-
                             $('.itq').eq(i).append('<div class="row no-gutters pt-1">\n' +
                                 '                                                            <div class="col-12 text-left d-flex align-items-center pl-2">\n' +
                                 '                                                                <span class="badge badge-default"></span>\n' +
                                 '                                                            </div>\n' +
                                 '                                                        </div>');
-
                             // ======= 팀 정보
                             $('.gg-matchlist').eq(i).append('<div class="teamArea col-md-4 d-none d-lg-flex align-items-center gg-matchlist-' + data.matchViewList[i][j].win + '">');
                             $('.teamArea').eq(i).append('<div class="row no-gutters w-100">\n' +
                                 '                                            <div class="col-11">\n' +
                                 '                                                <div class="teamMember row no-gutters">');
                             $('.teamMember').eq(i).append('<div class="col-6 team1">').append('<div class="col-6 team2">');
-
                             for (var m = 0; m < 5; m++) {
-
                                 $('.team1').eq(i).append('<div class="of-ellipsis text-left pl-1 gg-matchlist-item gg-border-' + data.matchViewList[i][m].win + '">\n' +
                                     '                                                                <img class="img-xs img-circled gg-img-18x18"\n' +
                                     '                                                                     src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/champion/' + data.matchViewList[i][m].champFullImg + '" >\n' +
@@ -1014,29 +1096,21 @@
                                     '                                                                </a>\n' +
                                     '                                                            </div>');
                             }
-
                         }
-
                     }
-
                 }
-
                 $('img[src*="item/0.png"]').attr('src', '${pageContext.request.contextPath}/resources/Images/none.png');
-
             }, error: function (e) {
                 console.log("ajax 처리 실패");
-
             },
             beforeSend: function () {
                 $('.wrap-loading').removeClass('display-none');
-
             }
             , complete: function () {
                 $('.wrap-loading').addClass('display-none');
             }, timeout:100000
         });
     }
-
 </script>
 <%--불러오기--%>
 <script>
@@ -1047,7 +1121,6 @@
         var $partyContent = $('#partyContent');
         var $partyWriter = $('#partyWriter');
         var $tierInfo = $('#tierInfo');
-
         $.ajax({
             url: "${pageContext.request.contextPath}/search/MatchSearch.do",
             data: {summonerName: '${summoner.name}',
@@ -1056,14 +1129,11 @@
             type: "POST",
             dataType: "json",
             success: function (data) {
-
                 console.log(data);
-
                 $partyTier.empty();
                 $partyPosition.empty();
                 $partyContent.empty();
                 $partyWriter.empty();
-
                 if (data.partyBoard != null){
                     $partyTier.text(data.partyBoard.pbRanktype +" "+ data.partyBoard.pbTier);
                     $partyPosition.text(data.partyBoard.pbPosition);
@@ -1072,61 +1142,40 @@
                 }else {
                     $partyContent.text('조건에 맞는 게시글이 없습니다.');
                 }
-
-
                 var name = $('#summonerName').val();
-
                 if (data.matchViewList.length == 0) {
                     alert('데이터가 없습니다. 업데이트를 실행하세요.');
                 }
-
                 $cPage.val(data.cPage);
-
                 for (var i = 0; i < data.matchViewList.length; i++) {
                     $('#matchAllArea').append('<div class="tab-pane active">');
-
                     $('#matchAllArea>div').eq(i).append('<div class="Normal gg-thin-line">').append('<div id="matchListAllArea" class="row no-gutters gg-action gg-matchlist FreeRank">');
-
                     for (var j = 0; j < 10; j++) {
-
                         if (data.matchViewList[i][j].summonerName == name) {
-
                             // ===== 승패 포지션
-
                             $('.gg-matchlist').eq(i).append('<div id="myStatView" class="col-md-8 d-flex flex-column justify-content-between gg-matchlist-' + data.matchViewList[i][j].win + '">\n' +
                                 '                                                <div class="row no-gutters myMatchInfoArea">');
-
                             $('.myMatchInfoArea').eq(i).append('<div class="col-2 position d-flex flex-column gg-bg-' + data.matchViewList[i][j].win + ' text-white">');
                             $('.position').eq(i).append('<div class="d-flex flex-column my-auto justify-content-center py-2 durationtime">');
-
                             var time = data.matchViewList[i][j].gameCreation;
                             console.log(time);
                             var date = new Date();
                             date.setTime(time);
                             dateString = date.getMonth()+ 1 + "/" + date.getDate();
-
                             $('.durationtime').eq(i).append('<span class="gg-matchlist-meta-text">'+ dateString +'');
-
                             $('.durationtime').eq(i).append('<div class="d-block"><img class="py-1 gg-img-25x25" src="${pageContext.request.contextPath}/resources/Images/position/' + data.matchViewList[i][j].position + '.svg">');
-
                             if (data.matchViewList[i][j].win == true) {
                                 $('.position').eq(i).append('<div class="d-flex justify-content-center py-lg-2 py-1">승리');
                             } else if (data.matchViewList[i][j].win == false) {
                                 $('.position').eq(i).append('<div class="d-flex justify-content-center py-lg-2 py-1">패배');
                             }
-
                             // ======= 내 정보
-
-
                             var gameType = data.matchViewList[i][j].queueName.substr(0,1);
-
                             var gameDuration = data.matchViewList[i][j].gameDuration;
                             var min = parseInt((gameDuration%3600)/60);
                             var sec = gameDuration%60;
-
                             if (min.toString().length==1) min = "0" + min;
                             if (sec.toString().length==1) sec = "0" + sec;
-
                             $('.myMatchInfoArea').eq(i).append('<div class="col-10 myMatchInfo" >');
                             $('.myMatchInfo').eq(i).append(' <div class="row no-gutters px-2 pt-2 itq ">');
                             $('.myMatchInfo').eq(i).append(' <div class="row no-gutters pt-1">');
@@ -1135,7 +1184,6 @@
                                 ' <img class="img-md img-circled full-width" src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/champion/' + data.matchViewList[i][j].champFullImg + '">\n' +
                                 ' <span class="gg-matchlist-meta-text gg-matchlist-matchcategory rounded-circle">'+gameType+'');
                             $('.matchduration').eq(i).append('<span class="d-block text-sm">'+min+':'+sec+'');
-
                             $('.myMatchInfo>div:eq(1)').eq(i).append('<div class="col-12 text-left d-flex align-items-center pl-2">').append('<span class="badge badge-default">');
                             $('.itq').eq(i).append(' <div class="col-2 col-lg-1 d-flex justify-content-center justify-content-lg-start px-0 my-auto">\n' +
                                 '  <div class="col-xs-12 gg-padding-1px spellImg">');
@@ -1144,7 +1192,6 @@
                                 '\n' +
                                 '  <img class="d-block img-xs rounded" alt="img"\n' +
                                 '  src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/spell/' + data.matchViewList[i][j].spell2Id + '.png">');
-
                             $('.itq').eq(i).append(' <div class="col-2 col-lg-1 d-flex justify-content-center justify-content-lg-start px-0 my-auto">\n' +
                                 '  <div class="col-xs-12 gg-padding-1px perkImg">');
                             $('.perkImg').eq(i).append(' <img class="rune d-block img-xs rounded" alt="img"\n' +
@@ -1152,18 +1199,11 @@
                                 '\n' +
                                 '  <img class="rune d-block img-xs rounded" alt="img"\n' +
                                 '  src="https://opgg-static.akamaized.net/images/lol/perkStyle/' + data.matchViewList[i][j].perkSubStyle + '.png">');
-
                             $('.itq').eq(i).append('<div class="col-2 col-lg-2 d-flex flex-column my-auto mykda">');
-
                             $('.mykda').eq(i).append('<span class="gg-important-number gg-text-negative">' + ((data.matchViewList[i][j].kills + data.matchViewList[i][j].assists) / data.matchViewList[i][j].deaths).toFixed(1)).append('<span class="gg-matchlist-sub-description text-truncate">KDA');
-
                             $('.itq').eq(i).append('<div class="col-lg-2 d-lg-flex flex-column my-auto d-none myCS">');
-
                             $('.myCS').eq(i).append('<span><img src="${pageContext.request.contextPath}/resources/Images/ranked-emblems/GRANDMASTER.png" class="gg-img-25x25 pr-1"></span>').append('<span>' + data.matchViewList[i][j].totalMinionKilled + '').append('<span class="gg-sub-description">분당 CS');
-
                             $('.itq').eq(i).append('<div class="col-4 col-lg-3 d-flex py-0 my-auto justify-content-lg-start justify-content-center myItem">');
-
-
                             $('.myItem').eq(i).append('<div>\n' +
                                 '     <img class="d-block img-xs rounded" src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/item/' + data.matchViewList[i][j].item0 + '.png">\n' +
                                 '     <img class="d-block img-xs rounded" src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/item/' + data.matchViewList[i][j].item1 + '.png">');
@@ -1173,23 +1213,19 @@
                             $('.myItem').eq(i).append('<div>\n' +
                                 '     <img class="d-block img-xs rounded" src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/item/' + data.matchViewList[i][j].item4 + '.png">\n' +
                                 '     <img class="d-block img-xs rounded" src="https://ddragon.leagueoflegends.com/cdn/10.1.1/img/item/' + data.matchViewList[i][j].item5 + '.png">');
-
                             // $('.itq').eq(i).append('<div class="col-2 d-flex px-0 flex-column justify-content-center teamBalance">');
                             // $('.teamBalance').eq(i).append('<span class="gg-important-text gg-text-soso">보통').append('<span class="gg-matchlist-sub-description gg-text-break">팀운');
-
                             $('.itq').eq(i).append('<div class="row no-gutters pt-1">\n' +
                                 '  <div class="col-12 text-left d-flex align-items-center pl-2">\n' +
                                 '  <span class="badge badge-default"></span>\n' +
                                 '  </div>\n' +
                                 '  </div>');
-
                             // ======= 팀 정보
                             $('.gg-matchlist').eq(i).append('<div class="teamArea col-md-4 d-none d-lg-flex align-items-center gg-matchlist-' + data.matchViewList[i][j].win + '">');
                             $('.teamArea').eq(i).append('<div class="row no-gutters w-100">\n' +
                                 '  <div class="col-11">\n' +
                                 '  <div class="teamMember row no-gutters">');
                             $('.teamMember').eq(i).append('<div class="col-6 team1">').append('<div class="col-6 team2">');
-
                             for (var m = 0; m < 5; m++) {
                                 $('.team1').eq(i).append('<div class="of-ellipsis text-left pl-1 gg-matchlist-item gg-border-' + data.matchViewList[i][m].win + '">\n' +
                                     '                                                                <img class="img-xs img-circled gg-img-18x18"\n' +
@@ -1208,23 +1244,15 @@
                                     '                                                                </a>\n' +
                                     '                                                            </div>');
                             }
-
                         }
-
                     }
-
                 }
-
                 $('img[src*="item/0.png"]').attr('src', '${pageContext.request.contextPath}/resources/Images/none.png');
-
-
             }, error: function (e) {
                 console.log("ajax 처리 실패");
-
             },
             beforeSend: function () {
                 $('.wrap-loading').removeClass('display-none');
-
             }
             , complete: function () {
                 $('.wrap-loading').addClass('display-none');

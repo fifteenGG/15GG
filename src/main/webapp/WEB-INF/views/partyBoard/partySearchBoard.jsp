@@ -224,17 +224,17 @@
 									data-style="btn btn-link gg-select"
 									id="duoRequestListTierSelect" tabindex="-98">
 
-									<option value="티어 상관없이">모든 티어</option>
-									<option value="언랭 이상">언랭크</option>
-									<option value="아이언 이상">아이언</option>
-									<option value="브론즈 이상">브론즈</option>
-									<option value="실버 이상">실버</option>
-									<option value="골드 이상">골드</option>
-									<option value="플레 이상">플래티넘</option>
-									<option value="다이아 이상">다이아몬드</option>
-									<option value="마스터 이상">마스터</option>
-									<option value="그마 이상">그랜드마스터</option>
-									<option value="챌린저">챌린저</option>
+									<option value="ALL">모든 티어</option>
+									<option value="Unranked">언랭크</option>
+									<option value="IRON">아이언</option>
+									<option value="BRONZE">브론즈</option>
+									<option value="SILVER">실버</option>
+									<option value="GOLD">골드</option>
+									<option value="PLATINUM">플레티넘</option>
+									<option value="DIAMOND">다이아몬드</option>
+									<option value="MASTER">마스터</option>
+									<option value="GRANDMASTER">그랜드마스터</option>
+									<option value="CHALLENGER">챌린저</option>
 
 								</select>
 							</div>
